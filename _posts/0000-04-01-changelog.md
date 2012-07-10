@@ -1,7 +1,7 @@
 ---
 category: about
 ---
-* V1 
+* V0.1
 
-    - First viable version of docs project
+    - Created the pablo script.
 

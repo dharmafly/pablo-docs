@@ -4,8 +4,8 @@ category: about
 Starting with {{ site.PROJECT_NAME }}
 =====================
 
-If a project has a website hosted on github pages it will have a gh-pages branch.
+It's simple to get started. Just clone the project with git.
 
-The project website will either be hosted at dharmafly.github.com/project-name/ or at a custom domain.
+`git clone git@github.com:dharmafly/pablo.git`
 
-All project documentation should be put as markdown pages in the `_posts` directory.
+Alternatively just download the zip file from above.
