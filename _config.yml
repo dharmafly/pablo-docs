@@ -35,7 +35,7 @@ GA_ID:
 sections:
  - path:
    name: Overview
- - path: examples
+ - path: reference
    name: Examples
 
 ###############################
