@@ -2,6 +2,8 @@
 category: reference
 ---
 
+Pablo supports mouse events.
+
     paper('circle')
         .attr({style:'cursor:pointer'})
         .on('mouseover', function(event){
