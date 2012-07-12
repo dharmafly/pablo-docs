@@ -6,10 +6,10 @@ GITHUB_PROJECT_URL: https://github.com/dharmafly/pablo
 # The style for your site (currently only default)
 
 THEME: ocean
-
+    
 ############ Optional extras
 
-GITHUB_ZIP_URL: https://github.com/dharmafly/pablo/zipball/master
+GITHUB_ZIP_URL: #https://github.com/dharmafly/dharmafly-docs/zipball/gh-pages
 TWITTER_PROJECT_URL: https://twitter.com/dharmafly
 # javascript, css or html5
 LANG: javascript
