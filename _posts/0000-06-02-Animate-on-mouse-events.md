@@ -5,7 +5,7 @@ category: reference
 Pablo can be used to attach mouse events to svg elements.
 
     
-    var paper = Pablo($output[0]).root({width:300, height:420});
+    var paper = Pablo($output[0]).root({height:120});
 
     // Create the circle
     paper._('circle', {cx:60, cy:60, r:50, fill:'#ff3', stroke:'#050'});
