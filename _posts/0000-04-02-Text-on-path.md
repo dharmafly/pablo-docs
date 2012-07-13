@@ -8,8 +8,7 @@ category: reference
         .defs()
         ._('path', {
             id:'squiggle',
-            transform:'rotate(-90 300 170)',
-            d:'M 20 320 C 120 220 220 120 320 220 C 420 320 520 420 620 320'
+            d:'M 20 80 C 20 120 120 20 220 120 C 320 220 420 320 520 220'
         });
     paper
         .text()
