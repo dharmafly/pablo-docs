@@ -14,25 +14,10 @@ Pablo can be used to attach mouse events to svg elements.
     paper('circle')
         .attr({style:'cursor:pointer'})
         .on('mouseover', function(event){
-            Pablo(event.target)
-                .empty()
-                ._('animate', {
-                    attributeName:'fill',
-                    from:'#ff3',
-                    to:'#005',
-                    dur:'1.62s',
-                    repeatCount:'indefinite'
-                })
-                ._('animate', {
-                    attributeName:'r',
-                    from:45,
-                    to:60,
-                    dur:'6s',
-                    repeatCount:'indefinite'
-                });
+            Pablo(event.target).attr({fill:'#f0f'});
         })
         .on('mouseout', function(event){
-            Pablo(event.target).empty();
+            Pablo(event.target).attr({fill:'#ff3'});
         })
         .on('mousedown', function(event){
             Pablo(event.target).attr({stroke:'#fff'});
