@@ -28,11 +28,11 @@ Pablo supports chainability for some of its methods.
             'stroke-linejoin':'round',
             'stroke-linecap':'round'
         })
-        
+
 Pablo designates the subject of it's method chain to the last 
 mentioned svg element.
 
-    var paper = Pablo($output[0]).root({width:300, height:420});
+    var paper = Pablo($output[0]).root({height:320});
 
     // Make a svg definition element and append a path element to it
     paper
