@@ -6,7 +6,7 @@ GITHUB_PROJECT_URL: https://github.com/dharmafly/pablo
 # The style for your site (currently only default)
 
 THEME: ocean
-    
+
 ############ Optional extras
 
 GITHUB_ZIP_URL: #https://github.com/dharmafly/dharmafly-docs/zipball/gh-pages
@@ -36,7 +36,7 @@ sections:
  - path:
    name: Overview
  - path: reference
-   name: Examples
+   name: Reference
 
 ###############################
 
