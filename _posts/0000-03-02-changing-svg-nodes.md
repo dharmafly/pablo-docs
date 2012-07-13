@@ -25,7 +25,7 @@ Specifying an attribute already set on that node will replace it.
 To remove an attribute use `removeAttr()` and pass the attribute name as a 
 string.
 
-    var square = Pablo().rect({width: 50, height: 50, fill: 'red'});
+    var square = Pablo().rect({width: 100, height: 100, fill: 'red'});
 
     // Remove the fill attribute (turns out black by default)
     square.removeAttr('fill');
