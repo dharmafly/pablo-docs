@@ -29,7 +29,7 @@ Pablo supports chainability for some of its methods.
             'stroke-linecap':'round'
         })
 
-Pablo designates the subject of it's method chain to the last 
+Pablo designates the subject of its method chain to the last 
 mentioned svg element.
 
     var paper = Pablo($output[0]).root({height:320});
@@ -39,7 +39,7 @@ mentioned svg element.
         .defs()
         ._('path', {
             id:'squiggle',
-            d:'M 20 80 C 20 120 120 20 220 120 C 320 220 420 320 520 220'
+            d:'M 20 80 C 20 120 120 20 220 120 C 320 220 420 320 420 120'
         });
 
     // Make a text element and append a textPath element to it.
