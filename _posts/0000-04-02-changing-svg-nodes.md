@@ -13,16 +13,14 @@ The `attr()` method can be used to set or get an objects attributes.
 To add one or more attributes pass in an object map of the attribute name and 
 its value.
 
+Specifying an attribute already set on that node will replace it.
+
     var square = Pablo.rect({width: 100, fill: 'red'});
 
     // Add a height and replace the fill color
     square.attr({height: 100, fill: 'green'});
 
     Pablo($output[0]).root()._(square);
-
-Specifying an attribute already set on that node will replace it.
-
-    var square
 
 To remove an attribute use `removeAttr()` and pass the attribute name as a 
 string.
