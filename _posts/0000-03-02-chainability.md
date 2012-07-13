@@ -27,10 +27,9 @@ Pablo supports chainability for some of its methods.
             // since CamelCased attribute names are not (yet) supported
             'stroke-linejoin':'round',
             'stroke-linecap':'round'
-        })
+        });
 
-Pablo designates the subject of its method chain to the last 
-mentioned svg element.
+Pablo allows for chaining off svg shorthands like `.circle()` or `.line()`.
 
     var paper = Pablo($output[0]).root({height:320});
 
