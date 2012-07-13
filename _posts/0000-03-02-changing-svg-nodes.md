@@ -32,24 +32,31 @@ string.
 
     Pablo($output[0]).root({height:100})._(square);
 
-CSS styles can be applied
--------------------------
+CSS styles
+----------
 
-Appending a `style` element to the related svg node and changing its content 
-with `content()`.
+CSS properties carry over to svg natively. This means you can use CSS to set 
+svg node properties.
+
+Appending a style element and editing its contents allows you to do this.
+
+This is done with `style().content(css)`.
 
     // Create the root node.
-    var paper = Pablo(document.body).root({width:300, height:420})
+    var paper = Pablo($output[0]).root({height:100});
 
-    // Append <style> element
-    paper.style()
-        // Change text content of style
-        // (Similar to jQuery's text() method)
+    // Append a <style> element
+    paper
+        .style()
+        // Change text content of style (Similar to jQuery's text() method)
         .content(
             '* {stroke-width:20}' +
-            'text {font-family:sans-serif; font-size:16px}'
+            'circle {fill:green}'
         );
-    ])
+
+    paper._('circle', {stroke: 'red', cx:50, cy:50, r:25});
+
+
 
 Making svg nodes hyperlinked
 ----------------------------
