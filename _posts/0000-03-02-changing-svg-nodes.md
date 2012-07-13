@@ -20,7 +20,7 @@ Specifying an attribute already set on that node will replace it.
     // Add a height and replace the fill color
     square.attr({height: 100, fill: 'green'});
 
-    Pablo($output[0]).root()._(square);
+    Pablo($output[0]).root({height:100})._(square);
 
 To remove an attribute use `removeAttr()` and pass the attribute name as a 
 string.
@@ -30,7 +30,7 @@ string.
     // Remove the fill attribute (turns out black by default)
     square.removeAttr('fill');
 
-    Pablo($output[0]).root()._(square);
+    Pablo($output[0]).root({height:100})._(square);
 
 CSS styles can be applied
 -------------------------
