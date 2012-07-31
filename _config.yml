@@ -3,8 +3,8 @@ PROJECT_NAME: Pablo
 GITHUB_CURRENT_VERSION: 0.1
 GITHUB_PROJECT_URL: https://github.com/dharmafly/pablo
 
-# The style for your site (options: default, ocean)
-THEME: default
+# The style for your site (options: forest, ocean)
+THEME: forest
 
 ############ Optional extras
 
