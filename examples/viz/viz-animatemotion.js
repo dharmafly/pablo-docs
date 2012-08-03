@@ -13,13 +13,8 @@
 */
 
 function createRoot(container){
-    var root, width, height;
-
-    // SETTINGS
-    width = window.innerWidth;
-    height = window.innerHeight;
-
-    var root;
+    var width = window.innerWidth,
+        height = window.innerHeight;
 
     // Body styles
     Pablo('body').css({
@@ -65,6 +60,8 @@ var namespace = 'pabloviz',
         strokeWidthMax: 20,
         velocityMin: 0.05,
         velocityMax: 0.2,
+        pathDurationMin: 1000,
+        pathDurationMax: 5000,
         velocitySlowdown: 1.5,
         opacityMin: 0.3,
         opacityMax: 0.9,
@@ -160,17 +157,42 @@ Symbol.prototype = {
         return this.settings.colors[randomInt(this.settings.colorsLength)];
     },
 
-    /*
-    isOffscreenX: function(){
-        var coord = this.pos.x;
-        return coord < 0 || coord > settings.width;
+    isOffscreen: function(axis){
+        var coord = this.pos[axis];
+        return coord < 0 || coord > (axis === 'x' ? settings.width : settings.height);
     },
 
-    isOffscreenY: function(){
-        var coord = this.pos.y;
-        return coord < 0 || coord > settings.height;
+    randomStartPos: function(){
+        var halfwidth = this.r + this.strokeWidth,
+            x, y;
+
+        if (randomInt()){
+            x = randomInt() ? settings.width + halfwidth : 0 - halfwidth;
+            y = randomInt(settings.height);
+        }
+        else {
+            x = randomInt(settings.width);
+            y = randomInt() ? settings.height + halfwidth : 0 - halfwidth;
+        }
+
+        return new Vector(x, y);
     },
-    */
+
+    randomEndPos: function(){
+        var halfwidth = this.r + this.strokeWidth,
+            endX, endY;
+
+        if (this.isOffscreen('x')){
+            endX = this.pos.x < 0 ? settings.width + halfwidth : 0 - halfwidth;
+            endY = randomInt(settings.height);
+        }
+        else {
+            endX = randomInt(settings.width);
+            endY = this.pos.y < 0 ? settings.height + halfwidth : 0 - halfwidth;
+        }
+
+        return new Vector(endX, endY);
+    },
 
     randomize: function(){
         var settings = this.settings,
@@ -192,16 +214,11 @@ Symbol.prototype = {
         halfwidth = this.r + this.strokeWidth;
 
         // Starting position - spread over either x or y axis
-        if (randomInt()){
-            x = randomInt() ? settings.width + halfwidth : 0 - halfwidth;
-            y = randomInt(settings.height);
-        }
-        else {
-            x = randomInt(settings.width);
-            y = randomInt() ? settings.height + halfwidth : 0 - halfwidth;
-        }
+        this.pos = this.randomStartPos();
 
-        velocityMax = selectInRange((1 - this.importance) * settings.velocitySlowdown, settings.velocityMin, settings.velocityMax);
+        // Velocity
+        /*
+        velocityMax =  (1 - this.importance) * settings.velocitySlowdown * (settings.velocityMax - settings.velocityMin) + settings.velocityMin;
         velocityX = round(randomInRange(settings.velocityMin, velocityMax), 2);
         velocityY = round(randomInRange(settings.velocityMin, velocityMax), 2);
 
@@ -212,12 +229,13 @@ Symbol.prototype = {
             velocityY = 0 - velocityY;
         }
 
-        this.pos      = new Vector(x, y);
         this.velocity = new Vector(velocityX, velocityY);
+        */
 
         return this;
     },
 
+    /*
     update: function(velocityPerFrame){
         var pos = this.pos,
             halfwidth = this.r + this.strokeWidth;
@@ -234,6 +252,7 @@ Symbol.prototype = {
 
         return this.drawPos();
     },
+    */
 
     drawAppearance: function(){
         this.dom.attr({
@@ -259,12 +278,14 @@ Symbol.prototype = {
     onclick: function(event){
         var symbol = this;
 
-        // Fade out
-        this.dom
-            .attr({'class': 'fade'})
-            .cssPrefix({
-                'transform-origin': this.pos.x + 'px ' + this.pos.y + 'px'
-            });
+        // Fade out, using CSS3
+        // TODO: create as part of <style> element?
+        this.dom.cssPrefix({
+            'transition': '-webkit-transform ' + (settings.fadeoutTime / 1000) + 's',
+            'transition-timing-function': 'ease-out',
+            'transform': 'scale(0)',
+            'transform-origin': this.pos.x + 'px ' + this.pos.y + 'px'
+        });
 
         // Remove DOM element from DOM tree, when animation finished
         window.setTimeout(function(){
@@ -278,13 +299,66 @@ Symbol.prototype = {
     createDom: function(){
         this.root = this.settings.root;
         this.dom = this.root.circle();
+        this.animateDom = this.dom.animateMotion({
+            fill: 'freeze',
+            repeatCount: 1
+        });
+        return this;
+    },
+
+    animate: function(){
+        var symbol = this,
+            halfwidth = this.r + this.strokeWidth,
+            duration = randomIntRange(settings.pathDurationMin, settings.pathDurationMax),
+            timeoutID;
+
+        duration = Math.round(selectInRange(this.importance, settings.pathDurationMin, settings.pathDurationMax));
+
+        /*
+        velocityMax =  (1 - this.importance) * settings.velocitySlowdown * (settings.velocityMax - settings.velocityMin) + settings.velocityMin;
+        velocityX = round(randomInRange(settings.velocityMin, velocityMax), 2);
+        velocityY = round(randomInRange(settings.velocityMin, velocityMax), 2);
+
+
+        if (this.pos.x > this.settings.width / 2){
+            endX = 0 - halfwidth;
+        }
+        else {
+            endX = this.settings.width + halfwidth;
+        }
+        if (this.pos.y > this.settings.height / 2){
+            endY = 0 - halfwidth;
+        }
+        else {
+            endY = this.settings.height + halfwidth;
+        }
+        */
+
+        this.endPos = this.randomEndPos();
+
+        this.animateDom.attr({
+            path: 'M' + this.pos.x + ' ' + this.pos.y + 'L' + this.endPos.x + ' ' + this.endPos.y,
+            dur: (duration / 1000) + 's'
+        });
+        this.animateDom.el[0].beginElement();
+
+        // On end of animation
+        timeoutID = Symbol.addTimeout(function(){
+            symbol.randomize()
+                .animate()
+                .drawAppearance();
+
+            Symbol.removeTimeout(timeoutID);
+        }, duration);
+
         return this;
     },
 
     create: function(){
         return this.createDom()
-            .drawAppearance()
-            .drawPos();
+            .animate()
+            .drawAppearance();
+            //.drawPos();
     }
 };
 
@@ -306,8 +380,6 @@ Pablo.extend(Symbol, {
         var Symbol = this,
             attr = {},
             i, symbol;
-
-        settings.root = settings.root.g({'class': 'symbols'});
 
         for (i=0; i < Symbol.maxSymbols; i++){
             symbol = Symbol.createSymbol(settings);
@@ -348,15 +420,8 @@ Pablo.extend(Symbol, {
 
     // Add CSS styles
     addStyles: function(){
-        var fadeStyles = {
-            'transition-duration': (settings.fadeoutTime / 1000) + 's',
-            'transition-timing-function': 'ease-out',
-            'transform': 'scale(0)'
-        };
-
         settings.root.style().content(
-            '.symbols circle:hover {stroke:green; cursor:crosshair;}' + 
-            '.symbols circle.fade {' + Pablo.cssTextPrefix(fadeStyles) + '}'
+            'circle:hover {stroke:green; cursor:crosshair}'
         );
     },
 
@@ -368,6 +433,64 @@ Pablo.extend(Symbol, {
         if (symbol.id){
             delete this.symbols[symbol.id];
         }
+    },
+
+    timeouts: {},
+
+    addTimeout: (function(){
+        var counter = 1;
+
+        return function(handler, duration, key){
+            var timeoutID = window.setTimeout(handler, duration);
+
+            key || (key = counter ++);
+            this.timeouts[key] = {
+                id: timeoutID,
+                handler: handler,
+                end: now() + duration
+            };
+            return key;
+        }
+    }()),
+
+    removeTimeout: function(key){
+        delete this.timeouts[key];
+    },
+
+    pauseTimeouts: function(){
+        var time = now(),
+            timeout, key;
+
+        for (key in this.timeouts){
+            if (this.timeouts.hasOwnProperty(key)){
+                timeout = this.timeouts[key];
+                timeout.remaining = timeout.end - time;
+                window.clearTimeout(timeout.id);
+            }
+        }
+    },
+
+    resumeTimeouts: function(){
+        var time = now(),
+            timeout, key;
+
+        for (key in this.timeouts){
+            if (this.timeouts.hasOwnProperty(key)){
+                timeout = this.timeouts[key];
+                Symbol.removeTimeout(key);
+                Symbol.addTimeout(timeout.handler, timeout.remaining, key);
+            }
+        }
+    },
+
+    pause: function(){
+        root.el[0].pauseAnimations();
+        this.pauseTimeouts();
+    },
+
+    resume: function(){
+        root.el[0].unpauseAnimations();
+        this.resumeTimeouts();
     }
 });
 
@@ -375,6 +498,7 @@ Pablo.extend(Symbol, {
 /////
 
 // Main loop handler, fires on each animation frame
+/*
 function loop(){
     // Update all symbols
     Symbol.updateAll();
@@ -382,6 +506,7 @@ function loop(){
     // On each animation frame, repeat the loop; store ID of this request for the next animation frame
     loopRequestID = reqAnimFrame(loop, settings.rootElem);
 }
+*/
 
 // If browser environment suitable...
 if (Pablo.isSupported && reqAnimFrame){
@@ -390,10 +515,10 @@ if (Pablo.isSupported && reqAnimFrame){
 
     // Create symbols
     Symbol.createAll(settings);
-    Symbol.created = now();
 
     // Store ID of this request for the next animation frame
-    loopRequestID = reqAnimFrame(loop, settings.rootElem);
+    // Symbol.created = now();
+    //loopRequestID = reqAnimFrame(loop, settings.rootElem);
 
     // Click listener on SVG element
     settings.rootElem.addEventListener('click', function(event){
@@ -407,6 +532,16 @@ if (Pablo.isSupported && reqAnimFrame){
     window.addEventListener('keydown', function(event){
         // Spacebar pressed
         if (event.keyCode === 32){
+            if (active){
+                active = false;
+                Symbol.pause();
+            }
+            else {
+                active = true;
+                Symbol.resume();
+            }
+
+            /*
             if (active && cancelAnimFrame){
                 active = false;
                 cancelAnimFrame(loopRequestID);
@@ -417,6 +552,7 @@ if (Pablo.isSupported && reqAnimFrame){
                 Symbol.updated = now();
                 loop();
             }
+            */
         }
     }, false);
 
