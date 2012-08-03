@@ -189,6 +189,34 @@ var Pablo = (function(document, Array, JSON, Element, NodeList){
         });
     }
     
+    function addVendorPrefixes(stylesMap){
+        var prop;
+        
+        for (prop in stylesMap){
+            if (stylesMap.hasOwnProperty(prop)){
+                vendorPrefixes.forEach(function(prefix){
+                    stylesMap[prefix + prop] = stylesMap[prop];
+                });
+            }
+        }
+        return stylesMap;
+    }
+
+    function cssText(stylesMap){
+        var cssText = '',
+            prop;
+        
+        for (prop in stylesMap){
+            if (stylesMap.hasOwnProperty(prop)){
+                cssText += prop + ':' + stylesMap[prop] + ';';
+            }
+        }
+        return cssText;
+    }
+
+    function cssTextPrefix(stylesMap){
+        return cssText(addVendorPrefixes(stylesMap));
+    }
     
     /////
     
@@ -483,16 +511,7 @@ var Pablo = (function(document, Array, JSON, Element, NodeList){
         // Add CSS styles with browser vendor prefixes
         // e.g. cssPrefix({transform:'rotate(45deg)'}) will be prefixed with -moz, -webkit, -o, -ms and -khtml
         cssPrefix: function(newStyles){
-            var prop;
-            
-            for (prop in newStyles){
-                if (newStyles.hasOwnProperty(prop)){
-                    vendorPrefixes.forEach(function(prefix){
-                        newStyles[prefix + prop] = newStyles[prop];
-                    });
-                }
-            }
-            return this.css(newStyles);
+            return this.css(addVendorPrefixes(newStyles));
         },
         
         on: function(type, listener, useCapture){
@@ -645,6 +664,9 @@ var Pablo = (function(document, Array, JSON, Element, NodeList){
         extend: extend,
         fn: pabloNodeApi,
         Node: PabloNode,
+        addVendorPrefixes: addVendorPrefixes,
+        cssText: cssText,
+        cssTextPrefix: cssTextPrefix,
         
         // Whether to use the function API (default) or the object API
         functionApi: function(yes){
