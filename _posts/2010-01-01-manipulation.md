@@ -1,6 +1,6 @@
 ---
 category: reference
-heading: "Changing SVG Nodes"
+heading: "Manipulation"
 ---
 
 Pablo also has an assortment of methods for changing the properties of 
@@ -59,6 +59,7 @@ element and editing its content, using `style().content(css)`.
 
 Hyperlinks
 ----------
+
 The `a(options)` element method can be used to set up hyperlinked SVG elements.
 
 In the example below `<a>` elements are created and SVG elements are appended 
