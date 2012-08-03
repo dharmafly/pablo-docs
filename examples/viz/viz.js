@@ -72,7 +72,7 @@ var namespace = 'pabloviz',
         //opacityMax: 1,
         colors: colors,
         colorsLength: colorsLength,
-        fadeoutTime: 380
+        fadeoutTime: 405
     },
 
 
@@ -119,15 +119,27 @@ function Vector(x, y){
 }
 
 Vector.prototype = {
-    add: function(vector){
-        this.x += vector.x;
-        this.y += vector.y;
+    add: function(vectorOrDigit){
+        if (typeof vectorOrDigit === 'number'){
+            this.x += vectorOrDigit;
+            this.y += vectorOrDigit;
+        }
+        else if (typeof vectorOrDigit === 'object' && vectorOrDigit !== null) {
+            this.x += vectorOrDigit.x;
+            this.y += vectorOrDigit.y;
+        }
         return this;
     },
 
-    multiply: function(vector){
-        this.x *= vector.x;
-        this.y *= vector.y;
+    multiply: function(vectorOrDigit){
+        if (typeof vectorOrDigit === 'number'){
+            this.x *= vectorOrDigit;
+            this.y *= vectorOrDigit;
+        }
+        else if (typeof vectorOrDigit === 'object' && vectorOrDigit !== null) {
+            this.x *= vector.x;
+            this.y *= vector.y;
+        }
         return this;
     },
 
@@ -212,8 +224,13 @@ Symbol.prototype = {
             velocityY = 0 - velocityY;
         }
 
-        this.pos      = new Vector(x, y);
-        this.velocity = new Vector(velocityX, velocityY);
+        this.pos || (this.pos = new Vector());
+        this.pos.x = x;
+        this.pos.y = y;
+
+        this.velocity || (this.velocity = new Vector());
+        this.velocity.x = velocityX;
+        this.velocity.y = velocityY;
 
         return this;
     },
@@ -289,87 +306,85 @@ Symbol.prototype = {
 };
 
 // Symbol - static properties & methods
-Pablo.extend(Symbol, {
-    symbols: [],
-    createInterval: createInterval,
-    maxSymbols: maxSymbols,
-    reqAnimFrame: reqAnimFrame,
+Pablo.extend(
+    Symbol,
+    {
+        symbols: [],
+        createInterval: createInterval,
+        maxSymbols: maxSymbols,
+        reqAnimFrame: reqAnimFrame,
 
-    createSymbol: function(settings){
-        var symbol = new this(settings);
-        this.symbols.push(symbol);
-        return symbol;
-    },
+        createSymbol: function(settings){
+            var symbol = new this(settings);
+            this.symbols.push(symbol);
+            return symbol;
+        },
 
-    // Create as many symbols as specified by maxSymbols; add id to each symbol dom
-    createAll: function(settings){
-        var Symbol = this,
-            attr = {},
-            i, symbol;
+        // Create as many symbols as specified by maxSymbols; add id to each symbol dom
+        createAll: function(settings){
+            var Symbol = this,
+                attr = {},
+                i, symbol;
 
-        settings.root = settings.root.g({'class': 'symbols'});
+            settings.root = settings.root.g({'class': 'symbols'});
 
-        for (i=0; i < Symbol.maxSymbols; i++){
-            symbol = Symbol.createSymbol(settings);
-            symbol.id = i;
-            attr[attrIdKey] = i;
-            symbol.dom.attr(attr);
-        }
-    },
+            for (i=0; i < Symbol.maxSymbols; i++){
+                symbol = Symbol.createSymbol(settings);
+                symbol.id = i;
+                attr[attrIdKey] = i;
+                symbol.dom.attr(attr);
+            }
+        },
 
-    updateAll: (function(){
-        // Keep updateSymbol in the closure, and return the main updateAll function
-        return function(){
-            var timeSinceLastUpdateVector;
+        updateAll: (function(){
+            // Keep updateSymbol in the closure, and return the main updateAll function
+            return function(){
+                var timeSinceLastUpdateVector;
 
-            // Cache timestamp of this run of the loop
-            this.prevUpdated = this.updated || this.created;
-            this.updated = now();
-            this.timeSinceLastUpdate = this.prevUpdated ?
-                this.updated - this.prevUpdated : null;
+                // Cache timestamp of this run of the loop
+                this.prevUpdated = this.updated || this.created;
+                this.updated = now();
+                this.timeSinceLastUpdate = this.prevUpdated ?
+                    this.updated - this.prevUpdated : null;
 
-            timeSinceLastUpdateVector = this.timeSinceLastUpdate ?
-                new Vector(this.timeSinceLastUpdate, this.timeSinceLastUpdate) :
-                null;
+                Symbol.symbols.forEach(
+                    function (symbol){
+                        var velocityPerFrame;
 
-            Symbol.symbols.forEach(
-                function (symbol){
-                    var velocityPerFrame;
+                        velocityPerFrame = Symbol.timeSinceLastUpdate ?
+                            symbol.velocity.clone().multiply(Symbol.timeSinceLastUpdate) :
+                            symbol.velocity;
+                            
+                        symbol.update(velocityPerFrame);
+                    }
+                );
+            };
+        }()),
 
-                    velocityPerFrame = timeSinceLastUpdateVector ?
-                        symbol.velocity.clone().multiply(timeSinceLastUpdateVector) :
-                        symbol.velocity;
+        // Add CSS styles
+        addStyles: function(){
+            var fadeStylesToPrefix = {
+                transition: 'all ' + (settings.fadeoutTime / 1000) + 's ' + 'ease-out',
+                transform: 'scale(0)'
+            };
 
-                    symbol.update(velocityPerFrame);
-                }
+            settings.root.style().content(
+                '.symbols circle:hover {stroke:green; cursor:crosshair;}' + 
+                '.symbols circle.fade {' + Pablo.cssTextPrefix(fadeStylesToPrefix) + '}'
             );
-        };
-    }()),
+        },
 
-    // Add CSS styles
-    addStyles: function(){
-        var fadeStyles = {
-            'transition-duration': (settings.fadeoutTime / 1000) + 's',
-            'transition-timing-function': 'ease-out',
-            'transform': 'scale(0)'
-        };
+        getSymbolById: function(id){
+            return Symbol.symbols[id];
+        },
 
-        settings.root.style().content(
-            '.symbols circle:hover {stroke:green; cursor:crosshair;}' + 
-            '.symbols circle.fade {' + Pablo.cssTextPrefix(fadeStyles) + '}'
-        );
-    },
-
-    getSymbolById: function(id){
-        return Symbol.symbols[id];
-    },
-
-    removeSymbol: function(symbol){
-        if (symbol.id){
-            delete this.symbols[symbol.id];
+        removeSymbol: function(symbol){
+            if (symbol.id){
+                delete this.symbols[symbol.id];
+            }
         }
     }
-});
+);
 
 
 /////
