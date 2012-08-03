@@ -38,7 +38,7 @@ sections:
  - path:
    name: Overview
  - path: reference
-   name: Reference
+   name: Guide
 
 ###############################
 
