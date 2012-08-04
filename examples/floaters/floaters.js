@@ -73,7 +73,6 @@ var namespace = 'pabloviz',
         fadeoutTime: 405
     },
 
-
     rMid = ((settings.rMax - settings.rMin) / 2) + settings.rMin,
     numPixels = settings.width * settings.height,
     maxSymbols = Math.round((numPixels / rMid) * (symbolDensity / 1000)),
@@ -156,16 +155,18 @@ function Symbol(settings, params){
 Symbol.prototype = {
     init: function(settings, params){
         this.settings = settings;
+        this.pos = new Vector();
+        this.velocity = new Vector();
 
         // Instance parameters specified - e.g. radius, color, etc
         if (params){
             Pablo.extend(this, params);
         }
-
         // No instance parameters given, so randomise first
         else {
             this.randomize();
         }
+
         return this.create();
     },
 
@@ -213,22 +214,26 @@ Symbol.prototype = {
             velocityY = 0 - velocityY;
         }
 
-        this.pos || (this.pos = new Vector());
         this.pos.x = x;
         this.pos.y = y;
 
-        this.velocity || (this.velocity = new Vector());
         this.velocity.x = velocityX;
         this.velocity.y = velocityY;
 
         return this;
     },
 
-    update: function(velocityPerFrame){
+    update: function(timeSinceLastUpdate){
         var pos = this.pos,
             halfwidth = this.r + this.strokeWidth;
 
-        pos.add(velocityPerFrame || this.velocity);
+        if (timeSinceLastUpdate){
+            pos.x += this.velocity.x * timeSinceLastUpdate;
+            pos.y += this.velocity.y * timeSinceLastUpdate;
+        }
+        else {
+            pos.add(this.velocity);
+        }
 
         if (
             pos.y < 0 - halfwidth ||
@@ -331,28 +336,19 @@ Symbolset.prototype = {
     },
 
     updateAll: (function(){
+        function updateSymbol(symbol){
+            symbol.update(this.timeSinceLastUpdate);
+        }
+
         // Keep updateSymbol in the closure, and return the main updateAll function
         return function(){
-            var symbolset = this,
-                timeSinceLastUpdateVector;
-
             // Cache timestamp of this run of the loop
             this.prevUpdated = this.updated || this.created;
             this.updated = this.now();
             this.timeSinceLastUpdate = this.prevUpdated ?
                 this.updated - this.prevUpdated : null;
 
-            this.symbols.forEach(
-                function (symbol){
-                    var velocityPerFrame;
-
-                    velocityPerFrame = symbolset.timeSinceLastUpdate ?
-                        symbol.velocity.clone().multiply(symbolset.timeSinceLastUpdate) :
-                        symbol.velocity;
-
-                    symbol.update(velocityPerFrame);
-                }
-            );
+            this.symbols.forEach(updateSymbol, this);
         };
     }()),
 
@@ -383,8 +379,7 @@ Symbolset.prototype = {
 
 /////
 
-// If browser environment suitable...
-if (Pablo.isSupported && reqAnimFrame){
+function createGame(){
     var circles = new Symbolset(),
         // Main loop handler, fires on each animation frame
         loop = function(){
@@ -432,7 +427,13 @@ if (Pablo.isSupported && reqAnimFrame){
             }
         }
     }, false);
+}
 
+/////
+
+// If browser environment suitable...
+if (Pablo.isSupported && reqAnimFrame){
+    createGame();
 }
 
 else {
