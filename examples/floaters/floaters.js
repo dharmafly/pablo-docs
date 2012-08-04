@@ -170,6 +170,12 @@ Symbol.prototype = {
         return this.create();
     },
 
+    create: function(){
+        return this.createDom()
+            .drawAppearance()
+            .drawPos();
+    },
+
     pickColor: function(){
         return this.settings.colors[randomInt(this.settings.colorsLength)];
     },
@@ -267,10 +273,6 @@ Symbol.prototype = {
         return this;
     },
 
-    onclick: function(event){
-        this.remove();
-    },
-
     remove: function(event){
         var symbol = this;
 
@@ -293,12 +295,6 @@ Symbol.prototype = {
         this.root = this.settings.root;
         this.dom = this.root.circle();
         return this;
-    },
-
-    create: function(){
-        return this.createDom()
-            .drawAppearance()
-            .drawPos();
     }
 };
 
@@ -370,9 +366,11 @@ Symbolset.prototype = {
     },
 
     removeSymbol: function(symbol){
-        if (symbol.id){
-            delete this.symbols[symbol.id];
-        }
+        // Trigger symbol's remove routine
+        symbol.remove.call(symbol);
+
+        // Remove instance from memory
+        delete this.symbols[symbol.id];
     }
 };
 
@@ -405,9 +403,7 @@ function createGame(){
             symbol = circles.getSymbolById(symbolId);
 
         if (symbol){
-            symbol.onclick.call(symbol, event);
-            // Remove Symbol instance from memory
-            circles.removeSymbol(this);
+            circles.removeSymbol(symbol);
         }
     }, false);
 
