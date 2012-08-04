@@ -144,6 +144,10 @@ Vector.prototype = {
     }
 };
 
+/////
+
+//global message queue object
+var messageQueue = new MQ();
 
 /////
 
@@ -168,6 +172,11 @@ Symbol.prototype = {
         }
 
         return this.create();
+    },
+
+    //event publishing function 
+    pub: function(event, data){
+        messageQueue.pub(event, data, this);
     },
 
     create: function(){
@@ -308,6 +317,11 @@ Symbolset.prototype = {
     maxSymbols: maxSymbols,
     reqAnimFrame: reqAnimFrame,
 
+    //event publishing function 
+    pub: function(event, data){
+        messageQueue.pub(event, data, this);
+    },
+
     createSymbol: function(settings){
         var symbol = new Symbol(settings);
         this.symbols.push(symbol);
@@ -384,6 +398,9 @@ function createGame(){
             // Update all symbols
             circles.updateAll();
 
+            // Process all the events in the message queue
+            messageQueue.process();
+
             // On each animation frame, repeat the loop; store ID of this request for the next animation frame
             loop.requestId = reqAnimFrame(loop, settings.rootElem);
         };
@@ -393,6 +410,8 @@ function createGame(){
 
     // Create symbols
     circles.createAll(settings);
+
+
 
     // Store ID of this request for the next animation frame
     loop.requestId = reqAnimFrame(loop, settings.rootElem);
