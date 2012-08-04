@@ -106,8 +106,7 @@ function now(){
     return (new Date().getTime());
 }
 
-/////
-
+////
 
 function Vector(x, y){
     this.x = x;
@@ -148,6 +147,45 @@ Vector.prototype = {
 
 //global message queue object
 var messageQueue = new MQ();
+
+//game state object
+function GameState(){
+    this.pauseText = 'Paused';    
+    this.intervalId;
+}
+
+GameState.prototype = {
+    init: function(){
+        var self = this;
+        messageQueue.sub('pause', function(data, object){
+            if(!self.notification){
+                var dom = settings.root.g({'class': 'notification'});
+                self.notification = dom.text({
+                        x:'45%', 
+                        y:'50%', 
+                        'font-size':30, 
+                        'font-family':'lcd', 
+                        fill:'white'
+                    })
+                    .content(self.pauseText);
+            }
+            else
+                self.notification.text(self.pauseText);
+        });
+
+        messageQueue.sub('resume', function(data, object){
+            if(self.notification){
+                console.log(self.notification.text);
+                self.notification.content('');
+            }
+        });
+    },
+    update: function(){
+        messageQueue.process();
+    }
+}
+
+var gstate = new GameState();
 
 /////
 
@@ -392,6 +430,7 @@ Symbolset.prototype = {
 /////
 
 function createGame(){
+    gstate.init();
     var circles = new Symbolset(),
         // Main loop handler, fires on each animation frame
         loop = function(){
@@ -410,6 +449,9 @@ function createGame(){
 
     // Create symbols
     circles.createAll(settings);
+
+    //create state loop
+    gstate.intervalId = setInterval(gstate.update, 1000/5);
 
     // Store ID of this request for the next animation frame
     loop.requestId = reqAnimFrame(loop, settings.rootElem);
@@ -430,12 +472,14 @@ function createGame(){
         if (event.keyCode === 32){
             if (active && cancelAnimFrame){
                 active = false;
+                messageQueue.pub('pause', {}, null);
                 cancelAnimFrame(loop.requestId);
             }
             else {
                 active = true;
                 // Reset timer, to resume play from where we left off
                 circles.updated = now();
+                messageQueue.pub('resume', {}, null);
                 loop();
             }
         }
