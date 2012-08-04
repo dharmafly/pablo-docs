@@ -4,12 +4,10 @@
     TODO:
     - convert Symbol to Symbolset or to Circleset
     - explode into 4 squares on click, shoot off-screen never to return (a new Symbolset); worth many points; use same stroke-color as mother
-    - "Floaters"
     - click within union between symbols, for double points
-    - highlight stroke-color on mouseover
     - keep score
     - `panic` param -> greater velocity
-    - keep time; time is taken off score for that round; ticker sound, LED font
+    - keep time; time is taken off score for that round; ticker sound, LCD font
 */
 
 function createRoot(container){
@@ -171,18 +169,6 @@ Symbol.prototype = {
     pickColor: function(){
         return this.settings.colors[randomInt(this.settings.colorsLength)];
     },
-
-    /*
-    isOffscreenX: function(){
-        var coord = this.pos.x;
-        return coord < 0 || coord > settings.width;
-    },
-
-    isOffscreenY: function(){
-        var coord = this.pos.y;
-        return coord < 0 || coord > settings.height;
-    },
-    */
 
     randomize: function(){
         var settings = this.settings,
@@ -354,7 +340,7 @@ Pablo.extend(
                         velocityPerFrame = Symbol.timeSinceLastUpdate ?
                             symbol.velocity.clone().multiply(Symbol.timeSinceLastUpdate) :
                             symbol.velocity;
-                            
+
                         symbol.update(velocityPerFrame);
                     }
                 );
