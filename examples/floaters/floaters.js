@@ -50,7 +50,7 @@ var namespace = 'pabloviz',
         
     colors = ['#e0f6a5','#eafcb3','#a0c574','#7c7362','#745051','#edcabc','#6b5048','#ae7271','#b79b9e','#c76044','#edfcc1','#d9f396','#75a422','#819b69','#c8836a'],
     colorsLength = colors.length,
-    symbolDensity = 1,
+    symbolDensity = 2,
 
     settings = {
         root: root,
@@ -77,8 +77,7 @@ var namespace = 'pabloviz',
     rMid = ((settings.rMax - settings.rMin) / 2) + settings.rMin,
     numPixels = settings.width * settings.height,
     maxSymbols = Math.round((numPixels / rMid) * (symbolDensity / 1000)),
-    createInterval = 240,
-    loopRequestID;
+    createInterval = 240;
 
 
 /////
@@ -273,9 +272,6 @@ Symbol.prototype = {
         window.setTimeout(function(){
             symbol.dom.remove();
         }, settings.fadeoutTime);
-
-        // Remove Symbol instance from memory
-        Symbol.removeSymbol(this);
     },
 
     createDom: function(){
@@ -291,116 +287,120 @@ Symbol.prototype = {
     }
 };
 
-// Symbol - static properties & methods
-Pablo.extend(
-    Symbol,
-    {
-        symbols: [],
-        createInterval: createInterval,
-        maxSymbols: maxSymbols,
-        reqAnimFrame: reqAnimFrame,
+function Symbolset(){
+    this.symbols = [];
+}
 
-        createSymbol: function(settings){
-            var symbol = new this(settings);
-            this.symbols.push(symbol);
-            return symbol;
-        },
+Symbolset.prototype = {
+    now: now,
+    createInterval: createInterval,
+    maxSymbols: maxSymbols,
+    reqAnimFrame: reqAnimFrame,
 
-        // Create as many symbols as specified by maxSymbols; add id to each symbol dom
-        createAll: function(settings){
-            var Symbol = this,
-                attr = {},
-                i, symbol;
+    createSymbol: function(settings){
+        var symbol = new Symbol(settings);
+        this.symbols.push(symbol);
+        return symbol;
+    },
 
-            settings.root = settings.root.g({'class': 'symbols'});
+    // Create as many symbols as specified by maxSymbols; add id to each symbol dom
+    createAll: function(settings){
+        var Symbol = this,
+            attr = {},
+            i, symbol;
 
-            for (i=0; i < Symbol.maxSymbols; i++){
-                symbol = Symbol.createSymbol(settings);
-                symbol.id = i;
-                attr[attrIdKey] = i;
-                symbol.dom.attr(attr);
-            }
-        },
+        this.created = this.now(); // used in updateAll()
+        settings.root = settings.root.g({'class': 'symbols'});
 
-        updateAll: (function(){
-            // Keep updateSymbol in the closure, and return the main updateAll function
-            return function(){
-                var timeSinceLastUpdateVector;
+        for (i=0; i < Symbol.maxSymbols; i++){
+            symbol = Symbol.createSymbol(settings);
+            symbol.id = i;
+            attr[attrIdKey] = i;
+            symbol.dom.attr(attr);
+        }
+    },
 
-                // Cache timestamp of this run of the loop
-                this.prevUpdated = this.updated || this.created;
-                this.updated = now();
-                this.timeSinceLastUpdate = this.prevUpdated ?
-                    this.updated - this.prevUpdated : null;
+    updateAll: (function(){
+        // Keep updateSymbol in the closure, and return the main updateAll function
+        return function(){
+            var symbolset = this,
+                timeSinceLastUpdateVector;
 
-                Symbol.symbols.forEach(
-                    function (symbol){
-                        var velocityPerFrame;
+            // Cache timestamp of this run of the loop
+            this.prevUpdated = this.updated || this.created;
+            this.updated = this.now();
+            this.timeSinceLastUpdate = this.prevUpdated ?
+                this.updated - this.prevUpdated : null;
 
-                        velocityPerFrame = Symbol.timeSinceLastUpdate ?
-                            symbol.velocity.clone().multiply(Symbol.timeSinceLastUpdate) :
-                            symbol.velocity;
+            this.symbols.forEach(
+                function (symbol){
+                    var velocityPerFrame;
 
-                        symbol.update(velocityPerFrame);
-                    }
-                );
-            };
-        }()),
+                    velocityPerFrame = symbolset.timeSinceLastUpdate ?
+                        symbol.velocity.clone().multiply(symbolset.timeSinceLastUpdate) :
+                        symbol.velocity;
 
-        // Add CSS styles
-        addStyles: function(){
-            var fadeStylesToPrefix = {
-                transition: 'all ' + (settings.fadeoutTime / 1000) + 's ' + 'ease-out',
-                transform: 'scale(0)'
-            };
-
-            settings.root.style().content(
-                '.symbols circle:hover {stroke:green; cursor:crosshair;}' + 
-                '.symbols circle.fade {' + Pablo.cssTextPrefix(fadeStylesToPrefix) + '}'
+                    symbol.update(velocityPerFrame);
+                }
             );
-        },
+        };
+    }()),
 
-        getSymbolById: function(id){
-            return Symbol.symbols[id];
-        },
+    // Add CSS styles
+    addStyles: function(){
+        var fadeStylesToPrefix = {
+            transition: 'all ' + (settings.fadeoutTime / 1000) + 's ' + 'ease-out',
+            transform: 'scale(0)'
+        };
 
-        removeSymbol: function(symbol){
-            if (symbol.id){
-                delete this.symbols[symbol.id];
-            }
+        settings.root.style().content(
+            '.symbols circle:hover {stroke:green; cursor:crosshair;}' + 
+            '.symbols circle.fade {' + Pablo.cssTextPrefix(fadeStylesToPrefix) + '}'
+        );
+    },
+
+    getSymbolById: function(id){
+        return this.symbols[id];
+    },
+
+    removeSymbol: function(symbol){
+        if (symbol.id){
+            delete this.symbols[symbol.id];
         }
     }
-);
+};
 
 
 /////
 
-// Main loop handler, fires on each animation frame
-function loop(){
-    // Update all symbols
-    Symbol.updateAll();
-
-    // On each animation frame, repeat the loop; store ID of this request for the next animation frame
-    loopRequestID = reqAnimFrame(loop, settings.rootElem);
-}
-
 // If browser environment suitable...
 if (Pablo.isSupported && reqAnimFrame){
+    var circles = new Symbolset(),
+        // Main loop handler, fires on each animation frame
+        loop = function(){
+            // Update all symbols
+            circles.updateAll();
+
+            // On each animation frame, repeat the loop; store ID of this request for the next animation frame
+            loop.requestId = reqAnimFrame(loop, settings.rootElem);
+        };
+
     // Add CSS styles
-    Symbol.addStyles();
+    circles.addStyles();
 
     // Create symbols
-    Symbol.createAll(settings);
-    Symbol.created = now();
+    circles.createAll(settings);
 
     // Store ID of this request for the next animation frame
-    loopRequestID = reqAnimFrame(loop, settings.rootElem);
+    loop.requestId = reqAnimFrame(loop, settings.rootElem);
 
     // Click listener on SVG element
     settings.rootElem.addEventListener('click', function(event){
-        var symbol = Symbol.getSymbolById(event.target.getAttribute(attrIdKey));
+        var symbol = circles.getSymbolById(event.target.getAttribute(attrIdKey));
         if (symbol){
             symbol.onclick.call(symbol, event);
+            // Remove Symbol instance from memory
+            circles.removeSymbol(this);
         }
     }, false);
 
@@ -410,12 +410,12 @@ if (Pablo.isSupported && reqAnimFrame){
         if (event.keyCode === 32){
             if (active && cancelAnimFrame){
                 active = false;
-                cancelAnimFrame(loopRequestID);
+                cancelAnimFrame(loop.requestId);
             }
             else {
                 active = true;
                 // Reset timer, to resume play from where we left off
-                Symbol.updated = now();
+                circles.updated = now();
                 loop();
             }
         }
