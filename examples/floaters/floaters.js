@@ -150,21 +150,25 @@ Vector.prototype = {
 
 
 function Symbol(settings, params){
-    this.settings = settings;
-
-    // Instance parameters specified - e.g. radius, color, etc
-    if (params){
-        Pablo.extend(this, params);
-    }
-
-    // No instance parameters given, so randomise first
-    else {
-        this.randomize();
-    }
-    this.create();
+    this.init(settings, params);
 }
 
 Symbol.prototype = {
+    init: function(settings, params){
+        this.settings = settings;
+
+        // Instance parameters specified - e.g. radius, color, etc
+        if (params){
+            Pablo.extend(this, params);
+        }
+
+        // No instance parameters given, so randomise first
+        else {
+            this.randomize();
+        }
+        return this.create();
+    },
+
     pickColor: function(){
         return this.settings.colors[randomInt(this.settings.colorsLength)];
     },
@@ -259,6 +263,10 @@ Symbol.prototype = {
     },
 
     onclick: function(event){
+        this.remove();
+    },
+
+    remove: function(event){
         var symbol = this;
 
         // Fade out
@@ -272,6 +280,8 @@ Symbol.prototype = {
         window.setTimeout(function(){
             symbol.dom.remove();
         }, settings.fadeoutTime);
+
+        return this;
     },
 
     createDom: function(){
@@ -396,7 +406,9 @@ if (Pablo.isSupported && reqAnimFrame){
 
     // Click listener on SVG element
     settings.rootElem.addEventListener('click', function(event){
-        var symbol = circles.getSymbolById(event.target.getAttribute(attrIdKey));
+        var symbolId = event.target.getAttribute(attrIdKey),
+            symbol = circles.getSymbolById(symbolId);
+
         if (symbol){
             symbol.onclick.call(symbol, event);
             // Remove Symbol instance from memory
