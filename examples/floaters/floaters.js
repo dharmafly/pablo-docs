@@ -175,7 +175,6 @@ GameState.prototype = {
 
         messageQueue.sub('resume', function(data, object){
             if(self.notification){
-                console.log(self.notification.text);
                 self.notification.content('');
             }
         });
