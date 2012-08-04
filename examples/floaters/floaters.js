@@ -329,7 +329,7 @@ Symbolset.prototype = {
     },
 
     // Create as many symbols as specified by maxSymbols; add id to each symbol dom
-    createAll: function(settings){
+    createAll: function(settings, params){
         var Symbol = this,
             attr = {},
             i, symbol;
@@ -338,7 +338,7 @@ Symbolset.prototype = {
         settings.root = settings.root.g({'class': 'symbols'});
 
         for (i=0; i < this.maxSymbols; i++){
-            symbol = this.createSymbol(settings);
+            symbol = this.createSymbol(settings, params);
             symbol.id = i;
             attr[attrIdKey] = i;
             symbol.dom.attr(attr);
@@ -410,8 +410,6 @@ function createGame(){
 
     // Create symbols
     circles.createAll(settings);
-
-
 
     // Store ID of this request for the next animation frame
     loop.requestId = reqAnimFrame(loop, settings.rootElem);
