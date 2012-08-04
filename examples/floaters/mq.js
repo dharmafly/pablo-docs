@@ -11,7 +11,7 @@ function MQ(){
 MQ.prototype.pub = function(event, data, object)
 {
 	if(event){
-		this.queue.push({event: event, data: data, object: object};
+		this.queue.push({event: event, data: data, object: object});
 	}
 }
 
@@ -36,7 +36,7 @@ MQ.prototype.sub = function(event, callback)
 // Process the queue. This will run inside the game loop so 
 // events "in sync" with the rest of the game
 MQ.prototype.process = function(){
-	while(this.queue.length > 0)) {
+	while(this.queue.length > 0) {
 		var e = this.queue.pop();
 		//retrieve all subscribers of this event
 		var eventSubs = this.subscribers[e.event];
