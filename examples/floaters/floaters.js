@@ -170,7 +170,7 @@ GameState.prototype = {
                     .content(self.pauseText);
             }
             else
-                self.notification.text(self.pauseText);
+                self.notification.content(self.pauseText);
         });
 
         messageQueue.sub('resume', function(data, object){
