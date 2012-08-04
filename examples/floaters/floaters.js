@@ -322,8 +322,8 @@ Symbolset.prototype = {
         this.created = this.now(); // used in updateAll()
         settings.root = settings.root.g({'class': 'symbols'});
 
-        for (i=0; i < Symbol.maxSymbols; i++){
-            symbol = Symbol.createSymbol(settings);
+        for (i=0; i < this.maxSymbols; i++){
+            symbol = this.createSymbol(settings);
             symbol.id = i;
             attr[attrIdKey] = i;
             symbol.dom.attr(attr);
