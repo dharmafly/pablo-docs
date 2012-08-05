@@ -72,7 +72,9 @@ var namespace = 'floaters',
         //opacityMax: 1,
         colors: colors,
         colorsLength: colorsLength,
-        fadeoutTime: 405
+        fadeoutTime: 405,
+        pointsMin: 5,
+        pointsMax: 100
     },
 
     rMid = ((settings.rMax - settings.rMin) / 2) + settings.rMin,
@@ -162,11 +164,15 @@ Game.prototype = {
         var game = this;
 
         this.createDashboard()
+            // Event subscriptions
             .sub('pause', function(data, object){
-                game.notification.content(game.pauseText);
+                game.displayNotification(game.pauseText);
             })
             .sub('resume', function(data, object){
-                game.notification.content('');
+                game.displayNotification('');
+            })
+            .sub('symbol:remove', function(data, symbol){
+                game.displayPoints(symbol);
             });
 
         return this;
@@ -185,14 +191,42 @@ Game.prototype = {
     },
 
     createDashboard: function(){
-        this.dashboard = settings.root.g({'class': 'notification'});
-        this.notification = this.dashboard.text({
+        this.points = [];
+
+        this.dom = settings.root.g({'class': 'dashboard'});
+
+        this.notification = this.dom.text({
+            'class': 'notification',
             x:'45%', 
             y:'50%', 
             'font-size':30, 
             'font-family':'lcd', 
             fill:'white'
         });
+
+        return this;
+    },
+
+    displayNotification: function(message){
+        // Re-attach notification element to ensure top-level in the , with new text
+        this.notification
+            .remove()
+            .content(message)
+            .appendTo(this.dashboard);
+        return this;
+    },
+
+    displayPoints: function(symbol){
+        var points  = this.dom.text({
+            'class': 'points',
+            x: symbol.pos.x, 
+            y: symbol.pos.y, 
+            'font-size':30, 
+            'font-family':'lcd', 
+            fill:'white'
+        }).content(symbol.points);
+        
+        this.points.push(points);
         return this;
     },
 
@@ -325,8 +359,12 @@ Symbol.prototype = {
         
         this.fill = this.pickColor();
         this.stroke = this.pickColor();
-        
+
         halfwidth = this.r + this.strokeWidth;
+
+        // Points
+        this.points = Math.round(selectInRange(1 - this.importance, settings.pointsMin, settings.pointsMax));
+        
 
         // Starting position - spread over either x or y axis
         if (randomInt()){
