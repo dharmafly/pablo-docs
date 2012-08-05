@@ -37,7 +37,7 @@ function createRoot(container){
 /////
 
 
-var namespace = 'pabloviz',
+var namespace = 'floaters',
     attrNamespace = 'data-' + namespace,
     attrIdKey = attrNamespace + '-id',
     root = createRoot('#paper'),
@@ -47,6 +47,8 @@ var namespace = 'pabloviz',
         window.msCancelAnimationFrame,
 
     active = true,
+
+    gameMQInterval = 1000 / 5,
         
     colors = ['#e0f6a5','#eafcb3','#a0c574','#7c7362','#745051','#edcabc','#6b5048','#ae7271','#b79b9e','#c76044','#edfcc1','#d9f396','#75a422','#819b69','#c8836a'],
     colorsLength = colors.length,
@@ -76,7 +78,10 @@ var namespace = 'pabloviz',
     rMid = ((settings.rMax - settings.rMin) / 2) + settings.rMin,
     numPixels = settings.width * settings.height,
     maxSymbols = Math.round((numPixels / rMid) * (symbolDensity / 1000)),
-    createInterval = 240;
+    createInterval = 240,
+
+    // global message queue
+    messageQueue = new MQ();
 
 
 /////
@@ -143,12 +148,117 @@ Vector.prototype = {
     }
 };
 
+
 /////
 
-//global message queue object
-var messageQueue = new MQ();
-//game state object
-var gameState = new GameState();
+
+function Game(){
+    this.pauseText = 'Paused';
+    this.init();
+}
+
+Game.prototype = {
+    init: function(){
+        var game = this;
+
+        this.createDashboard()
+            .sub('pause', function(data, object){
+                game.notification.content(game.pauseText);
+            })
+            .sub('resume', function(data, object){
+                game.notification.content('');
+            });
+
+        return this;
+    },
+
+    // publish event
+    pub: function(event, data){
+        messageQueue.pub(this.namespace + ':' + event, data, this);
+        return this;
+    },
+
+    // subscribe to event
+    sub: function(event, callback){
+        messageQueue.sub(event, callback);
+        return this;
+    },
+
+    createDashboard: function(){
+        this.dashboard = settings.root.g({'class': 'notification'});
+        this.notification = this.dashboard.text({
+            x:'45%', 
+            y:'50%', 
+            'font-size':30, 
+            'font-family':'lcd', 
+            fill:'white'
+        });
+        return this;
+    },
+
+    update: function(){
+        messageQueue.process();
+        return this;
+    },
+
+    create: function(){
+        var circles = new Symbolset(),
+        
+            // Main loop handler, fires on each animation frame
+            loop = function(){
+                // Update all symbols
+                circles.updateAll();
+
+                // Process all the events in the message queue
+                messageQueue.process();
+
+                // On each animation frame, repeat the loop; store ID of this request for the next animation frame
+                loop.requestId = reqAnimFrame(loop, settings.rootElem);
+            };
+
+        // create state loop
+        this.intervalId = window.setInterval(this.update, gameMQInterval);
+
+        // Add CSS styles
+        circles.addStyles();
+
+        // Create symbols
+        circles.createAll(settings);
+
+        // Store ID of this request for the next animation frame
+        loop.requestId = reqAnimFrame(loop, settings.rootElem);
+
+        // Click listener on SVG element
+        settings.rootElem.addEventListener('click', function(event){
+            var symbolId = event.target.getAttribute(attrIdKey),
+                symbol = circles.getSymbolById(symbolId);
+
+            if (symbol){
+                symbol.onclick.call(symbol, event);
+            }
+        }, false);
+
+        // Keypress listener
+        window.addEventListener('keydown', function(event){
+            // Spacebar pressed
+            if (event.keyCode === 32){
+                if (active && cancelAnimFrame){
+                    active = false;
+                    messageQueue.pub('pause', {}, null);
+                    cancelAnimFrame(loop.requestId);
+                }
+                else {
+                    active = true;
+                    // Reset timer, to resume play from where we left off
+                    circles.updated = now();
+                    messageQueue.pub('resume', {}, null);
+                    loop();
+                }
+            }
+        }, false);
+    }
+};
+
 
 /////
 
@@ -158,6 +268,8 @@ function Symbol(settings, params){
 }
 
 Symbol.prototype = {
+    namespace: 'symbol',
+
     init: function(settings, params){
         this.settings = settings;
         this.pos = new Vector();
@@ -175,9 +287,16 @@ Symbol.prototype = {
         return this.create();
     },
 
-    //event publishing function 
+    // publish event
     pub: function(event, data){
-        messageQueue.pub(event, data, this);
+        messageQueue.pub(this.namespace + ':' + event, data, this);
+        return this;
+    },
+
+    // subscribe to event
+    sub: function(event, callback){
+        messageQueue.sub(event, callback);
+        return this;
     },
 
     create: function(){
@@ -298,33 +417,57 @@ Symbol.prototype = {
             symbol.dom.remove();
         }, settings.fadeoutTime);
 
-        return this;
+        return this.pub('remove');
     },
 
     createDom: function(){
         this.root = this.settings.root;
         this.dom = this.root.circle();
         return this;
+    },
+
+    onclick: function(domEvent){
+        return this.remove();
     }
 };
 
 function Symbolset(){
-    this.symbols = [];
+    this.init();
 }
 
 Symbolset.prototype = {
+    namespace: 'symbolset',
     now: now,
     createInterval: createInterval,
     maxSymbols: maxSymbols,
     reqAnimFrame: reqAnimFrame,
 
-    //event publishing function 
+    init: function(){
+        var symbolset = this;
+        
+        this.symbols = [];
+
+        this.sub('symbol:remove', function(data, symbol){
+            symbolset.removeSymbol(symbol);
+        });
+        return this;
+    },
+
+    // publish event
     pub: function(event, data){
-        messageQueue.pub(event, data, this);
+        messageQueue.pub(this.namespace + ':' + event, data, this);
+        return this;
+    },
+
+    // subscribe to event
+    sub: function(event, callback){
+        messageQueue.sub(event, callback);
+        return this;
     },
 
     createSymbol: function(settings){
         var symbol = new Symbol(settings);
+
         this.symbols.push(symbol);
         return symbol;
     },
@@ -344,6 +487,8 @@ Symbolset.prototype = {
             attr[attrIdKey] = i;
             symbol.dom.attr(attr);
         }
+
+        return this;
     },
 
     updateAll: (function(){
@@ -360,6 +505,7 @@ Symbolset.prototype = {
                 this.updated - this.prevUpdated : null;
 
             this.symbols.forEach(updateSymbol, this);
+            return this;
         };
     }()),
 
@@ -374,6 +520,7 @@ Symbolset.prototype = {
             '.symbols circle:hover {stroke:green; cursor:crosshair;}' + 
             '.symbols circle.fade {' + Pablo.cssTextPrefix(fadeStylesToPrefix) + '}'
         );
+        return this;
     },
 
     getSymbolById: function(id){
@@ -381,76 +528,19 @@ Symbolset.prototype = {
     },
 
     removeSymbol: function(symbol){
-        // Trigger symbol's remove routine
-        symbol.remove.call(symbol);
-
         // Remove instance from memory
         delete this.symbols[symbol.id];
+        return this;
     }
 };
 
 
 /////
 
-function createGame(){
-    gameState.init();
-    var circles = new Symbolset(),
-        // Main loop handler, fires on each animation frame
-        loop = function(){
-            // Update all symbols
-            circles.updateAll();
-
-            // On each animation frame, repeat the loop; store ID of this request for the next animation frame
-            loop.requestId = reqAnimFrame(loop, settings.rootElem);
-        };
-
-    // Add CSS styles
-    circles.addStyles();
-
-    // Create symbols
-    circles.createAll(settings);
-
-    //create state loop
-    gameState.intervalId = setInterval(gameState.update, 1000/5);
-
-    // Store ID of this request for the next animation frame
-    loop.requestId = reqAnimFrame(loop, settings.rootElem);
-
-    // Click listener on SVG element
-    settings.rootElem.addEventListener('click', function(event){
-        var symbolId = event.target.getAttribute(attrIdKey),
-            symbol = circles.getSymbolById(symbolId);
-
-        if (symbol){
-            circles.removeSymbol(symbol);
-        }
-    }, false);
-
-    // Keypress listener
-    window.addEventListener('keydown', function(event){
-        // Spacebar pressed
-        if (event.keyCode === 32){
-            if (active && cancelAnimFrame){
-                active = false;
-                messageQueue.pub(events.pause, {}, null);
-                cancelAnimFrame(loop.requestId);
-            }
-            else {
-                active = true;
-                // Reset timer, to resume play from where we left off
-                circles.updated = now();
-                messageQueue.pub(events.resume, {}, null);
-                loop();
-            }
-        }
-    }, false);
-}
-
-/////
 
 // If browser environment suitable...
 if (Pablo.isSupported && reqAnimFrame){
-    createGame();
+    (new Game()).create();
 }
 
 else {
