@@ -144,19 +144,21 @@ Vector.prototype = {
 /////
 
 
-function Game(){
-    this.pauseText = 'Paused';
-    this.init();
+function Game(settings){
+    this.init(settings);
 }
 
 Game.prototype = {
-    init: function(){
+    init: function(settings){
         var game = this;
+
+
+        this.settings = settings;
 
         this.createDashboard()
             // Event subscriptions
             .sub('pause', function(data, object){
-                game.displayNotification(game.pauseText);
+                game.displayNotification(game.settings.pauseText);
             })
             .sub('resume', function(data, object){
                 game.displayNotification('');
@@ -183,7 +185,7 @@ Game.prototype = {
     createDashboard: function(){
         this.points = [];
 
-        this.dom = settings.root.g({'class': 'dashboard'});
+        this.dom = this.settings.root.g({'class': 'dashboard'});
 
         this.notification = this.dom.text({
             'class': 'notification',
@@ -198,11 +200,13 @@ Game.prototype = {
     },
 
     displayNotification: function(message){
-        // Re-attach notification element to ensure top-level in the , with new text
-        this.notification
+        // Re-attach notification element to ensure top-level
+        this.dom
             .remove()
-            .content(message)
-            .appendTo(this.dashboard);
+            .appendTo(this.settings.root);
+
+        // Update contents
+        this.notification.content(message);
         return this;
     },
 
@@ -568,7 +572,10 @@ Symbolset.prototype = {
 
 // If browser environment suitable...
 if (Pablo.isSupported && reqAnimFrame){
-    (new Game()).create();
+    (new Game({
+        pauseText: 'Paused',
+        root: root,
+    })).create();
 }
 
 else {
