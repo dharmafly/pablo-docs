@@ -42,7 +42,7 @@ var namespace = 'floaters',
         
     colors = ['#e0f6a5','#eafcb3','#a0c574','#7c7362','#745051','#edcabc','#6b5048','#ae7271','#b79b9e','#c76044','#edfcc1','#d9f396','#75a422','#819b69','#c8836a'],
     colorsLength = colors.length,
-    symbolDensity = 2,
+    symbolDensity = 1,
 
     settings = {
         root: root,
@@ -150,24 +150,8 @@ function Game(settings){
 
 Game.prototype = {
     init: function(settings){
-        var game = this;
-
-
         this.settings = settings;
-
-        this.createDashboard()
-            // Event subscriptions
-            .sub('pause', function(data, object){
-                game.displayNotification(game.settings.pauseText);
-            })
-            .sub('resume', function(data, object){
-                game.displayNotification('');
-            })
-            .sub('symbol:remove', function(data, symbol){
-                game.displayPoints(symbol);
-            });
-
-        return this;
+        return this.create();
     },
 
     // publish event
@@ -183,8 +167,6 @@ Game.prototype = {
     },
 
     createDashboard: function(){
-        this.points = [];
-
         this.dom = this.settings.root.g({'class': 'dashboard'});
 
         this.notification = this.dom.text({
@@ -196,31 +178,51 @@ Game.prototype = {
             fill:'white'
         });
 
+        this.points = this.dom.g({'class': 'points'});
+
         return this;
     },
 
     displayNotification: function(message){
-        // Re-attach notification element to ensure top-level
-        this.dom
-            .remove()
-            .appendTo(this.settings.root);
-
         // Update contents
         this.notification.content(message);
         return this;
     },
 
     displayPoints: function(symbol){
-        var points  = this.dom.text({
-            'class': 'points',
-            x: symbol.pos.x, 
-            y: symbol.pos.y, 
-            'font-size':30, 
+        var fontSize = 30;
+
+        this.points.text({
+            x: Math.round(symbol.pos.x - (fontSize / 2)),
+            y: Math.round(symbol.pos.y + (fontSize / 2)), 
+            'font-size': fontSize, 
             'font-family':'lcd', 
             fill:'white'
         }).content(symbol.points);
-        
-        this.points.push(points);
+
+        return this;
+    },
+
+    transformPoints: function(){
+        var px = randomIntRange(30, 60);
+
+        this.points.cssPrefix({
+            transform: 'rotate3d(1, 1, 1, ' + px + 'deg)'
+        });
+        return this;
+    },
+
+    // Add CSS styles
+    addStyles: function(){
+        var fadeStylesToPrefix = {
+            transition: 'all ' + (800 / 1000) + 's ' + 'ease-in-out',
+            'transform-origin': (this.settings.width / 2) + 'px ' + (this.settings.height / 2) + 'px'
+        };
+
+        this.dom.style().content(
+            '.dashboard .points {' + Pablo.cssTextPrefix(fadeStylesToPrefix) + '}'
+        );
+
         return this;
     },
 
@@ -230,7 +232,8 @@ Game.prototype = {
     },
 
     create: function(){
-        var circles = new Symbolset(),
+        var game = this,
+            circles = new Symbolset(),
         
             // Main loop handler, fires on each animation frame
             loop = function(){
@@ -247,14 +250,32 @@ Game.prototype = {
         // create state loop
         this.intervalId = window.setInterval(this.update, gameMQInterval);
 
-        // Add CSS styles
-        circles.addStyles();
-
         // Create symbols
         circles.createAll(settings);
 
-        // Store ID of this request for the next animation frame
+        // Create dashboard
+        this.createDashboard();
+
+        // Add CSS styles
+        this.addStyles();
+
+        // Animation loop. Store ID of this request for the next animation frame.
         loop.requestId = reqAnimFrame(loop, settings.rootElem);
+
+        // Event subscriptions
+        this.sub('pause', function(data, object){
+                game.displayNotification(game.settings.pauseText);
+            })
+            .sub('resume', function(data, object){
+                game.displayNotification('');
+            })
+            .sub('symbol:remove', function(data, symbol){
+                game.displayPoints(symbol);
+            })
+            .sub('symbolset:remove', function(data, symbolset){
+                game.displayNotification('Level complete');
+                game.transformPoints();
+            });
 
         // Click listener on SVG element
         settings.rootElem.addEventListener('click', function(event){
@@ -272,15 +293,15 @@ Game.prototype = {
             if (event.keyCode === 32){
                 if (active && cancelAnimFrame){
                     active = false;
-                    messageQueue.pub('pause', {}, null);
                     cancelAnimFrame(loop.requestId);
+                    messageQueue.pub('pause', {}, game);
                 }
                 else {
                     active = true;
                     // Reset timer, to resume play from where we left off
                     circles.updated = now();
-                    messageQueue.pub('resume', {}, null);
-                    loop();
+                    loop.requestId = reqAnimFrame(loop, settings.rootElem);
+                    messageQueue.pub('resume', {}, game);
                 }
             }
         }, false);
@@ -479,6 +500,8 @@ Symbolset.prototype = {
         
         this.symbols = [];
 
+        this.addStyles();
+
         this.sub('symbol:remove', function(data, symbol){
             symbolset.removeSymbol(symbol);
         });
@@ -560,8 +583,22 @@ Symbolset.prototype = {
     },
 
     removeSymbol: function(symbol){
+        var hasRemainingSymbols, i;
+
         // Remove instance from memory
         delete this.symbols[symbol.id];
+
+        // Check if all symbols removed
+        for (i = this.symbols.length; i; i--){
+            if (this.symbols[i-1]){
+                hasRemainingSymbols = true;
+                break;
+            }
+        }
+        if (!hasRemainingSymbols){
+            this.pub('remove');
+        }
+
         return this;
     }
 };
@@ -572,10 +609,12 @@ Symbolset.prototype = {
 
 // If browser environment suitable...
 if (Pablo.isSupported && reqAnimFrame){
-    (new Game({
+    new Game({
         pauseText: 'Paused',
         root: root,
-    })).create();
+        width: settings.width,
+        height: settings.height
+    });
 }
 
 else {
