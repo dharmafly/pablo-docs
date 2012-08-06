@@ -40,10 +40,12 @@ MQ.prototype.process = function(){
 		var e = this.queue.pop();
 		//retrieve all subscribers of this event
 		var eventSubs = this.subscribers[e.event];
-		for (var i = 0; i < eventSubs.length; i++) {
-			var callback = eventSubs[i];
-			//invoke the event handler registered by this subscriber
-			callback(e.data, e.object);
-		}
+		if(eventSubs){
+			for (var i = 0; i < eventSubs.length; i++) {
+				var callback = eventSubs[i];
+				//invoke the event handler registered by this subscriber
+				callback(e.data, e.object);
+			}	
+		}		
 	};
 }
