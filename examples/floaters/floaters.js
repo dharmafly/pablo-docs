@@ -147,44 +147,8 @@ Vector.prototype = {
 
 //global message queue object
 var messageQueue = new MQ();
-
 //game state object
-function GameState(){
-    this.pauseText = 'Paused';    
-    this.intervalId;
-}
-
-GameState.prototype = {
-    init: function(){
-        var self = this;
-        messageQueue.sub('pause', function(data, object){
-            if(!self.notification){
-                var dom = settings.root.g({'class': 'notification'});
-                self.notification = dom.text({
-                        x:'45%', 
-                        y:'50%', 
-                        'font-size':30, 
-                        'font-family':'lcd', 
-                        fill:'white'
-                    })
-                    .content(self.pauseText);
-            }
-            else
-                self.notification.content(self.pauseText);
-        });
-
-        messageQueue.sub('resume', function(data, object){
-            if(self.notification){
-                self.notification.content('');
-            }
-        });
-    },
-    update: function(){
-        messageQueue.process();
-    }
-}
-
-var gstate = new GameState();
+var gameState = new GameState();
 
 /////
 
@@ -429,15 +393,12 @@ Symbolset.prototype = {
 /////
 
 function createGame(){
-    gstate.init();
+    gameState.init();
     var circles = new Symbolset(),
         // Main loop handler, fires on each animation frame
         loop = function(){
             // Update all symbols
             circles.updateAll();
-
-            // Process all the events in the message queue
-            messageQueue.process();
 
             // On each animation frame, repeat the loop; store ID of this request for the next animation frame
             loop.requestId = reqAnimFrame(loop, settings.rootElem);
@@ -450,7 +411,7 @@ function createGame(){
     circles.createAll(settings);
 
     //create state loop
-    gstate.intervalId = setInterval(gstate.update, 1000/5);
+    gameState.intervalId = setInterval(gameState.update, 1000/5);
 
     // Store ID of this request for the next animation frame
     loop.requestId = reqAnimFrame(loop, settings.rootElem);
@@ -471,14 +432,14 @@ function createGame(){
         if (event.keyCode === 32){
             if (active && cancelAnimFrame){
                 active = false;
-                messageQueue.pub('pause', {}, null);
+                messageQueue.pub(events.pause, {}, null);
                 cancelAnimFrame(loop.requestId);
             }
             else {
                 active = true;
                 // Reset timer, to resume play from where we left off
                 circles.updated = now();
-                messageQueue.pub('resume', {}, null);
+                messageQueue.pub(events.resume, {}, null);
                 loop();
             }
         }
