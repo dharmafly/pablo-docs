@@ -36,8 +36,6 @@ var namespace = 'floaters',
     cancelAnimFrame = window.cancelAnimationFrame || window.webkitCancelAnimationFrame || window.mozCancelAnimationFrame ||
         window.msCancelAnimationFrame,
 
-    active = true,
-
     gameMQInterval = 1000 / 5,
         
     colors = ['#e0f6a5','#eafcb3','#a0c574','#7c7362','#745051','#edcabc','#6b5048','#ae7271','#b79b9e','#c76044','#edfcc1','#d9f396','#75a422','#819b69','#c8836a'],
@@ -150,7 +148,11 @@ function Game(settings){
 
 Game.prototype = {
     init: function(settings){
+        var game = this;
+
         this.settings = settings;
+        this.animationLoop = new AnimationLoop(null, settings.rootElem);
+
         return this.create();
     },
 
@@ -215,7 +217,7 @@ Game.prototype = {
     // Add CSS styles
     addStyles: function(){
         var fadeStylesToPrefix = {
-            transition: 'all ' + (800 / 1000) + 's ' + 'ease-in-out',
+            transition: 'all ' + (800 / 1000) + 's ' + 'ease-in',
             'transform-origin': (this.settings.width / 2) + 'px ' + (this.settings.height / 2) + 'px'
         };
 
@@ -236,19 +238,7 @@ Game.prototype = {
 
     create: function(){
         var game = this,
-            circles = new Symbolset(),
-        
-            // Main loop handler, fires on each animation frame
-            loop = function(){
-                // Update all symbols
-                circles.updateAll();
-
-                // Process all the events in the message queue
-                messageQueue.process();
-
-                // On each animation frame, repeat the loop; store ID of this request for the next animation frame
-                loop.requestId = reqAnimFrame(loop, settings.rootElem);
-            };
+            circles = new Symbolset();
 
         // create state loop
         this.intervalId = window.setInterval(this.update, gameMQInterval);
@@ -261,9 +251,6 @@ Game.prototype = {
 
         // Add CSS styles
         this.addStyles();
-
-        // Animation loop. Store ID of this request for the next animation frame.
-        loop.requestId = reqAnimFrame(loop, settings.rootElem);
 
         // Event subscriptions
         this.sub('pause', function(data, object){
@@ -294,20 +281,27 @@ Game.prototype = {
         window.addEventListener('keydown', function(event){
             // Spacebar pressed
             if (event.keyCode === 32){
-                if (active && cancelAnimFrame){
-                    active = false;
-                    cancelAnimFrame(loop.requestId);
+                if (game.animationLoop.active){
+                    game.animationLoop.stop();
                     messageQueue.pub('pause', {}, game);
                 }
                 else {
-                    active = true;
                     // Reset timer, to resume play from where we left off
                     circles.updated = now();
-                    loop.requestId = reqAnimFrame(loop, settings.rootElem);
+                    game.animationLoop.start();
                     messageQueue.pub('resume', {}, game);
                 }
             }
         }, false);
+
+        this.animationLoopCallback = this.animationLoop.add(function(){
+            // Process all the events in the message queue
+            messageQueue.process();
+
+            // Update all symbols
+            circles.updateAll();
+        });
+        this.animationLoop.start();
     }
 };
 

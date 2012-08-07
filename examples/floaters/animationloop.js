@@ -11,11 +11,36 @@ var AnimationLoop = (function(window){
 		nativeCancelAnimationFrame = window.cancelAnimationFrame || window.webkitCancelAnimationFrame || window.mozCancelAnimationFrame ||
 	        window.msCancelAnimationFrame;
 
+
+	function AnimationLoopCallback(callback, thisArg){
+		this.callback = callback;
+
+		if (thisArg){
+			this.thisArg = thisArg
+		}
+	}
+
+	AnimationLoopCallback.prototype = {
+		thisArg: null,
+		active: true,
+		pause: function(){
+			this.active = false;
+		},
+		resume: function(){
+			this.active = true;
+		},
+		toggle: function(){
+			this.active = !this.active;
+		}
+	};
+
+
 	function AnimationLoop(callback, element){
 		this.init(callback, element);
 	}
 
 	AnimationLoop.prototype = {
+		active: false,
 		requestID: null,
 		lastUpdated: null,
 		timeSinceLastFrame: 0,
@@ -26,24 +51,25 @@ var AnimationLoop = (function(window){
 		isSupported: !!(nativeRequestAnimationFrame && nativeCancelAnimationFrame),
 
 		init: function(callback, element){
-			if (callback){
-				this.add(callback, element);
-			}
+			this.lastUpdated = now();
 			if (element){
 				this.element = element;
 			}
-			this.lastUpdated = now();
+			if (callback){
+				this.add(callback, element).start();
+			}
 		    
-		    return this.start();
+		    return this;
 		},
 
 		request: function(){
 			var animationLoop = this;
 
 			if (this.isSupported){
+				this.active = true;
 				this.requestID = this.nativeRequestAnimationFrame.call(window, function(){
 					animationLoop.process();
-				});
+				}, this.element);
 			}
 			return this;
 		},
@@ -54,15 +80,22 @@ var AnimationLoop = (function(window){
 
 		stop: function(){
 			if (this.isSupported){
+				this.active = false;
 				this.nativeCancelAnimationFrame.call(window, this.requestID);
 				this.requestID = null;
 			}
 			return this;
 		},
 
+		toggle: function(){
+			return this.active ? this.stop() : this.start();
+		},
+
 		process: (function(){
 			function process(callbackObj){
-				callbackObj.callback.call(callbackObj.thisArg || null, this.timeSinceLastFrame);
+				if (callbackObj.active){
+					callbackObj.callback.call(callbackObj.thisArg || null, this.timeSinceLastFrame);
+				}
 			}
 
 			return function(){
@@ -70,19 +103,18 @@ var AnimationLoop = (function(window){
 
 				this.timeSinceLastFrame = t - this.lastUpdated;
 				this.lastUpdated = t;
-				this.callbacks.forEach(process);
+				this.callbacks.forEach(process, this);
 
 				return this.request();
 			};
 		}()),
 
 		add: function(callback, element, thisArg){
-			this.callbacks.push({
-				callback: callback,
-				element: element, // (not currently supported)
-				thisArg: thisArg
-			});
-			return this;
+			var animationLoop = this,
+				callbackObj = new AnimationLoopCallback(callback, element, thisArg);
+
+			this.callbacks.push(callbackObj);
+			return callbackObj;
 		},
 
 		remove: function(callback){
@@ -99,22 +131,7 @@ var AnimationLoop = (function(window){
 			}
 
 			return this;
-		}/*,
-
-
-		find: function(callback){
-			var callbacks = this.callbacks,
-				len = callbacks.length,
-				i;
-
-			for (i=0; i<len; i++){
-				if (callbacks[i].callback === callback){
-					return callbacks[i];
-				}
-			}
-
-			return null;
-		}*/
+		}
 	};
 
 	return AnimationLoop;
