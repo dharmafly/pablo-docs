@@ -220,6 +220,9 @@ Game.prototype = {
         };
 
         this.dom.style().content(
+            // prevent mouse clicks on dashboard notifications & points
+            '.dashboard .notification, .dashboard .points { pointer-events: none; }' +
+            // transform points
             '.dashboard .points {' + Pablo.cssTextPrefix(fadeStylesToPrefix) + '}'
         );
 
