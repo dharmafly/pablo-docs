@@ -1,7 +1,8 @@
 ---
 category: reference
-heading: 'Selection'
+heading: Selection
 ---
+
 
 The `Pablo()` method call can be used to select multiple SVG elements.
 

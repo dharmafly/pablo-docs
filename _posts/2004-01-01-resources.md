@@ -1,7 +1,8 @@
 ---
-category: about
-heading: "Resources"
+category: overview
+heading: Resources
 ---
+
 
 * [SVG reference on MDN](https://developer.mozilla.org/en/SVG)
 * [SVG elements reference](https://developer.mozilla.org/en/SVG/Element)
