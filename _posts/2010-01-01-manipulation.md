@@ -16,7 +16,7 @@ This means you can use CSS to set SVG node properties by appending a style
 element and editing its content, using `style().content(css)`.
 
     // Create the root node.
-    var paper = Pablo($output[0]).root({height:100});
+    var paper = Pablo(demoElement).root({height:100});
 
     // Append a <style> element
     paper
@@ -39,7 +39,7 @@ The `a(options)` element method can be used to set up hyperlinked SVG elements.
 In the example below `<a>` elements are created and SVG elements are appended 
 as children.
 
-    var paper  = Pablo($output[0]).root({height: 130}),
+    var paper  = Pablo(demoElement).root({height: 130}),
         circle = paper.circle({cx:60, cy:60, r:50, fill:'red'}),
         text   = paper.text({x:220, y:30}).content('we ♥ pablo');
 
