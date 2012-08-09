@@ -1,6 +1,7 @@
 ---
 category: reference
-heading: "Traversal"
+heading: Traversal
 ---
+
 
 Pablo has methods to facilitate DOM traversal.

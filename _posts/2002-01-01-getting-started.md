@@ -1,7 +1,8 @@
 ---
-category: about
-heading: "Getting started"
+category: overview
+heading: Getting started
 ---
+
 
 It's simple to get started with {{ site.PROJECT_NAME }}. 
 Just clone the project with git.

@@ -1,40 +1,14 @@
 ---
 category: reference
-heading: "Manipulation"
+heading: Manipulation
 ---
+
 
 Pablo also has an assortment of methods for changing the properties of 
 SVG nodes.
 
 Attributes
-----------
-
-The `attr()` method can be used to set or get an objects attributes.
-
-To add one or more attributes pass in an object map of the attribute name and 
-its value.
-
-Specifying an attribute already set on that node will replace it.
-
-    var square = Pablo.rect({width: 100, fill: 'red'});
-
-    // Add a height and replace the fill color
-    square.attr({height: 100, fill: 'green'});
-
-    Pablo($output[0]).root({height:100})._(square);
-
-To remove an attribute use `removeAttr()` and pass the attribute name as a 
-string.
-
-    var square = Pablo().rect({width: 100, height: 100, fill: 'red'});
-
-    // Remove the fill attribute (turns out black by default)
-    square.removeAttr('fill');
-
-    Pablo($output[0]).root({height:100})._(square);
-
-CSS styles
-----------
+--
 
 CSS properties carry over to SVG natively. 
 
@@ -58,7 +32,7 @@ element and editing its content, using `style().content(css)`.
 
 
 Hyperlinks
-----------
+----
 
 The `a(options)` element method can be used to set up hyperlinked SVG elements.
 
