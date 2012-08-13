@@ -7,10 +7,9 @@ var Symbolset = (function(){
 
     Symbolset.prototype = {
         namespace: 'symbolset',
-        now: now,
-        createInterval: createInterval,
-        maxSymbols: maxSymbols,
-        reqAnimFrame: reqAnimFrame,
+        now: Floaters.now,
+        reqAnimFrame: Floaters.reqAnimFrame,
+        settings: Floaters.symbolSettings,
 
         init: function(){
             var symbolset = this;
@@ -27,13 +26,13 @@ var Symbolset = (function(){
 
         // publish event
         pub: function(event, data){
-            messageQueue.pub(this.namespace + ':' + event, data, this);
+            Floaters.messageQueue.pub(this.namespace + ':' + event, data, this);
             return this;
         },
 
         // subscribe to event
         sub: function(event, callback){
-            messageQueue.sub(event, callback);
+            Floaters.messageQueue.sub(event, callback);
             return this;
         },
 
@@ -51,12 +50,12 @@ var Symbolset = (function(){
                 i, symbol;
 
             this.created = this.now(); // used in updateAll()
-            settings.root = settings.root.g({'class': 'symbols'});
+            this.settings.root = this.settings.root.g({'class': 'symbols'});
 
-            for (i=0; i < this.maxSymbols; i++){
-                symbol = this.createSymbol(settings, params);
+            for (i=0; i < this.settings.maxSymbols; i++){
+                symbol = this.createSymbol(this.settings, params);
                 symbol.id = i;
-                attr[attrIdKey] = i;
+                attr[this.attrIdKey] = i;
                 symbol.dom.attr(attr);
             }
 
@@ -84,11 +83,11 @@ var Symbolset = (function(){
         // Add CSS styles
         addStyles: function(){
             var fadeStylesToPrefix = {
-                transition: 'all ' + (settings.fadeoutTime / 1000) + 's ' + 'ease-out',
+                transition: 'all ' + (this.settings.fadeoutTime / 1000) + 's ' + 'ease-out',
                 transform: 'scale(0)'
             };
 
-            settings.root.style().content(
+            this.settings.root.style().content(
                 '.symbols circle:hover {stroke:green; cursor:crosshair;}' + 
                 '.symbols circle.fade {' + Pablo.cssTextPrefix(fadeStylesToPrefix) + '}'
             );

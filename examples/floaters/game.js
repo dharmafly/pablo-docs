@@ -1,29 +1,30 @@
 var Game = (function(){
     'use strict';
 
-    function Game(settings){
-        this.init(settings);
+    function Game(){
+        this.init();
     }
 
     Game.prototype = {
         init: function(settings){
             var game = this;
 
-            this.settings = settings;
-            this.animationLoop = new AnimationLoop(null, settings.rootElem);
+            this.settings = Floaters.gameSettings;
+            this.messageQueue = Floaters.messageQueue;
+            this.animationLoop = new AnimationLoop(null, this.settings.rootElem);
 
             return this;
         },
 
         // publish event
         pub: function(event, data){
-            messageQueue.pub(this.namespace + ':' + event, data, this);
+            this.messageQueue.pub(this.namespace + ':' + event, data, this);
             return this;
         },
 
         // subscribe to event
         sub: function(event, callback){
-            messageQueue.sub(event, callback);
+            this.messageQueue.sub(event, callback);
             return this;
         },
 
@@ -66,7 +67,7 @@ var Game = (function(){
         },
 
         transformPoints: function(){
-            var px = randomIntRange(30, 60);
+            var px = Floaters.randomIntRange(60, 120);
 
             this.points.cssPrefix({
                 transform: 'rotate3d(1, 1, 1, ' + px + 'deg)'
@@ -77,34 +78,36 @@ var Game = (function(){
         // Add CSS styles
         addStyles: function(){
             var fadeStylesToPrefix = {
-                transition: 'all ' + (800 / 1000) + 's ' + 'ease-in',
-                'transform-origin': (this.settings.width / 2) + 'px ' + (this.settings.height / 2) + 'px'
-            };
+                    transition: 'all ' + (this.settings.pointsTransitionDuration / 1000) + 's ' + 'ease-in-out',
+                    'transform-origin': (this.settings.width / 2) + 'px ' + (this.settings.height / 2) + 'px'
+                };
 
             this.dom.style().content(
                 // prevent mouse clicks on dashboard notifications & points
                 '.dashboard .notification, .dashboard .points { pointer-events: none; }' +
                 // transform points
-                '.dashboard .points {' + Pablo.cssTextPrefix(fadeStylesToPrefix) + '}'
+                '.dashboard .points {' + Pablo.cssTextPrefix(fadeStylesToPrefix) + '}' +
+                '.dashboard.paused { pointer-events: none; }'
             );
 
             return this;
         },
 
         update: function(){
-            messageQueue.process();
+            Floaters.messageQueue.process();
             return this;
         },
 
         create: function(){
             var game = this,
+                rootElem = this.settings.root.get(0),
                 circles = new Symbolset();
 
             // create state loop
-            this.intervalId = window.setInterval(this.update, gameMQInterval);
+            this.intervalId = window.setInterval(this.update, this.settings.gameMQInterval);
 
             // Create symbols
-            circles.createAll(settings);
+            circles.createAll();
 
             // Create dashboard
             this.createDashboard();
@@ -128,8 +131,8 @@ var Game = (function(){
                 });
 
             // Click listener on SVG element
-            settings.rootElem.addEventListener('click', function(event){
-                var symbolId = event.target.getAttribute(attrIdKey),
+            rootElem.addEventListener('click', function(event){
+                var symbolId = event.target.getAttribute(game.settings.attrIdKey),
                     symbol = circles.getSymbolById(symbolId);
 
                 if (symbol){
@@ -141,22 +144,23 @@ var Game = (function(){
             window.addEventListener('keydown', function(event){
                 // Spacebar pressed
                 if (event.keyCode === 32){
+                    // TODO: refactor to Game.pause() and Game.resume() methods
                     if (game.animationLoop.active){
                         game.animationLoop.stop();
-                        messageQueue.pub('pause', {}, game);
+                        Floaters.messageQueue.pub('pause', {}, game);
                     }
                     else {
                         // Reset timer, to resume play from where we left off
-                        circles.updated = now();
+                        circles.updated = Floaters.now();
                         game.animationLoop.start();
-                        messageQueue.pub('resume', {}, game);
+                        Floaters.messageQueue.pub('resume', {}, game);
                     }
                 }
             }, false);
 
             this.animationLoopCallback = this.animationLoop.add(function(){
                 // Process all the events in the message queue
-                messageQueue.process();
+                Floaters.messageQueue.process();
 
                 // Update all symbols
                 circles.updateAll();

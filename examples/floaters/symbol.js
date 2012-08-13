@@ -27,13 +27,13 @@ var Symbol = (function(){
 
         // publish event
         pub: function(event, data){
-            messageQueue.pub(this.namespace + ':' + event, data, this);
+            Floaters.messageQueue.pub(this.namespace + ':' + event, data, this);
             return this;
         },
 
         // subscribe to event
         sub: function(event, callback){
-            messageQueue.sub(event, callback);
+            Floaters.messageQueue.sub(event, callback);
             return this;
         },
 
@@ -44,7 +44,7 @@ var Symbol = (function(){
         },
 
         pickColor: function(){
-            return this.settings.colors[randomInt(this.settings.colorsLength)];
+            return this.settings.colors[Floaters.randomInt(this.settings.colorsLength)];
         },
 
         randomize: function(){
@@ -52,14 +52,14 @@ var Symbol = (function(){
                 halfwidth, x, y, velocityX, velocityY, velocityMax;
 
             // Importance
-            this.importance = randomIntRange(1, 100) / 100;
+            this.importance = Floaters.randomIntRange(1, 100) / 100;
 
             // Size & colour
-            this.opacity = round(selectInRange(1 - this.importance, settings.opacityMin, settings.opacityMax), 2);
+            this.opacity = Floaters.round(Floaters.selectInRange(1 - this.importance, settings.opacityMin, settings.opacityMax), 2);
 
-            this.r = Math.round(selectInRange(this.importance, settings.rMin, settings.rMax));
+            this.r = Math.round(Floaters.selectInRange(this.importance, settings.rMin, settings.rMax));
 
-            this.strokeWidth = Math.round(selectInRange(this.importance, settings.strokeWidthMin, settings.strokeWidthMax));
+            this.strokeWidth = Math.round(Floaters.selectInRange(this.importance, settings.strokeWidthMin, settings.strokeWidthMax));
             
             this.fill = this.pickColor();
             this.stroke = this.pickColor();
@@ -67,22 +67,22 @@ var Symbol = (function(){
             halfwidth = this.r + this.strokeWidth;
 
             // Points
-            this.points = Math.round(selectInRange(1 - this.importance, settings.pointsMin, settings.pointsMax));
+            this.points = Math.round(Floaters.selectInRange(1 - this.importance, settings.pointsMin, settings.pointsMax));
             
 
             // Starting position - spread over either x or y axis
-            if (randomInt()){
-                x = randomInt() ? settings.width + halfwidth : 0 - halfwidth;
-                y = randomInt(settings.height);
+            if (Floaters.randomInt()){
+                x = Floaters.randomInt() ? settings.width + halfwidth : 0 - halfwidth;
+                y = Floaters.randomInt(settings.height);
             }
             else {
-                x = randomInt(settings.width);
-                y = randomInt() ? settings.height + halfwidth : 0 - halfwidth;
+                x = Floaters.randomInt(settings.width);
+                y = Floaters.randomInt() ? settings.height + halfwidth : 0 - halfwidth;
             }
 
-            velocityMax = selectInRange((1 - this.importance) * settings.velocitySlowdown, settings.velocityMin, settings.velocityMax);
-            velocityX = round(randomInRange(settings.velocityMin, velocityMax), 2);
-            velocityY = round(randomInRange(settings.velocityMin, velocityMax), 2);
+            velocityMax = Floaters.selectInRange((1 - this.importance) * settings.velocitySlowdown, settings.velocityMin, settings.velocityMax);
+            velocityX = Floaters.round(Floaters.randomInRange(settings.velocityMin, velocityMax), 2);
+            velocityY = Floaters.round(Floaters.randomInRange(settings.velocityMin, velocityMax), 2);
 
             if (x > this.settings.width / 2){
                 velocityX = 0 - velocityX;
@@ -157,7 +157,7 @@ var Symbol = (function(){
             // Remove DOM element from DOM tree, when animation finished
             window.setTimeout(function(){
                 symbol.dom.remove();
-            }, settings.fadeoutTime);
+            }, this.settings.fadeoutTime);
 
             return this.pub('remove');
         },

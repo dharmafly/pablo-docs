@@ -1,52 +1,50 @@
-'use strict';
+var Floaters = (function(){
+    'use strict';
 
-function createRoot(container){
-    var root, width, height;
+    var Floaters, namespace, colors, colorsLength, width, height, numPixels, settings, root, gameSettings, symbolSettings;
 
-    // SETTINGS
+    function createRoot(container, width, height){
+        // Body styles
+        // TODO: move styles out to stylesheet
+        Pablo('body').css({
+            margin:0,
+            body: 0,
+            'background-color': 'black',
+            color: 'white'
+        });
+
+        // SVG root node
+        return Pablo('#paper').root({
+            width: width,
+            height: height
+        });
+    }
+
+    /////
+
+
+    namespace = 'floaters';
+    colors = ['#e0f6a5','#eafcb3','#a0c574','#7c7362','#745051','#edcabc','#6b5048','#ae7271','#b79b9e','#c76044','#edfcc1','#d9f396','#75a422','#819b69','#c8836a'];
+    colorsLength = colors.length;
     width = window.innerWidth;
     height = window.innerHeight;
+    numPixels =  width * height;
+    root = createRoot('#paper', width, height);
 
-    var root;
-
-    // Body styles
-    Pablo('body').css({
-        margin:0,
-        body: 0,
-        'background-color': 'black',
-        color: 'white'
-    });
-
-    // SVG root node
-    return Pablo('#paper').root({
+    gameSettings = {
         width: width,
-        height: height
-    });
-}
+        height: height,
+        root: root,
+        gameMQInterval:  1000 / 5,
+        symbolDensity: 1,
+        pointsTransitionDuration: 1000,
+    };
 
-/////
-
-
-var namespace = 'floaters',
-    attrNamespace = 'data-' + namespace,
-    attrIdKey = attrNamespace + '-id',
-    root = createRoot('#paper'),
-    reqAnimFrame = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame ||
-        window.msRequestAnimationFrame,
-    cancelAnimFrame = window.cancelAnimationFrame || window.webkitCancelAnimationFrame || window.mozCancelAnimationFrame ||
-        window.msCancelAnimationFrame,
-
-    gameMQInterval = 1000 / 5,
-        
-    colors = ['#e0f6a5','#eafcb3','#a0c574','#7c7362','#745051','#edcabc','#6b5048','#ae7271','#b79b9e','#c76044','#edfcc1','#d9f396','#75a422','#819b69','#c8836a'],
-    colorsLength = colors.length,
-    symbolDensity = 1,
-
-    settings = {
+    symbolSettings = {
+        width: width,
+        height: height,
         root: root,
         rootElem: root.el[0],
-        width: Number(root.attr('width')),
-        height: Number(root.attr('height')),
         rMax: 150,
         rMin: 1.5,
         strokeWidthMin: 2,
@@ -63,77 +61,63 @@ var namespace = 'floaters',
         fadeoutTime: 405,
         pointsMin: 5,
         pointsMax: 100
-    },
+    };
 
-    rMid = ((settings.rMax - settings.rMin) / 2) + settings.rMin,
-    numPixels = settings.width * settings.height,
-    maxSymbols = Math.round((numPixels / rMid) * (symbolDensity / 1000)),
-    createInterval = 240,
-
-    // global message queue
-    messageQueue = new MQ();
+    symbolSettings.rMid = ((symbolSettings.rMax - symbolSettings.rMin) / 2) + symbolSettings.rMin;
+    symbolSettings.maxSymbols =  Math.round((numPixels / symbolSettings.rMid) * (gameSettings.symbolDensity / 1000));
 
 
-/////
+    /////
 
 
-function round(num, decimalplaces){
-    return Number(num.toFixed(decimalplaces));
-}
+    Floaters = {
+        namespace: namespace,
+        attrNamespace:  'data-' + namespace,
+        attrIdKey:  'data-' + namespace + '-id',
+        reqAnimFrame:  window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame ||
+            window.msRequestAnimationFrame,
+        cancelAnimFrame:  window.cancelAnimationFrame || window.webkitCancelAnimationFrame || window.mozCancelAnimationFrame ||
+            window.msCancelAnimationFrame,
+        colors: colors,
+        colorsLength: colorsLength,
+        gameMQInterval: gameSettings.gameMQInterval,
+        symbolDensity: gameSettings.symbolDensity,
 
-function randomInt(length){
-    return Math.ceil((length || 2) * Math.random()) - 1;
-}
+        gameSettings: gameSettings,
+        symbolSettings: symbolSettings,
 
-function selectInRange(factor, min, max){
-    return factor * (max - min) + min;
-}
+        /////
 
-function randomInRange(min, max){
-    return selectInRange(Math.random(), min, max);
-}
+        // global message queue
+        messageQueue: new MQ(),
 
-function randomIntRange(min, max){
-    return randomInt(max + 1 - min) + min;
-}
 
-function now(){
-    return (new Date().getTime());
-}
+        round: function(num, decimalplaces){
+            return Number(num.toFixed(decimalplaces));
+        },
 
-////
+        randomInt: function(length){
+            return Math.ceil((length || 2) * Math.random()) - 1;
+        },
 
-function Vector(x, y){
-    this.x = x;
-    this.y = y;
-}
+        selectInRange: function(factor, min, max){
+            return factor * (max - min) + min;
+        },
 
-Vector.prototype = {
-    add: function(vectorOrDigit){
-        if (typeof vectorOrDigit === 'number'){
-            this.x += vectorOrDigit;
-            this.y += vectorOrDigit;
+        randomInRange: function(min, max){
+            return this.selectInRange(Math.random(), min, max);
+        },
+
+        randomIntRange: function(min, max){
+            return this.randomInt(max + 1 - min) + min;
+        },
+
+        now: function(){
+            return (new Date().getTime());
         }
-        else if (typeof vectorOrDigit === 'object' && vectorOrDigit !== null) {
-            this.x += vectorOrDigit.x;
-            this.y += vectorOrDigit.y;
-        }
-        return this;
-    },
+    };
 
-    multiply: function(vectorOrDigit){
-        if (typeof vectorOrDigit === 'number'){
-            this.x *= vectorOrDigit;
-            this.y *= vectorOrDigit;
-        }
-        else if (typeof vectorOrDigit === 'object' && vectorOrDigit !== null) {
-            this.x *= vector.x;
-            this.y *= vector.y;
-        }
-        return this;
-    },
+    /////
 
-    clone: function(){
-        return new Vector(this.x, this.y);
-    }
-};
+    return Floaters;
+}());

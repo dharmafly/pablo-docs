@@ -1,11 +1,6 @@
 // If browser environment suitable...
-if (Pablo.isSupported && reqAnimFrame){
-    var game = new Game({
-        pauseText: 'Paused',
-        root: root,
-        width: settings.width,
-        height: settings.height
-    });
+if (Pablo.isSupported && Floaters.reqAnimFrame){
+    var game = new Game();
     
     game.create();
 }
