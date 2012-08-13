@@ -73,7 +73,7 @@ var Game = (function(){
             var px = Floaters.randomIntRange(60, 120);
 
             this.points.cssPrefix({
-                transform: 'rotate3d(1, 1, 1, ' + px + 'deg)'
+                transform: 'rotate3d(1, 1, 1, ' + px + 'deg) scale(0.5) skew(0deg, 90deg)'
             });
             return this;
         },

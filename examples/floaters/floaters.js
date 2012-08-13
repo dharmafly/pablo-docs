@@ -64,7 +64,7 @@ var Floaters = (function(){
     };
 
     symbolSettings.rMid = ((symbolSettings.rMax - symbolSettings.rMin) / 2) + symbolSettings.rMin;
-    symbolSettings.maxSymbols =  Math.round((numPixels / symbolSettings.rMid) * (gameSettings.symbolDensity / 1000));
+    symbolSettings.maxSymbols =  Math.ceil((numPixels / symbolSettings.rMid) * (gameSettings.symbolDensity / 1000));
 
 
     /////
