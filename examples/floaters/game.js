@@ -41,12 +41,15 @@ var Game = (function(){
                 'font-family':'lcd', 
                 fill:'white'
             });
+            this.previousNotification = this.currentNotification = '';
 
             return this;
         },
 
         displayNotification: function(message){
             // Update contents
+            this.previousNotification = this.currentNotification;
+            this.currentNotification = message;
             this.notification.content(message);
             return this;
         },
@@ -120,7 +123,7 @@ var Game = (function(){
                     game.displayNotification('Paused');
                 })
                 .sub('resume', function(data, object){
-                    game.displayNotification('');
+                    game.displayNotification(game.previousNotification);
                 })
                 .sub('symbol:remove', function(data, symbol){
                     game.displayPoints(symbol);
