@@ -33,13 +33,15 @@ var Game = (function(){
 
             this.points = this.dom.g({'class': 'points'});
 
+            // TODO: move to stylesheet
             this.notification = this.dom.text({
                 'class': 'notification',
-                x:'45%', 
+                x:'50%', 
                 y:'50%', 
                 'font-size':30, 
                 'font-family':'lcd', 
-                fill:'white'
+                fill:'white',
+                'text-anchor': 'middle'
             });
             this.previousNotification = this.currentNotification = '';
 
