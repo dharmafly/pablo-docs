@@ -80,9 +80,6 @@ var Floaters = (function(){
             window.msCancelAnimationFrame,
         colors: colors,
         colorsLength: colorsLength,
-        gameMQInterval: gameSettings.gameMQInterval,
-        symbolDensity: gameSettings.symbolDensity,
-
         gameSettings: gameSettings,
         symbolSettings: symbolSettings,
 
