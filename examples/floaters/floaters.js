@@ -171,6 +171,8 @@ Game.prototype = {
     createDashboard: function(){
         this.dom = this.settings.root.g({'class': 'dashboard'});
 
+        this.points = this.dom.g({'class': 'points'});
+
         this.notification = this.dom.text({
             'class': 'notification',
             x:'45%', 
@@ -179,8 +181,6 @@ Game.prototype = {
             'font-family':'lcd', 
             fill:'white'
         });
-
-        this.points = this.dom.g({'class': 'points'});
 
         return this;
     },
@@ -199,7 +199,7 @@ Game.prototype = {
             y: Math.round(symbol.pos.y + (fontSize / 2)), 
             'font-size': fontSize, 
             'font-family':'lcd', 
-            fill:'white'
+            fill:'green'
         }).content(symbol.points);
 
         return this;
