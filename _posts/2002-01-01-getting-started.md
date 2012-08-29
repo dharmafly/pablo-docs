@@ -1,12 +1,8 @@
----
-category: overview
+--- 
 heading: Getting started
+category: overview
 ---
 
 
-It's simple to get started with {{ site.PROJECT_NAME }}. 
-Just clone the project with git.
-
+Either [download the code](#download) or clone the repo:
 `git clone git@github.com:dharmafly/pablo.git`
-
-Alternatively just download the zip file from above.

@@ -1,8 +1,11 @@
----
-category: overview
+--- 
 heading: Changelog
+category: overview
 ---
 
-* V0.1
+* v0.2
+	- Functional API moved to /extensions/functional.js
+	- Elements now top-level in a Pablo collection, e.g. circle[0]
 
-    - Created the pablo script.
+* v0.1
+    - Created Pablo.
