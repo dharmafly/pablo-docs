@@ -1,5 +1,5 @@
 --- 
-heading: Related libraries
+heading: Alternative libraries
 category: overview
 ---
 
