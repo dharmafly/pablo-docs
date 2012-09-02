@@ -72,20 +72,4 @@ Typically, elements are instead created with an 'element method' - see the 'Elem
 `Pablo` methods
 
 
-Most collection methods return the collection, allowing methods to be chained:
-
-	var paper = Pablo(demoElement).root({height:320});
-
-    // Create a definition element and append a path to it
-    paper.defs()
-         .path({
-             id:'squiggle',
-             d:'M 20 80 C 20 120 120 20 220 120 C 320 220 420 320 420 120'
-         });
-
-    // Create a text element and append a textPath to it
-    paper.text()
-         .textPath({fill:'#997099'})
-         	// Apply a link and contents to the textPath
-         	.link('#squiggle')
-            .content('★ In Xanadu, did Kublah Khan a stately pleasuredome decree…');
+Most collection methods return the collection, allowing methods to be chained.
