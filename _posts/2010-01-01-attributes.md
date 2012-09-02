@@ -1,43 +1,55 @@
 --- 
-category: reference
 heading: Attributes
+category: reference
 ---
 
 
-Pablo collections, and the SVG elements they contain, can be manipulated in a number of ways.
 
+`.attr()`
+--
 
-`attr()`: Get attributes
-
-
-Without arguments, the `attr()` method returns an object corresponding to the element's attributes.
+Returns an object containing all the attributes on the first element in the collection.
 
     var square = Pablo.rect({width: 100, fill: 'red'});
     square.attr(); // returns {width: 100, fill: 'red'}
 
 
-`attr(attributeName)`: Get an named attribute
---
+`.attr(attributeName)`
+-
 
-Passing two strings sets the corresponding attribute:
+Sets the named attribute to the specified value, on all elements in the collection and returns the collection.
 
-    square.attr('fill', 'blue'); // makes the square blue
-
-
-`attr(attributes)`: Set multiple attributes
+    var square = Pablo.rect({width: 100, fill: 'red'});
+    square.attr('fill', 'blue');
 
 
-Passing all the attributes to be changed as an object:
+`.attr(attributes)`
+
+
+Sets multiple attributes (passed in as an object), on all elements in the collection and returns the collection.
 
     square.attr({fill:'orange', width:50});
 
 
-`removeAttr(attributeName)`: Remove attribute
----
+`.removeAttr(attributeName)`
+-
 
-    var square = Pablo().rect({width: 100, height: 100, fill: 'red'});
+Adds the specified CSS class to all elements in the collection and returns the collection.
 
-    // Remove the fill attribute (turns out black by default)
-    square.removeAttr('fill');
+	square.addClass('foo');
 
-    Pablo(demoElement).root({height:100}).append(square);
+
+`.removeClass(className)`
+--
+
+Returns boolean `true` or `false` depending on whether or not the first element has the specified CSS class.
+
+	square.hasClass('special');
+
+
+`.toggleClass(className)`
+----
+
+For each element in the collection, add the specified class if it is not present, otherwise remove it.
+
+	square.toggleClass('active');
