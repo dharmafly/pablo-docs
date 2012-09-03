@@ -89,5 +89,5 @@ Most methods return `this`, the collection. This allows methods to be chained, o
 		.append('rect', {width:50})
 		.append('line', {})
 		.on('click', function(){
-			alert('clicked');
+			// clicked
 		});
