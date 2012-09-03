@@ -1,6 +1,6 @@
 --- 
-heading: Collections
 category: reference
+heading: Collections
 ---
 
 
@@ -26,13 +26,15 @@ Creates a Pablo collection, wrapping a single DOM element.
 `Pablo(list)`
 -
 
-Creates a Pablo collection, wrapping multiple DOM elements in a NodeList or arrays of elements.
+Creates a Pablo collection, wrapping multiple DOM elements. The elements could be in a NodeList, an array of elements, a jQuery collection or another Pablo collection.
 
+	// Any of these could be passed to Pablo()
 	var nodeList = document.body.childNodes,
-		collection1 = Pablo(nodeList),
-
 		array = [element1, element2],
-		collection2 = Pablo(array);
+		jQueryCollection = jQuery('p'),
+		pabloCollection = Pablo('circle');
+
+	var collection = Pablo(list);
 
 
 `Pablo(selectors)`
@@ -69,7 +71,23 @@ Here, the attributes object is required, even if it is an empty object. (If the 
 Typically, elements are instead created with an 'element method' - see the 'Elements' documentation.
 
 
+`Pablo(elementNames, [attributes])`
+-------
+
+Note that Pablo does not (currently) support the form `Pablo(svgMarkup)` - e.g. `Pablo('<circle cx="50"/>')` - in the same way that jQuery supports `jQuery('<div id="foo">'`). There is no native `innerSVG` property on SVG elements in the same way as there is an `innerHTML` property on HTML elements. See the '[innerSVG][innersvg]' project for a potential polyfill.
+
+[innersvg]: http://code.google.com/p/innersvg/
+
+
 `Pablo` methods
 
 
-Most collection methods return the collection, allowing methods to be chained.
+Most methods return `this`, the collection. This allows methods to be chained, one after another.
+
+	Pablo('circle')
+		.addClass('foo')
+		.append('rect', {width:50})
+		.append('line', {})
+		.on('click', function(){
+			alert('clicked');
+		});
