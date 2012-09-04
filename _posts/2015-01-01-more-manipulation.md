@@ -1,6 +1,6 @@
 --- 
-heading: More manipulation
 category: reference
+heading: More manipulation
 ---
 
 
@@ -26,7 +26,8 @@ Creates cloned copies of all elements in the collection, and returns the copies 
 `deep` is a boolean value to indicate if the entire child node structure of the cloned nodes should be included (default `false`).
 
     var paper = Pablo(demoElement).root({height:40})
-        square = paper.rect({width:40, height:40});
+        square = paper.rect({width:40, height:40}),
+        x = 0;
 
     paper.on('click', function(){
         // CLICK to clone and append

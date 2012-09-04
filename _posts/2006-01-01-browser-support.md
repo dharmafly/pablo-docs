@@ -1,6 +1,6 @@
 --- 
-heading: Browser support
 category: reference
+heading: Browser support
 ---
 
    

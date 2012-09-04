@@ -1,6 +1,6 @@
 --- 
-heading: Array methods
 category: reference
+heading: Array methods
 ---
 
 
