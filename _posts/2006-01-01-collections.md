@@ -1,6 +1,6 @@
 --- 
-category: reference
 heading: Collections
+category: reference
 ---
 
 
@@ -84,7 +84,7 @@ Note that Pablo does not (currently) support the form `Pablo(svgMarkup)` - e.g. 
 
 Most methods return `this`, the collection. This allows methods to be chained, one after another.
 
-	Pablo('circle')
+	Pablo.circle())
 		.addClass('foo')
 		.append('rect', {width:50})
 		.append('line', {})
