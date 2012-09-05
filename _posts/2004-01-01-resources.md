@@ -1,6 +1,6 @@
 --- 
-category: overview
 heading: Resources
+category: overview
 ---
 
 

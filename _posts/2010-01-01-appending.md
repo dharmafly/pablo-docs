@@ -1,6 +1,6 @@
 --- 
-category: reference
 heading: Appending
+category: reference
 ---
 
 
