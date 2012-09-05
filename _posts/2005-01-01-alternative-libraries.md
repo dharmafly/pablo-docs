@@ -1,6 +1,6 @@
 --- 
-category: overview
 heading: Alternative libraries
+category: overview
 ---
 
 * [Raphaël](http://raphaeljs.com)
