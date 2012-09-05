@@ -1,6 +1,6 @@
 --- 
-heading: More manipulation
 category: reference
+heading: More manipulation
 ---
 
 `.empty()`

@@ -1,6 +1,6 @@
 --- 
-heading: Traversal
 category: reference
+heading: Traversal
 ---
 
 

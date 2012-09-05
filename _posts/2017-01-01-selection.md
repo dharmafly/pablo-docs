@@ -1,6 +1,6 @@
 --- 
-heading: Selection
 category: reference
+heading: Selection
 ---
 
 `Pablo(selector)`: Select elements in the document
