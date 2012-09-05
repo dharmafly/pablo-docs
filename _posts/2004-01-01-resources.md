@@ -3,7 +3,6 @@ heading: Resources
 category: overview
 ---
 
-
 * Mozilla Developer Network:
 	* [SVG](https://developer.mozilla.org/en/SVG)
 	* [Elements](https://developer.mozilla.org/en/SVG/Element)

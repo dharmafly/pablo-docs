@@ -2,10 +2,9 @@
 heading: Browser support
 category: reference
 ---
-
    
 `Pablo.isSupported`
--
+-------------------
 
 Boolean `true` or `false`, denoting whether or not the current browser supports the web technologies required by Pablo.
 
