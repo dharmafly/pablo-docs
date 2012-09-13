@@ -1,6 +1,6 @@
 --- 
-category: overview
 heading: Getting started
+category: overview
 ---
 
 Either [download the code](#download) or clone the repo:

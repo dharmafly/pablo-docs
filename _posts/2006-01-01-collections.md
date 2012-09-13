@@ -1,6 +1,6 @@
 --- 
-category: reference
 heading: Collections
+category: reference
 ---
 
 Creating Pablo collections
