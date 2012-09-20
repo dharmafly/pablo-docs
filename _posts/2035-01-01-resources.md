@@ -1,6 +1,6 @@
 --- 
+category: reference
 heading: Resources
-category: details
 ---
 
 * Mozilla Developer Network:
