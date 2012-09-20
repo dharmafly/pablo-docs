@@ -18,7 +18,7 @@ LANG: javascript
 SCRIPTS:
 - src: https://raw.github.com/dharmafly/pablo/master/pablo.js
 
-REFERENCE_LINK_TEXT: "Complete documentation can be found here:"
+REFERENCE_LINK_TEXT: "Complete documentation:"
 
 # A quote to add at the footer of your project page
 QUOTE:
@@ -26,7 +26,7 @@ QUOTE:
   cite: Pablo Picasso
 
 # Your google analytics id
-GA_ID:
+GA_ID: UA-34978047-1
 
 ##############
 
@@ -39,6 +39,10 @@ sections:
    name: Overview
  - path: reference
    name: Reference
+ - path: details
+   name: Details
+ - path: examples
+   name: Examples
 
 ###############################
 
