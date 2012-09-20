@@ -1,6 +1,6 @@
 --- 
-category: reference
 heading: JS SVG libraries
+category: reference
 ---
 
 Other than [Pablo](http://pablojs.com), see:

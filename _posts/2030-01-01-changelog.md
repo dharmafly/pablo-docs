@@ -1,6 +1,6 @@
 --- 
-category: reference
 heading: Changelog
+category: reference
 ---
 * v0.2
 	- Functional API moved to /extensions/functional.js
