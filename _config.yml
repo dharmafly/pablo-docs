@@ -39,6 +39,8 @@ sections:
    name: Overview
  - path: reference
    name: Reference
+ - path: details
+   name: Details
 
 ###############################
 
