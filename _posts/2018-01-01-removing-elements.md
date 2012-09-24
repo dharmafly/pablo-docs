@@ -1,6 +1,6 @@
 --- 
-category: reference
 heading: Removing elements
+category: reference
 ---
 
 `.empty()`

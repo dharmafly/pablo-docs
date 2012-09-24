@@ -1,6 +1,6 @@
 --- 
-category: reference
 heading: Symbols & duplication
+category: reference
 ---
 
 See also the documentation on 'Plugins and templates'.
