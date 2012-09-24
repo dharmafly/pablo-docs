@@ -1,6 +1,6 @@
 --- 
-category: reference
 heading: Attributes
+category: reference
 ---
 
 
@@ -121,6 +121,18 @@ Removes an attribute and returns the collection.
 
     rect.removeAttr('fill');
     // the default fill is black
+
+
+`.transform(functionName, value)`
+---------------------------------
+
+Modifies the value of a _transform function_ in each element's `transform` attribute, and returns the collection. Each transform function can be modified individually.
+
+    var paper = Pablo(demoElement).root({height:285});
+    
+    paper.rect({width:200, height:200, fill:'red'})
+         .transform('rotate', '45 100 100')
+         .transform('translate', 60);
 
 
 `.addClass(className)`
