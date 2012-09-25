@@ -1,6 +1,6 @@
 # Your project's details
 PROJECT_NAME: Pablo
-GITHUB_CURRENT_VERSION: 0.1
+GITHUB_CURRENT_VERSION: 0.2.0
 GITHUB_PROJECT_URL: https://github.com/dharmafly/pablo
 
 # The style for your site (options: forest, ocean)
@@ -8,7 +8,7 @@ THEME: ocean
 
 ############ Optional extras
 
-GITHUB_ZIP_URL: https://github.com/dharmafly/dharmafly-docs/zipball/gh-pages
+GITHUB_ZIP_URL: https://raw.github.com/dharmafly/pablo/master/pablo.js
 TWITTER_PROJECT_URL: https://twitter.com/dharmafly
 
 # javascript, css or html5
