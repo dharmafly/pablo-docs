@@ -1,6 +1,6 @@
 --- 
-heading: Getting started
 category: overview
+heading: Getting started
 ---
 
 For production, <a href="https://github.com/downloads/dharmafly/pablo/pablo.min.js" target="_blank">download the minified script</a>.
@@ -21,7 +21,11 @@ Start drawing:
 	}
 
 The rest is just details...
+See the [Reference section][reference] to discover Pablo's extensive API.
 
-See the [Reference section][reference] for descriptions and examples of Pablo's extensive API.
+The [Changelog][pablo-changelog] lists API changes. Please add bug reports and feedback on the GitHub ['Issues' page][pablo-issues] or contact [@premasagar][prem-twitter].*
 
 [reference]: reference/
+[pablo-issues]: https://github.com/dharmafly/pablo/issues
+[pablo-changelog]: http://pablojs.com/details/#changelog
+[prem-twitter]: https://twitter.com/premasagar
