@@ -1,5 +1,5 @@
 --- 
-heading: Symbols & duplication
+heading: Symbols & cloning
 category: reference
 ---
 
