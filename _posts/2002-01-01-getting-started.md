@@ -1,6 +1,6 @@
 --- 
-category: overview
 heading: Getting started
+category: overview
 ---
 
 For production, download <a href="https://github.com/downloads/dharmafly/pablo/pablo.min.js" target="_blank">the minified script</a> and call it from your HTML:
@@ -29,16 +29,17 @@ The [Changelog][changelog] lists API changes. Please add bug reports and feedbac
 
 
 <!-- Testcard demo -->
-<div id="testcard" style="margin-top:40px"></div>
-<script>
-	if (document.addEventListener){
-		document.addEventListener('DOMContentLoaded', function(){
-			var script = document.createElement('script');
-			document.body.appendChild(script);
-			script.src = 'https://raw.github.com/dharmafly/pablo/master/examples/testcard/testcard.js';
-		}, false);
-	}
-</script>
+<div id="testcard" style="margin-top:40px">
+	<script>
+		if (document.addEventListener){
+			document.addEventListener('DOMContentLoaded', function(){
+				var script = document.createElement('script');
+				document.body.appendChild(script);
+				script.src = 'https://raw.github.com/dharmafly/pablo/master/examples/testcard/testcard.js';
+			}, false);
+		}
+	</script>
+</div>
 
 
 [pablo-site]: http://pablojs.com
