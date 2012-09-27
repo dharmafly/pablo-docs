@@ -1,6 +1,6 @@
 --- 
-heading: Utilities & advanced
 category: reference
+heading: Utilities & advanced
 ---
 
 `Pablo.extend(target, source, [source2], [deep]`)
