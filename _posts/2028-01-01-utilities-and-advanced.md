@@ -1,6 +1,6 @@
 --- 
-category: reference
 heading: Utilities & advanced
+category: reference
 ---
 
 `Pablo.extend(target, source, [source2], [deep]`)
@@ -36,6 +36,13 @@ This is useful, for example, in setting transition properties:
     shape.cssPrefix({
         transform:  'rotate(45deg)',
         transition: Pablo.cssPrefix('transform')
+    });
+    
+which is equivalent to:
+
+    square.cssPrefix({
+        transform:  'rotate(45deg)',
+        transition: 'transform, -moz-transform, -webkit-transform, -ms-transform, -o-transform, -khtml-transform'
     });
 
 
