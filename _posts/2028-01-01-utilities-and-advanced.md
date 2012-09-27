@@ -1,6 +1,6 @@
 --- 
-heading: Utilities & advanced
 category: reference
+heading: Utilities & advanced
 ---
 
 `Pablo.extend(target, source, [source2], [deep]`)
@@ -14,6 +14,14 @@ Copies properties from the `source` object to the `target` object and returns th
 If more than one source object is passed, then each one will be copied across from right-to-left. Only the target object is modified.
 
 If `deep` is `true` then properties from the sources' prototype chains will also be copied. If the target is not an object, a new blank object will be created first.
+
+
+`Pablo.make(elementName)`
+-------------------------
+
+Returns a native SVG element with the supplied name.
+
+    Pablo.make('path');
 
 
 `Pablo.cssPrefix(property)`
@@ -173,3 +181,13 @@ The Xlink namespace URI used internally when creating links. Currently `"http://
 ---------
 
 The current version of the Pablo library. E.g. `"1.2.23"`.
+
+    alert(Pablo.v);
+
+
+`.pablo`
+--------
+
+This property, on a Pablo collection is identical to `Pablo.v`.
+
+    alert(Pablo.circle().pablo === Pablo.v); // true
