@@ -3,8 +3,8 @@ PROJECT_NAME: Pablo
 GITHUB_CURRENT_VERSION: 0.2.0
 GITHUB_PROJECT_URL: https://github.com/dharmafly/pablo
 
-# The style for your site (options: forest, ocean)
-THEME: ocean
+# Site theme (options: forest, ocean, horus)
+THEME: horus
 
 ############ Optional extras
 
