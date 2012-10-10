@@ -1,4 +1,4 @@
-# Your project's details
+# The project
 PROJECT_NAME: Pablo
 GITHUB_CURRENT_VERSION: 0.2.0
 GITHUB_PROJECT_URL: https://github.com/dharmafly/pablo
@@ -6,34 +6,37 @@ GITHUB_PROJECT_URL: https://github.com/dharmafly/pablo
 # Site theme (options: forest, ocean, horus)
 THEME: horus
 
-############ Optional extras
 
+############ Options
+
+# URLs
 GITHUB_ZIP_URL: https://raw.github.com/dharmafly/pablo/master/pablo.js
 TWITTER_PROJECT_URL: https://twitter.com/dharmafly
 
-# javascript, css or html5
+# Primary language or technology (options: javascript, css, html5)
 LANG: javascript
 
-# Add your project's scripts here to be available to any examples
+# Documentation site scripts
 SCRIPTS:
 - src: https://raw.github.com/dharmafly/pablo/master/pablo.js
 
-REFERENCE_LINK_TEXT: "Complete documentation:"
-
-# A quote to add at the footer of your project page
+# Footer quote
 QUOTE:
   quote: Painting is just another way of keeping a diary.
   cite: Pablo Picasso
 
-# Your google analytics id
+# Site analytics
 GA_ID: UA-34978047-1
 
-##############
 
-# Page names -- paths should not be updated and
-# are currently hard-coded to match directory names / site categories.
-# (They're here as placeholders for future work to
-# allow new sections to be dynamically created)
+############ Deprecated / Temporary
+
+# Link from overview to reference
+REFERENCE_LINK_TEXT: "Complete documentation can be found here:"
+
+# Page names
+# In future, new site sections will be dynamically created.
+# The following paths are hard-coded to match directory names / site categories.
 sections:
  - path:
    name: Overview
@@ -42,9 +45,8 @@ sections:
  - path: details
    name: Details
 
-###############################
 
-# Jekyll options
+############ Jekyll options
 
 safe:        false
 auto:        false
