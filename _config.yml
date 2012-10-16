@@ -28,23 +28,20 @@ QUOTE:
 # Site analytics
 GA_ID: UA-34978047-1
 
-
-############ Deprecated / Temporary
-
-# Link from overview to reference
-REFERENCE_LINK_TEXT: "Complete documentation can be found here:"
-
 # Page names
-# In future, new site sections will be dynamically created.
 # The following paths are hard-coded to match directory names / site categories.
 sections:
- - path:
+ - path: /index.html
    name: Overview
- - path: reference
+ - path: /reference/index.html
    name: Reference
  - path: details
    name: Details
 
+############ Deprecated 
+
+# Link from overview to reference
+REFERENCE_LINK_TEXT: "Complete documentation can be found here:"
 
 ############ Jekyll options
 
