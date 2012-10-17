@@ -10,7 +10,15 @@ THEME: horus
 ############ Options
 
 # URLs
-GITHUB_ZIP_URL: https://raw.github.com/dharmafly/pablo/master/pablo.js
+DOWNLOAD_LINKS:
+  - text: pablo.js
+    subtext: v{{ version }}
+    href: https://raw.github.com/dharmafly/pablo/master/pablo.js
+    title: Full source code, for use in development
+  - text: pablo.min.js
+    subtext: v{{ version }}.min
+    href: https://raw.github.com/dharmafly/pablo/master/pablo.js
+    title: Minified, for use in production
 TWITTER_PROJECT_URL: https://twitter.com/dharmafly
 
 # Primary language or technology (options: javascript, css, html5)
@@ -42,6 +50,8 @@ sections:
 
 # Link from overview to reference
 REFERENCE_LINK_TEXT: "Complete documentation can be found here:"
+
+#GITHUB_ZIP_URL: https://github.com/dharmafly/dharmafly-docs/zipball/gh-pages
 
 ############ Jekyll options
 
