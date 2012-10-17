@@ -17,8 +17,8 @@ DOWNLOAD_LINKS:
     href: https://raw.github.com/dharmafly/pablo/master/pablo.js
     title: Full source code, for use in development
   - text: pablo.min.js
-    subtext: v{{ version }}.min
-    href: https://raw.github.com/dharmafly/pablo/master/pablo.js
+    subtext: v{{ version }}
+    href: https://github.com/downloads/dharmafly/pablo/pablo.min.js
     title: Minified, for use in production
 TWITTER_PROJECT_URL: https://twitter.com/dharmafly
 
