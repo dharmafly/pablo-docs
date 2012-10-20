@@ -97,3 +97,51 @@ sections:
    name: Reference
  - path: /details/index.html
    name: Details
+# The project
+PROJECT_NAME: Pablo
+# Version number as a string
+VERSION: '0.2.0'
+GITHUB_PROJECT_URL: https://github.com/dharmafly/pablo
+
+# Site theme (options: forest, ocean, horus, seagrass, sundae, slate)
+THEME: horus
+
+
+############ Options
+
+# URLs
+DOWNLOAD_LINKS:
+  - text: pablo.js
+    subtext: v{{ version }}
+    href: https://raw.github.com/dharmafly/pablo/master/pablo.js
+    title: Full source code, for use in development
+  - text: pablo.min.js
+    subtext: v{{ version }}
+    href: https://github.com/downloads/dharmafly/pablo/pablo.min.js
+    title: Minified, for use in production
+TWITTER_PROJECT_URL: https://twitter.com/dharmafly
+
+# Primary language or technology (options: javascript, css, html5)
+LANG: javascript
+
+# Documentation site scripts
+SCRIPTS:
+- src: https://raw.github.com/dharmafly/pablo/master/pablo.js
+
+# Footer quote
+QUOTE:
+  quote: Painting is just another way of keeping a diary.
+  cite: Pablo Picasso
+
+# Site analytics
+GA_ID: UA-34978047-1
+
+# Page names
+# The following paths are hard-coded to match directory names / site categories.
+sections:
+ - path: /index.html
+   name: Overview
+ - path: /reference/index.html
+   name: Reference
+ - path: /details/index.html
+   name: Details
