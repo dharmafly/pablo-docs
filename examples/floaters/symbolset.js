@@ -38,6 +38,7 @@ var Symbolset = (function(){
 
         createSymbol: function(settings){
             var symbol = new Symbol(settings);
+            symbol.dom.attr({'class': 'symbol'});
 
             this.symbols.push(symbol);
             return symbol;
@@ -88,8 +89,8 @@ var Symbolset = (function(){
             };
 
             this.settings.root.style().content(
-                '.symbols circle:hover {stroke:green; cursor:crosshair;}' + 
-                '.symbols circle.fade {' + Pablo.cssTextPrefix(fadeStylesToPrefix) + '}'
+                '.symbol:hover {stroke:green; cursor:crosshair;}' + 
+                '.symbol.fade {' + Pablo.cssTextPrefix(fadeStylesToPrefix) + '}'
             );
             return this;
         },
