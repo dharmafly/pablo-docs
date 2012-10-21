@@ -86,56 +86,7 @@ quote:
   cite: Pablo Picasso
 
 # Site analytics
-ga_id:UA-34978047-1
-
-# Page names
-# The following paths are hard-coded to match directory names / site categories.
-sections:
- - path: /index.html
-   name: Overview
- - path: /reference/index.html
-   name: Reference
- - path: /details/index.html
-   name: Details
-
-# The project
-project_name: Pablo
-# Version number as a string
-version: '0.2.0'
-project_url: https://github.com/dharmafly/pablo
-
-# Site theme (options: forest, ocean, horus, seagrass, sundae, slate)
-theme: horus
-
-
-############ Options
-
-# URLs
-download_links:
-  - text: pablo.js
-    subtext: v{{ version }}
-    href: https://raw.github.com/dharmafly/pablo/master/pablo.js
-    title: Full source code, for use in development
-  - text: pablo.min.js
-    subtext: v{{ version }}
-    href: https://github.com/downloads/dharmafly/pablo/pablo.min.js
-    title: Minified, for use in production
-twitter_url: https://twitter.com/username
-
-# Primary language or technology (options: javascript, css, html5)
-lang: javascript
-
-# Documentation site scripts
-scripts:
-- src: https://raw.github.com/dharmafly/pablo/master/pablo.js
-
-# Footer quote
-quote:
-  quote: Painting is just another way of keeping a diary.
-  cite: Pablo Picasso
-
-# Site analytics
-ga_id:UA-34978047-1
+ga_id: UA-34978047-1
 
 # Page names
 # The following paths are hard-coded to match directory names / site categories.
