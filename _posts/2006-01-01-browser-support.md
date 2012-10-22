@@ -1,6 +1,6 @@
 --- 
-heading: Browser support
 category: reference
+heading: Browser support
 ---
    
 `Pablo.isSupported`
@@ -8,7 +8,7 @@ category: reference
 
 Boolean `true` or `false`, denoting whether or not the current browser supports the web technologies required by Pablo.
 
-	if (Pablo.isSupported){
+    if (Pablo.isSupported){
         alert('Pablo works!');
     }
     else {
