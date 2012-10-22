@@ -3,7 +3,7 @@ heading: Symbols & cloning
 category: reference
 ---
 
-See also the documentation on 'Plugins and templates'.
+See also the documentation on 'Templates & plugins'.
 
 
 The native approach: `<use>` & `<symbol>`
