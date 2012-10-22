@@ -47,6 +47,8 @@ var Floaters = (function(){
         rootElem: root.el[0],
         rMax: 150,
         rMin: 1.5,
+        scaleMin: 0.3,
+        scaleMax: 5,
         strokeWidthMin: 2,
         strokeWidthMax: 20,
         velocityMin: 0.05,
