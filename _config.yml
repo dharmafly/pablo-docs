@@ -1,46 +1,46 @@
 --- 
-theme: horus
-download_links: 
-- subtext: v{{ version }}
-  text: pablo.js
-  href: https://raw.github.com/dharmafly/pablo/master/pablo.js
-  title: Full source code, for use in development
-- subtext: v{{ version }}
-  text: pablo.min.js
-  href: https://github.com/downloads/dharmafly/pablo/pablo.min.js
-  title: Minified, for use in production
-- subtext: (master)
-  text: Edge
-  href: https://github.com/dharmafly/pablo/zipball/master
-  title: The repo's latest codebase (zip). Potentially unstable.
-server: false
 lang: javascript
+future: true
+ga_id: UA-34978047-1
+auto: false
 quote: 
 - quote: Painting is just another way of keeping a diary.
 - cite: Pablo Picasso
-pygments: false
-permalink: /:title
+project_url: https://github.com/dharmafly/pablo
+twitter_url: https://twitter.com/dharmafly
+download_links: 
+- text: pablo.js
+  href: https://raw.github.com/dharmafly/pablo/master/pablo.js
+  title: Full source code, for use in development
+  subtext: v{{ version }}
+- text: pablo.min.js
+  href: https://github.com/downloads/dharmafly/pablo/pablo.min.js
+  title: Minified, for use in production
+  subtext: v{{ version }}
+- text: Edge
+  href: https://github.com/dharmafly/pablo/zipball/master
+  title: The repo's latest codebase (zip). Potentially unstable.
+  subtext: (master)
+baseurl: /
 version: 0.2.1
+project_name: Pablo
+scripts: 
+- src: https://raw.github.com/dharmafly/pablo/master/pablo.js
+server: false
+lsi: false
+pygments: false
 exclude: 
 - README.md
 - assets
 - FiddlerRules.farx
-safe: false
-future: true
-lsi: false
-scripts: 
-- src: https://raw.github.com/dharmafly/pablo/master/pablo.js
-project_name: Pablo
-twitter_url: https://twitter.com/dharmafly
-ga_id: UA-34978047-1
 sections: 
-- name: Overview
-  path: /index.html
-- name: Reference
-  path: /reference/index.html
-- name: Details
-  path: /details/index.html
-auto: false
-baseurl: /
-project_url: https://github.com/dharmafly/pablo
+- path: /index.html
+  name: Overview
+- path: /reference/index.html
+  name: Reference
+- path: /details/index.html
+  name: Details
+safe: false
+permalink: /:title
+theme: horus
 markdown: maruku

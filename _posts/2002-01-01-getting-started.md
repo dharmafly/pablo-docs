@@ -1,6 +1,6 @@
 --- 
-heading: Getting started
 category: overview
+heading: Getting started
 ---
 
 For production, download <a href="https://github.com/downloads/dharmafly/pablo/pablo.min.js" target="_blank">the minified script</a> and call it from your HTML:
@@ -12,12 +12,28 @@ Start drawing:
     // Check browser support
     if (Pablo.isSupported){
         // Inside an HTML element, append an <svg> root
-        var paper = Pablo(demoElement).root({height:160});
+        var paper = Pablo(demoElement).root({height:160}),
+            // Append SVG elements, specifying their attributes
+            circle = paper.circle({
+                r:80, cx:80, cy:80,
+                fill:'orange'
+            }),
+            // SVG / SMIL animations
+            anim = circle.animateTransform({
+                id: 'anim1',
+                attributeName:'transform',
+                type:'scale',
+                from: 1,
+                to:0.5,
+                dur:'1s',
+                begin:'indefinite',
+                fill:'freeze'
+            });
 
-        // Append SVG elements, specifying their attributes
-        paper.circle({
-            r:80, cx:80, cy:80,
-            fill:'orange'
+        // On a particular DOM event
+        circle.on('click touchstart', function(){
+            // Start native SVG animation
+            anim[0].beginElement();
         });
     }
 
