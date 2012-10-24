@@ -1,38 +1,37 @@
 --- 
-twitter_url: https://twitter.com/dharmafly
-pygments: false
-baseurl: /
-scripts: 
-- src: https://raw.github.com/dharmafly/pablo/master/pablo.js
-permalink: /:title
-lang: javascript
+theme: horus
 download_links: 
 - subtext: v{{ version }}
-  href: https://raw.github.com/dharmafly/pablo/master/pablo.js
   text: pablo.js
+  href: https://raw.github.com/dharmafly/pablo/master/pablo.js
   title: Full source code, for use in development
 - subtext: v{{ version }}
-  href: https://github.com/downloads/dharmafly/pablo/pablo.min.js
   text: pablo.min.js
+  href: https://github.com/downloads/dharmafly/pablo/pablo.min.js
   title: Minified, for use in production
 - subtext: (master)
-  href: https://github.com/dharmafly/pablo/zipball/master
   text: Edge
+  href: https://github.com/dharmafly/pablo/zipball/master
   title: The repo's latest codebase (zip). Potentially unstable.
-auto: false
-future: true
-safe: false
-project_name: Pablo
-version: 0.2.1
-theme: horus
+server: false
+lang: javascript
 quote: 
 - quote: Painting is just another way of keeping a diary.
 - cite: Pablo Picasso
-markdown: maruku
+pygments: false
+permalink: /:title
+version: 0.2.1
 exclude: 
 - README.md
 - assets
 - FiddlerRules.farx
+safe: false
+future: true
+lsi: false
+scripts: 
+- src: https://raw.github.com/dharmafly/pablo/master/pablo.js
+project_name: Pablo
+twitter_url: https://twitter.com/dharmafly
 ga_id: UA-34978047-1
 sections: 
 - name: Overview
@@ -41,6 +40,7 @@ sections:
   path: /reference/index.html
 - name: Details
   path: /details/index.html
-server: false
+auto: false
+baseurl: /
 project_url: https://github.com/dharmafly/pablo
-lsi: false
+markdown: maruku

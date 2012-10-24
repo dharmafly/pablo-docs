@@ -3,7 +3,6 @@ heading: Attributes
 category: reference
 ---
 
-
 `.attr()`
 --------
 
