@@ -1,6 +1,6 @@
 --- 
-category: reference
 heading: Attributes
+category: reference
 ---
 
 `.attr()`
