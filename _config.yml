@@ -1,36 +1,25 @@
 --- 
-server: false
-baseurl: /
+project_url: https://github.com/dharmafly/pablo
+version: 0.2.1
+twitter_url: https://twitter.com/dharmafly
+project_name: Pablo
+theme: horus
+quote: 
+- quote: Painting is just another way of keeping a diary.
+- cite: Pablo Picasso
 exclude: 
 - README.md
 - assets
 - FiddlerRules.farx
-project_url: https://github.com/dharmafly/pablo
-quote: 
-- quote: Painting is just another way of keeping a diary.
-- cite: Pablo Picasso
 permalink: /:title
-twitter_url: https://twitter.com/dharmafly
-safe: false
-version: 0.2.1
-download_links: 
-- href: https://raw.github.com/dharmafly/pablo/master/pablo.js
-  subtext: v{{ version }}
-  title: Full source code, for use in development
-  text: pablo.js
-- href: https://github.com/downloads/dharmafly/pablo/pablo.min.js
-  subtext: v{{ version }}
-  title: Minified, for use in production
-  text: pablo.min.js
-- href: https://github.com/dharmafly/pablo/zipball/master
-  subtext: (master)
-  title: The repo's latest codebase (zip). Potentially unstable.
-  text: Edge
 auto: false
-lang: javascript
-lsi: false
+scripts: 
+- src: https://raw.github.com/dharmafly/pablo/master/pablo.js
+ga_id: UA-34978047-1
+baseurl: /
+server: false
+future: true
 pygments: false
-markdown: maruku
 sections: 
 - path: /index.html
   name: Overview
@@ -38,9 +27,20 @@ sections:
   name: Reference
 - path: /details/index.html
   name: Details
-future: true
-project_name: Pablo
-scripts: 
-- src: https://raw.github.com/dharmafly/pablo/master/pablo.js
-theme: horus
-ga_id: UA-34978047-1
+markdown: maruku
+lang: javascript
+download_links: 
+- href: https://raw.github.com/dharmafly/pablo/master/pablo.js
+  text: pablo.js
+  subtext: v{{ version }}
+  title: Full source code, for use in development
+- href: https://github.com/downloads/dharmafly/pablo/pablo.min.js
+  text: pablo.min.js
+  subtext: v{{ version }}
+  title: Minified, for use in production
+- href: https://github.com/dharmafly/pablo/zipball/master
+  text: Edge
+  subtext: (master)
+  title: The repo's latest codebase (zip). Potentially unstable.
+safe: false
+lsi: false

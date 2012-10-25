@@ -15,7 +15,7 @@ Start drawing:
         var paper = Pablo(demoElement).root({height:160}),
             // Append <circle> element with attributes
             circle = paper.circle({
-                r:80, cx:80, cy:80,
+                r:74, cx:80, cy:80,
                 fill:'green',
                 stroke:'orange', 'stroke-width':12
             }),
