@@ -1,46 +1,46 @@
 --- 
 theme: horus
-quote: 
-- quote: Painting is just another way of keeping a diary.
-- cite: Pablo Picasso
+lang: javascript
+auto: false
 future: true
-lsi: false
-scripts: 
-- src: https://raw.github.com/dharmafly/pablo/master/pablo.js
-markdown: maruku
-baseurl: /
+twitter_url: https://twitter.com/dharmafly
+sections: 
+- path: /index.html
+  name: Overview
+- path: /reference/index.html
+  name: Reference
+- path: /details/index.html
+  name: Details
+safe: false
+project_name: Pablo
+server: false
 exclude: 
 - README.md
 - assets
 - FiddlerRules.farx
-pygments: false
-project_name: Pablo
-ga_id: UA-34978047-1
-safe: false
-auto: false
-server: false
-permalink: /:title
-twitter_url: https://twitter.com/dharmafly
-download_links: 
-- title: Full source code, for use in development
-  href: https://raw.github.com/dharmafly/pablo/master/pablo.js
-  subtext: v{{ version }}
-  text: pablo.js
-- title: Minified, for use in production
-  href: https://github.com/downloads/dharmafly/pablo/pablo.min.js
-  subtext: v{{ version }}
-  text: pablo.min.js
-- title: The repo's latest codebase (zip). Potentially unstable.
-  href: https://github.com/dharmafly/pablo/zipball/master
-  subtext: (master)
-  text: Edge
 project_url: https://github.com/dharmafly/pablo
+scripts: 
+- src: https://raw.github.com/dharmafly/pablo/master/pablo.js
+quote: 
+- quote: Painting is just another way of keeping a diary.
+- cite: Pablo Picasso
+download_links: 
+- text: pablo.js
+  subtext: v{{ version }}
+  href: https://raw.github.com/dharmafly/pablo/master/pablo.js
+  title: Full source code, for use in development
+- text: pablo.min.js
+  subtext: v{{ version }}
+  href: https://github.com/downloads/dharmafly/pablo/pablo.min.js
+  title: Minified, for use in production
+- text: Edge
+  subtext: (master)
+  href: https://github.com/dharmafly/pablo/zipball/master
+  title: The repo's latest codebase (zip). Potentially unstable.
 version: 0.2.1
-lang: javascript
-sections: 
-- name: Overview
-  path: /index.html
-- name: Reference
-  path: /reference/index.html
-- name: Details
-  path: /details/index.html
+lsi: false
+baseurl: /
+ga_id: UA-34978047-1
+markdown: maruku
+pygments: false
+permalink: /:title
