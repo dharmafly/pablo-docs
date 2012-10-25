@@ -35,12 +35,11 @@ Start drawing:
         });
     }
 
-Pablo can do anything that SVG can do, in a simple, expressive way.  
-**See the [API Reference][reference]** to discover Pablo's extensive API.
+**See the [API Reference][reference].**
 
 The [Changelog][changelog] lists API changes. Please add bug reports and feedback on the GitHub ['Issues' page][issues] or contact [@premasagar][prem-twitter].
 
-[Pull requests][pull-requests] are welcome for any part of the code. To update the pages on [pablojs.com][pablo-site], the markdown files in the [/docs folder][docs-folder] should be changed.
+[Pull requests][pull-requests] are welcome. To update the pages on [pablojs.com][pablo-site], the markdown files in the [/docs folder][docs-folder] should be changed.
 
 
 <!-- Testcard demo -->
