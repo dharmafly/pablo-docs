@@ -1,15 +1,40 @@
 --- 
-future: true
-version: 0.2.1
-twitter_url: https://twitter.com/dharmafly
-lang: javascript
+theme: horus
+safe: false
+baseurl: /
 pygments: false
+markdown: maruku
+scripts: 
+- src: https://raw.github.com/dharmafly/pablo/master/pablo.js
+lsi: false
 exclude: 
 - README.md
 - assets
 - FiddlerRules.farx
+twitter_url: https://twitter.com/dharmafly
+lang: javascript
+quote: 
+- quote: Painting is just another way of keeping a diary.
+- cite: Pablo Picasso
+server: false
+project_url: https://github.com/dharmafly/pablo
+download_links: 
+- title: Full source code, for use in development
+  subtext: v{{ version }}
+  href: https://raw.github.com/dharmafly/pablo/master/pablo.js
+  text: pablo.js
+- title: Minified, for use in production
+  subtext: v{{ version }}
+  href: https://github.com/downloads/dharmafly/pablo/pablo.min.js
+  text: pablo.min.js
+- title: The repo's latest codebase (zip). Potentially unstable.
+  subtext: (master)
+  href: https://github.com/dharmafly/pablo/zipball/master
+  text: Edge
+auto: false
+project_name: Pablo
+version: 0.2.1
 ga_id: UA-34978047-1
-markdown: maruku
 sections: 
 - path: /index.html
   name: Overview
@@ -17,30 +42,5 @@ sections:
   name: Reference
 - path: /details/index.html
   name: Details
-auto: false
-quote: 
-- quote: Painting is just another way of keeping a diary.
-- cite: Pablo Picasso
-project_name: Pablo
+future: true
 permalink: /:title
-scripts: 
-- src: https://raw.github.com/dharmafly/pablo/master/pablo.js
-download_links: 
-- text: pablo.js
-  href: https://raw.github.com/dharmafly/pablo/master/pablo.js
-  title: Full source code, for use in development
-  subtext: v{{ version }}
-- text: pablo.min.js
-  href: https://github.com/downloads/dharmafly/pablo/pablo.min.js
-  title: Minified, for use in production
-  subtext: v{{ version }}
-- text: Edge
-  href: https://github.com/dharmafly/pablo/zipball/master
-  title: The repo's latest codebase (zip). Potentially unstable.
-  subtext: (master)
-baseurl: /
-project_url: https://github.com/dharmafly/pablo
-theme: horus
-safe: false
-lsi: false
-server: false
