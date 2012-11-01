@@ -1,6 +1,6 @@
 --- 
-category: overview
 heading: Getting started
+category: overview
 ---
 
 For production, download <a href="https://github.com/downloads/dharmafly/pablo/pablo.min.js" target="_blank">the minified script</a> and call it from your HTML:
@@ -13,23 +13,33 @@ Start drawing:
     if (Pablo.isSupported){
         // Inside an HTML element, append an <svg> root
         var paper = Pablo(demoElement).root({height:160}),
+            // Create <g> element; change mouse cursor on hover
+            group = paper.g().css({cursor:'pointer'}),
+
             // Append <circle> element with attributes
-            circle = paper.circle({
-                r:74, cx:80, cy:80,
+            circle = group.circle({
+                r:74, cx:'50%', cy:'50%',
                 fill:'green',
                 stroke:'orange', 'stroke-width':12
             }),
+
+            // Append <text> element and add content to it
+            label = group.text({
+                x:'50%', y:'50%', 'text-anchor':'middle',
+                'font-size':'20px', fill:'white'
+            }).content('CLICK'),
+
             // Append SVG / SMIL animation element
-            anim = circle.animateTransform({
+            anim = group.animateTransform({
                 attributeName:'transform',
                 type:'scale',
-                from:1, to:0.5, dur:'1s',
+                from:1, to:0.5, dur:'0.68s',
                 begin:'indefinite',
                 fill:'freeze'
             });
 
-        // Add DOM event listener
-        circle.on('click', function(){
+        // Listen for click events
+        group.on('click', function(){
             // Start <animateTransform> element's animation
             anim[0].beginElement();
         });
