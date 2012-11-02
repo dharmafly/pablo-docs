@@ -1,41 +1,26 @@
 --- 
+project_name: Pablo
+version: 0.2.2
+theme: horus
+future: true
+permalink: /:title
+scripts: 
+- src: https://raw.github.com/dharmafly/pablo/master/pablo.js
+baseurl: /
 project_url: https://github.com/dharmafly/pablo
+twitter_url: https://twitter.com/dharmafly
+quote: 
+- quote: Painting is just another way of keeping a diary.
+- cite: Pablo Picasso
+safe: false
 exclude: 
 - README.md
 - assets
 - FiddlerRules.farx
-lsi: false
-baseurl: /
-project_name: Pablo
-version: 0.2.1
-theme: horus
-ga_id: UA-34978047-1
-download_links: 
-- title: Full source code, for use in development
-  subtext: v{{ version }}
-  href: https://raw.github.com/dharmafly/pablo/master/pablo.js
-  text: pablo.js
-- title: Minified, for use in production
-  subtext: v{{ version }}
-  href: https://github.com/downloads/dharmafly/pablo/pablo.min.js
-  text: pablo.min.js
-- title: The repo's latest codebase (zip). Potentially unstable.
-  subtext: (master)
-  href: https://github.com/dharmafly/pablo/zipball/master
-  text: Edge
-future: true
-safe: false
-auto: false
-pygments: false
-server: false
-scripts: 
-- src: https://raw.github.com/dharmafly/pablo/master/pablo.js
-quote: 
-- quote: Painting is just another way of keeping a diary.
-- cite: Pablo Picasso
-permalink: /:title
-twitter_url: https://twitter.com/dharmafly
 lang: javascript
+server: false
+pygments: false
+auto: false
 sections: 
 - name: Overview
   path: /index.html
@@ -43,4 +28,19 @@ sections:
   path: /reference/index.html
 - name: Details
   path: /details/index.html
+ga_id: UA-34978047-1
+download_links: 
+- title: Full source code, for use in development
+  href: https://raw.github.com/dharmafly/pablo/master/pablo.js
+  text: pablo.js
+  subtext: v{{ version }}
+- title: Minified, for use in production
+  href: https://github.com/downloads/dharmafly/pablo/pablo.min.js
+  text: pablo.min.js
+  subtext: v{{ version }}
+- title: The repo's latest codebase (zip). Potentially unstable.
+  href: https://github.com/dharmafly/pablo/zipball/master
+  text: Edge
+  subtext: (master)
+lsi: false
 markdown: maruku
