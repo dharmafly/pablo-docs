@@ -1,46 +1,46 @@
 --- 
 auto: false
-markdown: maruku
-permalink: /:title
-download_links: 
-- subtext: v{{ version }}
-  title: Full source code, for use in development
-  text: pablo.js
-  href: https://raw.github.com/dharmafly/pablo/master/pablo.js
-- subtext: v{{ version }}
-  title: Minified, for use in production
-  text: pablo.min.js
-  href: https://github.com/downloads/dharmafly/pablo/pablo.min.js
-- subtext: (master)
-  title: The repo's latest codebase (zip). Potentially unstable.
-  text: Edge
-  href: https://github.com/dharmafly/pablo/zipball/master
-ga_id: UA-34978047-1
-project_name: Pablo
-version: 0.2.2
-project_url: https://github.com/dharmafly/pablo
-safe: false
-pygments: false
-baseurl: /
+lsi: false
 twitter_url: https://twitter.com/dharmafly
+pygments: false
+markdown: maruku
+project_name: Pablo
+scripts: 
+- src: https://github.com/downloads/dharmafly/pablo/pablo.min.js
+project_url: https://github.com/dharmafly/pablo
+theme: horus
 quote: 
 - quote: Painting is just another way of keeping a diary.
 - cite: Pablo Picasso
+ga_id: UA-34978047-1
+sections: 
+- name: Overview
+  path: /index.html
+- name: Reference
+  path: /reference/index.html
+- name: Details
+  path: /details/index.html
+safe: false
+version: 0.2.2
+download_links: 
+- href: https://raw.github.com/dharmafly/pablo/master/pablo.js
+  text: pablo.js
+  subtext: v{{ version }}
+  title: Full source code, for use in development
+- href: https://github.com/downloads/dharmafly/pablo/pablo.min.js
+  text: pablo.min.js
+  subtext: v{{ version }}
+  title: Minified, for use in production
+- href: https://github.com/dharmafly/pablo/zipball/master
+  text: Edge
+  subtext: (master)
+  title: The repo's latest codebase (zip). Potentially unstable.
+server: false
+baseurl: /
+lang: javascript
+future: true
+permalink: /:title
 exclude: 
 - README.md
 - assets
 - FiddlerRules.farx
-theme: horus
-server: false
-future: true
-lang: javascript
-scripts: 
-- src: https://github.com/downloads/dharmafly/pablo/pablo.min.js
-sections: 
-- path: /index.html
-  name: Overview
-- path: /reference/index.html
-  name: Reference
-- path: /details/index.html
-  name: Details
-lsi: false
