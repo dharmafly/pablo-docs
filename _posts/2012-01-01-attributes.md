@@ -1,6 +1,6 @@
 --- 
-category: reference
 heading: Attributes
+category: reference
 ---
 
 `.attr()`
@@ -12,12 +12,12 @@ Returns an object listing all the attributes from the first element in the colle
         rect  = paper.rect({
             width: 200,
             height:100,
-            fill: 'gold'
+            fill: 'purple'
         }),
         attributes = rect.attr();
 
     alert(JSON.stringify(attributes));
-    // {width:200, height:100, fill:'gold'}
+    // {width:200, height:100, fill:'purple'}
 
 
 `.attr(attributeName)`
@@ -29,11 +29,11 @@ Returns the value of the named attribute on the first element in the collection.
         rect  = paper.rect({
             width: 200,
             height:100,
-            fill: 'gold'
+            fill: 'purple'
         }),
         value = rect.attr('fill');
 
-    alert(value); // 'gold'
+    alert(value); // 'purple'
 
 
 `.attr(attributeName, value)`
@@ -45,7 +45,7 @@ Sets the named attribute to the specified value, on all elements in the collecti
         rect  = paper.rect({
             width: 200,
             height:100,
-            fill: 'gold'
+            fill: 'purple'
         });
 
     rect.attr('fill', 'silver');
@@ -99,7 +99,7 @@ Attribute values may alternatively be supplied as an array. For each element in 
 
     var paper  = Pablo(demoElement).root({height:100}),
         circle = paper.circle({cy:50, r:50}),
-        colors = ['red', 'green', 'blue', 'yellow', 'purple'],
+        colors = ['red', 'green', 'blue', 'orange', 'purple'],
         cx     = [50, 150, 250, 350, 450];
 
     circle.duplicate(4)
@@ -115,7 +115,7 @@ Removes an attribute and returns the collection.
         rect  = paper.rect({
             width: 200,
             height:100,
-            fill: 'gold'
+            fill: 'purple'
         });
 
     rect.removeAttr('fill');
