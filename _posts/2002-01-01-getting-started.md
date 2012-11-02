@@ -1,6 +1,6 @@
 --- 
-heading: Getting started
 category: overview
+heading: Getting started
 ---
 
 For production, download <a href="https://github.com/downloads/dharmafly/pablo/pablo.min.js" target="_blank">the minified script</a> and call it from your HTML:
@@ -34,7 +34,7 @@ Start drawing:
         label.content('CLICK');
 
         /* Apply CSS (change mouse cursor) */
-        group.css('cursor', 'pointer'});
+        group.css('cursor', 'pointer');
 
         /* Vendor-prefixed CSS transitions (-webkit-, -moz-, etc) */
         group.cssPrefix('transition-duration', '0.5s');
