@@ -1,46 +1,46 @@
 --- 
-auto: false
-lsi: false
-twitter_url: https://twitter.com/dharmafly
-pygments: false
-markdown: maruku
-project_name: Pablo
-scripts: 
-- src: https://github.com/downloads/dharmafly/pablo/pablo.min.js
-project_url: https://github.com/dharmafly/pablo
+server: false
 theme: horus
+twitter_url: https://twitter.com/dharmafly
+permalink: /:title
+version: 0.2.2
+project_name: Pablo
+future: true
 quote: 
 - quote: Painting is just another way of keeping a diary.
 - cite: Pablo Picasso
-ga_id: UA-34978047-1
-sections: 
-- name: Overview
-  path: /index.html
-- name: Reference
-  path: /reference/index.html
-- name: Details
-  path: /details/index.html
-safe: false
-version: 0.2.2
 download_links: 
-- href: https://raw.github.com/dharmafly/pablo/master/pablo.js
+- title: Full source code, for use in development
+  subtext: v{{ version }}
+  href: https://raw.github.com/dharmafly/pablo/master/pablo.js
   text: pablo.js
+- title: Minified, for use in production
   subtext: v{{ version }}
-  title: Full source code, for use in development
-- href: https://github.com/downloads/dharmafly/pablo/pablo.min.js
+  href: https://github.com/downloads/dharmafly/pablo/pablo.min.js
   text: pablo.min.js
-  subtext: v{{ version }}
-  title: Minified, for use in production
-- href: https://github.com/dharmafly/pablo/zipball/master
-  text: Edge
+- title: The repo's latest codebase (zip). Potentially unstable.
   subtext: (master)
-  title: The repo's latest codebase (zip). Potentially unstable.
-server: false
-baseurl: /
-lang: javascript
-future: true
-permalink: /:title
+  href: https://github.com/dharmafly/pablo/zipball/master
+  text: Edge
+pygments: false
 exclude: 
 - README.md
 - assets
 - FiddlerRules.farx
+project_url: https://github.com/dharmafly/pablo
+ga_id: UA-34978047-1
+sections: 
+- path: /index.html
+  name: Overview
+- path: /reference/index.html
+  name: Reference
+- path: /details/index.html
+  name: Details
+scripts: 
+- src: https://github.com/downloads/dharmafly/pablo/pablo.min.js
+markdown: maruku
+auto: false
+baseurl: /
+lang: javascript
+safe: false
+lsi: false
