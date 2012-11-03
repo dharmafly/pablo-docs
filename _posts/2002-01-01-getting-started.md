@@ -1,6 +1,6 @@
 --- 
-category: overview
 heading: Getting started
+category: overview
 ---
 
 For production, download <a href="https://github.com/downloads/dharmafly/pablo/pablo.min.js" target="_blank">the minified script</a> and call it from your HTML:
@@ -14,10 +14,9 @@ Start drawing:
         /* Inside an HTML element, append an <svg> root */
         var paper = Pablo(demoElement).root({height:220}),
             /* Create <circle> element, with attributes */
-            color = 'rgba(127, 159, 95, 0.2)',
             circle = paper.circle({
                 cy: '50%',
-                fill: color,
+                fill: 'rgba(127, 159, 95, 0.2)',
                 stroke: '#777'
             });
 

@@ -1,6 +1,6 @@
 --- 
-category: details
 heading: Resources
+category: details
 ---
 
 MDN (Mozilla Developer Network)
