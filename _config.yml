@@ -1,31 +1,10 @@
 --- 
-lang: javascript
-safe: false
-future: true
-quote: 
-- quote: Painting is just another way of keeping a diary.
-- cite: Pablo Picasso
-project_url: https://github.com/dharmafly/pablo
-download_links: 
-- href: https://raw.github.com/dharmafly/pablo/master/pablo.js
-  subtext: v{{ version }}
-  text: pablo.js
-  title: Full source code, for use in development
-- href: https://github.com/downloads/dharmafly/pablo/pablo.min.js
-  subtext: v{{ version }}
-  text: pablo.min.js
-  title: Minified, for use in production
-- href: https://github.com/dharmafly/pablo/zipball/master
-  subtext: (master)
-  text: Edge
-  title: The repo's latest codebase (zip). Potentially unstable.
-auto: false
-exclude: 
-- README.md
-- assets
-- FiddlerRules.farx
-pygments: false
-project_name: Pablo
+twitter_url: https://twitter.com/dharmafly
+theme: horus
+server: false
+scripts: 
+- src: https://github.com/downloads/dharmafly/pablo/pablo.min.js
+ga_id: UA-34978047-1
 sections: 
 - name: Overview
   path: /index.html
@@ -34,13 +13,34 @@ sections:
 - name: Details
   path: /details/index.html
 markdown: maruku
-lsi: false
-twitter_url: https://twitter.com/dharmafly
-scripts: 
-- src: https://github.com/downloads/dharmafly/pablo/pablo.min.js
-server: false
-ga_id: UA-34978047-1
-theme: horus
-baseurl: /
+download_links: 
+- title: Full source code, for use in development
+  subtext: v{{ version }}
+  href: https://raw.github.com/dharmafly/pablo/master/pablo.js
+  text: pablo.js
+- title: Minified, for use in production
+  subtext: v{{ version }}
+  href: https://github.com/downloads/dharmafly/pablo/pablo.min.js
+  text: pablo.min.js
+- title: The repo's latest codebase (zip). Potentially unstable.
+  subtext: (master)
+  href: https://github.com/dharmafly/pablo/zipball/master
+  text: Edge
+exclude: 
+- README.md
+- assets
+- FiddlerRules.farx
+project_url: https://github.com/dharmafly/pablo
+future: true
 version: 0.2.2
+project_name: Pablo
+auto: false
+lsi: false
+baseurl: /
+lang: javascript
+safe: false
 permalink: /:title
+quote: 
+- quote: Painting is just another way of keeping a diary.
+- cite: Pablo Picasso
+pygments: false
