@@ -1,6 +1,6 @@
 --- 
-category: reference
 heading: Attributes
+category: reference
 ---
 
 `.attr()`
@@ -83,12 +83,8 @@ Attribute values may alternatively be supplied as a callback function. The callb
 
     circle.duplicate(20)
           .attr({
-              cx: function(el, i){
-                  return i * 10 + ((i + 1) * 10);
-              },
-              r: function(el, i){
-                  return i * 5 + 10;
-              }
+              cx: function(el, i) {return i * 20 + 10},
+              r:  function(el, i) {return i * 5 + 10}
           });
 
 
