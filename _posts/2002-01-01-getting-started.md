@@ -1,6 +1,6 @@
 --- 
-heading: Getting started
 category: overview
+heading: Getting started
 ---
 
 For production, download <a href="https://github.com/downloads/dharmafly/pablo/pablo.min.js" target="_blank">the minified script</a> and call it from your HTML:
@@ -16,7 +16,7 @@ Start drawing:
             /* Create <circle> element, with attributes */
             color = 'rgba(127, 159, 95, 0.2)',
             circle = paper.circle({
-                cy: 110,
+                cy: '50%',
                 fill: color,
                 stroke: '#777'
             });
