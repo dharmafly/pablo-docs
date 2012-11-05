@@ -1,46 +1,46 @@
 --- 
-project_name: Pablo
-pygments: false
-lsi: false
+version: 0.2.2
+safe: false
+project_url: https://github.com/dharmafly/pablo
 permalink: /:title
+baseurl: /
+pygments: false
+ga_id: UA-34978047-1
+server: false
+scripts: 
+- src: https://github.com/downloads/dharmafly/pablo/pablo.min.js
+project_name: Pablo
+markdown: maruku
+quote: 
+- quote: Painting is just another way of keeping a diary.
+- cite: Pablo Picasso
+theme: horus
+download_links: 
+- subtext: v{{ version }}
+  title: Full source code, for use in development
+  href: https://raw.github.com/dharmafly/pablo/master/pablo.js
+  text: pablo.js
+- subtext: v{{ version }}
+  title: Minified, for use in production
+  href: https://github.com/downloads/dharmafly/pablo/pablo.min.js
+  text: pablo.min.js
+- subtext: (master)
+  title: The repo's latest codebase (zip). Potentially unstable.
+  href: https://github.com/dharmafly/pablo/zipball/master
+  text: Edge
+future: true
+lang: javascript
+auto: false
+lsi: false
 exclude: 
 - README.md
 - assets
 - FiddlerRules.farx
-auto: false
-server: false
-lang: javascript
-sections: 
-- name: Overview
-  path: /index.html
-- name: Reference
-  path: /reference/index.html
-- name: Details
-  path: /details/index.html
-future: true
-markdown: maruku
-version: 0.2.2
-theme: horus
-quote: 
-- quote: Painting is just another way of keeping a diary.
-- cite: Pablo Picasso
-baseurl: /
-project_url: https://github.com/dharmafly/pablo
 twitter_url: https://twitter.com/dharmafly
-scripts: 
-- src: https://github.com/downloads/dharmafly/pablo/pablo.min.js
-safe: false
-ga_id: UA-34978047-1
-download_links: 
-- subtext: v{{ version }}
-  text: pablo.js
-  href: https://raw.github.com/dharmafly/pablo/master/pablo.js
-  title: Full source code, for use in development
-- subtext: v{{ version }}
-  text: pablo.min.js
-  href: https://github.com/downloads/dharmafly/pablo/pablo.min.js
-  title: Minified, for use in production
-- subtext: (master)
-  text: Edge
-  href: https://github.com/dharmafly/pablo/zipball/master
-  title: The repo's latest codebase (zip). Potentially unstable.
+sections: 
+- path: /index.html
+  name: Overview
+- path: /reference/index.html
+  name: Reference
+- path: /details/index.html
+  name: Details

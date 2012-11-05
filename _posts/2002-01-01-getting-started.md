@@ -1,6 +1,6 @@
 --- 
-category: overview
 heading: Getting started
+category: overview
 ---
 
 For production, download <a href="https://github.com/downloads/dharmafly/pablo/pablo.min.js" target="_blank">the minified script</a> and call it from your HTML:
@@ -12,6 +12,11 @@ Check that the browser supports basic SVG:
 
     if (Pablo.isSupported){
         /* Pablo code here */
+        alert('Yes!');
+    }
+    else {
+        /* Alternative content */
+        alert("Noo");
     }
 
 
