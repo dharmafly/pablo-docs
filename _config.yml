@@ -1,46 +1,46 @@
 --- 
-project_name: Pablo
-version: 0.2.2
+download_links: 
+- title: Full source code, for use in development
+  href: https://raw.github.com/dharmafly/pablo/master/pablo.js
+  text: pablo.js
+  subtext: v{{ version }}
+- title: Minified, for use in production
+  href: https://github.com/downloads/dharmafly/pablo/pablo.min.js
+  text: pablo.min.js
+  subtext: v{{ version }}
+- title: The repo's latest codebase (zip). Potentially unstable.
+  href: https://github.com/dharmafly/pablo/zipball/master
+  text: Edge
+  subtext: (master)
+pygments: false
+permalink: /:title
 theme: horus
-future: true
-project_url: https://github.com/dharmafly/pablo
-twitter_url: https://twitter.com/dharmafly
-sections: 
-- name: Overview
-  path: /index.html
-- name: Reference
-  path: /reference/index.html
-- name: Details
-  path: /details/index.html
+lang: javascript
 quote: 
 - quote: Painting is just another way of keeping a diary.
 - cite: Pablo Picasso
+sections: 
+- path: /index.html
+  name: Overview
+- path: /reference/index.html
+  name: Reference
+- path: /details/index.html
+  name: Details
+lsi: false
+project_name: Pablo
+markdown: maruku
+baseurl: /
+scripts: 
+- src: https://github.com/downloads/dharmafly/pablo/pablo.min.js
+auto: false
+twitter_url: https://twitter.com/dharmafly
+ga_id: UA-34978047-1
+project_url: https://github.com/dharmafly/pablo
+server: false
+version: 0.2.2
+safe: false
+future: true
 exclude: 
 - README.md
 - assets
 - FiddlerRules.farx
-permalink: /:title
-baseurl: /
-ga_id: UA-34978047-1
-pygments: false
-lang: javascript
-auto: false
-safe: false
-server: false
-scripts: 
-- src: https://github.com/downloads/dharmafly/pablo/pablo.min.js
-download_links: 
-- href: https://raw.github.com/dharmafly/pablo/master/pablo.js
-  subtext: v{{ version }}
-  text: pablo.js
-  title: Full source code, for use in development
-- href: https://github.com/downloads/dharmafly/pablo/pablo.min.js
-  subtext: v{{ version }}
-  text: pablo.min.js
-  title: Minified, for use in production
-- href: https://github.com/dharmafly/pablo/zipball/master
-  subtext: (master)
-  text: Edge
-  title: The repo's latest codebase (zip). Potentially unstable.
-lsi: false
-markdown: maruku
