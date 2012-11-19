@@ -6,7 +6,7 @@
  */
 chrome.app.runtime.onLaunched.addListener(function() {
 	var screen = window.screen,
-		w = screen.availWidth / 2,
+		w = screen.availWidth,
 		h = screen.availHeight;
 
 	chrome.app.window.create(
