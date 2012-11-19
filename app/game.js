@@ -98,9 +98,18 @@ var Game = (function(){
         },
 
         levelComplete: function(){
+            var game = this;
+
             this.updateHiScore(Floaters.user.score)
                 .displayNotification('Level complete')
                 .transformPoints();
+
+            /*
+            this.settings.root.one('click', function(){
+                game.resetGame();
+                game.displayNotification('');
+            });
+            */
         },
 
         // Add CSS styles
