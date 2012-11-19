@@ -122,7 +122,7 @@ var Game = (function(){
                 '.dashboard .notification, .dashboard .points { pointer-events: none; }' +
                 // transform points
                 '.dashboard .points {' + fadeStylesString + '}' +
-                '.dashboard.paused { pointer-events: none; }'
+                'svg.paused .dashboard { pointer-events: none; }'
             );
 
             return this;
@@ -164,9 +164,11 @@ var Game = (function(){
             // Event subscriptions
             this.sub('pause', function(data, object){
                     game.displayNotification('Paused');
+                    game.settings.root.addClass('paused');
                 })
                 .sub('resume', function(data, object){
                     game.displayNotification(game.previousNotification);
+                    game.settings.root.removeClass('paused');
                 })
                 .sub('symbol:remove', function(data, symbol){
                     game.gainPoints(symbol);

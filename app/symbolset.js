@@ -97,7 +97,8 @@ var Symbolset = (function(){
 
             this.settings.root.style().content(
                 '.symbol:hover {stroke:green; cursor:crosshair;}' + 
-                '.symbol.fade {' + fadeStylesString + '}'
+                '.symbol.fade {' + fadeStylesString + '}' +
+                'svg.paused .symbols { pointer-events:none; }'
             );
             return this;
         },
