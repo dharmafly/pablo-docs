@@ -6,7 +6,7 @@ if (Pablo.isSupported && Floaters.reqAnimFrame){
 }
 
 else {
-    alert('Sorry, your browser does not support the JavaScript technologies required for this demo.')
+    alert('Sorry, your browser does not support the JavaScript technologies required.')
 }
 
 /////

@@ -163,7 +163,7 @@ var Symbol = (function(){
         },
 
         createDom: function(){
-            this.root = this.settings.root;
+            this.root = this.settings.symbolsRoot;
             this.dom = this.root.circle();
             return this;
         },

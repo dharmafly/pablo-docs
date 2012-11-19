@@ -38,7 +38,7 @@ var Game = (function(){
                 'class': 'notification',
                 x:'50%', 
                 y:'50%', 
-                'font-size':30, 
+                'font-size':Floaters.gameSettings.fontSize, 
                 'font-family':'lcd', 
                 fill:'white',
                 'text-anchor': 'middle'
@@ -56,8 +56,13 @@ var Game = (function(){
             return this;
         },
 
+        gainPoints: function(symbol){
+            Floaters.user.score += symbol.points;
+            return this.displayPoints(symbol);
+        },
+
         displayPoints: function(symbol){
-            var fontSize = 30;
+            var fontSize = Floaters.gameSettings.fontSize;
 
             // TODO use stylesheet to style the `points` class
             this.points.text({
@@ -67,7 +72,6 @@ var Game = (function(){
                 'font-family':'lcd', 
                 fill:'green'
             }).content(symbol.points);
-
             return this;
         },
 
@@ -78,6 +82,25 @@ var Game = (function(){
                 transform: 'rotate3d(1, 1, 1, ' + px + 'deg) scale(0.5) skew(0deg, 90deg)'
             });
             return this;
+        },
+
+        updateHiScore: function(score){
+            if (Floaters.user.hiScore < score){
+                Floaters.user.hiScore = score;
+                this.cacheHiScore(score);
+            }
+            return this;
+        },
+
+        cacheHiScore: function(hiScore){
+            Floaters.cache.set({hiScore: hiScore});
+            return this;
+        },
+
+        levelComplete: function(){
+            this.updateHiScore(Floaters.user.score)
+                .displayNotification('Level complete')
+                .transformPoints();
         },
 
         // Add CSS styles
@@ -110,16 +133,27 @@ var Game = (function(){
             return this;
         },
 
+        resetGame: function(){
+            // Remove existing symbolset
+            if (Floaters.symbolset && Floaters.symbolset.settings.symbolsRoot){
+                Floaters.symbolset.settings.symbolsRoot.remove();
+            }
+
+            Floaters.symbolset = new Symbolset();
+
+            // Create symbols
+            Floaters.symbolset.createAll();
+
+            this.displayNotification('');
+            return this;
+        },
+
         create: function(){
             var game = this,
-                rootElem = this.settings.root.get(0),
-                circles = new Symbolset();
+                rootElem = this.settings.root.get(0);
 
             // create state loop
             this.intervalId = window.setInterval(this.update, this.settings.gameMQInterval);
-
-            // Create symbols
-            circles.createAll();
 
             // Create dashboard
             this.createDashboard();
@@ -135,17 +169,16 @@ var Game = (function(){
                     game.displayNotification(game.previousNotification);
                 })
                 .sub('symbol:remove', function(data, symbol){
-                    game.displayPoints(symbol);
+                    game.gainPoints(symbol);
                 })
                 .sub('symbolset:remove', function(data, symbolset){
-                    game.displayNotification('Level complete');
-                    game.transformPoints();
+                    game.levelComplete();
                 });
 
             // Click listener on SVG element
             rootElem.addEventListener('click', function(event){
                 var symbolId = event.target.getAttribute(Floaters.attrIdKey),
-                    symbol = circles.getSymbolById(symbolId);
+                    symbol = Floaters.symbolset.getSymbolById(symbolId);
                 
                 if (symbol){
                     symbol.onclick.call(symbol, event);
@@ -163,7 +196,7 @@ var Game = (function(){
                     }
                     else {
                         // Reset timer, to resume play from where we left off
-                        circles.updated = Floaters.now();
+                        Floaters.symbolset.updated = Floaters.now();
                         game.animationLoop.start();
                         Floaters.messageQueue.pub('resume', {}, game);
                     }
@@ -175,9 +208,12 @@ var Game = (function(){
                 Floaters.messageQueue.process();
 
                 // Update all symbols
-                circles.updateAll();
+                Floaters.symbolset.updateAll();
             });
             this.animationLoop.start();
+
+            // Reset game
+            this.resetGame();
 
             return this;
         }

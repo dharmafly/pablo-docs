@@ -51,7 +51,7 @@ var Symbolset = (function(){
                 i, symbol;
 
             this.created = this.now(); // used in updateAll()
-            this.settings.root = this.settings.root.g({'class': 'symbols'});
+            this.settings.symbolsRoot = this.settings.root.g({'class': 'symbols'});
 
             for (i=0; i < this.settings.maxSymbols; i++){
                 symbol = this.createSymbol(this.settings, params);
@@ -127,5 +127,5 @@ var Symbolset = (function(){
         }
     };
 
-        return Symbolset;
+    return Symbolset;
 }());

@@ -38,6 +38,7 @@ var Floaters = (function(){
         gameMQInterval:  1000 / 5,
         symbolDensity: 1,
         pointsTransitionDuration: 1000,
+        fontSize: 30
     };
 
     symbolSettings = {
@@ -82,6 +83,12 @@ var Floaters = (function(){
         colorsLength: colorsLength,
         gameSettings: gameSettings,
         symbolSettings: symbolSettings,
+        user: {
+            score: 0,
+            hiScore: 0
+        },
+        symbolset: null,
+        cache: new Cache(),
 
         /////
 
