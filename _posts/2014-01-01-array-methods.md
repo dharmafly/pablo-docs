@@ -1,6 +1,6 @@
 --- 
-heading: Array methods
 category: reference
+heading: Array methods
 ---
 
 Pablo collections are essentially arrays, with some enhanced and additional methods. In general, [array methods][array-methods] and properties also apply to Pablo collections. Some array methods have been tailored to suit collections, while exhibiting the same, expected behaviour.
@@ -49,6 +49,24 @@ Returns a new collection, containing the element at `index`.
           beatle = collection.eq(2);
 
     alert(beatle.attr('id')); // 'george'
+
+    
+`.first()`
+----------
+
+Returns a new collection containing the first element in the original collection. This is the same as calling `collection.eq(0)`
+
+    Pablo('.manythings').first()
+        .length; // 1
+
+    
+`.last()`
+----------
+
+Returns a new collection containing the last element in the original collection. This is the same as calling `collection.eq(collection.length-1)`
+
+    Pablo('.manythings').last()
+        .length; // 1
 
 
 `.push(elements)`
