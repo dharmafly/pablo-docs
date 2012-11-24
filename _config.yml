@@ -1,46 +1,46 @@
 --- 
-download_links: 
-- title: Full source code, for use in development
-  text: pablo.js
-  subtext: v{{ version }}
-  href: https://raw.github.com/dharmafly/pablo/master/pablo.js
-- title: Minified, for use in production
-  text: pablo.min.js
-  subtext: v{{ version }}
-  href: https://github.com/downloads/dharmafly/pablo/pablo.min.js
-- title: The repo's latest codebase (zip). Potentially unstable.
-  text: Edge
-  subtext: (master)
-  href: https://github.com/dharmafly/pablo/zipball/master
-future: true
-markdown: maruku
-twitter_url: https://twitter.com/dharmafly
-pygments: false
 project_name: Pablo
-theme: horus
-sections: 
-- path: /index.html
-  name: Overview
-- path: /reference/index.html
-  name: Reference
-- path: /details/index.html
-  name: Details
-ga_id: UA-34978047-1
-safe: false
-project_url: https://github.com/dharmafly/pablo
+twitter_url: https://twitter.com/dharmafly
+lang: javascript
+download_links: 
+- subtext: v{{ version }}
+  href: https://raw.github.com/dharmafly/pablo/master/pablo.js
+  text: pablo.js
+  title: Full source code, for use in development
+- subtext: v{{ version }}
+  href: https://github.com/downloads/dharmafly/pablo/pablo.min.js
+  text: pablo.min.js
+  title: Minified, for use in production
+- subtext: (master)
+  href: https://github.com/dharmafly/pablo/zipball/master
+  text: Edge
+  title: The repo's latest codebase (zip). Potentially unstable.
+baseurl: /
+markdown: maruku
+version: 0.2.3
+permalink: /:title
 scripts: 
 - src: https://github.com/downloads/dharmafly/pablo/pablo.min.js
-version: 0.2.3
+sections: 
+- name: Overview
+  path: /index.html
+- name: Reference
+  path: /reference/index.html
+- name: Details
+  path: /details/index.html
+lsi: false
+safe: false
+theme: horus
 quote: 
 - quote: Painting is just another way of keeping a diary.
 - cite: Pablo Picasso
-lsi: false
-permalink: /:title
-baseurl: /
+ga_id: UA-34978047-1
+server: false
+project_url: https://github.com/dharmafly/pablo
+auto: false
+future: true
+pygments: false
 exclude: 
 - README.md
 - assets
 - FiddlerRules.farx
-lang: javascript
-auto: false
-server: false
