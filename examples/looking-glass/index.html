@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <title>Through the Looking Glass: Pablo</title>
+
+        <style>
+            body {
+                padding:0;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- <h1><a href="https://github.com/dharmafly/pablo">Pablo</a></h1> -->
+        
+        <!-- HTML container for the SVG root node -->
+        <div id="root"></div>
+
+
+
+        <!-- scripts -->
+        <script src="../../pablo.js"></script>
+        <script>
+        (function(){
+            function importFromIframe(src, loadHandler, errorHandler){
+                var iframe = Pablo(document.createElement('iframe'));
+
+                iframe[0].setAttribute('src', src);
+                iframe[0].setAttribute('style', 'width:0;height:0;visibility:hidden');
+
+                if (loadHandler){
+                    iframe.on('load', function(event){
+                        var svgDoc = iframe[0].getSVGDocument(),
+                            rootEl = svgDoc.getElementsByTagName('svg')[0],
+                            importedEl = document.importNode(rootEl, true);
+
+                        iframe.remove();
+                        if (rootEl){
+                            loadHandler.call(this, event, Pablo(importedEl));
+                        }
+                        else {
+                            errorHandler.call(this, event);
+                        }
+                    })
+                }
+                if (errorHandler){
+                    iframe.remove();
+                    iframe.on('error', errorHandler);
+                }
+                return iframe.appendTo(document.body);
+            }
+
+            importFromIframe('images/dharmafly-sq.svg', function(event, svg){
+                var width = window.innerWidth - 50,
+                    height = window.innerHeight - 50,
+                    root = Pablo('#root').root(),
+                    image = svg.find('g.logo'),
+                    imageBBox,
+                    holeWidth = 12,
+                    factor = 20,
+                    holeX = 79.8 + holeWidth / 2 * factor * -1.3,
+                    holeY = 28.4 + holeWidth / 2 * factor * -0.3,
+                    duration = 10;
+
+                if (width < 0){
+                    width = 0;
+                }
+                if (height < 0){
+                    height = 0;
+                }
+                root.attr({width:width, height:height})
+                    .append(svg);
+
+                imageBBox = image[0].getBBox();
+
+                svg.removeAttr('viewBox')
+                    .attr({
+                        width: width,
+                        height: height,
+                        x: width / 2 - imageBBox.width,
+                        y: height / 2 - imageBBox.height
+                    });
+
+                image
+                    .transform('scale', 2);
+/*
+                image.cssPrefix({
+                    'transition-property': '-webkit-transform',
+                    'transition-duration': '1002s',
+                    'transition-timing-function': 'ease-in'
+                });
+
+                window.setTimeout(function(){
+                    image.cssPrefix({
+                        transform: 'scale(' + 100 + ')',
+                        'transform-origin': 82.3 + 'px ' + 30 + 'px'
+                    });
+                }, 4);
+*/
+                /*
+                image
+                    .transform('translate', (-holeX) + ' ' + (-holeY))
+                    .transform('scale', factor);
+                */
+
+                /*
+                var animTranslate = image.animateTransform({
+                        attributeName: 'transform',
+                        type: 'translate',
+                        from: '0',
+                        to: '0, 0',
+                        dur: duration + 's',
+                        fill: 'freeze',
+                        begin: 'indeterminate'
+                    }),
+                    animScale = image.animateTransform({
+                        attributeName: 'transform',
+                        type: 'scale',
+                        from: '0',
+                        to: 100,
+                        dur: duration + 's',
+                        fill: 'freeze',
+                        begin: 'indeterminate'
+                    });
+
+                animTranslate[0].beginElement();
+                animScale[0].beginElement();
+                */
+            });
+
+            /*
+            var root = Pablo('#root').root({
+                    width: window.innerWidth - 50,
+                    height: window.innerHeight - 50
+                }),
+                imageWidth = 555,
+                imageHeight = 729,
+                factor = 30,
+                duration = 20,
+                image = root.image({
+                    x:0,
+                    y:0,
+                    width: imageWidth,
+                    height: imageHeight,
+                }).link('images/dharmafly-sq.svg'),
+                animWidth = image.animate({
+                    attributeName: 'width',
+                    from: imageWidth,
+                    to: imageWidth * factor,
+                    dur: duration + 's',
+                    fill: 'freeze',
+                    begin: 'indeterminate'
+                }),
+                animHeight = image.animate({
+                    attributeName: 'height',
+                    from: imageHeight,
+                    to: imageHeight * factor,
+                    dur: duration + 's',
+                    fill: 'freeze',
+                    begin: 'indeterminate'
+                }),
+                animX = image.animate({
+                    attributeName: 'x',
+                    from: 0,
+                    to: -352 * factor,
+                    dur: duration + 's',
+                    fill: 'freeze',
+                    begin: 'indeterminate'
+                }),
+                animY = image.animate({
+                    attributeName: 'y',
+                    from: 0,
+                    to: -130 * factor,
+                    dur: duration + 's',
+                    fill: 'freeze',
+                    begin: 'indeterminate'
+                }),
+                animTranslate = image.animateTransform({
+                    attributeName: 'transform',
+                    type: 'translate',
+                    from: '0',
+                    to: (factor * (-1410 / 4)) + ' ' + (factor * (-500 / 4)),
+                    dur: duration + 's',
+                    fill: 'freeze',
+                    begin: 'indeterminate'
+                });
+
+                console.log(animX.attr('to'), animY.attr('to'));
+            
+            animWidth[0].beginElement();
+            animHeight[0].beginElement();
+            animX[0].beginElement();
+            animY[0].beginElement();
+            //animTranslate[0].beginElement();
+            */
+        }());
+        
+        </script>
+    </body>
+</html>
