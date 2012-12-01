@@ -62,10 +62,11 @@
                     factor = 20,
                     holeX = 79.8 + holeWidth / 2 * factor * -1.3,
                     holeY = 28.4 + holeWidth / 2 * factor * -0.3,
-                    duration = 3,
+                    duration = 7,
                     scaleTo = 180,
                     instanceX, instanceY,
-                    logoSymbol, logoInstance;
+                    logoSymbol, logoInstance,
+                    animScale, bg;
 
 
                 if (width < 0){
@@ -74,20 +75,29 @@
                 if (height < 0){
                     height = 0;
                 }
+                root.attr({
+                    width: width,
+                    height: height
+                });
 
-                logoSymbol = root.defs().symbol({id: 'df-logo'}).append(image),
+                logoSymbol = root.defs().symbol({id: 'df-logo'}).append(image);
+
+                animScale = image.animateTransform({
+                    attributeName: 'transform',
+                    type: 'scale',
+                    from: 1,
+                    to: scaleTo,
+                    dur: duration + 's',
+                    begin: 'indeterminate'
+                });
+
                 logoInstance = root.use().link('#df-logo');
 
-                root.attr({
-                        width: width,
-                        height: height
-                    })
-                    .append(logoInstance);
-
-                imageBBox = image[0].getBBox();
-
-                instanceX = width / 2 - imageBBox.width;
-                instanceY = height / 2 - imageBBox.height;
+                if (!imageBBox){
+                    imageBBox = image[0].getBBox();
+                    instanceX = width / 2 - imageBBox.width;
+                    instanceY = height / 2 - imageBBox.height;
+                }
 
                 logoInstance.attr({
                     x: instanceX,
@@ -95,6 +105,62 @@
                     width: width,
                     height: height
                 });
+
+                var animX = logoInstance.animate({
+                    attributeName: 'x',
+                    from: instanceX,
+                    to: -14550,
+                    dur: duration + 's',
+                    fill: 'freeze',
+                    begin: 'indeterminate'
+                }),
+                animY = logoInstance.animate({
+                    attributeName: 'y',
+                    from: instanceY,
+                    to: -5500,
+                    dur: duration + 's',
+                    fill: 'freeze',
+                    begin: 'indeterminate'
+                }),
+                animWidth = logoInstance.animate({
+                    attributeName: 'width',
+                    from: width,
+                    to: width * scaleTo,
+                    dur: duration + 's',
+                    fill: 'freeze',
+                    begin: 'indeterminate'
+                }),
+                animHeight = logoInstance.animate({
+                    attributeName: 'height',
+                    from: height,
+                    to: height * scaleTo,
+                    dur: duration + 's',
+                    fill: 'freeze',
+                    begin: 'indeterminate'
+                });
+
+                function startAnimation(){
+                    logoInstance.appendTo(root);
+                    animX[0].beginElement();
+                    animY[0].beginElement();
+                    animWidth[0].beginElement();
+                    animHeight[0].beginElement();
+                    animScale[0].beginElement();
+
+                    window.setTimeout(function(){
+                        if (!bg){
+                            bg = root.rect({
+                                width: width,
+                                height: height,
+                                fill: '#8EC045'
+                            });
+                        }
+
+                        startAnimation()
+                    }, duration * 1000);
+                }
+
+                startAnimation();
 
 /*
                 logoInstance.transform('scale', 2);
@@ -105,53 +171,6 @@
                     'transition-timing-function': 'ease-in'
                 });
 */
-
-                window.setTimeout(function(){
-                    logoInstance.cssPrefix({
-                        //transform: 'scale(' + 8 + ')'//,
-                        //'transform-origin': 82.3 + 'px ' + 30 + 'px'
-                    });
-
-                    var animX = logoInstance.animate({
-                            attributeName: 'x',
-                            from: instanceX,
-                            to: -14550,
-                            dur: duration + 's',
-                            fill: 'freeze'
-                        }),
-                        animX = logoInstance.animate({
-                            attributeName: 'y',
-                            from: instanceY,
-                            to: -5500,
-                            dur: duration + 's',
-                            fill: 'freeze'
-                        }),
-                        animWidth = logoInstance.animate({
-                            attributeName: 'width',
-                            from: width,
-                            to: width * scaleTo,
-                            dur: duration + 's',
-                            fill: 'freeze'
-                        }),
-                        animHeight = logoInstance.animate({
-                            attributeName: 'height',
-                            from: height,
-                            to: height * scaleTo,
-                            dur: duration + 's',
-                            fill: 'freeze'
-                        }),
-                        animScale = image.animateTransform({
-                            attributeName: 'transform',
-                            type: 'scale',
-                            from: 2,
-                            to: scaleTo,
-                            dur: duration + 's',
-                            fill: 'freeze'
-                        });
-                }, 4);
-
-
-                
 
 
 /*
