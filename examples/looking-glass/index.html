@@ -8,6 +8,7 @@
         <style>
             body {
                 padding:0;
+                margin:0;
             }
         </style>
     </head>
@@ -52,8 +53,8 @@
             }
 
             importFromIframe('images/dharmafly-sq.svg', function(event, svg){
-                var width = window.innerWidth - 50,
-                    height = window.innerHeight - 50,
+                var width = window.innerWidth,
+                    height = window.innerHeight,
                     root = Pablo('#root').root(),
                     image = svg.find('g.logo'),
                     imageBBox,
@@ -61,7 +62,11 @@
                     factor = 20,
                     holeX = 79.8 + holeWidth / 2 * factor * -1.3,
                     holeY = 28.4 + holeWidth / 2 * factor * -0.3,
-                    duration = 10;
+                    duration = 3,
+                    scaleTo = 180,
+                    instanceX, instanceY,
+                    logoSymbol, logoInstance;
+
 
                 if (width < 0){
                     width = 0;
@@ -69,35 +74,100 @@
                 if (height < 0){
                     height = 0;
                 }
-                root.attr({width:width, height:height})
-                    .append(svg);
+
+                logoSymbol = root.defs().symbol({id: 'df-logo'}).append(image),
+                logoInstance = root.use().link('#df-logo');
+
+                root.attr({
+                        width: width,
+                        height: height
+                    })
+                    .append(logoInstance);
 
                 imageBBox = image[0].getBBox();
 
-                svg.removeAttr('viewBox')
-                    .attr({
-                        width: width,
-                        height: height,
-                        x: width / 2 - imageBBox.width,
-                        y: height / 2 - imageBBox.height
-                    });
+                instanceX = width / 2 - imageBBox.width;
+                instanceY = height / 2 - imageBBox.height;
 
-                image
-                    .transform('scale', 2);
-/*
-                image.cssPrefix({
-                    'transition-property': '-webkit-transform',
-                    'transition-duration': '1002s',
-                    'transition-timing-function': 'ease-in'
+                logoInstance.attr({
+                    x: instanceX,
+                    y: instanceY,
+                    width: width,
+                    height: height
                 });
 
+/*
+                logoInstance.transform('scale', 2);
+
+                logoInstance.cssPrefix({
+                    'transition-property': '-webkit-transform',
+                    'transition-duration': duration + 's',
+                    'transition-timing-function': 'ease-in'
+                });
+*/
+
                 window.setTimeout(function(){
-                    image.cssPrefix({
-                        transform: 'scale(' + 100 + ')',
-                        'transform-origin': 82.3 + 'px ' + 30 + 'px'
+                    logoInstance.cssPrefix({
+                        //transform: 'scale(' + 8 + ')'//,
+                        //'transform-origin': 82.3 + 'px ' + 30 + 'px'
+                    });
+
+                    var animX = logoInstance.animate({
+                            attributeName: 'x',
+                            from: instanceX,
+                            to: -14550,
+                            dur: duration + 's',
+                            fill: 'freeze'
+                        }),
+                        animX = logoInstance.animate({
+                            attributeName: 'y',
+                            from: instanceY,
+                            to: -5500,
+                            dur: duration + 's',
+                            fill: 'freeze'
+                        }),
+                        animWidth = logoInstance.animate({
+                            attributeName: 'width',
+                            from: width,
+                            to: width * scaleTo,
+                            dur: duration + 's',
+                            fill: 'freeze'
+                        }),
+                        animHeight = logoInstance.animate({
+                            attributeName: 'height',
+                            from: height,
+                            to: height * scaleTo,
+                            dur: duration + 's',
+                            fill: 'freeze'
+                        }),
+                        animScale = image.animateTransform({
+                            attributeName: 'transform',
+                            type: 'scale',
+                            from: 2,
+                            to: scaleTo,
+                            dur: duration + 's',
+                            fill: 'freeze'
+                        });
+                }, 4);
+
+
+                
+
+
+/*
+                svg.cssPrefix({
+                    'transition-property': '-webkit-transform',
+                    'transition-duration': '2s',
+                    'transition-timing-function': 'ease-in'
+                });
+                window.setTimeout(function(){
+                    svg.cssPrefix({
+                        transform: 'translate(' + (-82.3) + ' ' + (-30) + ')'//,
+                        //'transform-origin': 82.3 + 'px ' + 30 + 'px'
                     });
                 }, 4);
 */
+
                 /*
                 image
                     .transform('translate', (-holeX) + ' ' + (-holeY))
