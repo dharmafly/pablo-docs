@@ -1,6 +1,6 @@
 --- 
-category: reference
 heading: The Pablo Library
+category: reference
 ---
 
 At its core, Pablo simply allows the creation of SVG elements, and the setting of attributes on those elements. For example, to create a `<circle>` element with its three main attributes:
@@ -14,4 +14,4 @@ In addition to the creation of elements and setting of attributes, Pablo provide
 The API reference includes very little general information about SVG, or about specific SVG elements and attributes. To learn about SVG, check out the [Pablo Resources][resources] section.
 
 
-[resources]: http://pablojs.com/details/#resources
+[resources]: http://pablojs.com/resources/#resources

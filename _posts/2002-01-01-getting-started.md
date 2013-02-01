@@ -1,6 +1,6 @@
 --- 
-category: overview
 heading: Getting started
+category: overview
 ---
 
 For production, download <a href="http://cloud.github.com/downloads/dharmafly/pablo/pablo.min.js" target="_blank">the minified script</a> and call it from your HTML:
@@ -84,7 +84,7 @@ It's early days, so your feedback is welcome. For bug reports and requests, plea
 [pablo-site]: http://pablojs.com
 [reference]: http://pablojs.com/reference/
 [issues]: https://github.com/dharmafly/pablo/issues
-[changelog]: http://pablojs.com/details/#changelog
+[changelog]: http://pablojs.com/resources/#changelog
 [prem-twitter]: https://twitter.com/premasagar
 [docs-folder]: https://github.com/dharmafly/pablo/tree/master/docs
 [pull-requests]: https://help.github.com/articles/using-pull-requests
