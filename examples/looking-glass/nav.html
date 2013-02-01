@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <title>Through the Looking Glass: Pablo</title>
+
+        <style>
+            body {
+                padding:0;
+                margin:0;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- <h1><a href="https://github.com/dharmafly/pablo">Pablo</a></h1> -->
+        
+        <!-- HTML container for the SVG root node -->
+        <div id="root"></div>
+
+
+
+        <!-- scripts -->
+        <script src="../../pablo.js"></script>
+        <script>
+        (function(){
+            function importFromIframe(src, loadHandler, errorHandler){
+                var iframe = Pablo(document.createElement('iframe'));
+
+                iframe[0].setAttribute('src', src);
+                iframe[0].setAttribute('style', 'width:0;height:0;visibility:hidden');
+
+                if (loadHandler){
+                    iframe.on('load', function(event){
+                        var svgDoc = iframe[0].getSVGDocument(),
+                            rootEl = svgDoc.getElementsByTagName('svg')[0],
+                            importedEl = document.importNode(rootEl, true);
+
+                        iframe.remove();
+                        if (rootEl){
+                            loadHandler.call(this, event, Pablo(importedEl));
+                        }
+                        else {
+                            errorHandler.call(this, event);
+                        }
+                    });
+                }
+                if (errorHandler){
+                    iframe.remove();
+                    iframe.on('error', errorHandler);
+                }
+                return iframe.appendTo(document.body);
+            }
+
+            function drawLogo(event, svg){
+                var width = window.innerWidth,
+                    height = window.innerHeight,
+                    root = Pablo('#root').root(),
+                    image = svg.find('g.logo'),
+                    imageBBox,
+                    holeWidth = 12,
+                    factor = 20,
+                    instanceX, instanceY,
+                    logoSymbol, logoInstance,
+                    darkGreen = '#1c9549',
+                    lightGreen = '#8cbf44',
+                    white = '#fff',
+                    imageClone;
+
+
+                if (width < 0){
+                    width = 0;
+                }
+                if (height < 0){
+                    height = 0;
+                }
+                root.attr({
+                    width: width,
+                    height: height
+                });
+
+                imageClone = image.clone(true);
+                logoSymbol = root.defs().symbol({id: 'df-logo'}).append(imageClone);
+
+                /*
+                imageClone.find('.background').attr({
+                    stroke: 'white',
+                    'stroke-width': 2
+                });
+                */
+
+                logoInstance = root.use().link('#df-logo');
+
+                if (!imageBBox){
+                    imageBBox = imageClone[0].getBBox();
+                    instanceX = width / 2 - imageBBox.width;
+                    instanceY = height / 2 - imageBBox.height;
+                }
+
+                logoInstance.attr({
+                    x: instanceX,
+                    y: instanceY,
+                    width: width,
+                    height: height
+                });
+
+                function animateStalksColor(){
+                    var stalks = imageClone.find('.stalks'),
+                        hole = imageClone.find('.hole'),
+                        originalStalksFill = stalks.attr('fill') || white,
+                        originalHoleFill = hole.attr('fill') || lightGreen;
+
+                    stalks.attr('stroke-width', 0);
+
+                    stalks.animate({
+                        id: 'stalksAnimFill',
+                        attributeName: 'fill',
+                        from: originalStalksFill,
+                        to: lightGreen,
+                        dur: '0.618s'
+                    });
+
+                    stalks.animate({
+                        id: 'stalksAnimFill2',
+                        attributeName: 'fill',
+                        from: lightGreen,
+                        to: darkGreen,
+                        dur: '1s',
+                        begin: 'stalksAnimFill.end'
+                    });
+
+                    stalks.animate({
+                        attributeName: 'fill',
+                        from: darkGreen,
+                        to: originalStalksFill,
+                        dur: '1.618s',
+                        begin: 'stalksAnimFill2.end',
+                        fill: 'freeze'
+                    });
+
+                    hole.animate({
+                        id: 'holeAnimFill',
+                        attributeName: 'fill',
+                        from: originalHoleFill,
+                        to: darkGreen,
+                        dur: '0.618s'
+                    });
+
+                    hole.animate({
+                        attributeName: 'fill',
+                        from: darkGreen,
+                        to: originalHoleFill,
+                        dur: '1s',
+                        begin: 'holeAnimFill.end',
+                        fill: 'freeze'
+                    });
+                }
+
+                function animateStalksSize(){
+                    var stalks = imageClone.find('.stalks');
+
+                    
+                    stalks.animateTransform({
+                        attributeName: 'transform',
+                        type: 'scale',
+                        from: 1,
+                        to: 2,
+                        dur: '0.618s',
+                        begin: 'stalksAnimFill2.end',
+                        fill: 'freeze'
+                    });
+                    
+                }
+
+                function animateBackgroundColor(){
+                    var pageBackground = root.prepend('rect', {
+                        width: width,
+                        height: height
+                    });
+
+                    pageBackground.animate({
+                        attributeName: 'fill',
+                        from: white,
+                        to: darkGreen,
+                        dur: '2s',
+                        fill: 'freeze'
+                    });
+                }
+
+                animateStalksColor();
+                animateStalksSize();
+                animateBackgroundColor();
+            }
+
+            importFromIframe('images/dharmafly-sq.svg', drawLogo);
+        }());
+        </script>
+    </body>
+</html>
