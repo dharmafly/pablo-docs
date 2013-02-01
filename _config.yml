@@ -1,46 +1,46 @@
 --- 
+theme: horus
+twitter_url: https://twitter.com/dharmafly
+auto: false
+project_name: Pablo
+project_url: https://github.com/dharmafly/pablo
+future: true
+baseurl: /
+sections: 
+- name: Overview
+  path: /index.html
+- name: Reference
+  path: /reference/index.html
+- name: Resources
+  path: /resources/index.html
+pygments: false
+lang: javascript
+ga_id: UA-34978047-1
+lsi: false
+version: 0.2.3
 scripts: 
 - src: http://cloud.github.com/downloads/dharmafly/pablo/pablo.min.js
-pygments: false
-theme: horus
 quote: 
 - quote: Painting is just another way of keeping a diary.
 - cite: Pablo Picasso
-auto: false
-lsi: false
-twitter_url: https://twitter.com/dharmafly
-sections: 
-- path: /index.html
-  name: Overview
-- path: /reference/index.html
-  name: Reference
-- path: /resources/index.html
-  name: Resources
-markdown: maruku
-project_name: Pablo
-version: 0.2.3
-permalink: /:title
 safe: false
+server: false
+markdown: maruku
+download_links: 
+- subtext: v{{ version }}
+  text: pablo.js
+  href: https://raw.github.com/dharmafly/pablo/master/pablo.js
+  title: Full source code, for use in development
+- subtext: v{{ version }}
+  text: pablo.min.js
+  href: http://cloud.github.com/downloads/dharmafly/pablo/pablo.min.js
+  title: Minified, for use in production
+- subtext: (master)
+  text: Edge
+  href: https://github.com/dharmafly/pablo/zipball/master
+  title: The repo's latest codebase (zip). Potentially unstable.
+permalink: /:title
 exclude: 
 - README.md
 - assets
 - FiddlerRules.farx
-ga_id: UA-34978047-1
-project_url: https://github.com/dharmafly/pablo
-baseurl: /
-lang: javascript
-download_links: 
-- title: Full source code, for use in development
-  href: https://raw.github.com/dharmafly/pablo/master/pablo.js
-  text: pablo.js
-  subtext: v{{ version }}
-- title: Minified, for use in production
-  href: http://cloud.github.com/downloads/dharmafly/pablo/pablo.min.js
-  text: pablo.min.js
-  subtext: v{{ version }}
-- title: The repo's latest codebase (zip). Potentially unstable.
-  href: https://github.com/dharmafly/pablo/zipball/master
-  text: Edge
-  subtext: (master)
-server: false
-future: true
