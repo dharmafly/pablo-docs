@@ -1,46 +1,46 @@
 --- 
+safe: false
+server: false
+future: true
+scripts: 
+- src: http://cloud.github.com/downloads/dharmafly/pablo/pablo.min.js
+markdown: maruku
+baseurl: /
+pygments: false
+project_name: Pablo
+theme: horus
+quote: 
+- quote: Painting is just another way of keeping a diary.
+- cite: Pablo Picasso
+ga_id: UA-34978047-1
+sections: 
+- path: /index.html
+  name: Overview
+- path: /reference/index.html
+  name: Reference
+- path: /resources/index.html
+  name: Resources
+version: 0.2.3
+twitter_url: https://twitter.com/dharmafly
 lsi: false
 exclude: 
 - README.md
 - assets
 - FiddlerRules.farx
-scripts: 
-- src: http://cloud.github.com/downloads/dharmafly/pablo/pablo.min.js
-download_links: 
-- subtext: v{{ version }}
-  text: pablo.js
-  href: https://raw.github.com/dharmafly/pablo/master/pablo.js
-  title: Full source code, for use in development
-- subtext: v{{ version }}
-  text: pablo.min.js
-  href: http://cloud.github.com/downloads/dharmafly/pablo/pablo.min.js
-  title: Minified, for use in production
-- subtext: (master)
-  text: Edge
-  href: https://github.com/dharmafly/pablo/zipball/master
-  title: The repo's latest codebase (zip). Potentially unstable.
-sections: 
-- name: Overview
-  path: /index.html
-- name: Reference
-  path: /reference/index.html
-- name: Resources
-  path: /resources/index.html
-version: 0.2.3
-server: false
-lang: javascript
-permalink: /:title
-baseurl: /
-auto: false
-ga_id: UA-34978047-1
-safe: false
-project_name: Pablo
-quote: 
-- quote: Painting is just another way of keeping a diary.
-- cite: Pablo Picasso
 project_url: https://github.com/dharmafly/pablo
-twitter_url: https://twitter.com/dharmafly
-theme: horus
-future: true
-pygments: false
-markdown: maruku
+lang: javascript
+download_links: 
+- title: Full source code, for use in development
+  href: https://raw.github.com/dharmafly/pablo/master/pablo.js
+  subtext: v{{ version }}
+  text: pablo.js
+- title: Minified, for use in production
+  href: http://cloud.github.com/downloads/dharmafly/pablo/pablo.min.js
+  subtext: v{{ version }}
+  text: pablo.min.js
+- title: The repo's latest codebase (zip). Potentially unstable.
+  href: https://github.com/dharmafly/pablo/zipball/master
+  subtext: (master)
+  text: Edge
+auto: false
+permalink: /:title
