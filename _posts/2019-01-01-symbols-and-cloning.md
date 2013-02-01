@@ -1,6 +1,6 @@
 --- 
-heading: Symbols & cloning
 category: reference
+heading: Symbols & cloning
 ---
 
 See also the documentation on 'Templates & plugins'.
