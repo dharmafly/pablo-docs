@@ -1,6 +1,6 @@
 --- 
-heading: JavaScript SVG libraries
 category: resources
+heading: JavaScript SVG libraries
 ---
 
 Other than [Pablo](http://pablojs.com), see:
@@ -11,3 +11,4 @@ Other than [Pablo](http://pablojs.com), see:
 * [Pergola](http://www.dotuscomus.com/pergola/)
 * [Bonsai](http://bonsaijs.org)
 * [innerSVG](http://code.google.com/p/innersvg/)
+* [Dojo GFX](http://dojotoolkit.org/reference-guide/dojox/gfx.html)
