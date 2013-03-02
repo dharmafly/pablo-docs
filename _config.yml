@@ -1,33 +1,27 @@
 --- 
-quote: 
-- quote: Painting is just another way of keeping a diary.
-- cite: Pablo Picasso
-project_url: https://github.com/dharmafly/pablo
 twitter_name: Dharmafly
 scripts: 
 - src: http://cloud.github.com/downloads/dharmafly/pablo/pablo.min.js
+theme: horus
+pygments: false
+baseurl: /
+ga_id: UA-34978047-1
+lang: javascript
+quote: 
+- quote: Painting is just another way of keeping a diary.
+- cite: Pablo Picasso
 auto: false
 server: false
-twitter_url: https://twitter.com/dharmafly
-download_links: 
-- subtext: v{{ version }}
-  title: Full source code, for use in development
-  href: https://raw.github.com/dharmafly/pablo/master/pablo.js
-  text: pablo.js
-- subtext: v{{ version }}
-  title: Minified, for use in production
-  href: http://cloud.github.com/downloads/dharmafly/pablo/pablo.min.js
-  text: pablo.min.js
-- subtext: (master)
-  title: The repo's latest codebase (zip). Potentially unstable.
-  href: https://github.com/dharmafly/pablo/zipball/master
-  text: Edge
-pygments: false
-markdown: maruku
+permalink: /:title
+exclude: 
+- README.md
+- assets
+- FiddlerRules.farx
+lsi: false
 project_name: Pablo
-baseurl: /
-theme: horus
-lang: javascript
+jquery_no_conflict: true
+future: true
+project_url: https://github.com/dharmafly/pablo
 sections: 
 - name: Overview
   path: /index.html
@@ -35,14 +29,20 @@ sections:
   path: /reference/index.html
 - name: Resources
   path: /resources/index.html
-future: true
+twitter_url: https://twitter.com/dharmafly
+download_links: 
+- title: Full source code, for use in development
+  subtext: v{{ version }}
+  text: pablo.js
+  href: https://raw.github.com/dharmafly/pablo/master/pablo.js
+- title: Minified, for use in production
+  subtext: v{{ version }}
+  text: pablo.min.js
+  href: http://cloud.github.com/downloads/dharmafly/pablo/pablo.min.js
+- title: The repo's latest codebase (zip). Potentially unstable.
+  subtext: (master)
+  text: Edge
+  href: https://github.com/dharmafly/pablo/zipball/master
+markdown: maruku
 version: 0.2.3
 safe: false
-jquery_no_conflict: true
-permalink: /:title
-exclude: 
-- README.md
-- assets
-- FiddlerRules.farx
-ga_id: UA-34978047-1
-lsi: false
