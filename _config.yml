@@ -1,36 +1,21 @@
 --- 
-ga_id: UA-34978047-1
-version: 0.2.3
-theme: horus
-baseurl: /
+markdown: maruku
 project_url: https://github.com/dharmafly/pablo
-quote: 
-- quote: Painting is just another way of keeping a diary.
-- cite: Pablo Picasso
-auto: false
-future: true
+theme: horus
+twitter_name: Dharmafly
+lang: javascript
+lsi: false
+project_name: Pablo
 exclude: 
 - README.md
 - assets
 - FiddlerRules.farx
 twitter_url: https://twitter.com/dharmafly
-twitter_name: Dharmafly
-lang: javascript
-markdown: maruku
-download_links: 
-- href: https://raw.github.com/dharmafly/pablo/master/pablo.js
-  subtext: v{{ version }}
-  text: pablo.js
-  title: Full source code, for use in development
-- href: http://cloud.github.com/downloads/dharmafly/pablo/pablo.min.js
-  subtext: v{{ version }}
-  text: pablo.min.js
-  title: Minified, for use in production
-- href: https://github.com/dharmafly/pablo/zipball/master
-  subtext: (master)
-  text: Edge
-  title: The repo's latest codebase (zip). Potentially unstable.
-project_name: Pablo
+auto: false
+pygments: false
+baseurl: /
+scripts: 
+- src: https://raw.github.com/dharmafly/pablo/master/build/pablo.min.js
 sections: 
 - name: Overview
   path: /index.html
@@ -38,11 +23,26 @@ sections:
   path: /reference/index.html
 - name: Resources
   path: /resources/index.html
-jquery_no_conflict: true
-pygments: false
-scripts: 
-- src: http://cloud.github.com/downloads/dharmafly/pablo/pablo.min.js
-lsi: false
+future: true
+ga_id: UA-34978047-1
+download_links: 
+- title: Full source code, for use in development
+  href: https://raw.github.com/dharmafly/pablo/master/pablo.js
+  text: pablo.js
+  subtext: v{{ version }}
+- title: Minified, for use in production
+  href: https://raw.github.com/dharmafly/pablo/master/build/pablo.min.js
+  text: pablo.min.js
+  subtext: v{{ version }}
+- title: The repo's latest codebase (zip). Potentially unstable.
+  href: https://github.com/dharmafly/pablo/zipball/master
+  text: Edge
+  subtext: (master)
 safe: false
-server: false
 permalink: /:title
+quote: 
+- quote: Painting is just another way of keeping a diary.
+- cite: Pablo Picasso
+server: false
+version: 0.3.0
+jquery_no_conflict: true
