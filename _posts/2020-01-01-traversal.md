@@ -1,6 +1,6 @@
 --- 
-heading: Traversal
 category: reference
+heading: Traversal
 ---
 
 
@@ -12,7 +12,7 @@ Returns a collection containing the direct child nodes for each element in the c
     // Create SVG root
     var paper = Pablo(demoElement)
         .css({'background-color':'white'})
-        .root({height:120}),
+        .svg({height:120}),
 
         // Array of IDs
         ids = ['rebbie', 'jackie', 'tito', 'jermaine',

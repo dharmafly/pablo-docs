@@ -1,6 +1,6 @@
 --- 
-heading: Appending
 category: reference
+heading: Appending
 ---
 
 A number of methods exist to append one collection of elements to the elements in another collection. Each of these methods accepts either one or two arguments, which correspond to the different ways of creating collections with the `Pablo()` method.
@@ -61,12 +61,12 @@ Same as `.appendTo()` but, with this method, the elements in the collection are 
     Pablo.circle().prependTo(paper);
 
 
-`.children(elements, [attributes])`
+`.child(elements, [attributes])`
 ----------------------------------
 
 Same as `.append()`, but with this method, the _newly appended elements_ are returned as a Pablo collection.
 
-    Pablo.g().children('circle', {r:50});
+    Pablo.g().child('circle', {r:50});
 
 
 `.before(elements, [attributes])`

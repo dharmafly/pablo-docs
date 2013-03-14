@@ -1,6 +1,6 @@
 --- 
-heading: Collections
 category: reference
+heading: Collections
 ---
 
 Creating Pablo collections
@@ -116,7 +116,7 @@ Method chaining
 
 Most methods return `this`, the collection. This allows methods to be chained, one after another.
 
-    Pablo.circle())
+    Pablo.circle()
         .addClass('foo')
         .append('rect', {width:50})
         .append('line', {})
