@@ -1,29 +1,4 @@
 --- 
-project_name: Pablo
-version: 0.3.0
-theme: horus
-lang: javascript
-quote: 
-- quote: Painting is just another way of keeping a diary.
-- cite: Pablo Picasso
-ga_id: UA-34978047-1
-markdown: maruku
-exclude: 
-- README.md
-- assets
-- FiddlerRules.farx
-jquery_no_conflict: true
-twitter_url: https://twitter.com/dharmafly
-lsi: false
-baseurl: /
-permalink: /:title
-safe: false
-server: false
-pygments: false
-scripts: 
-- src: https://raw.github.com/dharmafly/pablo/master/build/pablo.min.js
-project_url: https://github.com/dharmafly/pablo
-twitter_name: Dharmafly
 sections: 
 - name: Overview
   path: /index.html
@@ -31,18 +6,43 @@ sections:
   path: /api/index.html
 - name: Resources
   path: /resources/index.html
+project_url: https://github.com/dharmafly/pablo
+twitter_url: https://twitter.com/dharmafly
+lang: javascript
+pygments: false
+markdown: maruku
 download_links: 
-- text: pablo.js
-  subtext: v{{ version }}
+- subtext: v{{ version }}
   title: Full source code, for use in development
   href: https://raw.github.com/dharmafly/pablo/master/pablo.js
-- text: pablo.min.js
-  subtext: v{{ version }}
+  text: pablo.js
+- subtext: v{{ version }}
   title: Minified, for use in production
   href: https://raw.github.com/dharmafly/pablo/master/build/pablo.min.js
-- text: Edge
-  subtext: (master)
+  text: pablo.min.js
+- subtext: (master)
   title: The repo's latest codebase (zip). Potentially unstable.
   href: https://github.com/dharmafly/pablo/zipball/master
-auto: false
+  text: Edge
+safe: false
 future: true
+lsi: false
+version: 0.3.0
+project_name: Pablo
+jquery_no_conflict: true
+theme: horus
+twitter_name: Dharmafly
+quote: 
+- quote: Painting is just another way of keeping a diary.
+- cite: Pablo Picasso
+permalink: /:title
+baseurl: /
+exclude: 
+- README.md
+- assets
+- FiddlerRules.farx
+ga_id: UA-34978047-1
+auto: false
+server: false
+scripts: 
+- src: https://raw.github.com/dharmafly/pablo/master/build/pablo.min.js
