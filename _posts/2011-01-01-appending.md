@@ -1,6 +1,6 @@
 --- 
+category: api
 heading: Appending
-category: reference
 ---
 
 A number of methods exist to append one collection of elements to the elements in another collection. Each of these methods accepts either one or two arguments, which correspond to the different ways of creating collections with the `Pablo()` method.

@@ -1,6 +1,6 @@
 --- 
-heading: Getting started
 category: overview
+heading: Getting started
 ---
 
 For production, download <a href="https://raw.github.com/dharmafly/pablo/master/build/pablo.min.js" target="_blank">the minified script</a> and call it from your HTML:
@@ -57,7 +57,7 @@ Start drawing:
 
 In this documentation, all code snippets with 'Run' buttons are editable (except on mobiles).
 
-**See the [API Reference][reference] for full details.**
+**See the [API Reference][api] for full details.**
 
 It's early days, so your feedback is welcome. For bug reports and requests, please use the GitHub ['Issues' page][issues] or contact [@premasagar][prem-twitter].
 
@@ -82,7 +82,7 @@ It's early days, so your feedback is welcome. For bug reports and requests, plea
 
 
 [pablo-site]: http://pablojs.com
-[reference]: http://pablojs.com/reference/
+[api]: http://pablojs.com/api/
 [issues]: https://github.com/dharmafly/pablo/issues
 [changelog]: http://pablojs.com/resources/#changelog
 [prem-twitter]: https://twitter.com/premasagar

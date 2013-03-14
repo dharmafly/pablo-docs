@@ -1,6 +1,6 @@
 --- 
+category: api
 heading: Array methods
-category: reference
 ---
 
 Pablo collections are essentially arrays, with some enhanced and additional methods. In general, [array methods][array-methods] and properties also apply to Pablo collections. Some array methods have been tailored to suit collections, while exhibiting the same, expected behaviour.

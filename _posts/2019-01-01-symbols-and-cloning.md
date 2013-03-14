@@ -1,6 +1,6 @@
 --- 
+category: api
 heading: Symbols & cloning
-category: reference
 ---
 
 See also the documentation on 'Templates & plugins'.

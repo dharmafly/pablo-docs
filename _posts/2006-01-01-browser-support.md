@@ -1,6 +1,6 @@
 --- 
+category: api
 heading: Browser support
-category: reference
 ---
    
 `Pablo.isSupported`
