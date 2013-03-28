@@ -1,33 +1,44 @@
 --- 
+version: 0.3.0
+twitter_url: https://twitter.com/dharmafly
+lang: javascript
+quote: 
+- quote: Painting is just another way of keeping a diary.
+- cite: Pablo Picasso
 ga_id: UA-34978047-1
-safe: false
 server: false
+project_name: Pablo
+project_url: https://github.com/dharmafly/pablo
+safe: false
+auto: false
+lsi: false
+pygments: false
+markdown: maruku
+download_links: 
+- title: Full source code, for use in development
+  href: https://raw.github.com/dharmafly/pablo/master/pablo.js
+  subtext: v{{ version }}
+  text: pablo.js
+- title: Minified, for use in production
+  href: https://raw.github.com/dharmafly/pablo/master/build/pablo.min.js
+  subtext: v{{ version }}
+  text: pablo.min.js
+- title: The repo's latest codebase (zip). Potentially unstable.
+  href: https://github.com/dharmafly/pablo/zipball/master
+  subtext: (master)
+  text: Edge
+baseurl: /
+theme: horus
+twitter_name: Dharmafly
+scripts: 
+- src: https://raw.github.com/dharmafly/pablo/master/build/dist/pablo.min.js
+future: true
+permalink: /:title
 exclude: 
 - README.md
 - assets
 - FiddlerRules.farx
-quote: 
-- quote: Painting is just another way of keeping a diary.
-- cite: Pablo Picasso
-download_links: 
-- subtext: v{{ version }}
-  href: https://raw.github.com/dharmafly/pablo/master/pablo.js
-  text: pablo.js
-  title: Full source code, for use in development
-- subtext: v{{ version }}
-  href: https://raw.github.com/dharmafly/pablo/master/build/pablo.min.js
-  text: pablo.min.js
-  title: Minified, for use in production
-- subtext: (master)
-  href: https://github.com/dharmafly/pablo/zipball/master
-  text: Edge
-  title: The repo's latest codebase (zip). Potentially unstable.
-project_name: Pablo
-future: true
-pygments: false
-markdown: maruku
-baseurl: /
-twitter_url: https://twitter.com/dharmafly
+jquery_no_conflict: true
 sections: 
 - name: Overview
   path: /index.html
@@ -35,14 +46,3 @@ sections:
   path: /api/index.html
 - name: Resources
   path: /resources/index.html
-permalink: /:title
-lang: javascript
-auto: false
-version: 0.3.0
-scripts: 
-- src: https://raw.github.com/dharmafly/pablo/master/build/dist/pablo.min.js
-jquery_no_conflict: true
-lsi: false
-project_url: https://github.com/dharmafly/pablo
-twitter_name: Dharmafly
-theme: horus
