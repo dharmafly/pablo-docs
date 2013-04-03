@@ -1,6 +1,6 @@
 --- 
-category: api
 heading: The Pablo Library
+category: api
 ---
 
 At its core, Pablo simply allows the creation of SVG elements, and the setting of attributes on those elements. For example, to create a `<circle>` element with its three main attributes:

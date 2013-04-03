@@ -1,6 +1,6 @@
 --- 
-category: api
 heading: Attributes
+category: api
 ---
 
 `.attr()`

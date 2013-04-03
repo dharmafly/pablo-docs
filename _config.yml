@@ -1,4 +1,30 @@
 --- 
+project_url: https://github.com/dharmafly/pablo
+project_name: Pablo
+markdown: maruku
+lang: javascript
+ga_id: UA-34978047-1
+auto: false
+permalink: /:title
+safe: false
+theme: horus
+quote: 
+- quote: Painting is just another way of keeping a diary.
+- cite: Pablo Picasso
+baseurl: /
+download_links: 
+- title: Full source code, for use in development
+  text: pablo.js
+  subtext: v{{ version }}
+  href: http://pablojs.com/downloads/pablo.js
+- title: Minified, for use in production
+  text: pablo.min.js
+  subtext: v{{ version }}
+  href: http://pablojs.com/downloads/pablo.min.js
+- title: The repo's latest codebase (zip). Potentially unstable.
+  text: Edge
+  subtext: (master)
+  href: https://github.com/dharmafly/pablo/zipball/master
 sections: 
 - name: Overview
   path: /index.html
@@ -7,42 +33,16 @@ sections:
 - name: Resources
   path: /resources/index.html
 server: false
-ga_id: UA-34978047-1
 lsi: false
-baseurl: /
 future: true
-theme: horus
-lang: javascript
+pygments: false
+twitter_url: https://twitter.com/dharmafly
+twitter_name: Dharmafly
+scripts: 
+- src: http://pablojs.com/downloads/pablo.min.js
+version: 0.3.0
+jquery_no_conflict: true
 exclude: 
 - README.md
 - assets
 - FiddlerRules.farx
-jquery_no_conflict: true
-auto: false
-markdown: maruku
-safe: false
-quote: 
-- quote: Painting is just another way of keeping a diary.
-- cite: Pablo Picasso
-version: 0.3.0
-twitter_url: https://twitter.com/dharmafly
-scripts: 
-- src: http://pablojs.com/downloads/pablo.min.js
-project_url: https://github.com/dharmafly/pablo
-twitter_name: Dharmafly
-download_links: 
-- title: Full source code, for use in development
-  href: http://pablojs.com/downloads/pablo.js
-  subtext: v{{ version }}
-  text: pablo.js
-- title: Minified, for use in production
-  href: http://pablojs.com/downloads/pablo.min.js
-  subtext: v{{ version }}
-  text: pablo.min.js
-- title: The repo's latest codebase (zip). Potentially unstable.
-  href: https://github.com/dharmafly/pablo/zipball/master
-  subtext: (master)
-  text: Edge
-project_name: Pablo
-pygments: false
-permalink: /:title
