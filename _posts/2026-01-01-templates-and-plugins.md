@@ -1,6 +1,6 @@
 --- 
-category: api
 heading: Templates & plugins
+category: api
 ---
 
 In the 'Symbols & duplication' section, some ways are describe to create multiple, repeating SVG structures:

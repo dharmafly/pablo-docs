@@ -1,6 +1,6 @@
 --- 
-category: api
 heading: Utilities & advanced
+category: api
 ---
 
 `Pablo.extend(target, source, [source2], [withPrototype]`)
