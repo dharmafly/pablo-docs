@@ -1,6 +1,6 @@
 --- 
-category: overview
 heading: Build Process
+category: overview
 ---
 
 
@@ -20,4 +20,4 @@ Building
 
 A copy of `pablo.min.js` can be found in the `build/dist` directory.
 
-In the future the build process may be used to concatinate modular Pablo functionality for a custom build.
+In the future the build process may be used to concatenate modular Pablo functionality for a custom build.
