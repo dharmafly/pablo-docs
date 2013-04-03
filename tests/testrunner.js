@@ -1,4 +1,4 @@
-(function(){
+(function(window){
   'use strict';
 
   function run(){
@@ -7,10 +7,10 @@
   // if `?minjs` is used as a query parameter in the browser
   // Use query parameters in the test page's URL to direct which version of 
   // Pablo is being tested
-  var search = window.location.search,
-      minjs =  /\bminjs\b/.test(search),
-      sync =   /\bsync\b/.test(search),
-      remote = /\bremote\b/.test(search),
+  var search   = window.location.search,
+      minjs    = window.PABLO_MINJS || /\bminjs\b/.test(search),
+      remote   = window.PABLO_REMOTE || /\bremote\b/.test(search),
+      sync     = window.PABLO_SYNC || /\bsync\b/.test(search),
       testsSrc = 'tests.js',
       pabloSrc;
 
@@ -48,4 +48,4 @@
       getscript(testsSrc, run);
     });
   }
-}());
+}(this));
