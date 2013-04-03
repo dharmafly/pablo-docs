@@ -1,48 +1,48 @@
 --- 
-quote: 
-- quote: Painting is just another way of keeping a diary.
-- cite: Pablo Picasso
-project_url: https://github.com/dharmafly/pablo
+sections: 
+- name: Overview
+  path: /index.html
+- name: API
+  path: /api/index.html
+- name: Resources
+  path: /resources/index.html
+server: false
 ga_id: UA-34978047-1
-pygments: false
-markdown: maruku
+lsi: false
+baseurl: /
+future: true
+theme: horus
+lang: javascript
 exclude: 
 - README.md
 - assets
 - FiddlerRules.farx
-twitter_name: Dharmafly
-download_links: 
-- subtext: v{{ version }}
-  text: pablo.js
-  title: Full source code, for use in development
-  href: http://pablojs.com/downloads/pablo.js
-- subtext: v{{ version }}
-  text: pablo.min.js
-  title: Minified, for use in production
-  href: http://pablojs.com/downloads/pablo.min.js
-- subtext: (master)
-  text: Edge
-  title: The repo's latest codebase (zip). Potentially unstable.
-  href: https://github.com/dharmafly/pablo/zipball/master
-permalink: /:title
-baseurl: /
+jquery_no_conflict: true
+auto: false
+markdown: maruku
+safe: false
+quote: 
+- quote: Painting is just another way of keeping a diary.
+- cite: Pablo Picasso
+version: 0.3.0
 twitter_url: https://twitter.com/dharmafly
-project_name: Pablo
-theme: horus
 scripts: 
 - src: http://pablojs.com/downloads/pablo.min.js
-server: false
-version: 0.3.0
-jquery_no_conflict: true
-sections: 
-- path: /index.html
-  name: Overview
-- path: /api/index.html
-  name: API
-- path: /resources/index.html
-  name: Resources
-future: true
-lang: javascript
-safe: false
-auto: false
-lsi: false
+project_url: https://github.com/dharmafly/pablo
+twitter_name: Dharmafly
+download_links: 
+- title: Full source code, for use in development
+  href: http://pablojs.com/downloads/pablo.js
+  subtext: v{{ version }}
+  text: pablo.js
+- title: Minified, for use in production
+  href: http://pablojs.com/downloads/pablo.min.js
+  subtext: v{{ version }}
+  text: pablo.min.js
+- title: The repo's latest codebase (zip). Potentially unstable.
+  href: https://github.com/dharmafly/pablo/zipball/master
+  subtext: (master)
+  text: Edge
+project_name: Pablo
+pygments: false
+permalink: /:title
