@@ -1,6 +1,6 @@
 --- 
-heading: Browser support
 category: api
+heading: Browser support
 ---
    
 `Pablo.isSupported`

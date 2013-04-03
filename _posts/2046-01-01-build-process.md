@@ -1,6 +1,6 @@
 --- 
-heading: Build Process
 category: overview
+heading: Build Process
 ---
 
 
@@ -18,6 +18,6 @@ Building
     $ npm install
     $ grunt
 
-A copy of `pablo.min.js` can be found in the `build/dist` directory.
+A copy of `pablo.min.js` will be saved in the `build/dist` directory.
 
 In the future the build process may be used to concatenate modular Pablo functionality for a custom build.
