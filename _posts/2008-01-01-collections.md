@@ -1,6 +1,6 @@
 --- 
-heading: Collections
 category: api
+heading: Collections
 ---
 
 Creating Pablo collections
