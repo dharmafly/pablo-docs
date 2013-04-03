@@ -3,6 +3,11 @@
   <meta charset="utf-8">
   <title>Pablo: Tests</title>
   <link rel="stylesheet" href="mocha.css" />
+
+  <script>
+    // TEST RUNNER SETTINGS - see testrunner.js
+    var PABLO_REMOTE = true;
+  </script>
 </head>
 <body>
   <div id="mocha"></div>
@@ -23,23 +28,6 @@
   <script src="vendor/mocha.js"></script>
   <script src="vendor/chai.js"></script>
   <script src="vendor/getscript.js"></script>
-
-  <script>mocha.setup('bdd')</script>
-  <script>
-    // if `?minjs` is used as a query parameter in the browser
-    var use_min_js = window.location.search.indexOf('minjs') >= 0;
-
-    function run(){
-      mocha.run();
-    }
-
-    getscript(use_min_js ?
-      'https://raw.github.com/dharmafly/pablo/master/build/dist/pablo.min.js' :
-      'https://raw.github.com/dharmafly/pablo/master/pablo.js',
-      function(){
-        getscript('https://raw.github.com/dharmafly/pablo/master/tests/tests.js', run);
-      }
-    );
-  </script>
+  <script src="testrunner.js"></script>
 </body>
 </html>
