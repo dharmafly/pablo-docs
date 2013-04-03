@@ -1,6 +1,6 @@
 --- 
-heading: Build Process
 category: overview
+heading: Build Process
 ---
 
 
