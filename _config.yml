@@ -1,48 +1,48 @@
 --- 
-project_name: Pablo
-twitter_url: https://twitter.com/dharmafly
-lang: javascript
-auto: false
-sections: 
-- path: /index.html
-  name: Overview
-- path: /api/index.html
-  name: API
-- path: /resources/index.html
-  name: Resources
-safe: false
-version: 0.3.0
-twitter_name: Dharmafly
-ga_id: UA-34978047-1
-lsi: false
-server: false
-baseurl: /
-permalink: /:title
-exclude: 
-- README.md
-- assets
-- FiddlerRules.farx
-pygments: false
-scripts: 
-- src: http://pablojs.com/downloads/pablo.min.js
-download_links: 
-- text: pablo.js
-  subtext: v{{ version }}
-  title: Full source code, for use in development
-  href: http://pablojs.com/downloads/pablo.js
-- text: pablo.min.js
-  subtext: v{{ version }}
-  title: Minified, for use in production
-  href: http://pablojs.com/downloads/pablo.min.js
-- text: Edge
-  subtext: (master)
-  title: Latest codebase (zip); potentially unstable
-  href: https://github.com/dharmafly/pablo/zipball/master
-markdown: maruku
 theme: horus
 quote: 
 - quote: Painting is just another way of keeping a diary.
 - cite: Pablo Picasso
+auto: false
+pygments: false
+twitter_name: Dharmafly
+lang: javascript
 future: true
-project_url: https://github.com/dharmafly/pablo
+exclude: 
+- README.md
+- assets
+- FiddlerRules.farx
+project_name: Pablo
+twitter_url: https://twitter.com/dharmafly
+baseurl: /
+version: 0.3.0
+download_links: 
+- title: Full source code, for use in development
+  href: http://pablojs.com/downloads/pablo.js
+  text: pablo.js
+  subtext: v{{ version }}
+- title: Minified, for use in production
+  href: http://pablojs.com/downloads/pablo.min.js
+  text: pablo.min.js
+  subtext: v{{ version }}
+- title: Latest codebase (zip); potentially unstable
+  href: https://github.com/dharmafly/pablo/zipball/master
+  text: Edge
+  subtext: (master)
+permalink: /:title
+scripts: 
+- src: http://pablojs.com/downloads/pablo.min.js
+server: false
 jquery_no_conflict: true
+sections: 
+- name: Overview
+  path: /index.html
+- name: API
+  path: /api/index.html
+- name: Resources
+  path: /resources/index.html
+safe: false
+lsi: false
+project_url: https://github.com/dharmafly/pablo
+ga_id: UA-34978047-1
+markdown: maruku
