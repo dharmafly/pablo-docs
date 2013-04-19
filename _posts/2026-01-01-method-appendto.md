@@ -1,6 +1,6 @@
 --- 
-heading: appendTo(elements, [attributes])
 category: appendTo
+heading: appendTo(elements, [attributes])
 ---
 
 Appends the elements in the current collection to the element or elements in the first argument, and returns the collection.

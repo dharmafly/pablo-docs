@@ -1,6 +1,6 @@
 --- 
-heading: SVG Shortcuts
 category: api
+heading: SVG Shortcuts
 ---
 
 Example: `Pablo.circle()` to create a Pablo wrapped circle 
