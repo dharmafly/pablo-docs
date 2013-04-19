@@ -1,6 +1,6 @@
 --- 
-category: remove
 heading: remove()
+category: remove
 ---
 
 Removes all elements in the collection from their parent nodes, and returns the collection.

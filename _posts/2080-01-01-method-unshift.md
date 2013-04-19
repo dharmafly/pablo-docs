@@ -1,6 +1,6 @@
 --- 
-category: unshift
 heading: unshift(elements)
+category: unshift
 ---
 
 Adds the elements to the start of the collection and returns the collection.

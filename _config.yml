@@ -1,18 +1,8 @@
 --- 
-scripts: 
-- src: http://pablojs.com/downloads/pablo.min.js
-quote: 
-- quote: Painting is just another way of keeping a diary.
-- cite: Pablo Picasso
-future: true
-markdown: maruku
-project_name: Pablo
-project_url: https://github.com/dharmafly/pablo
-twitter_url: https://twitter.com/dharmafly
-lsi: false
-permalink: /:title
+auto: false
+server: false
+pygments: false
 baseurl: /
-version: 0.3.0
 sections: 
 - path: /index.html
   name: Overview
@@ -20,29 +10,39 @@ sections:
   name: API
 - path: /resources/index.html
   name: Resources
-auto: false
-twitter_name: Dharmafly
-download_links: 
-- href: http://pablojs.com/downloads/pablo.js
-  subtext: v{{ version }}
-  text: pablo.js
-  title: Full source code, for use in development
-- href: http://pablojs.com/downloads/pablo.min.js
-  subtext: v{{ version }}
-  text: pablo.min.js
-  title: Minified, for use in production
-- href: https://github.com/dharmafly/pablo/zipball/master
-  subtext: (master)
-  text: Edge
-  title: The repo's latest codebase (zip). Potentially unstable.
-lang: javascript
-pygments: false
 exclude: 
 - README.md
 - assets
 - FiddlerRules.farx
+quote: 
+- quote: Painting is just another way of keeping a diary.
+- cite: Pablo Picasso
+ga_id: UA-34978047-1
+future: true
+twitter_url: https://twitter.com/dharmafly
+lang: javascript
+project_name: Pablo
+scripts: 
+- src: http://pablojs.com/downloads/pablo.min.js
+safe: false
+project_url: https://github.com/dharmafly/pablo
 jquery_no_conflict: true
 theme: horus
-ga_id: UA-34978047-1
-safe: false
-server: false
+permalink: /:title
+download_links: 
+- href: http://pablojs.com/downloads/pablo.js
+  title: Full source code, for use in development
+  text: pablo.js
+  subtext: v{{ version }}
+- href: http://pablojs.com/downloads/pablo.min.js
+  title: Minified, for use in production
+  text: pablo.min.js
+  subtext: v{{ version }}
+- href: https://github.com/dharmafly/pablo/zipball/master
+  title: The repo's latest codebase (zip). Potentially unstable.
+  text: Edge
+  subtext: (master)
+markdown: maruku
+version: 0.3.0
+twitter_name: Dharmafly
+lsi: false

@@ -1,6 +1,6 @@
 --- 
-category: api
 heading: Collection Iteration
+category: api
 ---
 
 #### [each(fn, [context]) alias forEach(fn, [context])](each)

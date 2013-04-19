@@ -1,6 +1,6 @@
 --- 
-category: api
 heading: Collection Data
+category: api
 ---
 
 #### [data([data])](data)

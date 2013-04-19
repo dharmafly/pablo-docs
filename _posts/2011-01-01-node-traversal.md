@@ -1,6 +1,6 @@
 --- 
-category: api
 heading: Node Traversal
+category: api
 ---
 
 #### [children([selector/fn/element])](children)
