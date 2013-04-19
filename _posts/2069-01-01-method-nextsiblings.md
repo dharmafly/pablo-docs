@@ -1,6 +1,6 @@
 --- 
-category: nextSiblings
 heading: nextSiblings([selector/fn/element])
+category: nextSiblings
 ---
 
 Returns a collection of all the collection’s siblings after it in the DOM.

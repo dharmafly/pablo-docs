@@ -1,6 +1,6 @@
 --- 
-category: pablo
 heading: Pablo(list)
+category: pablo
 ---
 
 Creates a Pablo collection, wrapping multiple DOM elements. The elements could be in a NodeList, an array of elements, a jQuery collection or another Pablo collection.

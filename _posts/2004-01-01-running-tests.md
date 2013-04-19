@@ -1,6 +1,6 @@
 --- 
-category: overview
 heading: Running Tests
+category: overview
 ---
 
 Run the tests at [pablojs.com/tests](http://pablojs.com/tests).

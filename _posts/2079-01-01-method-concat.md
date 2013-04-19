@@ -1,6 +1,6 @@
 --- 
-category: concat
 heading: concat(elements)
+category: concat
 ---
 
 Returns a new collection with the passed element(s) added to the end of it
