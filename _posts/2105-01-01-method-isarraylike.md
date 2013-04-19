@@ -1,6 +1,6 @@
 --- 
-category: isArrayLike
 heading: isArrayLike(obj)
+category: isArrayLike
 ---
 
 Returns boolean `true` if the argument is an object and can be iterated like an Array; otherwise `false`.
