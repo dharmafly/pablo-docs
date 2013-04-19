@@ -1,6 +1,6 @@
 --- 
-heading: viewport([selector/fn/element])
 category: viewport
+heading: viewport([selector/fn/element])
 ---
 
 Returns a collection of the collection svg element’s viewport ancestors from closest to furthest.
