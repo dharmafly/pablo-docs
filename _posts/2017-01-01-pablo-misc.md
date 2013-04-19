@@ -1,6 +1,6 @@
 --- 
-heading: Pablo Misc
 category: api
+heading: Pablo Misc
 ---
 
 ## `Pablo` methods

@@ -1,6 +1,6 @@
 --- 
-heading: Node Properties
 category: api
+heading: Node Properties
 ---
 
 #### [attr([attribute])](attr)
