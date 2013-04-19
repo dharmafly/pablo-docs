@@ -1,9 +1,9 @@
 --- 
-category: overview
 heading: Getting started
+category: overview
 ---
 
-For production, download <a href="http://pablojs.com/downloads/pablo.min.js" target="_blank">the minified script</a> and call it from your HTML:
+For production, download <a href="https://raw.github.com/dharmafly/pablo/master/build/pablo.min.js" target="_blank">the minified script</a> and call it from your HTML:
 
     <script src="pablo.min.js"></script>
 

@@ -1,0 +1,9 @@
+--- 
+heading: hasClass(name)
+category: hasClass
+---
+
+Returns boolean `true` if any element in the collection has the CSS class, otherwise `false`.
+
+    var rect = Pablo.rect({'class': 'john paul george ringo'});
+    alert(rect.hasClass('george')); // true

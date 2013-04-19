@@ -1,0 +1,12 @@
+--- 
+heading: concat(elements)
+category: concat
+---
+
+Returns a new collection with the passed element(s) added to the end of it
+
+    var collection    = Pablo([Pablo.rect(), Pablo.ellipse()]),
+        newCollection = collection.concat(Pablo.rect());
+
+    alert(collection.length);
+    alert(newCollection.length);

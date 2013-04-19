@@ -1,0 +1,11 @@
+--- 
+heading: removeClass(name)
+category: removeClass
+---
+
+Removes the specified CSS class from all elements in the collection and returns the collection.
+
+    var rect = Pablo.rect({'class': 'john paul george stimpy ringo'});
+        
+    rect.removeClass('stimpy');
+    alert(rect.attr('class')); // 'john paul george ringo'

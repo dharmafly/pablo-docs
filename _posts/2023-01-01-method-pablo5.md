@@ -1,0 +1,12 @@
+--- 
+heading: Pablo(elementName, attributes)
+category: pablo
+---
+
+Creates a new, named SVG element, with attributes specified as an object:
+
+    Pablo('rect', {x:10, y:10, width:50, height:50});
+
+Here, the attributes object is required, even if it is an empty object. (If the attributes argument is omitted, then Pablo('rect') will select all `<rect>` elements already in the document).
+
+Typically, elements are instead created with an ‘element method’ - see the ‘Elements’ documentation.

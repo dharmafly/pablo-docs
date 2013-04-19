@@ -1,0 +1,14 @@
+--- 
+heading: trigger(name, fn, [useCapture])
+category: trigger
+---
+
+Trigger an event bound to a Pablo Collection via its name.
+
+    var rect = Pablo.rect();
+
+    rect.on('foo', function () {
+        alert('triggered');
+    });
+
+    rect.trigger('foo');
