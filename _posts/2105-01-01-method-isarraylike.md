@@ -1,0 +1,9 @@
+--- 
+heading: isArrayLike(obj)
+category: isArrayLike
+---
+
+Returns boolean `true` if the argument is an object and can be iterated like an Array; otherwise `false`.
+
+    var obj = Pablo.toArray({0:'foo', 1:'bar', length:2});
+    alert(Pablo.isArrayLike(obj));

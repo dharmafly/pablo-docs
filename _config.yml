@@ -1,39 +1,37 @@
 --- 
-theme: horus
-quote: 
-- quote: Painting is just another way of keeping a diary.
-- cite: Pablo Picasso
-auto: false
-pygments: false
-twitter_name: Dharmafly
-lang: javascript
-future: true
+version: 0.3.0
+server: false
 exclude: 
 - README.md
 - assets
 - FiddlerRules.farx
-project_name: Pablo
-twitter_url: https://twitter.com/dharmafly
-baseurl: /
-version: 0.3.0
-download_links: 
-- title: Full source code, for use in development
-  href: http://pablojs.com/downloads/pablo.js
-  text: pablo.js
-  subtext: v{{ version }}
-- title: Minified, for use in production
-  href: http://pablojs.com/downloads/pablo.min.js
-  text: pablo.min.js
-  subtext: v{{ version }}
-- title: Latest codebase (zip); potentially unstable
-  href: https://github.com/dharmafly/pablo/zipball/master
-  text: Edge
-  subtext: (master)
+lsi: false
+pygments: false
 permalink: /:title
-scripts: 
-- src: http://pablojs.com/downloads/pablo.min.js
-server: false
-jquery_no_conflict: true
+quote: 
+- quote: Painting is just another way of keeping a diary.
+- cite: Pablo Picasso
+markdown: maruku
+twitter_name: Dharmafly
+download_links: 
+- href: http://pablojs.com/downloads/pablo.js
+  subtext: v{{ version }}
+  text: pablo.js
+  title: Full source code, for use in development
+- href: http://pablojs.com/downloads/pablo.min.js
+  subtext: v{{ version }}
+  text: pablo.min.js
+  title: Minified, for use in production
+- href: https://github.com/dharmafly/pablo/zipball/master
+  subtext: (master)
+  text: Edge
+  title: Latest codebase (zip); potentially unstable
+future: true
+baseurl: /
+project_url: https://github.com/dharmafly/pablo
+auto: false
+lang: javascript
+ga_id: UA-34978047-1
 sections: 
 - name: Overview
   path: /index.html
@@ -41,8 +39,10 @@ sections:
   path: /api/index.html
 - name: Resources
   path: /resources/index.html
+project_name: Pablo
+jquery_no_conflict: true
+scripts: 
+- src: http://pablojs.com/downloads/pablo.min.js
+theme: horus
+twitter_url: https://twitter.com/dharmafly
 safe: false
-lsi: false
-project_url: https://github.com/dharmafly/pablo
-ga_id: UA-34978047-1
-markdown: maruku
