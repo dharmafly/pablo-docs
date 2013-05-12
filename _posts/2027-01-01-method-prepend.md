@@ -1,6 +1,6 @@
 --- 
-heading: prepend(elements, [attributes])
 category: prepend
+heading: prepend(elements, [attributes])
 ---
 
 Same as [.append()](/api/append) but, with this method, the passed elements are inserted into the DOM as the first child of each of the elements in the collection.

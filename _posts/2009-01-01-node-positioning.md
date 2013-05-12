@@ -1,6 +1,6 @@
 --- 
-heading: Node Positioning
 category: api
+heading: Node Positioning
 ---
 
 #### [append(element)](/api/append/)

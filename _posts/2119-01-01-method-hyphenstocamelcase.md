@@ -1,6 +1,6 @@
 --- 
-heading: hyphensToCamelCase(string)
 category: hyphensToCamelCase
+heading: hyphensToCamelCase(string)
 ---
 
 Converts the hyphenated-string to a camelCase string. Useful for 

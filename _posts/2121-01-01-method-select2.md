@@ -1,6 +1,6 @@
 --- 
-heading: select(selector)
 category: select
+heading: select(selector)
 ---
 
 Returns a Pablo wrapped element(s) which matches the passed selector.

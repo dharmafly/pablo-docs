@@ -1,6 +1,6 @@
 --- 
-heading: parents([selector/fn/element])
 category: parents
+heading: parents([selector/fn/element])
 ---
 
 Returns a collection containing the parents from closest to oldest (excluding `document`) for every element in the collection.
