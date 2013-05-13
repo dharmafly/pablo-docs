@@ -3,56 +3,56 @@ category: api
 heading: Node Positioning
 ---
 
-#### [append(element)](append)
+#### [append(element)](/api/append/)
 
 Append the element to the element(s) in the collection and returns 
 the collection.
 
-#### [prepend(element)](prepend)
+#### [prepend(element)](/api/prepend/)
 
 Prepend the element to the element(s) in the collection and returns 
 the collection.
 
-#### [appendTo(element)](appendTo)
+#### [appendTo(element)](/api/appendTo/)
 
 Append the element(s) in the collection to the argument collection and 
 returns the collection.
 
-#### [prependTo(element)](prependTo)
+#### [prependTo(element)](/api/prependTo/)
 
 Prepend the element(s) in the collection to the argument collection and 
 returns the collection.
 
-#### [after(element)](after)
+#### [after(element)](/api/after/)
 
 Inserts the argument elements after each element in the collection and 
 returns the collection.
 
-#### [before(element)](before)
+#### [before(element)](/api/before/)
 
 Inserts the argument elements before each element in the collection and 
 returns the collection.
 
-#### [insertAfter(element)](insertAfter)
+#### [insertAfter(element)](/api/insertAfter/)
 
 Inserts each element in the collection after each argument element(s) and 
 returns the collection.
 
-#### [insertBefore(element)](insertBefore)
+#### [insertBefore(element)](/api/insertBefore/)
 
 Inserts each element in the collection before each argument element(s) and 
 returns the collection.
 
-#### [remove()](remove)
+#### [remove()](/api/remove/)
 
 Removes the collection from a parent element as well as removing any 
 events and data and returns the collection.
 
-#### [detach()](detach)
+#### [detach()](/api/detach/)
 
 Removes the collection from its parent not removing any events or 
 data and returns the collection.
 
-#### [empty()](empty)
+#### [empty()](/api/empty/)
 
 Empties the collection of children and returns the collection.

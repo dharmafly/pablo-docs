@@ -1,7 +1,14 @@
 --- 
-category: resources
+category: misc
 heading: Changelog
 ---
+
+* v0.3
+    - Rename `.root()` to `.svg()`
+    - New traversal methods
+    - Add CSS selectors and selector functions as optional arguments to traversal methods
+    - Streamline code
+
 * v0.2
     - Functional API moved to /extensions/functional.js
     - DOM elements now top-level in a Pablo collection, e.g. circle[0]
