@@ -1,6 +1,6 @@
 --- 
-category: offMethod
 heading: off(name, fn, [useCapture])
+category: offMethod
 ---
 
 Removes the previously added event listeners from each element in the collection, and returns the collection. 
