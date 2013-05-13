@@ -1,8 +1,33 @@
 --- 
-heading: Books
+heading: Resources
 category: resources
 ---
 
+MDN (Mozilla Developer Network)
+-------------------------------
+
+* [SVG](https://developer.mozilla.org/en/SVG)
+* [Elements](https://developer.mozilla.org/en/SVG/Element)
+* [Attributes](https://developer.mozilla.org/en/SVG/Attribute)
+* [Animation](https://developer.mozilla.org/en/SVG/SVG_animation_with_SMIL)
+* [CSS](https://developer.mozilla.org/en/CSS/CSS_Reference)
+
+
+Other online resources
+----------------------
+
+* [Browser support for SVG](http://caniuse.com/#cats=SVG)
+* [W3C spec for SVG 1.1](http://www.w3.org/TR/SVG11/)
+* [Phrogz's ObjJob reference](http://objjob.phrogz.net/svg/hierarchy)
+* [KevLinDev tutorials](http://kevlindev.com/tutorials/basics/index.htm)
+* [SVG Basics](http://www.svgbasics.com)
+* [SVG Wow](http://svg-wow.org)
+* [My Spare Brain's short intro to SVG](http://www.mysparebrain.com/svgjs)
+* [An SVG primer for Today's Browsers](http://www.w3.org/Graphics/SVG/IG/resources/svgprimer.html)
+
+
+Books
+-----
 
 [![](http://ecx.images-amazon.com/images/I/51UmzSJT3FL._SL150_.jpg)  
 HTML5 Graphics with SVG & CSS3](http://www.amazon.co.uk/HTML5-Graphics-CSS3-Kurt-Cagle/dp/1449304478/svg-21) by Kurt Cagle _(2012)_.

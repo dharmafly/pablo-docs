@@ -3,35 +3,24 @@ heading: Getting started
 category: overview
 ---
 
-Download either the <a href="http://pablojs.com/downloads/pablo.js" target="_blank">full script</a> for development or the <a href="http://pablojs.com/downloads/pablo.min.js" target="_blank">minified script</a> for production and reference it in your web page's HTML:
+For production, download <a href="https://raw.github.com/dharmafly/pablo/master/build/pablo.min.js" target="_blank">the minified script</a> and call it from your HTML:
 
     <script src="pablo.min.js"></script>
 
-Check the browser supports basic SVG:
+
+Check that the browser supports basic SVG:
 
     if (Pablo.isSupported){
-        alert('Yes!');
         /* Pablo code here */
+        alert('Yes!');
     }
     else {
+        /* Alternative content */
         alert("Noo");
-        /* Fallback content */
     }
 
 
 Start drawing:
-_Click the 'Run' button_
-
-    /* Inside an HTML element, append an <svg> root */
-    Pablo(demoElement).svg({height:200})
-        /* Create <circle> element, with attributes */
-        .circle({cx:90, cy:90, r:90})
-        /* Add a click listener */
-        .on('click', function(){
-            alert('Hello Pablo');
-        });
-
-and drawing...
 
     /* Inside an HTML element, append an <svg> root */
     var paper = Pablo(demoElement).svg({height:220}),
@@ -65,10 +54,39 @@ and drawing...
             circle.attr({cx:cx, fill:color});
         });
 
-_Note: in this documentation, all code snippets with 'Run' buttons are editable, except on mobiles_.
+
+In this documentation, all code snippets with 'Run' buttons are editable (except on mobiles).
 
 **See the [API Reference][api] for full details.**
+
+It's early days, so your feedback is welcome. For bug reports and requests, please use the GitHub ['Issues' page][issues] or contact [@premasagar][prem-twitter].
+
+[Pull requests][pull-requests] are welcome. To update the pages on [pablojs.com][pablo-site], the [Markdown][markdown-syntax] files in the [/docs folder][docs-folder] should be changed.
+
+
+<!-- Testcard demo -->
+<div id="testcard" style="margin-top:40px">
+    <script>
+        // Load testcard script on DOM ready
+        if (document.addEventListener){
+            document.addEventListener('DOMContentLoaded', function(){
+                var script = document.createElement('script');
+                document.body.appendChild(script);
+                script.src = 'https://raw.github.com/dharmafly/pablo/master/examples/testcard/testcard.js';
+            }, false);
+        }
+    </script>
+</div>
+
+[testcard.js][testcard.js]
 
 
 [pablo-site]: http://pablojs.com
 [api]: http://pablojs.com/api/
+[issues]: https://github.com/dharmafly/pablo/issues
+[changelog]: http://pablojs.com/resources/#changelog
+[prem-twitter]: https://twitter.com/premasagar
+[docs-folder]: https://github.com/dharmafly/pablo/tree/master/docs
+[pull-requests]: https://help.github.com/articles/using-pull-requests
+[markdown-syntax]: http://daringfireball.net/projects/markdown/syntax
+[testcard.js]: https://github.com/dharmafly/pablo/blob/master/examples/testcard/testcard.js
