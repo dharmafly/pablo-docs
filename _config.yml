@@ -1,4 +1,16 @@
 --- 
+safe: false
+project_name: Pablo
+ga_id: UA-34978047-1
+theme: horus
+lang: javascript
+quote: 
+- quote: Painting is just another way of keeping a diary.
+- cite: Pablo Picasso
+auto: false
+future: true
+lsi: false
+markdown: maruku
 sections: 
 - name: Overview
   path: /index.html
@@ -8,43 +20,31 @@ sections:
   path: /misc/index.html
 - name: Resources
   path: /resources/index.html
+permalink: /:title
 baseurl: /
+project_url: https://github.com/dharmafly/pablo
+version: 0.3.0
+twitter_url: https://twitter.com/dharmafly
+pygments: false
 exclude: 
 - README.md
 - assets
 - FiddlerRules.farx
-auto: false
-future: true
-project_url: https://github.com/dharmafly/pablo
-markdown: maruku
 jquery_no_conflict: true
-version: 0.3.0
-lang: javascript
-pygments: false
-quote: 
-- quote: Painting is just another way of keeping a diary.
-- cite: Pablo Picasso
-permalink: /:title
-download_links: 
-- subtext: v{{ version }}
-  text: pablo.js
-  title: Full source code, for use in development
-  href: http://pablojs.com/downloads/pablo.js
-- subtext: v{{ version }}
-  text: pablo.min.js
-  title: Minified, for use in production
-  href: http://pablojs.com/downloads/pablo.min.js
-- subtext: (master)
-  text: Edge
-  title: Latest codebase (zip); potentially unstable
-  href: https://github.com/dharmafly/pablo/zipball/master
-safe: false
-project_name: Pablo
-server: false
-lsi: false
-theme: horus
-ga_id: UA-34978047-1
-twitter_url: https://twitter.com/dharmafly
-twitter_name: Dharmafly
 scripts: 
 - src: http://pablojs.com/downloads/pablo.min.js
+server: false
+twitter_name: Dharmafly
+download_links: 
+- title: Full source code, for use in development
+  href: http://pablojs.com/downloads/pablo.js
+  text: pablo.js
+  subtext: v{{ version }}
+- title: Minified, for use in production
+  href: http://pablojs.com/downloads/pablo.min.js
+  text: pablo.min.js
+  subtext: v{{ version }}
+- title: Latest codebase (zip); potentially unstable
+  href: https://github.com/dharmafly/pablo/zipball/master
+  text: Edge
+  subtext: (master)
