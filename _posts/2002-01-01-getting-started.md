@@ -22,14 +22,16 @@ Check the browser supports basic SVG:
 Start drawing:
 _(Click the 'Run' button)_
 
-    Pablo(demoElement)
-        .svg({height:200})
-            .circle({cx:100, cy:100, r:100})
-            .on('click', function(){
-                alert('Hello Pablo');
-            });
+    /* Inside an HTML element, append an <svg> root */
+    Pablo(demoElement).svg({height:200})
+        /* Create <circle> element, with attributes */
+        .circle({cx:100, cy:100, r:100})
+        /* Add a click listener */
+        .on('click', function(){
+            alert('Hello Pablo');
+        });
 
-Or something a bit more adventurous:
+and drawing...
 
     /* Inside an HTML element, append an <svg> root */
     var paper = Pablo(demoElement).svg({height:220}),
@@ -68,23 +70,5 @@ _(Note: in this documentation, all code snippets with 'Run' buttons are editable
 **See the [API Reference][api] for full details.**
 
 
-<!-- Testcard demo -->
-<div id="testcard" style="margin-top:40px">
-    <script>
-        // Load testcard script on DOM ready
-        if (document.addEventListener){
-            document.addEventListener('DOMContentLoaded', function(){
-                var script = document.createElement('script');
-                document.body.appendChild(script);
-                script.src = 'https://raw.github.com/dharmafly/pablo/master/examples/testcard/testcard.js';
-            }, false);
-        }
-    </script>
-</div>
-
-[testcard.js][testcard.js]
-
-
 [pablo-site]: http://pablojs.com
 [api]: http://pablojs.com/api/
-[testcard.js]: https://github.com/dharmafly/pablo/blob/master/examples/testcard/testcard.js
