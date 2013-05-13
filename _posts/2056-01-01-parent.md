@@ -1,9 +1,0 @@
---- 
-heading: parent()
-category: parent
----
-
-Returns a collection containing the parent node for each element in the collection.
-
-    Pablo('#michael').parent()
-        .attr('id'); // 'jackson'

@@ -1,15 +1,12 @@
 --- 
-heading: Running Tests
 category: overview
+heading: Running Tests
 ---
 
-The tests can be used to check that a particular browser or device is supported by Pablo. Run the tests at [pablojs.com/tests][test].
+To test if a particular browser or device is supported by Pablo, visit [pablojs.com/tests][tests] on the device.
 
-Or run them locally by checking out the repo, running `grunt` in the `build` folder (see '[Build process][build]') and opening `tests/index.html` in the browser.
-
-If you are developing Pablo, add to or update the tests in [`tests.js`][tests.js].
+If you need to run the tests locally, check out the repo and open `tests/index.html` in the browser. If you are developing Pablo, add or update the tests in `tests/tests.js`.
 
 
 [tests]: http://pablojs.com/tests
 [build]: #build-process
-[tests.js]: https://github.com/dharmafly/pablo/blob/master/tests/tests.js

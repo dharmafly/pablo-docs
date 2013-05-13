@@ -1,9 +1,0 @@
---- 
-heading: Pablo(element)
-category: pablo
----
-
-Creates a Pablo collection, wrapping a single DOM element.
-
-    var element = document.getElementById('foo'),
-        collection = Pablo(element);
