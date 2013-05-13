@@ -1,16 +1,19 @@
 --- 
-project_url: https://github.com/dharmafly/pablo
-lsi: false
-pygments: false
-jquery_no_conflict: true
+twitter_url: https://twitter.com/dharmafly
+lang: javascript
 markdown: maruku
-version: 0.3.0
-theme: horus
+permalink: /:title
+jquery_no_conflict: true
+safe: false
 project_name: Pablo
-baseurl: /
-quote: 
-- quote: Painting is just another way of keeping a diary.
-- cite: Pablo Picasso
+future: true
+project_url: https://github.com/dharmafly/pablo
+version: 0.3.0
+pygments: false
+server: false
+lsi: false
+scripts: 
+- src: http://pablojs.com/downloads/pablo.min.js
 sections: 
 - path: /index.html
   name: Overview
@@ -20,31 +23,28 @@ sections:
   name: Misc
 - path: /resources/index.html
   name: Resources
-permalink: /:title
+auto: false
 twitter_name: Dharmafly
-ga_id: UA-34978047-1
-download_links: 
-- title: Full source code, for use in development
-  href: http://pablojs.com/downloads/pablo.js
-  subtext: v{{ version }}
-  text: pablo.js
-- title: Minified, for use in production
-  href: http://pablojs.com/downloads/pablo.min.js
-  subtext: v{{ version }}
-  text: pablo.min.js
-- title: Latest codebase (zip); potentially unstable
-  href: https://github.com/dharmafly/pablo/zipball/master
-  subtext: (master)
-  text: Edge
-server: false
+baseurl: /
 exclude: 
 - README.md
 - assets
 - FiddlerRules.farx
-lang: javascript
-auto: false
-future: true
-twitter_url: https://twitter.com/dharmafly
-scripts: 
-- src: http://pablojs.com/downloads/pablo.min.js
-safe: false
+theme: horus
+quote: 
+- quote: Painting is just another way of keeping a diary.
+- cite: Pablo Picasso
+ga_id: UA-34978047-1
+download_links: 
+- text: pablo.js
+  href: http://pablojs.com/downloads/pablo.js
+  subtext: v{{ version }}
+  title: Full source code, for use in development
+- text: pablo.min.js
+  href: http://pablojs.com/downloads/pablo.min.js
+  subtext: v{{ version }}
+  title: Minified, for use in production
+- text: Edge
+  href: https://github.com/dharmafly/pablo/zipball/master
+  subtext: (master)
+  title: Latest codebase (zip); potentially unstable
