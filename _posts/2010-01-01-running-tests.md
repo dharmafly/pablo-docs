@@ -7,7 +7,7 @@ The tests can be used to check that a particular browser or device is supported 
 
 Or run them locally by checking out the repo, running `grunt` in the `build` folder (see '[Build process][build]') and opening `tests/index.html` in the browser.
 
-If you are developing Pablo, add to or update the tests in `[tests.js][tests.js]`.
+If you are developing Pablo, add to or update the tests in [`tests.js`][tests.js].
 
 
 [tests]: http://pablojs.com/tests
