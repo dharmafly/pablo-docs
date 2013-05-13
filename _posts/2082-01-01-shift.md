@@ -1,6 +1,6 @@
 --- 
-category: shift
 heading: shift()
+category: shift
 ---
 
 Removes the first element in the collection and returns it, wrapped in a new collection.

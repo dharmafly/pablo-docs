@@ -1,6 +1,6 @@
 --- 
-category: overview
 heading: Build Process
+category: overview
 ---
 
 If you are editing the core library, you can build your own minified version of the library.
