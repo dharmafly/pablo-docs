@@ -1,6 +1,6 @@
 --- 
-heading: Pablo(element)
 category: pablo
+heading: Pablo(element)
 ---
 
 Creates a Pablo collection, wrapping a single DOM element.

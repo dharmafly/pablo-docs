@@ -1,6 +1,6 @@
 --- 
-heading: Running Tests
 category: overview
+heading: Running Tests
 ---
 
 To test if a particular browser or device is supported by Pablo, visit [pablojs.com/tests][tests] on the device.
