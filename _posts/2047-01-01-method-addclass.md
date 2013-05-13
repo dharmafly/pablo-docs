@@ -1,6 +1,6 @@
 --- 
-heading: addClass(name)
 category: addClass
+heading: addClass(name)
 ---
 
 Adds the specified CSS class to all elements in the collection and returns the collection.
