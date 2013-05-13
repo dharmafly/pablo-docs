@@ -1,6 +1,6 @@
 --- 
-category: removeData
 heading: removeData(key)
+category: removeData
 ---
 
 Remove data on a pablo collection via its key.

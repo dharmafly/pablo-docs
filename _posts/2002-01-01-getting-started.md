@@ -1,6 +1,6 @@
 --- 
-category: overview
 heading: Getting started
+category: overview
 ---
 
 Download either the <a href="http://pablojs.com/downloads/pablo.js" target="_blank">full script</a> for development or the <a href="http://pablojs.com/downloads/pablo.min.js" target="_blank">minified script</a> for production and reference it in your web page's HTML:
@@ -25,7 +25,7 @@ _(Click the 'Run' button)_
     /* Inside an HTML element, append an <svg> root */
     Pablo(demoElement).svg({height:200})
         /* Create <circle> element, with attributes */
-        .circle({cx:100, cy:100, r:100})
+        .circle({cx:90, cy:90, r:90})
         /* Add a click listener */
         .on('click', function(){
             alert('Hello Pablo');
