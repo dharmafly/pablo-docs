@@ -20,7 +20,7 @@ Check the browser supports basic SVG:
 
 
 Start drawing:
-_(Click the 'Run' button)_
+_Click the 'Run' button_
 
     /* Inside an HTML element, append an <svg> root */
     Pablo(demoElement).svg({height:200})
@@ -65,7 +65,7 @@ and drawing...
             circle.attr({cx:cx, fill:color});
         });
 
-_(Note: in this documentation, all code snippets with 'Run' buttons are editable, except on mobiles)_.
+_Note: in this documentation, all code snippets with 'Run' buttons are editable, except on mobiles_.
 
 **See the [API Reference][api] for full details.**
 
