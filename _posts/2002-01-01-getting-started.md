@@ -87,10 +87,4 @@ _(Note: in this documentation, all code snippets with 'Run' buttons are editable
 
 [pablo-site]: http://pablojs.com
 [api]: http://pablojs.com/api/
-[issues]: https://github.com/dharmafly/pablo/issues
-[changelog]: http://pablojs.com/resources/#changelog
-[prem-twitter]: https://twitter.com/premasagar
-[docs-folder]: https://github.com/dharmafly/pablo/tree/master/docs
-[pull-requests]: https://help.github.com/articles/using-pull-requests
-[markdown-syntax]: http://daringfireball.net/projects/markdown/syntax
 [testcard.js]: https://github.com/dharmafly/pablo/blob/master/examples/testcard/testcard.js
