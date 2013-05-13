@@ -3,24 +3,33 @@ category: overview
 heading: Getting started
 ---
 
-For production, download <a href="https://raw.github.com/dharmafly/pablo/master/build/pablo.min.js" target="_blank">the minified script</a> and call it from your HTML:
+Download either the <a href="http://pablojs.com/downloads/pablo.js" target="_blank">full script</a> for development or the <a href="http://pablojs.com/downloads/pablo.min.js" target="_blank">minified script</a> for production and reference it in your web page's HTML:
 
     <script src="pablo.min.js"></script>
 
-
-Check that the browser supports basic SVG:
+Check the browser supports basic SVG:
 
     if (Pablo.isSupported){
-        /* Pablo code here */
         alert('Yes!');
+        /* Pablo code here */
     }
     else {
-        /* Alternative content */
         alert("Noo");
+        /* Fallback content */
     }
 
 
 Start drawing:
+_(Click the 'Run' button)_
+
+    Pablo(demoElement)
+        .svg({height:200})
+            .circle({cx:100, cy:100, r:100})
+            .on('click', function(){
+                alert('Hello Pablo');
+            });
+
+Or something a bit more adventurous:
 
     /* Inside an HTML element, append an <svg> root */
     var paper = Pablo(demoElement).svg({height:220}),
@@ -54,14 +63,9 @@ Start drawing:
             circle.attr({cx:cx, fill:color});
         });
 
-
-In this documentation, all code snippets with 'Run' buttons are editable (except on mobiles).
+_(Note: in this documentation, all code snippets with 'Run' buttons are editable, except on mobiles)_.
 
 **See the [API Reference][api] for full details.**
-
-It's early days, so your feedback is welcome. For bug reports and requests, please use the GitHub ['Issues' page][issues] or contact [@premasagar][prem-twitter].
-
-[Pull requests][pull-requests] are welcome. To update the pages on [pablojs.com][pablo-site], the [Markdown][markdown-syntax] files in the [/docs folder][docs-folder] should be changed.
 
 
 <!-- Testcard demo -->
