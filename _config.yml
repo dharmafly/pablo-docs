@@ -1,50 +1,50 @@
 --- 
-ga_id: UA-34978047-1
-jquery_no_conflict: true
-theme: horus
-auto: false
-pygments: false
-markdown: maruku
-version: 0.3.0
-scripts: 
-- src: http://pablojs.com/downloads/pablo.min.js
-permalink: /:title
-project_url: https://github.com/dharmafly/pablo
-server: false
-baseurl: /
-project_name: Pablo
-lang: javascript
 quote: 
 - quote: Painting is just another way of keeping a diary.
 - cite: Pablo Picasso
-future: true
-safe: false
-lsi: false
-twitter_url: https://twitter.com/dharmafly
 twitter_name: Dharmafly
-sections: 
-- name: Overview
-  path: /index.html
-- name: API
-  path: /api/index.html
-- name: Misc
-  path: /misc/index.html
-- name: Resources
-  path: /resources/index.html
+lang: javascript
+download_links: 
+- text: pablo.js
+  title: Full source code, for use in development
+  href: http://pablojs.com/downloads/pablo.js
+  subtext: v{{ version }}
+- text: pablo.min.js
+  title: Minified, for use in production
+  href: http://pablojs.com/downloads/pablo.min.js
+  subtext: v{{ version }}
+- text: Edge
+  title: Latest codebase (zip); potentially unstable
+  href: https://github.com/dharmafly/pablo/zipball/master
+  subtext: (master)
+future: true
+project_url: https://github.com/dharmafly/pablo
+safe: false
+pygments: false
 exclude: 
 - README.md
 - assets
 - FiddlerRules.farx
-download_links: 
-- subtext: v{{ version }}
-  title: Full source code, for use in development
-  href: http://pablojs.com/downloads/pablo.js
-  text: pablo.js
-- subtext: v{{ version }}
-  title: Minified, for use in production
-  href: http://pablojs.com/downloads/pablo.min.js
-  text: pablo.min.js
-- subtext: (master)
-  title: Latest codebase (zip); potentially unstable
-  href: https://github.com/dharmafly/pablo/zipball/master
-  text: Edge
+theme: horus
+ga_id: UA-34978047-1
+permalink: /:title
+version: 0.3.0
+markdown: maruku
+lsi: false
+jquery_no_conflict: true
+auto: false
+baseurl: /
+twitter_url: https://twitter.com/dharmafly
+sections: 
+- path: /index.html
+  name: Overview
+- path: /api/index.html
+  name: API
+- path: /misc/index.html
+  name: Misc
+- path: /resources/index.html
+  name: Resources
+project_name: Pablo
+scripts: 
+- src: http://pablojs.com/downloads/pablo.min.js
+server: false
