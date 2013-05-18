@@ -11,7 +11,8 @@ The `Pablo()` method creates array-like Pablo collections of either new, or pre-
 Creates an empty Pablo collection.
 
 
-#### [Pablo(elements, [attributes])](/api/pablo/)
+#### [Pablo(elements, [attributes])][pablo-ref]
+[pablo-ref]:/api/pablo/
 
 Creates a Pablo collection of new elements.
 
