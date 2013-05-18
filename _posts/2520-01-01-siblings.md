@@ -1,6 +1,6 @@
 --- 
-heading: siblings([selector/fn/element])
 category: siblings
+heading: siblings([selector/fn/element])
 ---
 
 Returns a collection containing elements that have the same parent as elements in the collection.

@@ -1,6 +1,6 @@
 --- 
-heading: isPablo(obj)
 category: isPablo
+heading: isPablo(obj)
 ---
 
 Returns boolean `true` if the object is an instance of a Pablo collection; otherwise `false`.

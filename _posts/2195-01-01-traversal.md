@@ -1,6 +1,6 @@
 --- 
-heading: Node Traversal
 category: api
+heading: Traversal
 ---
 
 #### [children([selector/fn/element])](/api/children/)

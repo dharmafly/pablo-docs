@@ -1,19 +1,7 @@
 --- 
-heading: Pablo Misc
 category: api
+heading: Pablo methods
 ---
-
-## `Pablo` methods
-
-The global `Pablo` object has a number of methods and properties. In the documentation, these are written as `Pablo.methodName()`, e.g. `Pablo.extend()`.
-
-#### [v](/api/v/)
-
-The current version of the Pablo library. E.g. `"1.2.23"`.
-
-#### [isSupported](/api/isSupported/)
-
-Returns `true` if Pablo is supported in the current browser.
 
 #### [isArrayLike(obj)](/api/isArrayLike/)
 

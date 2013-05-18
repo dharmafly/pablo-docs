@@ -1,6 +1,6 @@
 --- 
-heading: last()
 category: last
+heading: last()
 ---
 
 Returns the last element in the collection.
