@@ -1,50 +1,50 @@
 --- 
-pygments: false
-jquery_no_conflict: true
-twitter_name: Dharmafly
 scripts: 
-- src: http://pablojs.com/downloads/pablo.min.js
-server: false
-download_links: 
-- title: Full source code, for use in development
-  href: http://pablojs.com/downloads/pablo.js
-  text: pablo.js
-  subtext: v{{ version }}
-- title: Minified, for use in production
-  href: http://pablojs.com/downloads/pablo.min.js
-  text: pablo.min.js
-  subtext: v{{ version }}
-- title: Latest codebase (zip); potentially unstable
-  href: https://github.com/dharmafly/pablo/zipball/master
-  text: Edge
-  subtext: (master)
-lsi: false
-markdown: maruku
+- src: /downloads/pablo.min.js
+quote: 
+- quote: Painting is just another way of keeping a diary.
+- cite: Pablo Picasso
 exclude: 
 - README.md
 - assets
 - FiddlerRules.farx
 project_name: Pablo
-baseurl: /
+jquery_no_conflict: true
+twitter_name: Dharmafly
 safe: false
-theme: horus
-quote: 
-- quote: Painting is just another way of keeping a diary.
-- cite: Pablo Picasso
-sections: 
-- name: Overview
-  path: /index.html
-- name: API
-  path: /api/index.html
-- name: Misc
-  path: /misc/index.html
-- name: Resources
-  path: /resources/index.html
-project_url: https://github.com/dharmafly/pablo
-twitter_url: https://twitter.com/dharmafly
-permalink: /:title
-lang: javascript
-ga_id: UA-34978047-1
-auto: false
 future: true
+lsi: false
+pygments: false
+download_links: 
+- subtext: v{{ version }}
+  text: pablo.js
+  href: http://pablojs.com/downloads/pablo.js
+  title: Full source code, for use in development
+- subtext: v{{ version }}
+  text: pablo.min.js
+  href: http://pablojs.com/downloads/pablo.min.js
+  title: Minified, for use in production
+- subtext: (master)
+  text: Edge
+  href: https://github.com/dharmafly/pablo/zipball/master
+  title: Latest codebase (zip); potentially unstable
 version: 0.3.0
+ga_id: UA-34978047-1
+markdown: maruku
+server: false
+twitter_url: https://twitter.com/dharmafly
+project_url: https://github.com/dharmafly/pablo
+theme: horus
+lang: javascript
+auto: false
+baseurl: /
+sections: 
+- path: /index.html
+  name: Overview
+- path: /api/index.html
+  name: API
+- path: /misc/index.html
+  name: Misc
+- path: /resources/index.html
+  name: Resources
+permalink: /:title

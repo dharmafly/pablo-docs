@@ -1,6 +1,6 @@
 --- 
-category: firstChild
 heading: firstChild([selector/fn/element])
+category: firstChild
 ---
 
 Returns a collection of the collection’s first child.

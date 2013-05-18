@@ -1,6 +1,6 @@
 --- 
-category: cssPrefix
 heading: cssPrefix(styles)
+category: cssPrefix
 ---
 
 Performs the same as `.cssPrefix(property, value)`, but allows multiple properties to be set at once. Accepts a `styles` object, for which each property is vendor-prefixed and then set to the property’s value.
