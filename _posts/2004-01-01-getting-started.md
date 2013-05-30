@@ -7,7 +7,7 @@ Download either the <a href="http://pablojs.com/downloads/pablo.js" target="_bla
 
     <script src="pablo.min.js"></script>
 
-Check the browser supports basic SVG:
+Check that the browser supports basic SVG <span id="has-browser-support"></span>:
 
     if (Pablo.isSupported){
         alert('Yes!');
@@ -17,6 +17,15 @@ Check the browser supports basic SVG:
         alert("Noo");
         /* Fallback content */
     }
+
+<script>
+    if ('addEventListener' in document){
+        document.addEventListener('DOMContentLoaded', function(){
+            isSupportedText = Pablo.isSupported ? ' (yours does)' : "yours doesn't";
+            document.getElementById('has-browser-support').textContent = isSupportedText;
+        }, false);
+    }
+</script>
 
 
 Start drawing:
