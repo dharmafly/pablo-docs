@@ -1,6 +1,6 @@
 --- 
-category: lastChild
 heading: lastChild([selector/fn/element])
+category: lastChild
 ---
 
 Returns a collection of the collection’s last child.

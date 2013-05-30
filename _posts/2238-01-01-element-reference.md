@@ -1,9 +1,9 @@
 --- 
-category: api
 heading: Element reference
+category: api
 ---
 
-New SVG elements can be created with the shortcut methods listed below. See the [Creation](/api/creation/) section for information on how to use them.
+SVG elements can be created with the shortcut methods listed below. See the [Creation](/api/creation/) section for information on how to use them.
 
 Each method is linked to the element's page on [MDN's element reference][mdn-svg-el]. For further informatio, see [MDN's attribute reference][mdn-svg-attr] and the [Pablo Resources][resources] section.
 
@@ -89,16 +89,13 @@ Each method is linked to the element's page on [MDN's element reference][mdn-svg
 * [vkern()][vkern]
 
 
-## Note: Creating SVG with markup not _(yet)_ supported
+## Note: Creating SVG with markup
 
-Unlike jQuery - which allows HTML to be created by passing in HTML markup - 
-e.g. `jQuery(<div>markup<div>)` - Pablo does not support the 
-creation of SVG elements by passing in SVG markup, although it may in future.
+Unlike jQuery - which allows HTML to be created by passing in HTML markup, for example `jQuery(<span>hello<span>)`, Pablo does not support the 
+creation of SVG elements by passing in SVG markup. It may support this in future.
 
 The reason for this is that SVG elements do not have an equivalent property to HTML
-elements' `innerHTML`.
-
-See the [innerSVG](http://code.google.com/p/innersvg/) library, which can be used to provide this functionality.
+elements' `innerHTML`. See the [innerSVG](http://code.google.com/p/innersvg/) library, which can be used as a polyfill to provide this functionality.
 
 
 [resources]: http://pablojs.com/resources/#resources

@@ -1,50 +1,50 @@
 --- 
-project_name: Pablo
-ga_id: UA-34978047-1
-auto: false
 future: true
 pygments: false
-baseurl: /
-download_links: 
-- href: http://pablojs.com/downloads/pablo.js
-  title: Full source code, for use in development
-  subtext: v{{ version }}
-  text: pablo.js
-- href: http://pablojs.com/downloads/pablo.min.js
-  title: Minified, for use in production
-  subtext: v{{ version }}
-  text: pablo.min.js
-- href: https://github.com/dharmafly/pablo/zipball/master
-  title: Latest codebase (zip); potentially unstable
-  subtext: (master)
-  text: Edge
-lsi: false
-permalink: /:title
-exclude: 
-- README.md
-- assets
-- FiddlerRules.farx
-project_url: https://github.com/dharmafly/pablo
-theme: horus
 twitter_url: https://twitter.com/dharmafly
-twitter_name: Dharmafly
-sections: 
-- name: Overview
-  path: /index.html
-- name: API
-  path: /api/index.html
-- name: Misc
-  path: /misc/index.html
-- name: Resources
-  path: /resources/index.html
-scripts: 
-- src: /downloads/pablo.min.js
-server: false
-markdown: maruku
-version: 0.3.0
-jquery_no_conflict: true
-lang: javascript
 quote: 
 - quote: Painting is just another way of keeping a diary.
 - cite: Pablo Picasso
 safe: false
+version: 0.3.0
+exclude: 
+- README.md
+- assets
+- FiddlerRules.farx
+ga_id: UA-34978047-1
+download_links: 
+- href: http://pablojs.com/downloads/pablo.js
+  text: pablo.js
+  subtext: v{{ version }}
+  title: Full source code, for use in development
+- href: http://pablojs.com/downloads/pablo.min.js
+  text: pablo.min.js
+  subtext: v{{ version }}
+  title: Minified, for use in production
+- href: https://github.com/dharmafly/pablo/zipball/master
+  text: Edge
+  subtext: (master)
+  title: Latest codebase (zip); potentially unstable
+project_url: https://github.com/dharmafly/pablo
+twitter_name: Dharmafly
+scripts: 
+- src: /downloads/pablo.min.js
+baseurl: /
+lang: javascript
+auto: false
+permalink: /:title
+project_name: Pablo
+lsi: false
+markdown: maruku
+sections: 
+- path: /index.html
+  name: Overview
+- path: /api/index.html
+  name: API
+- path: /misc/index.html
+  name: Misc
+- path: /resources/index.html
+  name: Resources
+server: false
+jquery_no_conflict: true
+theme: horus

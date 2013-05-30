@@ -1,6 +1,6 @@
 --- 
-category: every
 heading: every(element/selector/fn)
+category: every
 ---
 
 Returns true if every element in the collection satisfies the provided testing selector, function or element.
