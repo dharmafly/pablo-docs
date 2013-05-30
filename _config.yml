@@ -1,38 +1,4 @@
 --- 
-quote: 
-- quote: Painting is just another way of keeping a diary.
-- cite: Pablo Picasso
-markdown: maruku
-jquery_no_conflict: true
-scripts: 
-- src: /downloads/pablo.min.js
-permalink: /:title
-version: 0.3.0
-download_links: 
-- href: http://pablojs.com/downloads/pablo.js
-  text: pablo.js
-  title: Full source code, for use in development
-  subtext: v{{ version }}
-- href: http://pablojs.com/downloads/pablo.min.js
-  text: pablo.min.js
-  title: Minified, for use in production
-  subtext: v{{ version }}
-- href: https://github.com/dharmafly/pablo/zipball/master
-  text: Edge
-  title: Latest codebase (zip); potentially unstable
-  subtext: (master)
-pygments: false
-twitter_url: https://twitter.com/dharmafly
-twitter_name: Dharmafly
-lang: javascript
-baseurl: /
-safe: false
-project_url: https://github.com/dharmafly/pablo
-exclude: 
-- README.md
-- assets
-- FiddlerRules.farx
-project_name: Pablo
 sections: 
 - name: Overview
   path: /index.html
@@ -42,7 +8,41 @@ sections:
   path: /misc/index.html
 - name: Resources
   path: /resources/index.html
-theme: horus
+project_name: Pablo
+project_url: https://github.com/dharmafly/pablo
+lang: javascript
+scripts: 
+- src: /downloads/pablo.min.js
+quote: 
+- quote: Painting is just another way of keeping a diary.
+- cite: Pablo Picasso
+safe: false
+version: 0.3.0
 ga_id: UA-34978047-1
-lsi: false
+permalink: /:title
+baseurl: /
+jquery_no_conflict: true
+download_links: 
+- title: Full source code, for use in development
+  text: pablo.js
+  subtext: v{{ version }}
+  href: http://pablojs.com/downloads/pablo.js
+- title: Minified, for use in production
+  text: pablo.min.js
+  subtext: v{{ version }}
+  href: http://pablojs.com/downloads/pablo.min.js
+- title: Latest codebase (zip); potentially unstable
+  text: Edge
+  subtext: (master)
+  href: https://github.com/dharmafly/pablo/zipball/master
+exclude: 
+- README.md
+- assets
+- FiddlerRules.farx
+theme: horus
+twitter_url: https://twitter.com/dharmafly
+twitter_name: Dharmafly
+markdown: maruku
+pygments: false
 future: true
+lsi: false

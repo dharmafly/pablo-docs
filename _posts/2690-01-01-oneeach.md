@@ -1,6 +1,6 @@
 --- 
-heading: oneEach(name, fn, [useCapture])
 category: oneEach
+heading: oneEach(name, fn, [useCapture])
 ---
 
 Adds the listener to each element in the collection, but removes the listener on a single element as soon as it has been triggered *once on that element*.

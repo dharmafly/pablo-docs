@@ -1,6 +1,6 @@
 --- 
-heading: Pablo()
 category: pablo
+heading: Pablo()
 ---
 
 Creates an empty Pablo collection.
