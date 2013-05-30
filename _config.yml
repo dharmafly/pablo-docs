@@ -1,27 +1,8 @@
 --- 
+project_name: Pablo
 twitter_name: Dharmafly
-download_links: 
-- href: http://pablojs.com/downloads/pablo.js
-  text: pablo.js
-  title: Full source code, for use in development
-  subtext: v{{ version }}
-- href: http://pablojs.com/downloads/pablo.min.js
-  text: pablo.min.js
-  title: Minified, for use in production
-  subtext: v{{ version }}
-- href: https://github.com/dharmafly/pablo/zipball/master
-  text: Edge
-  title: Latest codebase (zip); potentially unstable
-  subtext: (master)
-version: 0.3.0
-lang: javascript
-ga_id: UA-34978047-1
-jquery_no_conflict: true
-scripts: 
-- src: /downloads/pablo.min.js
-quote: 
-- quote: Painting is just another way of keeping a diary.
-- cite: Pablo Picasso
+safe: false
+permalink: /:title
 sections: 
 - name: Overview
   path: /index.html
@@ -31,18 +12,37 @@ sections:
   path: /misc/index.html
 - name: Resources
   path: /resources/index.html
+project_url: https://github.com/dharmafly/pablo
+theme: horus
+quote: 
+- quote: Painting is just another way of keeping a diary.
+- cite: Pablo Picasso
+markdown: maruku
+jquery_no_conflict: true
+lang: javascript
+version: 0.3.0
+download_links: 
+- title: Full source code, for use in development
+  subtext: v{{ version }}
+  href: http://pablojs.com/downloads/pablo.js
+  text: pablo.js
+- title: Minified, for use in production
+  subtext: v{{ version }}
+  href: http://pablojs.com/downloads/pablo.min.js
+  text: pablo.min.js
+- title: Latest codebase (zip); potentially unstable
+  subtext: (master)
+  href: https://github.com/dharmafly/pablo/zipball/master
+  text: Edge
+pygments: false
+scripts: 
+- src: /downloads/pablo.min.js
+baseurl: /
+twitter_url: https://twitter.com/dharmafly
+ga_id: UA-34978047-1
+future: true
+lsi: false
 exclude: 
 - README.md
 - assets
 - FiddlerRules.farx
-permalink: /:title
-theme: horus
-project_name: Pablo
-lsi: false
-markdown: maruku
-twitter_url: https://twitter.com/dharmafly
-future: true
-project_url: https://github.com/dharmafly/pablo
-safe: false
-pygments: false
-baseurl: /

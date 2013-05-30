@@ -1,4 +1,5 @@
 --- 
+permalink: /api/isSupported/
 category: isSupported
 heading: isSupported
 ---
