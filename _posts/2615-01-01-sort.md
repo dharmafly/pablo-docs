@@ -1,6 +1,6 @@
 --- 
-heading: sort(fn)
 category: sort
+heading: sort(fn)
 ---
 
 Iterates over the collection re-ordering it based on the sort callback.
