@@ -332,6 +332,66 @@
           expect(subject[2].getAttribute('stroke')).to.eql('black');
         });
       });
+
+      describe('Pablo Collection uniqueness', function () {
+        describe('a PabloCollection should never contain duplicate items', function () {
+          it('with .push()/.add()', function () {
+            var collection = Pablo('#test-subject-a');
+
+            collection.add(Pablo('#test-subjects-a'));
+            expect(collection.length).to.eql(1);
+            expect(collection.attr('id')).to.eql('test-subject-a');
+
+            collection = Pablo('#test-subject-a');
+
+            collection.add(collection.get(0));
+            expect(collection.length).to.eql(1);
+            expect(collection.attr('id')).to.eql('test-subject-a');
+
+            collection = Pablo('#test-subject-a');
+
+            collection.add(collection.eq(0));
+            expect(collection.length).to.eql(1);
+            expect(collection.attr('id')).to.eql('test-subject-a');
+          });
+
+          it('with .concat()', function () {
+            var collection = Pablo('#test-subject-a');
+
+            collection.concat(Pablo('#test-subjects-a'));
+            expect(collection.length).to.eql(1);
+            expect(collection.attr('id')).to.eql('test-subject-a');
+
+            collection = Pablo('#test-subject-a');
+
+            collection.concat(collection.get(0));
+            expect(collection.length).to.eql(1);
+            expect(collection.attr('id')).to.eql('test-subject-a');
+
+            collection = Pablo('#test-subject-a');
+
+            collection.concat(collection.eq(0));
+            expect(collection.length).to.eql(1);
+            expect(collection.attr('id')).to.eql('test-subject-a');
+          });
+
+          it('a new Pablo Collection with an array of the same element', function () {
+            var subject    = Pablo('#test-subject-a')[0],
+                collection = Pablo([subject, subject, subject]);
+
+            expect(collection.length).to.eql(1);
+            expect(collection.attr('id')).to.eql('test-subject-a');
+          });
+
+          it('a new Pablo Collection with an array of the same element but one is Pablo wrapped', function () {
+            var subject    = Pablo('#test-subject-a'),
+                collection = Pablo([subject[0], subject[0], subject]);
+
+            expect(collection.length).to.eql(1);
+            expect(collection.attr('id')).to.eql('test-subject-a');
+          });
+        });
+      });
     });
 
     describe('Pablo collection methods', function () {
@@ -360,7 +420,7 @@
           });
         });
 
-        describe('.appendTo(element)', function () {
+        describe('.appendTo(element, [attributes])', function () {
           it('should return a Pablo collection', function () {
             expect(Pablo.circle().appendTo(Pablo.rect()) instanceof Pablo.Collection).to.eql(true);
           });
@@ -598,17 +658,41 @@
             expect(children[0].id).to.eql('test-subject-a');
             expect(children[1].id).to.eql('test-subject-c');
           });
+
+          it('should have the "this" context of the callback be the subject collection', function () {
+            var collection = Pablo.rect();
+            collection.children(function () {
+              expect(this).to.eql(collection);
+            });
+          });
         });
 
-        describe('.parent()', function () {
+        describe('.parent([filterBy])', function () {
           it('.parent() should return the parent element as a PabloCollection', function () {
             var child = document.getElementById('test-subject-a');
             expect(Pablo(child).parent()[0].id).to.eql('test-subjects');
             expect(Pablo(child).parent() instanceof Pablo.Collection).to.eql(true);
           });
+
+          it('.parent([selector])', function () {
+            var childA = document.getElementById('test-subject-a'),
+                childB = document.getElementById('test-subject-b'),
+                childC = document.getElementById('test-subject-c'),
+                parent = Pablo([childA, childB, childC]).parent('ul');
+
+            expect(parent[0].id).to.eql('test-subjects');
+            expect(parent instanceof Pablo.Collection).to.eql(true);
+          });
+
+          it('should have the "this" context of the callback be the subject collection', function () {
+            var collection = Pablo.rect();
+            collection.parent(function () {
+              expect(this).to.eql(collection);
+            });
+          });
         });
 
-        describe('.parents()', function () {
+        describe('.parents([filterBy])', function () {
           it('.parents() should return all ancestors of the PabloCollection as a PabloCollection ordered by closest to oldest', function () {
             var child     = Pablo('#test-subject-a'),
                 ancestors = child.parents(),
@@ -619,9 +703,24 @@
             expect(ancestors).to.eql(expected);
             expect(ancestors instanceof Pablo.Collection).to.eql(true);
           });
+
+          it('.parents([selector])', function () {
+            var child    = Pablo('#test-subject-a'),
+                filtered = child.parents('body');
+
+            expect(filtered.length).to.eql(1);
+            expect(filtered[0] instanceof HTMLBodyElement).to.eql(true);
+          });
+
+          it('should have the "this" context of the callback be the subject collection', function () {
+            var collection = Pablo.rect();
+            collection.parents(function () {
+              expect(this).to.eql(collection);
+            });
+          });
         });
 
-        describe('.parentsSvg()', function () {
+        describe('.parentsSvg([filterBy])', function () {
           it('.parentsSvg()', function () {
             var collection = Pablo(document.createElement('div')),
                 deepChild,
@@ -635,12 +734,33 @@
             expect(parents[0] instanceof SVGEllipseElement).to.eql(true);
             expect(parents[1] instanceof SVGCircleElement).to.eql(true);
           });
+
+          it('.parentsSvg([selector])', function () {
+            var collection = Pablo(document.createElement('div')),
+                deepChild,
+                parents;
+
+            collection.circle().circle().append('a', {});
+            deepChild = collection.find('a');
+            parents = deepChild.parentsSvg('circle');
+
+            expect(parents.length).to.eql(2);
+            expect(parents[0] instanceof SVGCircleElement).to.eql(true);
+            expect(parents[1] instanceof SVGCircleElement).to.eql(true);
+          });
+
+          it('should have the "this" context of the callback be the subject collection', function () {
+            var collection = Pablo.rect();
+            collection.parentsSvg(function () {
+              expect(this).to.eql(collection);
+            });
+          });
         });
 
         describe('.ancestor()', function () {
           it('.ancestor() should return the pablo wrapped document for an element in the DOM', function () {
               var subject = Pablo('#test-subjects'),
-                  result = subject.ancestor();
+                  result  = subject.ancestor();
 
               expect(result.length).to.eql(1);
               expect(result[0] === document).to.eql(true);
@@ -651,7 +771,7 @@
           it('.ancestor() for a detached element should return highest parent', function () {
               var ancestor = Pablo.g(),
                   subject  = ancestor.circle(),
-                  result = subject.ancestor();
+                  result   = subject.ancestor();
 
               expect(result.length).to.eql(1);
               expect(result[0] === ancestor[0]).to.eql(true);
@@ -694,6 +814,13 @@
               expect(collection.root()[0].getAttribute('id')).to.eql('A');
               expect(collection.root()[1].getAttribute('id')).to.eql('B');
           });
+
+          it('should have the "this" context of the callback be the subject collection', function () {
+            var collection = Pablo.rect();
+            collection.root(function () {
+              expect(this).to.eql(collection);
+            });
+          });
         });
 
         describe('.owner()', function () {
@@ -721,6 +848,89 @@
           });
         });
 
+        describe('.viewport', function () {
+          it('should return the PabloCollection\'s closest viewport element', function () {
+            var collection = Pablo.svg(),
+                foundViewport;
+
+            collection.circle().svg({'expected':'true'}).rect();
+            foundViewport = collection.find('rect').viewport();
+
+            expect(foundViewport.attr('expected')).to.eql('true');
+            expect(foundViewport.length).to.eql(1);
+          });
+
+          it('should return the PabloCollection\'s (multiple) closest viewport element', function () {
+            var collection = Pablo.rect(),
+                testCollection,
+                viewports;
+
+            collection.svg().a().svg({'vp':'a'}).circle();
+            collection.svg().a().svg({'vp':'b'}).ellipse();
+          
+            testCollection = Pablo([
+                                collection.find('circle'),
+                                collection.find('ellipse')
+                              ]);
+
+            viewports = testCollection.viewport();
+
+            expect(viewports.length).to.eql(2);
+            expect(viewports.eq(0).attr('vp')).to.eql('a');
+            expect(viewports.eq(1).attr('vp')).to.eql('b');
+          });
+
+          it('should have the "this" context of the callback be the subject collection', function () {
+            var collection = Pablo.rect();
+            collection.viewport(function () {
+              expect(this).to.eql(collection);
+            });
+          });
+        });
+
+        describe('.viewports', function () {
+          it('should return the PabloCollection\'s viewport elements from the closest to furthest ancestor', function () {
+            var collection = Pablo.svg({'vp':'b'}),
+                foundViewports;
+
+            collection.circle().svg({'vp':'a'}).rect();
+            foundViewports = collection.find('rect').viewports();
+
+            expect(foundViewports.length).to.eql(2);
+            expect(foundViewports.eq(0).attr('vp')).to.eql('a');
+            expect(foundViewports.eq(1).attr('vp')).to.eql('b');
+          });
+
+          it('should return the PabloCollection\'s (multiple) viewport elements from the closest to furthest ancestor', function () {
+            var collection = Pablo.rect(),
+                testCollection,
+                viewports;
+
+            collection.svg({'vp':'b'}).a().svg({'vp':'a'}).circle();
+            collection.svg({'vp':'d'}).a().svg({'vp':'c'}).ellipse();
+          
+            testCollection = Pablo([
+                                collection.find('circle'),
+                                collection.find('ellipse')
+                              ]);
+
+            viewports = testCollection.viewports();
+
+            expect(viewports.length).to.eql(4);
+            expect(viewports.eq(0).attr('vp')).to.eql('a');
+            expect(viewports.eq(1).attr('vp')).to.eql('b');
+            expect(viewports.eq(2).attr('vp')).to.eql('c');
+            expect(viewports.eq(3).attr('vp')).to.eql('d');
+          });
+
+          it('should have the "this" context of the callback be the subject collection', function () {
+            var collection = Pablo.rect();
+            collection.viewports(function () {
+              expect(this).to.eql(collection);
+            });
+          });
+        });
+
         describe('.siblings()', function () {
           it('.siblings() should return the sibling elements as PabloCollections', function () {
             var aSibling = document.getElementById('test-subject-a'),
@@ -730,6 +940,13 @@
             expect(siblings instanceof Pablo.Collection).to.eql(true);
             expect(siblings[0].id).to.eql('test-subject-b');
             expect(siblings[1].id).to.eql('test-subject-c');
+          });
+
+          it('should have the "this" context of the callback be the subject collection', function () {
+            var collection = Pablo.rect();
+            collection.siblings(function () {
+              expect(this).to.eql(collection);
+            });
           });
         });
 
@@ -746,6 +963,13 @@
             expect(siblings instanceof Pablo.Collection).to.eql(true);
             expect(siblings[0] instanceof SVGEllipseElement).to.eql(true);
             expect(siblings[1] instanceof SVGCircleElement).to.eql(true);
+          });
+
+          it('should have the "this" context of the callback be the subject collection', function () {
+            var collection = Pablo.rect();
+            collection.nextSiblings(function () {
+              expect(this).to.eql(collection);
+            });
           });
         });
 
@@ -766,6 +990,13 @@
             expect(siblings[1] instanceof SVGGElement).to.eql(true);
             expect(siblings[2] instanceof SVGEllipseElement).to.eql(true);
           });
+
+          it('should have the "this" context of the callback be the subject collection', function () {
+            var collection = Pablo.rect();
+            collection.prevSiblings(function () {
+              expect(this).to.eql(collection);
+            });
+          });
         });
 
         describe('.prev()', function () {
@@ -775,6 +1006,13 @@
             expect(b.prev()[0].id).to.eql('test-subject-a');
             expect(b.prev() instanceof Pablo.Collection).to.eql(true);
           });
+
+          it('should have the "this" context of the callback be the subject collection', function () {
+            var collection = Pablo.rect();
+            collection.prev(function () {
+              expect(this).to.eql(collection);
+            });
+          });
         });
 
         describe('.next()', function () {
@@ -783,6 +1021,13 @@
 
             expect(b.next()[0].id).to.eql('test-subject-c');
             expect(b.next() instanceof Pablo.Collection).to.eql(true);
+          });
+
+          it('should have the "this" context of the callback be the subject collection', function () {
+            var collection = Pablo.rect();
+            collection.next(function () {
+              expect(this).to.eql(collection);
+            });
           });
         });
 
@@ -872,6 +1117,13 @@
 
             expect(subject.firstChild()[0] instanceof SVGAElement).to.eql(true);
           });
+
+          it('should have the "this" context of the callback be the subject collection', function () {
+            var collection = Pablo.rect();
+            collection.firstChild(function () {
+              expect(this).to.eql(collection);
+            });
+          });
         });
 
         describe('.lastChild()', function () {
@@ -880,6 +1132,13 @@
                 child;
 
             expect(subject.lastChild()[0] instanceof SVGRectElement).to.eql(true);
+          });
+
+          it('should have the "this" context of the callback be the subject collection', function () {
+            var collection = Pablo.rect();
+            collection.lastChild(function () {
+              expect(this).to.eql(collection);
+            });
           });
         });
       });
@@ -1003,7 +1262,7 @@
 
           it('.css(styles) should set the specified css properties of the element in relation to the styles map', function () {
             var subject = Pablo('#test-subjects').css({
-                  'font-size': '20px',
+                  'font-size':   '20px',
                   'font-weight': 'bold'
                 }),
                 result1 = subject.css('font-weight'),
@@ -1382,6 +1641,13 @@
             expect(iterationIndices[2]).to.eql(2);
             expect(contextWasCorrect).to.eql(true);
           });
+
+          it('should have the "this" context of the callback be the subject collection', function () {
+            var collection = Pablo.rect();
+            collection.each(function () {
+              expect(this).to.eql(collection);
+            });
+          });
         });
 
         describe('.map()', function () {
@@ -1420,6 +1686,13 @@
             expect(mapped[1] instanceof SVGCircleElement).to.eql(true);
             expect(contextWasCorrect).to.eql(true);
           });
+
+          it('should have the "this" context of the callback be the subject collection', function () {
+            var collection = Pablo.rect();
+            collection.map(function () {
+              expect(this).to.eql(collection);
+            });
+          });
         });
 
         describe('.sort()', function () {
@@ -1433,6 +1706,13 @@
             expect(unsorted[0].getAttribute('n')).to.eql('1');
             expect(unsorted[1].getAttribute('n')).to.eql('2');
             expect(unsorted[2].getAttribute('n')).to.eql('3');
+          });
+
+          it('should have the "this" context of the callback be the subject collection', function () {
+            var collection = Pablo.rect();
+            collection.sort(function () {
+              expect(this).to.eql(collection);
+            });
           });
         });
 
@@ -1540,14 +1820,23 @@
             expect(subject2.length).to.eql(1);
             expect(subject2[0]).to.eql(a[0]);
           });
+
+          it('should have the "this" context of the callback be the subject collection', function () {
+            var collection = Pablo.rect();
+            collection.select(function () {
+              expect(this).to.eql(collection);
+            });
+          });
         });
 
         describe('.every()', function () {
           it('.every(function) should return true if all values in the PabloCollection pass the test function', function () {
-            var subject = Pablo([Pablo.a({foo:'bar'}),
-                                     Pablo.a({foo:'bar'}),
-                                     Pablo.a({foo:'bar'})]),
-                outcome1, outcome2;
+            var subject = Pablo([
+                            Pablo.a({foo:'bar'}),
+                            Pablo.a({foo:'bar'}),
+                            Pablo.a({foo:'bar'})
+                          ]),
+                          outcome1, outcome2;
 
             function test (item, i) {
               if (item.getAttribute('foo') === 'bar') {
@@ -1563,6 +1852,26 @@
             
             expect(outcome1).to.eql(true);
             expect(outcome2).to.eql(false);
+          });
+
+          it('.every(selector) should return true if all values in the PabloCollection pass the test selector)', function () {
+            var subject = Pablo.circle();
+
+            subject.add(Pablo.circle());
+            subject.add(Pablo.circle());
+
+            expect(subject.every('circle')).to.eql(true);
+
+            subject.add(Pablo.rect());
+            
+            expect(subject.every('circle')).to.eql(false);
+          });
+
+          it('should have the "this" context of the callback be the subject collection', function () {
+            var collection = Pablo.rect();
+            collection.every(function () {
+              expect(this).to.eql(collection);
+            });
           });
         });
       });
@@ -1827,6 +2136,13 @@
             expect(subject.some('span a')).to.eql(true);
             expect(subject.some('g')).to.eql(true);
           });
+
+          it('should have the "this" context of the callback be the subject collection', function () {
+            var collection = Pablo.rect();
+            collection.some(function () {
+              expect(this).to.eql(collection);
+            });
+          });
         });
 
         describe('.processList()', function () {
@@ -1860,23 +2176,30 @@
           });
         });
 
-        describe('.indexOf', function () {
-          it('.indexOf(element) should return the index position in the PabloCollection of the matching node', function () {
+        describe('.indexOf/.lastIndexOf', function () {
+          it('.indexOf(element)/.lastIndexOf(element) should return the index position in the PabloCollection of the matching node', function () {
             var subject = Pablo([Pablo.circle(), Pablo.a(), Pablo.g()]);
 
             expect(subject.indexOf(subject[2])).to.eql(2);
           });
 
-          it('.indexOf(element) should return the index position in the PabloCollection of the matching PabloCollection', function () {
+          it('.indexOf(element)/.lastIndexOf(element) should return the index position in the PabloCollection of the matching PabloCollection', function () {
             var subject = Pablo([Pablo.circle(), Pablo.a(), Pablo.g()]);
 
             expect(subject.indexOf(subject.eq(2))).to.eql(2);
           });
 
-          it('.indexOf(element) should return the index position of -1 in the PabloCollection of the matching node if it is not found', function () {
+          it('.indexOf(element)/.lastIndexOf(element) should return the index position of -1 if no matching node is not found in the PabloCollection', function () {
             var subject = Pablo([Pablo.circle(), Pablo.a(), Pablo.g()]);
 
             expect(subject.indexOf(Pablo.ellipse())).to.eql(-1);
+          });
+
+          it('should have the "this" context of the callback be the subject collection', function () {
+            var collection = Pablo.rect();
+            collection.indexOf(function () {
+              expect(this).to.eql(collection);
+            });
           });
         });
 
@@ -2450,6 +2773,14 @@
           expect(complete).to.eql(2);
         });
         */
+
+        it('should have the "this" context of the callback be the subject collection', function () {
+          var collection = Pablo.rect();
+          collection.on('foo', function (e) {
+            expect(this).to.eql(e.target);
+          });
+          collection.trigger('foo');
+        });
       });
 
       describe('.off()', function () {
@@ -2533,6 +2864,14 @@
             }
           }, 4);
         });
+
+        it('should have the "this" context of the callback be the subject collection', function () {
+          var collection = Pablo.rect();
+          collection.one('foo', function (e) {
+            expect(this).to.eql(e.target);
+          });
+          collection.trigger('foo');
+        });
       });
 
       describe('.oneEach()', function () {
@@ -2557,7 +2896,16 @@
             }
           }, 4);
         });
+
+        it('should have the "this" context of the callback be the subject collection', function () {
+          var collection = Pablo.rect();
+          collection.oneEach('foo', function (e) {
+            expect(this).to.eql(e.target);
+          });
+          collection.trigger('foo');
+        });
       });
+
     });
 
     describe('.extend()', function () {
