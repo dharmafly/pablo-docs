@@ -1,6 +1,6 @@
 --- 
-heading: some(selector/fn/element, [context])
 category: some
+heading: some(selector/fn/element, [context])
 ---
 
 Alias `is(selector/fn/element, [context])`.

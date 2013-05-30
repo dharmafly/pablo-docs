@@ -1,6 +1,6 @@
 --- 
-heading: css(property)
 category: css
+heading: css(property)
 ---
 
 Returns the value of the named CSS property from the first element in the collection.

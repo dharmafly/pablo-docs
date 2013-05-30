@@ -1,6 +1,6 @@
 --- 
-heading: indexOf(element)
 category: indexOf
+heading: indexOf(element)
 ---
 
 Alias `indexOf(element)`.
