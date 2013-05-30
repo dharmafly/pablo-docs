@@ -1,6 +1,6 @@
 --- 
-category: pablo
 heading: Pablo(selectors)
+category: pablo
 ---
 
 Creates a Pablo collection, wrapping elements specified by a CSS selector or comma-separated list of selectors.
