@@ -1,6 +1,6 @@
 --- 
-category: misc
 heading: Build Process
+category: misc
 ---
 
 If you are changing the core Pablo library, you can build your own minified version.
