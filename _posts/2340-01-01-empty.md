@@ -1,6 +1,6 @@
 --- 
-category: empty
 heading: empty()
+category: empty
 ---
 
 Removes all child nodes of each element in the collection, and returns the collection.
