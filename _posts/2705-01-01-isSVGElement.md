@@ -1,6 +1,6 @@
 --- 
 heading: isSVGElement(obj)
-category: isSVGElement
+category: issvgelement
 ---
 
 Returns boolean `true` if the object is an SVG element; otherwise `false`.

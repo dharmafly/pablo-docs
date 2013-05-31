@@ -1,6 +1,6 @@
 --- 
 heading: isElement(obj)
-category: isElement
+category: iselement
 ---
 
 Returns boolean `true` if the object is an `HTML`, `SVG` or other element; otherwise `false`.

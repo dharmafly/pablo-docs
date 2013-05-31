@@ -1,7 +1,6 @@
 --- 
-permalink: /api/isSupported/
 heading: isSupported
-category: isSupported
+category: issupported
 ---
 
 Boolean `true` or `false`, denoting whether or not the current browser supports the web technologies required by Pablo.
