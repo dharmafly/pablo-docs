@@ -1,6 +1,6 @@
 --- 
-heading: toArray()
 category: toArray
+heading: toArray()
 ---
 
 Converts the array-like object into a true array.
