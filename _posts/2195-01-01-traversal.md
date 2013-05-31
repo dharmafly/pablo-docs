@@ -1,94 +1,91 @@
 --- 
-heading: Traversal
 category: api
+heading: Traversal
 ---
-
-#### [children([selector/fn/element])](/api/children/)
-
-Returns a collection of the collection's children.
-
-#### [parent([selector/fn/element])](/api/parent/)
-
-Returns a collection of the collection's parent.
-
-#### [parents([selector/fn/element])](/api/parents/)
-
-Returns a collection of the collection's ancestors, from closest to furthest.
-
-#### [parentsSvg([selector/fn/element])](/api/parentsSvg/)
-
-Returns a collection of the collection's svg ancestors from closest to furthest.
-
-#### [root([selector/fn/element])](/api/root/)
-
-Returns a collection of the collection element(s) top most &lt;svg&gt; root node.
-
-#### [viewport([selector/fn/element])](/api/viewport/)
-
-Returns a collection of the collection svg element's viewport parent element.
-
-#### [viewports([selector/fn/element])](/api/viewports/)
-
-Returns a collection of the collection svg element's viewport ancestors from 
-closest to furthest.
-
-#### [owner([selector/fn/element])](/api/owner/)
-
-Returns a collection of the collection element's closest &lt;svg&gt; ancestor 
-element.
-
-#### [owners([selector/fn/element])](/api/owners/)
-
-Returns a collection of the collection element's ancestor &lt;svg&gt; elements 
-from closest to furthest.
-
-#### [firstChild([selector/fn/element])](/api/firstChild/)
-
-Returns a collection of the collection's first child.
-
-#### [lastChild([selector/fn/element])](/api/lastChild/)
-
-Returns a collection of the collection's last child.
-
-#### [first()](/api/first/)
-
-Returns a collection of the first element in the collection.
-
-#### [last()](/api/last/)
-
-Returns a collection of the last element in the collection.
-
-#### [siblings([selector/fn/element])](/api/siblings/)
-
-Returns a collection of a the collection's siblings.
-
-#### [nextSiblings([selector/fn/element])](/api/nextSiblings/)
-
-Returns a collection of all the collection's siblings after it in 
-the DOM.
-
-#### [prevSiblings([selector/fn/element])](/api/prevSiblings/)
-
-Returns a collection of all the collection's siblings before it in
-the DOM.
-
-#### [next([selector/fn/element])](/api/next/)
-
-Returns a collection the next adjacent element to it in the DOM.
-
-#### [prev([selector/fn/element])](/api/prev/)
-
-Returns a collection the pervious adjacent element to it in the 
-DOM.
 
 #### [eq(index)](/api/eq/)
 
-Returns a collection of the specified element by the collection index.
+Return the DOM element specified by array index (e.g. `0`, `3`, `-2`), wrapped in a new collection.
 
-#### [get(index) alias elements(index)](/api/get/)
+#### [get(index)](/api/get/)
+_alias: collection[index]_
 
-Returns the element by the collection index.
+Return the raw DOM element specified by array index.
 
 #### [find([selector/fn/element])](/api/find/)
 
-Returns a collection based on the matching argument from within the context of the collection.
+Return a collection based on the matching argument from within the context of the collection.
+
+#### [children([selector/fn/element])](/api/children/)
+
+Return a collection of the child elements for each element in the collection.
+
+#### [parent([selector/fn/element])](/api/parent/)
+
+Return a collection of the parent element for each element in the collection.
+
+#### [parents([selector/fn/element])](/api/parents/)
+
+Return a collection of all the ancestor elements for each element in the collection.
+
+#### [parentsSvg([selector/fn/element])](/api/parentsSvg/)
+
+Return a collection of all the ancestor SVG elements for each element in the collection.
+
+#### [firstChild([selector/fn/element])](/api/firstChild/)
+
+Return a collection of the first child element for each element in the collection.
+
+#### [lastChild([selector/fn/element])](/api/lastChild/)
+
+Return a collection of the last child element for each element in the collection.
+
+#### [first()](/api/first/)
+_alias: eq(0)_
+
+Return the first element in the collection, wrapped in a new collection.
+
+#### [last()](/api/last/)
+_alias: eq(-1)_
+
+Return the last element in the collection, wrapped in a new collection.
+
+#### [siblings([selector/fn/element])](/api/siblings/)
+
+Return elements that are siblings in the DOM for each element in the collection, wrapped in a new collection.
+
+#### [nextSiblings([selector/fn/element])](/api/nextSiblings/)
+
+Return sibling elements that appear _later in the DOM_ for each element in the collection, wrapped in a new collection.
+
+#### [prevSiblings([selector/fn/element])](/api/prevSiblings/)
+
+Return sibling elements that appear _earlier in the DOM_ for each element in the collection, wrapped in a new collection.
+
+#### [next([selector/fn/element])](/api/next/)
+
+Return the next sibling element in the DOM for each element in the collection, wrapped in a new collection.
+
+#### [prev([selector/fn/element])](/api/prev/)
+
+Return the previous sibling element in the DOM for each element in the collection, wrapped in a new collection.
+
+#### [root([selector/fn/element])](/api/root/)
+
+Return a collection of the topmost &lt;svg&gt; ancestor for each element in the collection.
+
+#### [owner([selector/fn/element])](/api/owner/)
+
+Return a collection of the nearest &lt;svg&gt; ancestor for each element in the collection.
+
+#### [owners([selector/fn/element])](/api/owners/)
+
+Return a collection of all the ancestor &lt;svg&gt; elements for each element in the collection.
+
+#### [viewport([selector/fn/element])](/api/viewport/)
+
+Return a collection of the element that establishes the viewport for each element in the collection (usually the nearest &lt;svg&gt; ancestor).
+
+#### [viewports([selector/fn/element])](/api/viewports/)
+
+Return a collection of all the viewport ancestors for each element in the collection.

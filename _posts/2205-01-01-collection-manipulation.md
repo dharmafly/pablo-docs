@@ -1,41 +1,42 @@
 --- 
-heading: Collection Manipulation
 category: api
+heading: Collection Manipulation
 ---
 
 #### [toArray()](/api/toArray/)
 
-Returns the collection as a JavaScript native array.
+Return the collection as a native JavaScript array.
 
 #### [size()](/api/size/)
+_alias: length_
 
-Returns the length of the collection.
+Return the number of elements in the collection.
 
-#### [push(element) alias add(element)](/api/push/)
+#### [push(elements)](/api/push/)
+_alias: add(element)_
 
-Add an element to the end of the collection.
+Return the collection with one or more elements added to the end of it.
 
-#### [concat(element)](/api/concat/)
+#### [concat(elements)](/api/concat/)
 
-Returns a new collection with the passed element(s) added to the 
-end of it.
+Return a new collection with one or more elements added to the end of it.
 
-#### [unshift(element)](/api/unshift/)
+#### [unshift(elements)](/api/unshift/)
 
-Add an element to the start of the collection and returns the collection.
+Return the collection with one or more elements added to the start of it.
 
 #### [pop()](/api/pop/)
 
-Remove and returns a collection with the last element in the collection.
+Remove the last element in the collection and return it, wrapped in a new collection.
 
 #### [shift()](/api/shift/)
 
-Remove and returns a collection with the first element in the collection.
+Remove the first element in the collection and return it, wrapped in a new collection.
 
 #### [slice(start, [end])](/api/slice/)
 
-Returns a new sliced collection based on passed collection indices.
+Slice the elements from the collection, according to the passed indices, and return them wrapped in a new collection.
 
 #### [reverse()](/api/reverse/)
 
-Reverse the collection and returns the collection.
+Reverse the collection and return it.

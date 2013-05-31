@@ -1,6 +1,6 @@
 --- 
-heading: Pablo methods
 category: api
+heading: Pablo methods
 ---
 
 #### [isArrayLike(obj)](/api/isArrayLike/)
