@@ -1,0 +1,18 @@
+--- 
+heading: attr(attributes)
+category: attr
+---
+
+Sets multiple attributes (supplied as an object), on all elements in the collection and returns the collection.
+
+    var paper = Pablo(demoElement).svg({height:220}),
+    rect  = paper.rect();
+
+    rect.attr({
+        x: 50,
+        y: -50,
+        width: 200,
+        height:100,
+        fill: 'orange',
+        transform: 'rotate(45)'
+    });

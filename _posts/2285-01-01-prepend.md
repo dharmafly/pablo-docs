@@ -1,0 +1,8 @@
+--- 
+heading: prepend(elements, [attributes])
+category: prepend
+---
+
+Same as [.append()](/api/append) but, with this method, the passed elements are inserted into the DOM as the first child of each of the elements in the collection.
+
+    Pablo.g().prepend('circle', {r:50});
