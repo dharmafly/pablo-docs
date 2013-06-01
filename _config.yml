@@ -1,48 +1,48 @@
 --- 
-project_name: Pablo
-version: 0.3.0
+twitter_name: Dharmafly
+safe: false
 scripts: 
 - src: /downloads/pablo.min.js
-safe: false
-future: true
 pygments: false
+markdown: maruku
+baseurl: /
+project_name: Pablo
 theme: horus
+twitter_url: https://twitter.com/dharmafly
+ga_id: UA-34978047-1
+project_url: https://github.com/dharmafly/pablo
+future: true
+permalink: /:title
+quote: 
+- quote: Painting is just another way of keeping a diary.
+- cite: Pablo Picasso
+lsi: false
+jquery_no_conflict: true
+sections: 
+- path: /index.html
+  name: Overview
+- path: /api/index.html
+  name: API
+- path: /misc/index.html
+  name: Misc
+- path: /resources/index.html
+  name: Resources
 exclude: 
 - README.md
 - assets
 - FiddlerRules.farx
-ga_id: UA-34978047-1
-twitter_url: https://twitter.com/dharmafly
-twitter_name: Dharmafly
-lang: javascript
+version: 0.3.0
 download_links: 
-- href: http://pablojs.com/downloads/pablo.js
-  title: Full source code, for use in development
+- title: Full source code, for use in development
+  subtext: v{{ version }}
+  href: http://pablojs.com/downloads/pablo.js
   text: pablo.js
+- title: Minified, for use in production
   subtext: v{{ version }}
-- href: http://pablojs.com/downloads/pablo.min.js
-  title: Minified, for use in production
+  href: http://pablojs.com/downloads/pablo.min.js
   text: pablo.min.js
-  subtext: v{{ version }}
-- href: https://github.com/dharmafly/pablo/zipball/master
-  title: Latest codebase (zip); potentially unstable
-  text: Edge
+- title: Latest codebase (zip); potentially unstable
   subtext: (master)
-permalink: /:title
-lsi: false
-jquery_no_conflict: true
-quote: 
-- quote: Painting is just another way of keeping a diary.
-- cite: Pablo Picasso
-project_url: https://github.com/dharmafly/pablo
-markdown: maruku
-baseurl: /
-sections: 
-- name: Overview
-  path: /index.html
-- name: API
-  path: /api/index.html
-- name: Misc
-  path: /misc/index.html
-- name: Resources
-  path: /resources/index.html
+  href: https://github.com/dharmafly/pablo/zipball/master
+  text: Edge
+lang: javascript

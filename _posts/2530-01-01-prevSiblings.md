@@ -1,6 +1,6 @@
 --- 
-category: prevsiblings
 heading: prevSiblings([selector/fn/element])
+category: prevsiblings
 ---
 
 Returns a collection of all the collection’s siblings before it in the DOM.
