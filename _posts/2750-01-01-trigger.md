@@ -1,6 +1,6 @@
 --- 
-category: trigger
 heading: trigger(name, fn, [useCapture])
+category: trigger
 ---
 
 Trigger an event bound to a Pablo Collection via its name.

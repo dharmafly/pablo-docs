@@ -1,6 +1,6 @@
 --- 
-category: api
 heading: Collection Misc
+category: api
 ---
 
 #### [clone([cloneDeep])](/api/clone/)

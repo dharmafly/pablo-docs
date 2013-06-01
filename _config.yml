@@ -1,21 +1,16 @@
 --- 
-lang: javascript
-lsi: false
+quote: 
+- quote: Painting is just another way of keeping a diary.
+- cite: Pablo Picasso
+project_url: https://github.com/dharmafly/pablo
+version: 0.3.0
+theme: horus
+ga_id: UA-34978047-1
+future: true
 exclude: 
 - README.md
 - assets
 - FiddlerRules.farx
-scripts: 
-- src: /downloads/pablo.min.js
-twitter_name: Dharmafly
-baseurl: /
-theme: horus
-quote: 
-- quote: Painting is just another way of keeping a diary.
-- cite: Pablo Picasso
-future: true
-project_name: Pablo
-ga_id: UA-34978047-1
 sections: 
 - path: /index.html
   name: Overview
@@ -26,12 +21,15 @@ sections:
 - path: /resources/index.html
   name: Resources
 permalink: /:title
-version: 0.3.0
-jquery_no_conflict: true
+baseurl: /
+project_name: Pablo
+lang: javascript
 safe: false
 pygments: false
-project_url: https://github.com/dharmafly/pablo
+jquery_no_conflict: true
+twitter_name: Dharmafly
 twitter_url: https://twitter.com/dharmafly
+markdown: maruku
 download_links: 
 - title: Full source code, for use in development
   text: pablo.js
@@ -45,4 +43,6 @@ download_links:
   text: Edge
   href: https://github.com/dharmafly/pablo/zipball/master
   subtext: (master)
-markdown: maruku
+scripts: 
+- src: /downloads/pablo.min.js
+lsi: false
