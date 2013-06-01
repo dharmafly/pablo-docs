@@ -1,6 +1,6 @@
 --- 
-heading: Traversal
 category: api
+heading: Traversal
 ---
 
 #### [eq(index)](/api/eq/)
