@@ -1,48 +1,48 @@
 --- 
+version: 0.3.0
+twitter_name: Dharmafly
+permalink: /:title
+sections: 
+- name: Overview
+  path: /index.html
+- name: API
+  path: /api/index.html
+- name: Misc
+  path: /misc/index.html
+- name: Resources
+  path: /resources/index.html
+future: true
+scripts: 
+- src: /downloads/pablo.min.js
+pygments: false
+lang: javascript
+lsi: false
+baseurl: /
+project_name: Pablo
 quote: 
 - quote: Painting is just another way of keeping a diary.
 - cite: Pablo Picasso
+download_links: 
+- href: http://pablojs.com/downloads/pablo.js
+  subtext: v{{ version }}
+  text: pablo.js
+  title: Full source code, for use in development
+- href: http://pablojs.com/downloads/pablo.min.js
+  subtext: v{{ version }}
+  text: pablo.min.js
+  title: Minified, for use in production
+- href: https://github.com/dharmafly/pablo/zipball/master
+  subtext: (master)
+  text: Edge
+  title: Latest codebase (zip); potentially unstable
 project_url: https://github.com/dharmafly/pablo
-version: 0.3.0
+jquery_no_conflict: true
 theme: horus
 ga_id: UA-34978047-1
-future: true
+safe: false
+markdown: maruku
+twitter_url: https://twitter.com/dharmafly
 exclude: 
 - README.md
 - assets
 - FiddlerRules.farx
-sections: 
-- path: /index.html
-  name: Overview
-- path: /api/index.html
-  name: API
-- path: /misc/index.html
-  name: Misc
-- path: /resources/index.html
-  name: Resources
-permalink: /:title
-baseurl: /
-project_name: Pablo
-lang: javascript
-safe: false
-pygments: false
-jquery_no_conflict: true
-twitter_name: Dharmafly
-twitter_url: https://twitter.com/dharmafly
-markdown: maruku
-download_links: 
-- title: Full source code, for use in development
-  text: pablo.js
-  href: http://pablojs.com/downloads/pablo.js
-  subtext: v{{ version }}
-- title: Minified, for use in production
-  text: pablo.min.js
-  href: http://pablojs.com/downloads/pablo.min.js
-  subtext: v{{ version }}
-- title: Latest codebase (zip); potentially unstable
-  text: Edge
-  href: https://github.com/dharmafly/pablo/zipball/master
-  subtext: (master)
-scripts: 
-- src: /downloads/pablo.min.js
-lsi: false
