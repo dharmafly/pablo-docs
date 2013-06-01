@@ -1,6 +1,6 @@
 --- 
-heading: parent()
 category: parent
+heading: parent()
 ---
 
 Returns a collection containing the parent node for each element in the collection.

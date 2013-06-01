@@ -1,6 +1,6 @@
 --- 
-heading: find([selector/fn/element])
 category: find
+heading: find([selector/fn/element])
 ---
 
 Returns a collection containing elements that are descendents of elements in the collection and that match the supplied CSS selector or comma-separated list of selectors.
