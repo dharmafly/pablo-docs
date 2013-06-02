@@ -1,6 +1,6 @@
 --- 
-heading: Collection Manipulation
 category: api
+heading: Collection Manipulation
 ---
 
 #### [toArray()](/api/toArray/)
@@ -33,7 +33,7 @@ Remove the last element in the collection and return it, wrapped in a new collec
 
 Remove the first element in the collection and return it, wrapped in a new collection.
 
-#### [slice(start, [end])](/api/slice/)
+#### [slice(start, \[end\])](/api/slice/)
 
 Slice the elements from the collection, according to the passed indices, and return them wrapped in a new collection.
 

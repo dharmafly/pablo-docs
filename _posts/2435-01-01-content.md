@@ -1,6 +1,6 @@
 --- 
-heading: content()
 category: content
+heading: content()
 ---
 
 Returns the text content of the first element in the collection.

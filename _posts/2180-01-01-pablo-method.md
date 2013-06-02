@@ -1,6 +1,6 @@
 --- 
-heading: Pablo()
 category: api
+heading: Pablo()
 ---
 
 The `Pablo()` method creates an array-like Pablo collection of new or pre-existing DOM elements. See the [Pablo method](/api/pablo/) section for details.
@@ -11,7 +11,7 @@ The `Pablo()` method creates an array-like Pablo collection of new or pre-existi
 Creates an empty Pablo collection.
 
 
-#### [Pablo(elements, [attributes])](/api/pablo/)
+#### [Pablo(elements, \[attributes\])](/api/pablo/)
 
 Create a Pablo collection of new elements.
 
@@ -27,6 +27,6 @@ Create a Pablo collection of elements in the `document` that match the specified
 
 Create a new SVG element with the specified name and attributes, and wraps it in a new Pablo collection.
 
-#### [Pablo(elementNames, [attributes])](/api/pablo/#pablo-06)
+#### [Pablo(elementNames, \[attributes\])](/api/pablo/#pablo-06)
 
 Create multiple new SVG elements and wraps them in a new Pablo collection.

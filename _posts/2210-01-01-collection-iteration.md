@@ -1,29 +1,40 @@
 --- 
-heading: Collection Iteration
 category: api
+heading: Collection Iteration
 ---
 
-#### [each(fn, [context]) alias forEach(fn, [context])](/api/each/)
+#### [each(fn, \[context\])](/api/each/)
+_alias: forEach(fn, \[context\])_
 
-Iterate over the collection and returns the collection.
+Call the iterator function for each element in the collection and return the collection.
 
-#### [map(fn, [context])](/api/map/)
+#### [map(fn, \[context\])](/api/map/)
 
-Iterate over the collection creating a new collection composed 
-of elements which are returned in the map callback.
+Call the iterator function for each element in the collection. For any elements returned by the iterator function, return them wrapped in a new collection.
 
 #### [sort(fn)](/api/sort/)
 
-Iterates over the collection re-ordering it based on the sort 
-callback.
+Re-order the elements in the collection based on the sort function.
 
-#### [pluck(propertyType, [attr])](/api/pluck/)
+#### [pluck(propertyType, \[attr\])](/api/pluck/)
 
-Returns an array containing property values for the passed type of 
-property (eg css, data) property name.
+Return an array of values from each element in the collection - e.g. attribute, data or object properties.
 
-#### [select(selector/fn/element)](/api/select/)
+#### [select(filter)](/api/select/)
 
-Returns a new collection containing the elements for their respected 
-callback function returned true.
+Return a new collection of elements that match the filter, which can be a function, CSS selector or elements.
+
+#### [every(filter)](/api/every/)
+
+Return `true` if **all** elements in the collection match the filter, which can be a function, CSS selector or elements. Otherwise `false`.
+
+#### [some(filter, \[context\])](/api/some/)
+_alias: is(filter, \[context\])_
+
+Return `true` if **any** elements in the collection match the filter, which can be a function, CSS selector or elements. Otherwise `false`.
+
+#### [indexOf(filter)](/api/indexOf/)
+_alias: lastIndexOf(filter)_
+
+Return the collection index of the first element in the collection that matchs the filter, which can be a function, CSS selector or elements. Otherwise `-1`.
 
