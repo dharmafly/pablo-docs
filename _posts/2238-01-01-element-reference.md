@@ -7,6 +7,7 @@ SVG elements can be created with the shortcut methods listed below. See the [Cre
 
 Each method is linked to the element's page on [MDN's element reference][mdn-svg-el]. For further informatio, see [MDN's attribute reference][mdn-svg-attr] and the [Pablo Resources][resources] section.
 
+<div class="long-list">
 * [a()][a]
 * [altGlyph()][altGlyph]
 * [altGlyphDef()][altGlyphDef]
@@ -87,6 +88,7 @@ Each method is linked to the element's page on [MDN's element reference][mdn-svg
 * [use()][use]
 * [view()][view]
 * [vkern()][vkern]
+</div>
 
 
 ## Note: Creating SVG with markup
