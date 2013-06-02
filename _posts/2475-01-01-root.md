@@ -1,6 +1,6 @@
 --- 
-category: root
 heading: root([selector/fn/element])
+category: root
 ---
 
 Returns a collection of the element(s)'s top most `<svg>` root node.

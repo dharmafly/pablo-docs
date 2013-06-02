@@ -1,6 +1,6 @@
 --- 
-category: detach
 heading: detach()
+category: detach
 ---
 
 Removes the collection from its parent not removing any events or data and returns the collection.

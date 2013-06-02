@@ -1,6 +1,6 @@
 --- 
-category: api
 heading: Traversal
+category: api
 ---
 
 #### [eq(index)](/api/eq/)
@@ -8,7 +8,7 @@ heading: Traversal
 Return the DOM element specified by array index (e.g. `0`, `3`, `-2`), wrapped in a new collection.
 
 #### [get(index)](/api/get/)
-_alias: collection[index]_
+_alias: collection\[index\]_
 
 Return the raw DOM element specified by array index.
 
