@@ -1,6 +1,6 @@
 --- 
-heading: owners([selector/fn/element])
 category: owners
+heading: owners([selector/fn/element])
 ---
 
 Returns a collection of the collection element’s ancestor owner elements from closest to furthest for each element in the collection.

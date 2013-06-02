@@ -1,6 +1,6 @@
 --- 
-heading: owner([selector/fn/element])
 category: owner
+heading: owner([selector/fn/element])
 ---
 
 Returns a collection of the collection element’s closest owner ancestor element.
