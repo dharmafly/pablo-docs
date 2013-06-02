@@ -3,49 +3,64 @@ category: api
 heading: Pablo methods
 ---
 
-#### [isArrayLike(obj)](/api/isArrayLike/)
+#### [Pablo.isArrayLike(obj)](/api/isArrayLike/)
 
-Returns true if the passed argument is like a Pablo or jQuery 
+Return `true` if the passed object is like an array - e.g. a Pablo or jQuery 
+collection, a DOM node list or a custom object.
+
+#### [Pablo.isElement(obj)](/api/isElement/)
+
+Return `true` if the passed object is a DOM element.
+
+#### [Pablo.isSVGElement(obj)](/api/isSVGElement/)
+
+Return `true` if the passed object is an SVG element.
+
+#### [Pablo.isNodeList(obj)](/api/isNodeList/)
+
+Return `true` if the passed object is a DOM node list.
+
+#### [Pablo.isHTMLDocument(obj)](/api/isHTMLDocument/)
+
+Return `true` if the passed object is an HTML document.
+
+#### [Pablo.isPablo(obj)](/api/isPablo/)
+
+Return `true` if the passed object is a Pablo collection.
+
+#### [Pablo.template(name, fn)](/api/template/)
+
+Create a factory function to generate templates of SVG elements, allowing custom settings to be passed in when the template is used.
+
+#### [Pablo.canBeWrapped(element)](/api/canBeWrapped/)
+
+Return `true` if the passed object can be contained within a Pablo 
 collection.
 
-#### [isElement(obj)](/api/isElement/)
+#### [Pablo.extend(target, source, [source2...], [deep])](/api/extend/)
 
-Returns true if the passed argument is an element.
+Extend an object with properties from any number of other objects, and return the result.
 
-#### [isSVGElement(obj)](/api/isSVGElement/)
+#### [Pablo.make(name)](/api/make/)
 
-Returns true if the passed argument is an svg element.
+Create a native SVG element with the specified element name.
 
-#### [isNodeList(obj)](/api/isNodeList/)
+#### [Pablo.hyphensToCamelCase(string)](/api/hyphensToCamelCase/)
 
-Returns true if the passed argument is a node list.
+Convert a hyphen-ated string into a camelCase string.
 
-#### [isHTMLDocument(obj)](/api/isHTMLDocument/)
 
-Returns true if the passed argument is a html document.
 
-#### [isPablo(obj)](/api/isPablo/)
+<!-- TODO: add sub-pages -->
 
-Returns true if the passed argument is a Pablo collection.
+#### Pablo.toArray(obj)
 
-#### [template(name, fn)](/api/template/)
+Convert the array-like object into a true array.
 
-Set a new svg shape template on the Pablo object by the passed 
-name argument and defined by the function argument.
+#### Pablo.cssPrefix(property, value)
 
-#### [canBeWrapped(element)](/api/canBeWrapped/)
+Return a semicolon-separated list of vendor-prefixed CSS rules.
 
-Returns true if the passed argument can be wrapped as a Pablo 
-collection.
+#### Pablo.getAttributes(element)
 
-#### [extend(target, source, [source2...], [deep])](/api/extend/)
-
-Returns an extended object from the passed arguments.
-
-#### [make(name)](/api/make/)
-
-Returns a native SVG or HTML element based on the passed element name.
-
-#### [hyphensToCamelCase(string)](/api/hyphensToCamelCase/)
-
-Returns a string in camel-case form based on the passed hyphen-delimited string.
+Return an object of attributes from a DOM element.
