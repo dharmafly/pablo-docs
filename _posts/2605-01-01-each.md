@@ -1,6 +1,6 @@
 --- 
-heading: each(fn, [ctx])
 category: each
+heading: each(fn, [ctx])
 ---
 
 Alias `forEach(fn, [ctx])`.
