@@ -1,6 +1,6 @@
 --- 
-category: api
 heading: Templates
+category: api
 ---
 
 

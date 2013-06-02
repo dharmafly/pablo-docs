@@ -1,6 +1,6 @@
 --- 
-category: api
 heading: Collection Manipulation
+category: api
 ---
 
 #### [toArray()](/api/toArray/)
