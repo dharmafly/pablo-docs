@@ -1,13 +1,11 @@
 --- 
-category: api
 heading: Element reference
+category: api
 ---
 
 SVG elements can be created with the shortcut methods listed below. See the [Creation](/api/creation/) section for information on how to use them.
 
 Each method is linked to the element's page on [MDN's element reference][mdn-svg-el]. For further informatio, see [MDN's attribute reference][mdn-svg-attr] and the [Pablo Resources][resources] section.
-
-<div class="long-list">
 
 * [a()][a]
 * [altGlyph()][altGlyph]
@@ -89,8 +87,6 @@ Each method is linked to the element's page on [MDN's element reference][mdn-svg
 * [use()][use]
 * [view()][view]
 * [vkern()][vkern]
-
-</div>
 
 
 ## Note: Creating SVG with markup
