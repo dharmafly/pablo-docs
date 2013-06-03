@@ -1,6 +1,6 @@
 --- 
-heading: Element reference
 category: api
+heading: Element reference
 ---
 
 SVG elements can be created with the shortcut methods listed below. See the [Creation](/api/creation/) section for information on how to use them.

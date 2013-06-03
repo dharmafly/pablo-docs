@@ -1,13 +1,14 @@
 --- 
-heading: Getting started
 category: overview
+heading: Getting started
 ---
 
 Download either the <a href="http://pablojs.com/downloads/pablo.js" target="_blank">full script</a> for development or the <a href="http://pablojs.com/downloads/pablo.min.js" target="_blank">minified script</a> for production and reference it in your web page's HTML:
 
     <script src="pablo.min.js"></script>
 
-Check that the browser supports basic SVG <a id="has-browser-support" href="http://caniuse.com/#search=svg" target="_blank"> </a>:
+Check that the browser supports basic SVG <a id="has-browser-support" href="http://caniuse.com/#search=svg" target="_blank"> </a>:  
+_Click the 'Run' button_
 
     if (Pablo.isSupported){
         alert('Yes!');
@@ -27,20 +28,20 @@ Check that the browser supports basic SVG <a id="has-browser-support" href="http
     }
 </script>
 
+_Note: in this documentation, all code snippets with 'Run' buttons are editable (except on mobiles)_.
 
 Start drawing:
-_Click the 'Run' button_
 
     /* Inside an HTML element, append an <svg> root */
     Pablo(demoElement).svg({height:200})
         /* Create <circle> element, with attributes */
-        .circle({cx:90, cy:90, r:90})
+        .circle({cx:90, cy:90, r:90, fill:'blue'})
         /* Add a click listener */
         .on('click', function(el){
-            Pablo(el).attr('fill', 'red');
+            Pablo(this).attr('fill', 'red');
         });
 
-and drawing...
+Something a bit more ambitious:
 
     /* Inside an HTML element, append an <svg> root */
     var paper = Pablo(demoElement).svg({height:220}),
@@ -73,8 +74,6 @@ and drawing...
             / * Apply new attributes to the <circle> element */
             circle.attr({cx:cx, fill:color});
         });
-
-_Note: in this documentation, all code snippets with 'Run' buttons are editable, except on mobiles_.
 
 **See the [API Reference][api] for full details.**
 
