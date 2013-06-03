@@ -11,7 +11,7 @@ Check that the browser supports basic SVG <a id="has-browser-support" href="http
 
     if (Pablo.isSupported){
         alert('Yes!');
-        /* Pablo code here */
+        /* Put Pablo-dependent code here */
     }
     else {
         alert("Noo");
@@ -36,8 +36,8 @@ _Click the 'Run' button_
         /* Create <circle> element, with attributes */
         .circle({cx:90, cy:90, r:90})
         /* Add a click listener */
-        .on('click', function(){
-            alert('Hello Pablo');
+        .on('click', function(el){
+            Pablo(el).attr('fill', 'red');
         });
 
 and drawing...
