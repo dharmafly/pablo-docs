@@ -1,6 +1,6 @@
 --- 
-heading: Traversal
 category: api
+heading: Traversal
 ---
 
 #### [get(index)](/api/get/)

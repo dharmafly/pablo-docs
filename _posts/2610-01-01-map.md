@@ -1,6 +1,6 @@
 --- 
-heading: map(fn, [ctx])
 category: map
+heading: map(fn, [ctx])
 ---
 
 Iterates over each element in the collection passing it to a callback function returning a new collection comprising of elements returned from the callback.

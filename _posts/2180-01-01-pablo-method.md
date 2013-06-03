@@ -1,6 +1,6 @@
 --- 
-heading: Pablo()
 category: api
+heading: Pablo()
 ---
 
 The `Pablo()` method creates an array-like Pablo collection of new or pre-existing DOM elements. See the [Pablo method](/api/pablo/) section for details.
