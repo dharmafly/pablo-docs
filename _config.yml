@@ -1,48 +1,48 @@
 --- 
-project_url: https://github.com/dharmafly/pablo
+future: true
+twitter_url: https://twitter.com/dharmafly
 scripts: 
 - src: /downloads/pablo.min.js
-ga_id: UA-34978047-1
-lsi: false
-permalink: /:title
-twitter_name: Dharmafly
-exclude: 
-- README.md
-- assets
-- FiddlerRules.farx
-version: 0.3.0
-twitter_url: https://twitter.com/dharmafly
-pygments: false
-baseurl: /
-future: true
-lang: javascript
-download_links: 
-- href: http://pablojs.com/downloads/pablo.js
-  subtext: v{{ version }}
-  title: Full source code, for use in development
-  text: pablo.js
-- href: http://pablojs.com/downloads/pablo.min.js
-  subtext: v{{ version }}
-  title: Minified, for use in production
-  text: pablo.min.js
-- href: https://github.com/dharmafly/pablo/zipball/master
-  subtext: (master)
-  title: Latest codebase (zip); potentially unstable
-  text: Edge
 safe: false
-markdown: maruku
-sections: 
-- name: Overview
-  path: /index.html
-- name: API
-  path: /api/index.html
-- name: Misc
-  path: /misc/index.html
-- name: Resources
-  path: /resources/index.html
+lsi: false
 jquery_no_conflict: true
 theme: horus
 quote: 
 - quote: Painting is just another way of keeping a diary.
 - cite: Pablo Picasso
+sections: 
+- path: /index.html
+  name: Overview
+- path: /api/index.html
+  name: API
+- path: /misc/index.html
+  name: Misc
+- path: /resources/index.html
+  name: Resources
+permalink: /:title
+project_url: https://github.com/dharmafly/pablo
+twitter_name: Dharmafly
+pygments: false
+baseurl: /
+download_links: 
+- text: pablo.js
+  title: Full source code, for use in development
+  href: http://pablojs.com/downloads/pablo.js
+  subtext: v{{ version }}
+- text: pablo.min.js
+  title: Minified, for use in production
+  href: http://pablojs.com/downloads/pablo.min.js
+  subtext: v{{ version }}
+- text: Edge
+  title: Latest codebase (zip); potentially unstable
+  href: https://github.com/dharmafly/pablo/zipball/master
+  subtext: (master)
 project_name: Pablo
+markdown: maruku
+exclude: 
+- README.md
+- assets
+- FiddlerRules.farx
+version: 0.3.0
+lang: javascript
+ga_id: UA-34978047-1
