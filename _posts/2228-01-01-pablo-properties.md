@@ -20,38 +20,22 @@ An array of vendor-prefixes used by `.cssPrefix()` and `Pablo.cssPrefix()`.
 
 
 
-Pablo.Collection`
-------------------
+#### Pablo.Collection
 
 The constructor function used internally for creating a new Pablo collection.
 
 
-`Pablo.svgVersion`
-------------------
+#### Pablo.svgVersion
 
 The version of SVG used internally on SVG root elements. Currently `1.1`.
 
 
-`Pablo.svgns`
--------------
+#### Pablo.ns
 
-The SVG namespace URI used internally when creating SVG elements. Currently `"http://www.w3.org/2000/svg"`.
-
-
-`Pablo.xlinkns`
--------------
-
-The Xlink namespace URI used internally when creating links. Currently `"http://www.w3.org/1999/xlink"`.
+An object containing namespace URIs for use when creating namespaced elements and attributes.
 
 
-`Pablo.v`
----------
+#### Pablo.v
+_alias: .pablo_
 
-The current version of the Pablo library. E.g. `"1.2.23"`.
-
-    alert(Pablo.v);
-
-
-`.pablo
-
-This property, on a Pablo collection is identical to `Pablo.v`.
+The current version of the Pablo library, e.g. `"1.2.34"`.
