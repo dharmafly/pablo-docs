@@ -38,7 +38,7 @@
             //width: width,
             //height: height,
             width: '100%',
-            height: '100%',
+            style: 'max-height: 480px',
             viewBox: '0 0 ' + naturalWidth + ' ' + naturalHeight
         });
     }
