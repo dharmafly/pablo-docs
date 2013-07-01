@@ -1,6 +1,6 @@
 --- 
-category: push
 heading: push(elements)
+category: push
 ---
 
 Alias `add(elements)`.
