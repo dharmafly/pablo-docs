@@ -1,6 +1,6 @@
 --- 
-heading: one(name, fn, [useCapture])
 category: one
+heading: one(name, fn, [useCapture])
 ---
 
 Adds the listener to each element in the collection, but removes the listener as soon as it has been triggered once, on *any* of the elements. Returns the collection.
