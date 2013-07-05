@@ -43,7 +43,6 @@ Start drawing:
 
 <div class="showhide">
 Something a bit more ambitious... (<span class="showhide-control">show</span>)
-
 <div class="showhide-content">
 <pre><code>/* Inside an HTML element, append an <svg> root */
 var paper = Pablo(demoElement).svg({height:220}),
