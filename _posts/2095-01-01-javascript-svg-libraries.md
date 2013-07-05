@@ -1,6 +1,6 @@
 --- 
-heading: JavaScript SVG libraries
 category: resources
+heading: JavaScript SVG libraries
 ---
 
 Other than [Pablo](http://pablojs.com), see:

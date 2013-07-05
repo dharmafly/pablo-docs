@@ -1,6 +1,6 @@
 --- 
-heading: firstChild(\[filter\])
 category: firstchild
+heading: firstChild(\[filter\])
 ---
 
 Returns a collection of the collection’s first child.

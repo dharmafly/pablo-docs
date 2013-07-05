@@ -1,6 +1,6 @@
 --- 
-heading: Getting started
 category: overview
+heading: Getting started
 ---
 
 Download either the <a href="http://pablojs.com/downloads/pablo.js" target="_blank">full script</a> for development or the <a href="http://pablojs.com/downloads/pablo.min.js" target="_blank">minified script</a> for production and reference it in your web page's HTML:
@@ -45,6 +45,7 @@ Start drawing:
 Something a bit more ambitious... (<span class="showhide-control">show</span>)
 
 <div class="showhide-content">
+    
     /* Inside an HTML element, append an <svg> root */
     var paper = Pablo(demoElement).svg({height:220}),
         /* Create <circle> element, with attributes */
@@ -76,6 +77,7 @@ Something a bit more ambitious... (<span class="showhide-control">show</span>)
             / * Apply new attributes to the <circle> element */
             circle.attr({cx:cx, fill:color});
         });
+
 </div>
 </div>
 
