@@ -41,8 +41,10 @@ Start drawing:
             Pablo(this).attr('fill', 'red');
         });
 
-Something a bit more ambitious:
+<div class="showhide">
+Something a bit more ambitious... (<span class="showhide-control">show</span>)
 
+<div class="showhide-content">
     /* Inside an HTML element, append an <svg> root */
     var paper = Pablo(demoElement).svg({height:220}),
         /* Create <circle> element, with attributes */
@@ -74,8 +76,37 @@ Something a bit more ambitious:
             / * Apply new attributes to the <circle> element */
             circle.attr({cx:cx, fill:color});
         });
+</div>
+</div>
 
 **See the [API Reference][api] for full details.**
+
+<script>
+    (function(){
+        jQuery('.showhide').each(function(i, el){
+            var container = jQuery(el),
+                control = ('.showhide-control', container),
+                content = ('.showhide-content', container),
+                hidden  = control.text() === 'show';
+
+            if (hidden){
+                content.hide();
+            }
+
+            control.toggle(function(){
+                hidden = !hidden;
+                if (hidden){
+                    content.hide();
+                    control.text('show');
+                }
+                else {
+                    content.show();
+                    control.text('hide');
+                }
+            });
+        });
+    }());
+</script>
 
 
 [pablo-site]: http://pablojs.com
