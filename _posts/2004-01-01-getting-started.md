@@ -44,9 +44,9 @@ Start drawing:
 <div class="showhide">
 Something a bit more ambitious... (<span class="showhide-control">show</span>)
 <div class="showhide-content">
-<pre><code>/* Inside an HTML element, append an <svg> root */
+<pre><code>/* Inside an HTML element, append an &lt;svg> root */
 var paper = Pablo(demoElement).svg({height:220}),
-/* Create <circle> element, with attributes */
+/* Create &lt;circle> element, with attributes */
 circle = paper.circle({
     cy: '50%',
     fill: 'rgba(127, 159, 95, 0.2)',
@@ -61,7 +61,7 @@ circle.duplicate(20)
     cx: function(el, i) {return i * 4 + 1 + '%'},
     r:  function(el, i) {return i + 1 + '%'}
 })
-/* Add a listener for mouseover & touchstart events */
+/* Add a listener for mouseover &amp; touchstart events */
 .on('mouseover touchstart', function(){
     /* Wrap this element in a Pablo collection */
     var circle = Pablo(this),
@@ -72,7 +72,7 @@ circle.duplicate(20)
         hue = Math.random() * 360,
         color = 'hsla(' + hue + ', 90%, 50%, 0.2)';
 
-    / * Apply new attributes to the <circle> element */
+    / * Apply new attributes to the &lt;circle> element */
     circle.attr({cx:cx, fill:color});
 });</pre></code>
 </div>
