@@ -1,6 +1,6 @@
 --- 
-category: overview
 heading: Getting started
+category: overview
 ---
 
 Download either the <a href="http://pablojs.com/downloads/pablo.js" target="_blank">full script</a> for development or the <a href="http://pablojs.com/downloads/pablo.min.js" target="_blank">minified script</a> for production and reference it in your web page's HTML:
@@ -76,6 +76,7 @@ Or, for something a bit more ambitious...
     });
 
 <script>
+// Toggle show/hide for the previous code example
 (function(){
     if ('addEventListener' in document){
         var pElems = document.getElementsByTagName('p'),
