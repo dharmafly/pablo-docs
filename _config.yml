@@ -1,48 +1,48 @@
 --- 
-project_name: Pablo
-twitter_name: Dharmafly
-lsi: false
-project_url: https://github.com/dharmafly/pablo
+quote: 
+- quote: Painting is just another way of keeping a diary.
+- cite: Pablo Picasso
+download_links: 
+- href: http://pablojs.com/downloads/pablo.js
+  text: pablo.js
+  subtext: v{{ version }}
+  title: Full source code, for use in development
+- href: http://pablojs.com/downloads/pablo.min.js
+  text: pablo.min.js
+  subtext: v{{ version }}
+  title: Minified, for use in production
+- href: https://github.com/dharmafly/pablo/zipball/master
+  text: Edge
+  subtext: (master)
+  title: Latest codebase (zip); potentially unstable
 safe: false
+twitter_name: Dharmafly
+markdown: maruku
+version: 0.3.0
+future: true
+baseurl: /
+theme: horus
+lang: javascript
+sections: 
+- path: /index.html
+  name: Overview
+- path: /api/index.html
+  name: API
+- path: /misc/index.html
+  name: Misc
+- path: /resources/index.html
+  name: Resources
+pygments: false
+project_url: https://github.com/dharmafly/pablo
+twitter_url: https://twitter.com/dharmafly
+permalink: /:title
+project_name: Pablo
+jquery_no_conflict: true
+scripts: 
+- src: /downloads/pablo.min.js
+lsi: false
+ga_id: UA-34978047-1
 exclude: 
 - README.md
 - assets
 - FiddlerRules.farx
-ga_id: UA-34978047-1
-scripts: 
-- src: /downloads/pablo.min.js
-sections: 
-- name: Overview
-  path: /index.html
-- name: API
-  path: /api/index.html
-- name: Misc
-  path: /misc/index.html
-- name: Resources
-  path: /resources/index.html
-baseurl: /
-future: true
-jquery_no_conflict: true
-lang: javascript
-markdown: maruku
-permalink: /:title
-download_links: 
-- subtext: v{{ version }}
-  href: http://pablojs.com/downloads/pablo.js
-  text: pablo.js
-  title: Full source code, for use in development
-- subtext: v{{ version }}
-  href: http://pablojs.com/downloads/pablo.min.js
-  text: pablo.min.js
-  title: Minified, for use in production
-- subtext: (master)
-  href: https://github.com/dharmafly/pablo/zipball/master
-  text: Edge
-  title: Latest codebase (zip); potentially unstable
-theme: horus
-quote: 
-- quote: Painting is just another way of keeping a diary.
-- cite: Pablo Picasso
-version: 0.3.0
-twitter_url: https://twitter.com/dharmafly
-pygments: false
