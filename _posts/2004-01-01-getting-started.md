@@ -1,6 +1,6 @@
 --- 
-heading: Getting started
 category: overview
+heading: Getting started
 ---
 
 Download either the <a href="http://pablojs.com/downloads/pablo.js" target="_blank">full script</a> for development or the <a href="http://pablojs.com/downloads/pablo.min.js" target="_blank">minified script</a> for production and reference it in your web page's HTML:
@@ -87,7 +87,7 @@ Something a bit more ambitious...
                 content = jQuery(p).next().hide(),
                 hidden = true;
 
-            control.toggle(function(){
+            control.on('click', function(){
                 hidden = !hidden;
                 if (hidden){
                     content.hide();
