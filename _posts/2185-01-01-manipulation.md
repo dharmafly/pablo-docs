@@ -1,6 +1,6 @@
 --- 
-heading: Manipulation
 category: api
+heading: Manipulation
 ---
 
 #### [append(elements)](/api/append/)
