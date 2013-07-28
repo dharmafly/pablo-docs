@@ -1,13 +1,13 @@
 --- 
-category: overview
 heading: Getting started
+category: overview
 ---
 
 Download either the <a href="http://pablojs.com/downloads/pablo.js" target="_blank">full script</a> for development or the <a href="http://pablojs.com/downloads/pablo.min.js" target="_blank">minified script</a> for production and reference it in your web page's HTML:
 
     <script src="pablo.min.js"></script>
 
-Check that the browser supports basic SVG <a id="has-browser-support" href="http://caniuse.com/#search=svg" target="_blank"> </a> and create some shapes:
+Check the browser supports SVG <a id="has-browser-support" href="http://caniuse.com/#search=svg" target="_blank"> </a> and start drawing:
 
 <script>
     if ('addEventListener' in document){
@@ -18,6 +18,7 @@ Check that the browser supports basic SVG <a id="has-browser-support" href="http
     }
 </script>
 
+    /* Check browser support */
     if (Pablo.isSupported){
         /* Inside an HTML element, append <svg> root */
         Pablo(demoElement).svg({height:180})

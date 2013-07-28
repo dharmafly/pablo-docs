@@ -1,6 +1,6 @@
 --- 
-category: cssprefix
 heading: cssPrefix(property, value)
+category: cssprefix
 ---
 
 Performs the same action as `.css(property, value)`, but also sets the CSS property with each of the common browser vendor prefixes: `-moz-`, `-webkit-`, `-ms-`, `-o-` and `-khtml-`.
