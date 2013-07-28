@@ -22,9 +22,9 @@ Check the browser supports SVG <a id="has-browser-support" href="http://caniuse.
     if (Pablo.isSupported){
         /* Inside an HTML element, append <svg> root */
         Pablo(demoElement).svg({height:180})
-            /* Create <circle> element with attributes */
+            /* Append <circle> element with attributes */
             .circle({cx:90, cy:90, r:90})
-            /* Add event listener */
+            /* Add event listener to the circle */
             .on('click', function(event){
                 /* On click, set the `fill` attribute */
                 Pablo(this).attr('fill', 'red');
