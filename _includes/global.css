@@ -29,6 +29,7 @@ body {
 a {
 	color: {{ page.copy_colour }};
   text-decoration:underline;
+  cursor: pointer;
 }
 
 a:hover,
