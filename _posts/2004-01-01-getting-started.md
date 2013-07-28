@@ -1,6 +1,6 @@
 --- 
-heading: Getting started
 category: overview
+heading: Getting started
 ---
 
 Download either the <a href="http://pablojs.com/downloads/pablo.js" target="_blank">full script</a> for development or the <a href="http://pablojs.com/downloads/pablo.min.js" target="_blank">minified script</a> for production and reference it in your web page's HTML:
@@ -25,11 +25,12 @@ Check that the browser supports basic SVG <a id="has-browser-support" href="http
             .circle({cx:90, cy:90, r:90})
             /* Add event listener */
             .on('click', function(event){
+                /* On click, set the `fill` attribute */
                 Pablo(this).attr('fill', 'red');
             });
     }
     else {
-        /* fallback content */
+        /* Add non-SVG fallback content */
     }
 
 _Note: in this documentation, all code snippets with 'Run' buttons are editable, except on mobiles_.

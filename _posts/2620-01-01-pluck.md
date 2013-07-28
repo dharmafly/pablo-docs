@@ -1,6 +1,6 @@
 --- 
-heading: pluck(propertyType, [attr])
 category: pluck
+heading: pluck(propertyType, [attr])
 ---
 
 Returns an array containing values for the passed type of property (eg css, data) property name for each element in the collection.

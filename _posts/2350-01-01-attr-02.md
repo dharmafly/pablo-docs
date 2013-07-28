@@ -1,6 +1,6 @@
 --- 
-heading: attr(attributeName)
 category: attr
+heading: attr(attributeName)
 ---
 
 Returns the value of the named attribute on the first element in the collection.
