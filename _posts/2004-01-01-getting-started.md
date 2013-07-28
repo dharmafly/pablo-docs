@@ -83,7 +83,7 @@ Something a bit more ambitious...
 
         document.addEventListener('DOMContentLoaded', function(){
             var jQuery = satya.jQuery,
-                control = jQuery('<span>show</span>').appendTo(p),
+                control = jQuery(' <a>show</a>').appendTo(p),
                 content = jQuery(p).next().hide(),
                 hidden = true;
 
