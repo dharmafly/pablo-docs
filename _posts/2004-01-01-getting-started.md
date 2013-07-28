@@ -79,14 +79,12 @@ Something a bit more ambitious...
 (function(){
     if ('addEventListener' in document){
         var pElems = document.getElementsByTagName('p'),
-            preElems = document.getElementsByTagName('pre'),
-            p = pElems[pElems.length - 1],
-            pre = preElems[preElems.length - 1];
+            p = pElems[pElems.length - 1];
 
         document.addEventListener('DOMContentLoaded', function(){
             var jQuery = satya.jQuery,
                 control = jQuery('<span>show</span>').appendTo(p),
-                content = jQuery(pre).hide(),
+                content = jQuery(p).next().hide(),
                 hidden = true;
 
             control.toggle(function(){
