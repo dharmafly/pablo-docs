@@ -7,41 +7,34 @@ Download either the <a href="http://pablojs.com/downloads/pablo.js" target="_bla
 
     <script src="pablo.min.js"></script>
 
-Check that the browser supports basic SVG <a id="has-browser-support" href="http://caniuse.com/#search=svg" target="_blank"> </a>:  
-_Click the 'Run' button_
-
-    if (Pablo.isSupported){
-        alert('Yes!');
-        /* Put Pablo-dependent code here */
-    }
-    else {
-        alert("Noo");
-        /* Fallback content */
-    }
+Check that the browser supports basic SVG <a id="has-browser-support" href="http://caniuse.com/#search=svg" target="_blank"> </a> and create some shapes:
 
 <script>
     if ('addEventListener' in document){
         document.addEventListener('DOMContentLoaded', function(){
-            isSupportedText = Pablo.isSupported ? ' (yours does)' : "yours doesn't";
+            isSupportedText = Pablo.isSupported ? ' (yours does)' : " (yours doesn't)";
             document.getElementById('has-browser-support').textContent = isSupportedText;
         }, false);
     }
 </script>
 
-_Note: in this documentation, all code snippets with 'Run' buttons are editable (except on mobiles)_.
+    if (Pablo.isSupported){
+        /* Inside an HTML element, append <svg> root */
+        Pablo(demoElement).svg({height:180})
+            /* Create <circle> element with attributes */
+            .circle({cx:90, cy:90, r:90})
+            /* Add event listener */
+            .on('click', function(event){
+                Pablo(this).attr('fill', 'red');
+            });
+    }
+    else {
+        /* fallback content */
+    }
 
-Start drawing:
+_Note: in this documentation, all code snippets with 'Run' buttons are editable, except on mobiles_.
 
-    /* Inside an HTML element, append an <svg> root */
-    Pablo(demoElement).svg({height:180})
-        /* Create <circle> element, with attributes */
-        .circle({cx:90, cy:90, r:90})
-        /* Add event listener */
-        .on('click', function(event){
-            Pablo(this).attr('fill', 'red');
-        });
-
-Or, for something a bit more ambitious... 
+To draw something a bit more ambitious... 
 
     /* Inside an HTML element, append an <svg> root */
     var paper = Pablo(demoElement).svg({height:220}),
