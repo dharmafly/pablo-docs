@@ -33,11 +33,11 @@ _Note: in this documentation, all code snippets with 'Run' buttons are editable 
 Start drawing:
 
     /* Inside an HTML element, append an <svg> root */
-    Pablo(demoElement).svg({height:200})
+    Pablo(demoElement).svg({height:180})
         /* Create <circle> element, with attributes */
-        .circle({cx:90, cy:90, r:90, fill:'blue'})
-        /* Add a click listener */
-        .on('click', function(el){
+        .circle({cx:90, cy:90, r:90})
+        /* Add event listener */
+        .on('click', function(event){
             Pablo(this).attr('fill', 'red');
         });
 
