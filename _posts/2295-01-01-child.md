@@ -1,6 +1,6 @@
 --- 
-category: child
 heading: child(elements, [attributes])
+category: child
 ---
 
 Same as [.append()](/api/append), but with this method, the *newly appended elements* are returned as a Pablo collection.

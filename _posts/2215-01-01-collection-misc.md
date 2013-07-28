@@ -1,6 +1,6 @@
 --- 
-category: api
 heading: Collection Misc
+category: api
 ---
 
 #### [clone(\[deepDom\], \[withData\], \[deepData\])](/api/clone/)

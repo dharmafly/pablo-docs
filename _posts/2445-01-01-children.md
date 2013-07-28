@@ -1,6 +1,6 @@
 --- 
-category: children
 heading: children()
+category: children
 ---
 
 Returns a collection containing the direct child nodes for each element in the collection.
