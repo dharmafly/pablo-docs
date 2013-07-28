@@ -41,7 +41,7 @@ Start drawing:
             Pablo(this).attr('fill', 'red');
         });
 
-Something a bit more ambitious...
+Or, for something a bit more ambitious... 
 
     /* Inside an HTML element, append an <svg> root */
     var paper = Pablo(demoElement).svg({height:220}),
@@ -83,19 +83,19 @@ Something a bit more ambitious...
 
         document.addEventListener('DOMContentLoaded', function(){
             var jQuery = satya.jQuery,
-                control = jQuery(' <a>show</a>').appendTo(p),
+                control = jQuery('<a>(show)</a>').appendTo(p),
                 content = jQuery(p).next().hide(),
                 hidden = true;
 
             control.on('click', function(){
                 hidden = !hidden;
                 if (hidden){
-                    content.hide();
-                    control.text('show');
+                    control.text('(show)');
+                    content.slideUp();
                 }
                 else {
-                    content.show();
-                    control.text('hide');
+                    control.text('(hide)');
+                    content.slideDown();
                 }
             });
         }, false);
