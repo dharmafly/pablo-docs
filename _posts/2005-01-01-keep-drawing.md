@@ -1,6 +1,6 @@
 --- 
-heading: Keep drawing
 category: overview
+heading: Keep drawing
 ---
 
 To draw something a bit more ambitious... 

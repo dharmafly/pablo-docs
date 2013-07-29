@@ -1,10 +1,8 @@
 --- 
-jquery_no_conflict: true
-twitter_url: https://twitter.com/dharmafly
-lang: javascript
-safe: false
-project_url: https://github.com/dharmafly/pablo
-theme: horus
+twitter_name: Dharmafly
+project_name: Pablo
+scripts: 
+- src: /downloads/pablo.min.js
 sections: 
 - name: Overview
   path: /index.html
@@ -14,35 +12,37 @@ sections:
   path: /misc/index.html
 - name: Resources
   path: /resources/index.html
-pygments: false
-markdown: maruku
-permalink: /:title
-scripts: 
-- src: /downloads/pablo.min.js
-ga_id: UA-34978047-1
-download_links: 
-- text: pablo.js
-  subtext: v{{ version }}
-  title: Full source code, for use in development
-  href: http://pablojs.com/downloads/pablo.js
-- text: pablo.min.js
-  subtext: v{{ version }}
-  title: Minified, for use in production
-  href: http://pablojs.com/downloads/pablo.min.js
-- text: Edge
-  subtext: (master)
-  title: Latest codebase (zip); potentially unstable
-  href: https://github.com/dharmafly/pablo/zipball/master
-future: true
-project_name: Pablo
-quote: 
-- quote: Painting is just another way of keeping a diary.
-- cite: Pablo Picasso
-lsi: false
-baseurl: /
 exclude: 
 - README.md
 - assets
 - FiddlerRules.farx
-twitter_name: Dharmafly
+project_url: https://github.com/dharmafly/pablo
 version: 0.3.0
+download_links: 
+- href: http://pablojs.com/downloads/pablo.js
+  subtext: v{{ version }}
+  title: Full source code, for use in development
+  text: pablo.js
+- href: http://pablojs.com/downloads/pablo.min.js
+  subtext: v{{ version }}
+  title: Minified, for use in production
+  text: pablo.min.js
+- href: https://github.com/dharmafly/pablo/zipball/master
+  subtext: (master)
+  title: Latest codebase (zip); potentially unstable
+  text: Edge
+permalink: /:title
+baseurl: /
+lang: javascript
+markdown: maruku
+jquery_no_conflict: true
+twitter_url: https://twitter.com/dharmafly
+safe: false
+future: true
+lsi: false
+theme: horus
+ga_id: UA-34978047-1
+quote: 
+- quote: Painting is just another way of keeping a diary.
+- cite: Pablo Picasso
+pygments: false

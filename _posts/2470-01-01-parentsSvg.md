@@ -1,6 +1,6 @@
 --- 
-heading: parentsSvg([filter])
 category: parentssvg
+heading: parentsSvg([filter])
 ---
 
 Returns a collection containing the svg parents from closest to oldest for every element in the collection.
