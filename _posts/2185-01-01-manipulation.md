@@ -1,6 +1,6 @@
 --- 
+heading: Manipulation
 category: api
-heading: DOM manipulation
 ---
 
 These collection methods manipulate DOM elements.
