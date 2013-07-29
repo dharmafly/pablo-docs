@@ -99,7 +99,7 @@ Each method is linked to the element's page on [MDN's element reference][mdn-svg
 * [vkern()][vkern]
 
 
-## Note: Creating SVG with markup
+## Creating SVG with markup
 
 Pablo does not (currently) support the creation of SVG elements by passing in a string of SVG markup. Perhaps it will in future.
 

@@ -1,48 +1,48 @@
 --- 
-safe: false
-project_url: https://github.com/dharmafly/pablo
-version: 0.3.0
-future: true
 ga_id: UA-34978047-1
-twitter_url: https://twitter.com/dharmafly
+version: 0.3.0
 twitter_name: Dharmafly
-lang: javascript
-baseurl: /
+quote: 
+- quote: Painting is just another way of keeping a diary.
+- cite: Pablo Picasso
+download_links: 
+- href: http://pablojs.com/downloads/pablo.js
+  title: Full source code, for use in development
+  subtext: v{{ version }}
+  text: pablo.js
+- href: http://pablojs.com/downloads/pablo.min.js
+  title: Minified, for use in production
+  subtext: v{{ version }}
+  text: pablo.min.js
+- href: https://github.com/dharmafly/pablo/zipball/master
+  title: Latest codebase (zip); potentially unstable
+  subtext: (master)
+  text: Edge
 exclude: 
 - README.md
 - assets
 - FiddlerRules.farx
-project_name: Pablo
-markdown: maruku
+pygments: false
 theme: horus
+twitter_url: https://twitter.com/dharmafly
 scripts: 
 - src: /downloads/pablo.min.js
-quote: 
-- quote: Painting is just another way of keeping a diary.
-- cite: Pablo Picasso
-sections: 
-- name: Overview
-  path: /index.html
-- name: API
-  path: /api/index.html
-- name: Misc
-  path: /misc/index.html
-- name: Resources
-  path: /resources/index.html
-lsi: false
 jquery_no_conflict: true
-download_links: 
-- href: http://pablojs.com/downloads/pablo.js
-  subtext: v{{ version }}
-  text: pablo.js
-  title: Full source code, for use in development
-- href: http://pablojs.com/downloads/pablo.min.js
-  subtext: v{{ version }}
-  text: pablo.min.js
-  title: Minified, for use in production
-- href: https://github.com/dharmafly/pablo/zipball/master
-  subtext: (master)
-  text: Edge
-  title: Latest codebase (zip); potentially unstable
 permalink: /:title
-pygments: false
+baseurl: /
+lang: javascript
+markdown: maruku
+project_name: Pablo
+project_url: https://github.com/dharmafly/pablo
+sections: 
+- path: /index.html
+  name: Overview
+- path: /api/index.html
+  name: API
+- path: /misc/index.html
+  name: Misc
+- path: /resources/index.html
+  name: Resources
+safe: false
+future: true
+lsi: false
