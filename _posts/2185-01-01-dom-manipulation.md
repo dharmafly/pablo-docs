@@ -1,7 +1,9 @@
 --- 
 category: api
-heading: Manipulation
+heading: DOM manipulation
 ---
+
+These collection methods manipulate DOM elements.
 
 #### [append(elements)](/api/append/)
 

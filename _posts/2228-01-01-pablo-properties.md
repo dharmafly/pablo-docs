@@ -3,6 +3,8 @@ category: api
 heading: Pablo properties
 ---
 
+These are the properties available on the global `Pablo` object.
+
 #### [Pablo.v](/api/v/)
 _alias: .pablo_
 
@@ -19,17 +21,13 @@ Returns `true` if Pablo is supported in the current browser.
 
 An array of vendor-prefixes used by `.cssPrefix()` and `Pablo.cssPrefix()`.
 
-
-
 #### Pablo.Collection
 
 The constructor function used internally for creating a new Pablo collection.
 
-
 #### Pablo.svgVersion
 
 The version of SVG used internally on SVG root elements. Currently `1.1`.
-
 
 #### Pablo.ns
 

@@ -1,16 +1,9 @@
 --- 
 category: api
-heading: Collection Manipulation
+heading: Change collection
 ---
 
-#### [toArray()](/api/toArray/)
-
-Return the collection as a native JavaScript array.
-
-#### [size()](/api/size/)
-_alias: length_
-
-Return the number of elements in the collection.
+These collection methods are used to add, remove and re-order elements in the collection. See also [Iteration](/api/#iteration) and [Duplicate](/api/#duplicate).
 
 #### [push(elements)](/api/push/)
 _alias: add(element)_
@@ -32,10 +25,6 @@ Remove the last element in the collection and return it, wrapped in a new collec
 #### [shift()](/api/shift/)
 
 Remove the first element in the collection and return it, wrapped in a new collection.
-
-#### [slice(start, \[end\])](/api/slice/)
-
-Slice the elements from the collection, according to the passed indices, and return them wrapped in a new collection.
 
 #### [reverse()](/api/reverse/)
 
