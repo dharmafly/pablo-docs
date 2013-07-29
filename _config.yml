@@ -1,48 +1,48 @@
 --- 
+ga_id: UA-34978047-1
+version: 0.3.0
+lang: javascript
+scripts: 
+- src: /downloads/pablo.min.js
+sections: 
+- path: /index.html
+  name: Overview
+- path: /api/index.html
+  name: API
+- path: /misc/index.html
+  name: Misc
+- path: /resources/index.html
+  name: Resources
+twitter_url: https://twitter.com/dharmafly
+quote: 
+- quote: Painting is just another way of keeping a diary.
+- cite: Pablo Picasso
+safe: false
+permalink: /:title
+twitter_name: Dharmafly
+future: true
 exclude: 
 - README.md
 - assets
 - FiddlerRules.farx
-lang: javascript
-quote: 
-- quote: Painting is just another way of keeping a diary.
-- cite: Pablo Picasso
-baseurl: /
-download_links: 
-- title: Full source code, for use in development
-  href: http://pablojs.com/downloads/pablo.js
-  text: pablo.js
-  subtext: v{{ version }}
-- title: Minified, for use in production
-  href: http://pablojs.com/downloads/pablo.min.js
-  text: pablo.min.js
-  subtext: v{{ version }}
-- title: Latest codebase (zip); potentially unstable
-  href: https://github.com/dharmafly/pablo/zipball/master
-  text: Edge
-  subtext: (master)
-sections: 
-- name: Overview
-  path: /index.html
-- name: API
-  path: /api/index.html
-- name: Misc
-  path: /misc/index.html
-- name: Resources
-  path: /resources/index.html
-future: true
-pygments: false
-permalink: /:title
-theme: horus
-scripts: 
-- src: /downloads/pablo.min.js
-lsi: false
-twitter_url: https://twitter.com/dharmafly
-safe: false
-project_name: Pablo
-markdown: maruku
 project_url: https://github.com/dharmafly/pablo
-version: 0.3.0
+lsi: false
+project_name: Pablo
+download_links: 
+- text: pablo.js
+  title: Full source code, for use in development
+  href: http://pablojs.com/downloads/pablo.js
+  subtext: v{{ version }}
+- text: pablo.min.js
+  title: Minified, for use in production
+  href: http://pablojs.com/downloads/pablo.min.js
+  subtext: v{{ version }}
+- text: Edge
+  title: Latest codebase (zip); potentially unstable
+  href: https://github.com/dharmafly/pablo/zipball/master
+  subtext: (master)
+markdown: maruku
+baseurl: /
 jquery_no_conflict: true
-twitter_name: Dharmafly
-ga_id: UA-34978047-1
+theme: horus
+pygments: false
