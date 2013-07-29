@@ -1,6 +1,6 @@
 --- 
-category: prevsiblings
 heading: prevSiblings([filter])
+category: prevsiblings
 ---
 
 Returns a collection of all the collection’s siblings before it in the DOM.

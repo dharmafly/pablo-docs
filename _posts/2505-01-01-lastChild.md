@@ -1,6 +1,6 @@
 --- 
-category: lastchild
 heading: lastChild([filter])
+category: lastchild
 ---
 
 Returns a collection of the collection’s last child.
