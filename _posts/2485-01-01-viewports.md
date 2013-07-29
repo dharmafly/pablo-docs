@@ -1,6 +1,6 @@
 --- 
-heading: viewports(\[filter\])
 category: viewports
+heading: viewports(\[filter\])
 ---
 
 Returns a collection of the collection svg element’s viewport ancestors from closest to furthest for each element in the collection.
