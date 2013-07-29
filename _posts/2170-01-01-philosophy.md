@@ -1,6 +1,6 @@
 --- 
-heading: Philosophy
 category: api
+heading: Philosophy
 ---
 
 Pablo has an API that will feel familiar to [jQuery][jquery] users (although it isn't important to have prior experience with jQuery). Methods are generally chainable and allow both setting and getting within the same function. Pablo's functionality is centred around array-like collections of DOM elements, much like jQuery's collections. These DOM elements can be SVG or HTML, although Pablo focuses on SVG.

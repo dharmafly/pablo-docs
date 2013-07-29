@@ -1,6 +1,6 @@
 --- 
-heading: Contributing
 category: overview
+heading: Contributing
 ---
 
 It's early days, so your feedback is welcome. For bug reports and requests, please use the GitHub ['Issues' page][issues] or contact [@premasagar][prem-twitter].
@@ -12,4 +12,5 @@ It's early days, so your feedback is welcome. For bug reports and requests, plea
 [prem-twitter]: https://twitter.com/premasagar
 [docs-folder]: https://github.com/dharmafly/pablo/tree/master/docs
 [pull-requests]: https://help.github.com/articles/using-pull-requests
+[pablo-site]: http://pablojs.com
 [markdown-syntax]: http://daringfireball.net/projects/markdown/syntax

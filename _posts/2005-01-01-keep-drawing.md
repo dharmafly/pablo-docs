@@ -1,6 +1,6 @@
 --- 
-heading: Keep drawing
 category: overview
+heading: Keep drawing
 ---
 
 To draw something a bit more ambitious... 
@@ -65,7 +65,3 @@ To draw something a bit more ambitious...
     }
 }());
 </script>
-
-**See the [API Reference][api] for full details.**
-
-[api]: /api/

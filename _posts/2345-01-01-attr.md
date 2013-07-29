@@ -1,6 +1,6 @@
 --- 
-heading: attr()
 category: attr
+heading: attr()
 ---
 
 Returns an object listing all the attributes from the first element in the collection.

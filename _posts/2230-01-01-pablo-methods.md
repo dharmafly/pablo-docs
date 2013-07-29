@@ -1,6 +1,6 @@
 --- 
-heading: Pablo methods
 category: api
+heading: Pablo methods
 ---
 
 These are the methods available on the global `Pablo` object.
@@ -39,7 +39,7 @@ Create a factory function to generate templates of SVG elements, allowing custom
 Return `true` if the passed object can be contained within a Pablo 
 collection.
 
-#### [Pablo.extend(target, source, [source2...], [deep])](/api/extend/)
+#### [Pablo.extend(target, source, \[source2...\], \[deep\])](/api/extend/)
 
 Extend an object with properties from any number of other objects, and return the result.
 
