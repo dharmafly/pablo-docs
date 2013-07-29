@@ -1,6 +1,6 @@
 --- 
-heading: select(fn, [ctx])
 category: select
+heading: select(fn, [ctx])
 ---
 
 Passes each element in the collection through an iterator function, returning a new collection of all the elements for which the iterator returns true. The iterator is passed two arguments: the element and its index.

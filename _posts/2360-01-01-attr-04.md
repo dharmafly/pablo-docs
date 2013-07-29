@@ -1,6 +1,6 @@
 --- 
-heading: attr(attributes)
 category: attr
+heading: attr(attributes)
 ---
 
 Sets multiple attributes (supplied as an object), on all elements in the collection and returns the collection.
