@@ -1,9 +1,9 @@
 --- 
-category: lastchild
 heading: lastChild([filter])
+category: lastchild
 ---
 
-Returns a collection of the collection’s last child.
+Returns a collection of the collection’s last child element.
 
     var paper = Pablo(demoElement).svg({height: 60});
 

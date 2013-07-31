@@ -1,6 +1,6 @@
 --- 
-category: data
 heading: data(key)
+category: data
 ---
 
 The `.data(key)` method will return the associated value to that key on the collection.

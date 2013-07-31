@@ -1,9 +1,9 @@
 --- 
-category: firstchild
 heading: firstChild([filter])
+category: firstchild
 ---
 
-Returns a collection of the collection’s first child.
+Returns a collection of the collection’s first child element.
 
     var paper = Pablo(demoElement).svg({height: 60});
 

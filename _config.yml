@@ -1,48 +1,48 @@
 --- 
-twitter_name: Dharmafly
-project_name: Pablo
-scripts: 
-- src: /downloads/pablo.min.js
-sections: 
-- name: Overview
-  path: /index.html
-- name: API
-  path: /api/index.html
-- name: Misc
-  path: /misc/index.html
-- name: Resources
-  path: /resources/index.html
+lang: javascript
+safe: false
+pygments: false
 exclude: 
 - README.md
 - assets
 - FiddlerRules.farx
-project_url: https://github.com/dharmafly/pablo
-version: 0.3.0
-download_links: 
-- href: http://pablojs.com/downloads/pablo.js
-  subtext: v{{ version }}
-  title: Full source code, for use in development
-  text: pablo.js
-- href: http://pablojs.com/downloads/pablo.min.js
-  subtext: v{{ version }}
-  title: Minified, for use in production
-  text: pablo.min.js
-- href: https://github.com/dharmafly/pablo/zipball/master
-  subtext: (master)
-  title: Latest codebase (zip); potentially unstable
-  text: Edge
-permalink: /:title
-baseurl: /
-lang: javascript
-markdown: maruku
 jquery_no_conflict: true
-twitter_url: https://twitter.com/dharmafly
-safe: false
+sections: 
+- path: /index.html
+  name: Overview
+- path: /api/index.html
+  name: API
+- path: /misc/index.html
+  name: Misc
+- path: /resources/index.html
+  name: Resources
 future: true
 lsi: false
-theme: horus
+project_url: https://github.com/dharmafly/pablo
+permalink: /:title
+baseurl: /
+project_name: Pablo
+twitter_name: Dharmafly
 ga_id: UA-34978047-1
+markdown: maruku
+version: 0.3.0
+theme: horus
+twitter_url: https://twitter.com/dharmafly
+scripts: 
+- src: /downloads/pablo.min.js
 quote: 
 - quote: Painting is just another way of keeping a diary.
 - cite: Pablo Picasso
-pygments: false
+download_links: 
+- text: pablo.js
+  subtext: v{{ version }}
+  href: http://pablojs.com/downloads/pablo.js
+  title: Full source code, for use in development
+- text: pablo.min.js
+  subtext: v{{ version }}
+  href: http://pablojs.com/downloads/pablo.min.js
+  title: Minified, for use in production
+- text: Edge
+  subtext: (master)
+  href: https://github.com/dharmafly/pablo/zipball/master
+  title: Latest codebase (zip); potentially unstable

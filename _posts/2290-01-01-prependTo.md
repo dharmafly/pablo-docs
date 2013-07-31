@@ -1,8 +1,10 @@
 --- 
-category: prependto
 heading: prependTo(elements, [attributes])
+category: prependto
 ---
 
-Same as [.appendTo()](/api/appendTo) but, with this method, the elements in the collection are inserted as the first child of the passed elements.
+Same as [.appendTo()][appendTo] but, with this method, the elements in the collection are inserted as the _first child_ of the passed elements.
 
     Pablo.circle().prependTo(paper);
+
+[appendTo]: /api/appendTo/

@@ -1,6 +1,6 @@
 --- 
-category: cssprefix
 heading: cssPrefix(property, value)
+category: cssprefix
 ---
 
 Performs the same action as `.css(property, value)`, but also sets the CSS property with each of the common browser vendor prefixes: `-moz-`, `-webkit-`, `-ms-`, `-o-` and `-khtml-`.
@@ -22,7 +22,7 @@ Performs the same action as `.css(property, value)`, but also sets the CSS prope
     }
     changeOpacity();
 
-In this example, the last line is equivalent to:
+In this example, `square.cssPrefix('transition', 'opacity 0.5s')` is equivalent to:
 
     square.css({
         transition: 'opacity 0.5s',
