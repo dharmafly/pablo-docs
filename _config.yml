@@ -1,48 +1,48 @@
 --- 
-quote: 
-- quote: Painting is just another way of keeping a diary.
-- cite: Pablo Picasso
-project_url: https://github.com/dharmafly/pablo
-lang: javascript
-lsi: false
+twitter_name: Dharmafly
+scripts: 
+- src: /downloads/pablo.min.js
 baseurl: /
-twitter_url: https://twitter.com/dharmafly
-safe: false
-theme: horus
-project_name: Pablo
-sections: 
-- path: /index.html
-  name: Overview
-- path: /api/index.html
-  name: API
-- path: /misc/index.html
-  name: Misc
-- path: /resources/index.html
-  name: Resources
-future: true
-jquery_no_conflict: true
-download_links: 
-- subtext: v{{ version }}
-  text: pablo.js
-  title: Full source code, for use in development
-  href: http://pablojs.com/downloads/pablo.js
-- subtext: v{{ version }}
-  text: pablo.min.js
-  title: Minified, for use in production
-  href: http://pablojs.com/downloads/pablo.min.js
-- subtext: (master)
-  text: Edge
-  title: Latest codebase (zip); potentially unstable
-  href: https://github.com/dharmafly/pablo/zipball/master
 version: 0.3.0
-pygments: false
 ga_id: UA-34978047-1
-markdown: maruku
+pygments: false
+theme: horus
+permalink: /:title
+lang: javascript
 exclude: 
 - README.md
 - assets
 - FiddlerRules.farx
-permalink: /:title
-twitter_name: Dharmafly
-scripts: 
-- src: /downloads/pablo.min.js
+safe: false
+future: true
+lsi: false
+project_name: Pablo
+jquery_no_conflict: true
+quote: 
+- quote: Painting is just another way of keeping a diary.
+- cite: Pablo Picasso
+sections: 
+- name: Overview
+  path: /index.html
+- name: API
+  path: /api/index.html
+- name: Misc
+  path: /misc/index.html
+- name: Resources
+  path: /resources/index.html
+project_url: https://github.com/dharmafly/pablo
+twitter_url: https://twitter.com/dharmafly
+download_links: 
+- title: Full source code, for use in development
+  text: pablo.js
+  href: http://pablojs.com/downloads/pablo.js
+  subtext: v{{ version }}
+- title: Minified, for use in production
+  text: pablo.min.js
+  href: http://pablojs.com/downloads/pablo.min.js
+  subtext: v{{ version }}
+- title: Latest codebase (zip); potentially unstable
+  text: Edge
+  href: https://github.com/dharmafly/pablo/zipball/master
+  subtext: (master)
+markdown: maruku
