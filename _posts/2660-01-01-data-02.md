@@ -1,6 +1,6 @@
 --- 
-heading: data(key, value)
 category: data
+heading: data(key, value)
 ---
 
 The `.data(key, value)` method will set a key/value pair (overwriting if already set) on the collection.
