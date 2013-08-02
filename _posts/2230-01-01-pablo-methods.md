@@ -1,6 +1,6 @@
 --- 
-category: api
 heading: Pablo methods
+category: api
 ---
 
 These are the methods available on the global `Pablo` object.
