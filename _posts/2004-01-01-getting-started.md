@@ -1,6 +1,6 @@
 --- 
-heading: Getting started
 category: overview
+heading: Getting started
 ---
 
 Download either the <a href="http://pablojs.com/downloads/pablo.js" target="_blank">full script</a> for development or the <a href="http://pablojs.com/downloads/pablo.min.js" target="_blank">minified script</a> for production, and reference the script in your web page's HTML:
