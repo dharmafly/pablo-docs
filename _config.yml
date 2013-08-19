@@ -1,48 +1,48 @@
 --- 
 project_name: Pablo
-theme: horus
-quote: 
-- quote: Painting is just another way of keeping a diary.
-- cite: Pablo Picasso
-version: 0.3.0
-markdown: maruku
-ga_id: UA-34978047-1
+twitter_url: https://twitter.com/dharmafly
+future: true
+lsi: false
+baseurl: /
+project_url: https://github.com/dharmafly/pablo
 safe: false
 pygments: false
 permalink: /:title
-baseurl: /
-download_links: 
-- title: Full source code, for use in development
-  subtext: v{{ version }}
-  href: http://pablojs.com/downloads/pablo.js
-  text: pablo.js
-- title: Minified, for use in production
-  subtext: v{{ version }}
-  href: http://pablojs.com/downloads/pablo.min.js
-  text: pablo.min.js
-- title: Latest codebase (zip); potentially unstable
-  subtext: (master)
-  href: https://github.com/dharmafly/pablo/zipball/master
-  text: Edge
-sections: 
-- name: Overview
-  path: /index.html
-- name: API
-  path: /api/index.html
-- name: Misc
-  path: /misc/index.html
-- name: Resources
-  path: /resources/index.html
-lsi: false
-project_url: https://github.com/dharmafly/pablo
 jquery_no_conflict: true
-twitter_url: https://twitter.com/dharmafly
-lang: javascript
-twitter_name: Dharmafly
+theme: horus
+sections: 
+- path: /index.html
+  name: Overview
+- path: /api/index.html
+  name: API
+- path: /misc/index.html
+  name: Misc
+- path: /resources/index.html
+  name: Resources
 scripts: 
 - src: /downloads/pablo.min.js
-future: true
 exclude: 
 - README.md
 - assets
 - FiddlerRules.farx
+download_links: 
+- subtext: v{{ version }}
+  title: Full source code, for use in development
+  href: http://pablojs.com/downloads/pablo.js
+  text: pablo.js
+- subtext: v{{ version }}
+  title: Minified, for use in production
+  href: http://pablojs.com/downloads/pablo.min.js
+  text: pablo.min.js
+- subtext: (master)
+  title: Latest codebase (zip); potentially unstable
+  href: https://github.com/dharmafly/pablo/zipball/master
+  text: Edge
+lang: javascript
+quote: 
+- quote: Painting is just another way of keeping a diary.
+- cite: Pablo Picasso
+markdown: maruku
+twitter_name: Dharmafly
+ga_id: UA-34978047-1
+version: 0.3.0
