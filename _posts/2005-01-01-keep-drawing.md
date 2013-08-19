@@ -1,9 +1,9 @@
 --- 
-heading: Keep drawing
 category: overview
+heading: Keep drawing
 ---
 
-To draw something a bit more ambitious... 
+Let's try something a bit more ambitious, using attribute functions and some more user interaction... 
 
     /* Inside an HTML element, append an <svg> root */
     var paper = Pablo(demoElement).svg({height:220}),

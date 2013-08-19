@@ -1,6 +1,6 @@
 --- 
-heading: isNodeList(obj)
 category: isnodelist
+heading: isNodeList(obj)
 ---
 
 Returns boolean `true` if the object is DOM NodeList - e.g. the result of a selector query or child nodes of an element; otherwise `false`.

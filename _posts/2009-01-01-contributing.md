@@ -1,13 +1,13 @@
 --- 
-heading: Contributing
 category: overview
+heading: Contributing
 ---
 
 Your feedback is welcome. For bug reports and requests, please use the GitHub ['Issues' page][issues] or contact [@premasagar][prem-twitter].
 
 [Pull requests][pullrequests] are welcome.
 
-To update the documentation on [pablojs.com][pablo-site], fork the [dharmafly/pablo-docs][pablo-docs] repo, edit the [Markdown][markdown-syntax] files in the [docs][docs-folder] folder on the master branch, and then send a [pull request][docs-pullrequests] with the changes.
+To update the documentation on [pablojs.com][pablo-site], fork the [dharmafly/pablo-docs][pablo-docs] repo, edit the [Markdown][markdown-syntax] files in the [docs][docs-folder] folder on the master branch, and send a [pull request][docs-pullrequests] with the changes.
 
 
 [issues]: https://github.com/dharmafly/pablo/issues

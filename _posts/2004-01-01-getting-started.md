@@ -1,9 +1,9 @@
 --- 
-heading: Getting started
 category: overview
+heading: Getting started
 ---
 
-Download either the <a href="http://pablojs.com/downloads/pablo.js" target="_blank">full script</a> for development or the <a href="http://pablojs.com/downloads/pablo.min.js" target="_blank">minified script</a> for production and reference it in your web page's HTML:
+Download either the <a href="http://pablojs.com/downloads/pablo.js" target="_blank">full script</a> for development or the <a href="http://pablojs.com/downloads/pablo.min.js" target="_blank">minified script</a> for production, and reference the script in your web page's HTML:
 
     <script src="pablo.min.js"></script>
 
@@ -34,4 +34,4 @@ Check the browser supports SVG <a id="has-browser-support" href="http://caniuse.
         /* Add non-SVG fallback content */
     }
 
-_Note: in this documentation, all code snippets with 'Run' buttons are editable, except on mobiles_.
+_On this website, you can edit any of the code snippets that have 'Run' buttons, and re-run the script (except on mobile browsers)._
