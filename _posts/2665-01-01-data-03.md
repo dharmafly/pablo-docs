@@ -1,6 +1,6 @@
 --- 
-category: data
 heading: data(object)
+category: data
 ---
 
 The `.data(object)` method will set multiple key/value pairs (overwriting if already set) on the collection if an object is passed in.

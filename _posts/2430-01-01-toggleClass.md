@@ -1,6 +1,6 @@
 --- 
-category: toggleclass
 heading: toggleClass(name)
+category: toggleclass
 ---
 
 For each element in the collection, if the CSS class is present it will be removed, otherwise it will be added.
