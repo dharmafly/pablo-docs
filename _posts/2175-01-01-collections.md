@@ -1,13 +1,13 @@
 --- 
-heading: Collections
 category: api
+heading: Collections
 ---
 
 When creating elements, or selecting SVG and HTML content from the page, Pablo encloses these elements inside an [array][array]-like "collection". Elements are usually manipulated and filtered via the methods on the collection object, though the elements are also available to work with directly.
 
 Methods are generally chainable:
 
-    // Wrap an HTML element
+    /* Wrap an HTML element */
     Pablo(demoElement)
         // Append an <svg> element
         .svg({width:140, height:140})
