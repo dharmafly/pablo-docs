@@ -1,6 +1,6 @@
 --- 
-category: api
 heading: Element reference
+category: api
 ---
 
 SVG elements can be created with the shortcut methods listed below. See the [Creation](/api/#creation) section for information on how to use them.
@@ -98,12 +98,6 @@ Each method is linked to the element's page on [MDN's element reference][mdn-svg
 * [view()][view]
 * [vkern()][vkern]
 
-
-## Creating SVG with markup
-
-Pablo does not (currently) support the creation of SVG elements by passing in a string of SVG markup. Perhaps it will in future.
-
-There is no native support in SVG for a property like HTML elements' `innerHTML`. The [innerSVG](http://code.google.com/p/innersvg/) library should work as a polyfill replacement.
 
 [resources]: http://pablojs.com/resources/
 [mdn-svg-el]: https://developer.mozilla.org/en-US/SVG/Element

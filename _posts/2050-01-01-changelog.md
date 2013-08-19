@@ -1,7 +1,12 @@
 --- 
-category: misc
 heading: Changelog
+category: misc
 ---
+
+
+* v0.3.1
+    - Add Pablo.toSvg()
+    - Add Pablo.hasSvgNamespace()
 
 * v0.3
     - Rename `.root()` to `.svg()`

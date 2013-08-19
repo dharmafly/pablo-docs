@@ -1,6 +1,6 @@
 --- 
-category: api
 heading: Pablo methods
+category: api
 ---
 
 These are the methods available on the global `Pablo` object.
@@ -17,6 +17,10 @@ Return `true` if the passed object is a DOM element.
 #### [Pablo.isSVGElement(obj)](/api/isSVGElement/)
 
 Return `true` if the passed object is an SVG element.
+
+#### Pablo.hasSvgNamespace(obj)
+
+Return `true` if the passed object has an SVG namespace.
 
 #### [Pablo.isNodeList(obj)](/api/isNodeList/)
 
