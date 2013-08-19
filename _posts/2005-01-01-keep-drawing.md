@@ -1,6 +1,6 @@
 --- 
-category: overview
 heading: Keep drawing
+category: overview
 ---
 
 To draw something a bit more ambitious... 
