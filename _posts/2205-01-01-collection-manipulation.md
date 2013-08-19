@@ -1,9 +1,9 @@
 --- 
-category: api
 heading: Collection manipulation
+category: api
 ---
 
-These collection methods are used to add, remove and re-order elements in the collection. See also [Iteration](/api/#iteration) and [Duplicate](/api/#duplicate).
+These collection methods are used to add, remove and re-order elements in the collection. See also [Iteration](/api/#iteration) and [Duplication](/api/#duplicate).
 
 #### [push(elements)](/api/push/)
 _alias: add(element)_

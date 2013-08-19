@@ -1,6 +1,6 @@
 --- 
-category: api
 heading: Iteration
+category: api
 ---
 
 These collection methods are used to filter or perform a function on each element in the collection.

@@ -1,6 +1,6 @@
 --- 
-category: overview
 heading: Contributing
+category: overview
 ---
 
 Your feedback is welcome. For bug reports and requests, please use the GitHub ['Issues' page][issues] or contact [@premasagar][prem-twitter].
