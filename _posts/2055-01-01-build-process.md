@@ -1,6 +1,6 @@
 --- 
-heading: Build Process
 category: misc
+heading: Build Process
 ---
 
 If you are changing the core Pablo library, you can build your own minified version.
@@ -19,4 +19,6 @@ Currently, the build process handles code linting and minification. In the futur
     $ npm install
     $ grunt
 
-A copy of `pablo.min.js` will be saved in the `build/dist` directory.
+A copy of `pablo.min.js` and its [source map][sourcemap] file will be saved in the `build` directory.
+
+[sourcemap]: http://www.html5rocks.com/en/tutorials/developertools/sourcemaps/
