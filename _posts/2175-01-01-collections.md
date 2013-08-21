@@ -10,7 +10,7 @@ Elements are usually manipulated and filtered via the methods on the collection 
 
 ## Method chaining
 
-Collection methods are generally chainable.
+Collection methods are generally chainable:
 
     /* Append an <svg> element to an HTML element */
     var svg = Pablo(demoElement).svg({
@@ -37,7 +37,7 @@ Collection methods are generally chainable.
 
 ## Read/write methods
 
-Many methods can either get or set properties on the elements.
+Many methods can either get or set properties on the elements:
 
     // Set an attribute
     shape.attr('fill', 'orange');
