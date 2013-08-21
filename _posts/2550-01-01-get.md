@@ -1,6 +1,6 @@
 --- 
-heading: get(index)
 category: get
+heading: get(index)
 ---
 
 Alias `elements(index)`.

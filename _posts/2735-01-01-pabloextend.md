@@ -1,6 +1,6 @@
 --- 
-heading: extend(target, source)
 category: extend
+heading: extend(target, source)
 ---
 
 Copies properties from the `source` object to the `target` object and returns the target.

@@ -1,6 +1,6 @@
 --- 
-heading: first()
 category: first
+heading: first()
 ---
 
 Returns a new collection containing the first element in the original collection. This is the same as calling [collection.eq(0)](/api/eq).

@@ -1,6 +1,6 @@
 --- 
-heading: pop()
 category: pop
+heading: pop()
 ---
 
 Removes the last element in the collection and returns it, wrapped in a new collection.

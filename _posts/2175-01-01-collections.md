@@ -1,6 +1,6 @@
 --- 
-heading: Collections
 category: api
+heading: Collections
 ---
 
 When creating elements, or selecting SVG and HTML from the page, Pablo encloses these elements within an [array][array]-like "collection".
@@ -14,7 +14,7 @@ Methods are generally chainable:
         width: 220,
         height: 220
     });
-    
+
     /* Append a <rect> element to the <svg> */
     svg.rect({width:200, height:100})
 
@@ -23,8 +23,13 @@ Methods are generally chainable:
         .transform('rotate', 45)
 
         // Change attributes
+        .addClass('guernica')
         .attr('fill', 'turquoise')
-        .addClass('guernica');
+
+        // Add events
+        .on('click', function(){
+            alert('yes');
+        });
 
 
 Many methods can both read and write changes to SVG elements:
