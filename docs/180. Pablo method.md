@@ -39,5 +39,4 @@ Creates multiple named elements and returns them in a collection.
 
 Converts SVG markup into a collection of elements. (experimental)
 
-
 [collections]: #collections
