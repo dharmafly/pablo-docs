@@ -1,39 +1,28 @@
 --- 
-project_url: https://github.com/dharmafly/pablo
-jquery_no_conflict: true
-theme: horus
-scripts: 
-- src: /downloads/pablo.min.js
+version: 0.3.2
+lsi: false
+permalink: /:title
+baseurl: /
 exclude: 
 - README.md
 - assets
 - FiddlerRules.farx
-version: 0.3.2
-twitter_name: Dharmafly
-download_links: 
-- href: http://pablojs.com/downloads/pablo.js
-  title: Full source code, for use in development
-  subtext: v{{ version }}
-  text: pablo.js
-- href: http://pablojs.com/downloads/pablo.min.js
-  title: Minified, for use in production
-  subtext: v{{ version }}
-  text: pablo.min.js
-- href: https://github.com/dharmafly/pablo/zipball/master
-  title: Latest codebase (zip); potentially unstable
-  subtext: (master)
-  text: Edge
 safe: false
-future: true
-ga_id: UA-34978047-1
-lsi: false
-pygments: false
-baseurl: /
-quote: 
-- quote: Painting is just another way of keeping a diary.
-- cite: Pablo Picasso
-permalink: /:title
-project_name: Pablo
+download_links: 
+- title: Full source code, for use in development
+  text: pablo.js
+  href: http://pablojs.com/downloads/pablo.js
+  subtext: v{{ version }}
+- title: Minified, for use in production
+  text: pablo.min.js
+  href: http://pablojs.com/downloads/pablo.min.js
+  subtext: v{{ version }}
+- title: Latest codebase (zip); potentially unstable
+  text: Edge
+  href: https://github.com/dharmafly/pablo/zipball/master
+  subtext: (master)
+jquery_no_conflict: true
+twitter_name: Dharmafly
 sections: 
 - name: Overview
   path: /index.html
@@ -43,6 +32,17 @@ sections:
   path: /misc/index.html
 - name: Resources
   path: /resources/index.html
-twitter_url: https://twitter.com/dharmafly
-lang: javascript
 markdown: maruku
+ga_id: UA-34978047-1
+pygments: false
+theme: horus
+twitter_url: https://twitter.com/dharmafly
+scripts: 
+- src: /downloads/pablo.min.js
+lang: javascript
+quote: 
+- quote: Painting is just another way of keeping a diary.
+- cite: Pablo Picasso
+future: true
+project_name: Pablo
+project_url: https://github.com/dharmafly/pablo
