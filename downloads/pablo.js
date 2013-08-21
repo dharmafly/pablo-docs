@@ -5,7 +5,7 @@
        Dharmafly <http://dharmafly.com>
 
     Repo: <https://github.com/dharmafly/pablo>
-    MIT license: http://opensource.org/licenses/mit-license.php
+    MIT license
 
 */
 /*jshint newcap:false */
@@ -144,7 +144,9 @@
     }
 
     function isArrayLike(obj){
-        return !!(obj && typeof obj === 'object' && typeof obj.length === 'number');
+        return obj &&
+            (typeof obj === 'object' || typeof obj === 'function') &&
+            typeof obj.length === 'number';
     }
     
     function isElement(obj){
