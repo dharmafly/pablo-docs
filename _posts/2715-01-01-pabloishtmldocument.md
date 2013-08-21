@@ -1,6 +1,6 @@
 --- 
-category: ishtmldocument
 heading: isHTMLDocument(obj)
+category: ishtmldocument
 ---
 
 Returns `true` if the passed argument is the html document object; otherwise `false`.
