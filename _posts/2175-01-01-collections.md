@@ -1,13 +1,16 @@
 --- 
-category: api
 heading: Collections
+category: api
 ---
 
 When creating elements, or selecting SVG and HTML from the page, Pablo encloses these elements within an [array][array]-like "collection".
 
 Elements are usually manipulated and filtered via the methods on the collection object, although the elements can also be worked with directly.
 
-Methods are generally chainable:
+
+## Method chaining
+
+Collection methods are generally chainable.
 
     /* Append an <svg> element to an HTML element */
     var svg = Pablo(demoElement).svg({
@@ -32,7 +35,9 @@ Methods are generally chainable:
         });
 
 
-Many methods can both read and write changes to SVG elements:
+## Read/write methods
+
+Many methods can either get or set properties on the elements.
 
     // Set an attribute
     shape.attr('fill', 'orange');
