@@ -1,6 +1,6 @@
 --- 
-heading: make(elementName)
 category: make
+heading: make(elementName)
 ---
 
 Returns a native SVG element with the supplied name.

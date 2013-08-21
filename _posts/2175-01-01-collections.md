@@ -1,6 +1,6 @@
 --- 
-heading: Collections
 category: api
+heading: Collections
 ---
 
 When creating elements, or selecting SVG and HTML from the page, Pablo encloses these elements within an [array][array]-like "collection".
@@ -39,10 +39,10 @@ Collection methods are generally chainable:
 
 Many methods can either get or set properties on the elements:
 
-    // Set an attribute
+    /* Set an attribute */
     shape.attr('fill', 'orange');
 
-    // Get the attribute
+    /* Get the attribute */
     shape.attr('fill') === 'orange'; // true
 
 
