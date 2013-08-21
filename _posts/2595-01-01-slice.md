@@ -1,6 +1,6 @@
 --- 
-category: slice
 heading: slice(begin, [end])
+category: slice
 ---
 
 Slices the collection from the `begin` index, to the `end` index (or to the end of the collection, if `end` is omitted). This works in the same manner as [Array.slice](https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Array/slice).
