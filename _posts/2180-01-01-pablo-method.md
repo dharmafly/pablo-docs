@@ -1,6 +1,6 @@
 --- 
-heading: Pablo()
 category: api
+heading: Pablo()
 ---
 
 The `Pablo()` method creates an array-like [collection][collections] of new or pre-existing HTML or SVG elements.
@@ -37,7 +37,7 @@ Creates multiple named elements and returns them in a collection.
 
 ## [Pablo(markup)](/api/pablo/#pablo-06)
 
-Creates a collection of elements specified in SVG markup.
+Converts SVG markup into a collection of elements. (experimental)
 
 
 [collections]: #collections
