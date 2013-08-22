@@ -807,6 +807,9 @@ p.buttons {
 .show-subnav .icon{
     background-position: 2px 3px;
     float: left;
+    tap-highlight-color: rgba(0,0,0,0);
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -moz-tap-highlight-color: rgba(0,0,0,0);
 }
 
 #navigation li.show-subnav {
