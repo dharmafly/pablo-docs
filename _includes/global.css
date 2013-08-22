@@ -890,6 +890,10 @@ p.buttons {
 	background-color: #fdfdea;
 }
 
+.run output svg {
+  display: block;
+}
+
 aside li,
 .buttons .badge {
   float: left;
