@@ -1,48 +1,48 @@
 --- 
-lsi: false
-theme: horus
-ga_id: UA-34978047-1
-permalink: /:title
-quote: 
-- quote: Painting is just another way of keeping a diary.
-- cite: Pablo Picasso
-safe: false
-version: 0.3.2
-future: true
-baseurl: /
 project_name: Pablo
+scripts: 
+- src: /downloads/pablo.min.js
+pygments: false
+version: 0.3.2
+ga_id: UA-34978047-1
+project_url: https://github.com/dharmafly/pablo
+lang: javascript
+markdown: maruku
 exclude: 
 - README.md
 - assets
 - FiddlerRules.farx
-project_url: https://github.com/dharmafly/pablo
-pygments: false
-jquery_no_conflict: true
-scripts: 
-- src: /downloads/pablo.min.js
-lang: javascript
+twitter_url: https://twitter.com/dharmafly
+lsi: false
+permalink: /:title
 download_links: 
-- title: Full source code, for use in development
-  href: http://pablojs.com/downloads/pablo.js
+- href: http://pablojs.com/downloads/pablo.js
+  title: Full source code, for use in development
   subtext: v{{ version }}
   text: pablo.js
-- title: Minified, for use in production
-  href: http://pablojs.com/downloads/pablo.min.js
+- href: http://pablojs.com/downloads/pablo.min.js
+  title: Minified, for use in production
   subtext: v{{ version }}
   text: pablo.min.js
-- title: Latest codebase (zip); potentially unstable
-  href: https://github.com/dharmafly/pablo/zipball/master
+- href: https://github.com/dharmafly/pablo/zipball/master
+  title: Latest codebase (zip); potentially unstable
   subtext: (master)
   text: Edge
+future: true
+baseurl: /
 sections: 
-- path: /index.html
-  name: Overview
-- path: /api/index.html
-  name: API
-- path: /misc/index.html
-  name: Misc
-- path: /resources/index.html
-  name: Resources
-twitter_url: https://twitter.com/dharmafly
-markdown: maruku
+- name: Overview
+  path: /index.html
+- name: API
+  path: /api/index.html
+- name: Misc
+  path: /misc/index.html
+- name: Resources
+  path: /resources/index.html
+safe: false
+jquery_no_conflict: true
 twitter_name: Dharmafly
+theme: horus
+quote: 
+- quote: Painting is just another way of keeping a diary.
+- cite: Pablo Picasso
