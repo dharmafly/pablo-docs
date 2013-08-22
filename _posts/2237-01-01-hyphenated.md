@@ -1,6 +1,6 @@
 --- 
 category: elements
-heading: Hyphenated element names
+heading: Hyphenated names
 ---
 
 For elements that contain hyphens, e.g. `<font-face-name>`, there is a method with the original, hyphenated name as well as an alias method with a camelCased name. For example, `Pablo['font-face-name']()` is the same as `Pablo.fontFaceName()`.
