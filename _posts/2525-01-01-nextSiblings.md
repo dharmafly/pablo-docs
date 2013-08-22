@@ -1,6 +1,6 @@
 --- 
-category: nextsiblings
 heading: nextSiblings([filter])
+category: nextsiblings
 ---
 
 Returns a collection of all the collection's siblings that follow after it in the DOM.

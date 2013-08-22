@@ -1,48 +1,48 @@
 --- 
-version: 0.3.2
-baseurl: /
-sections: 
-- name: Overview
-  path: /index.html
-- name: API
-  path: /api/index.html
-- name: Misc
-  path: /misc/index.html
-- name: Resources
-  path: /resources/index.html
-future: true
-permalink: /:title
-project_url: https://github.com/dharmafly/pablo
-download_links: 
-- text: pablo.js
-  subtext: v{{ version }}
-  title: Full source code, for use in development
-  href: http://pablojs.com/downloads/pablo.js
-- text: pablo.min.js
-  subtext: v{{ version }}
-  title: Minified, for use in production
-  href: http://pablojs.com/downloads/pablo.min.js
-- text: Edge
-  subtext: (master)
-  title: Latest codebase (zip); potentially unstable
-  href: https://github.com/dharmafly/pablo/zipball/master
-twitter_url: https://twitter.com/dharmafly
-lang: javascript
-scripts: 
-- src: /downloads/pablo.min.js
-safe: false
-jquery_no_conflict: true
-markdown: maruku
+lsi: false
 theme: horus
-project_name: Pablo
 ga_id: UA-34978047-1
-pygments: false
+permalink: /:title
+quote: 
+- quote: Painting is just another way of keeping a diary.
+- cite: Pablo Picasso
+safe: false
+version: 0.3.2
+future: true
+baseurl: /
+project_name: Pablo
 exclude: 
 - README.md
 - assets
 - FiddlerRules.farx
-quote: 
-- quote: Painting is just another way of keeping a diary.
-- cite: Pablo Picasso
-lsi: false
+project_url: https://github.com/dharmafly/pablo
+pygments: false
+jquery_no_conflict: true
+scripts: 
+- src: /downloads/pablo.min.js
+lang: javascript
+download_links: 
+- title: Full source code, for use in development
+  href: http://pablojs.com/downloads/pablo.js
+  subtext: v{{ version }}
+  text: pablo.js
+- title: Minified, for use in production
+  href: http://pablojs.com/downloads/pablo.min.js
+  subtext: v{{ version }}
+  text: pablo.min.js
+- title: Latest codebase (zip); potentially unstable
+  href: https://github.com/dharmafly/pablo/zipball/master
+  subtext: (master)
+  text: Edge
+sections: 
+- path: /index.html
+  name: Overview
+- path: /api/index.html
+  name: API
+- path: /misc/index.html
+  name: Misc
+- path: /resources/index.html
+  name: Resources
+twitter_url: https://twitter.com/dharmafly
+markdown: maruku
 twitter_name: Dharmafly

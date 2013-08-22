@@ -1,6 +1,6 @@
 --- 
-category: overview
 heading: Learn Pablo
+category: overview
 ---
 
 **See the [API Reference][api]** for full details.  
