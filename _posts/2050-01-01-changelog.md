@@ -1,6 +1,6 @@
 --- 
-heading: Changelog
 category: misc
+heading: Changelog
 ---
 
 ## v0.3.2
