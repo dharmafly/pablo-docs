@@ -22,7 +22,7 @@ If `attributes` are specified, they are set on each element.
 
 ## [Pablo(selectors, \[context\])](/api/pablo/#pablo-03)
 
-Returns a collection of elements that match the specified CSS selectors. By default, this searches the global `document`, but an optional context element or elements can be passed.
+Returns a collection of elements that match the specified CSS selectors. By default, this searches the global `document`, but an optional `context` element or elements can be passed.
 
 
 ## [Pablo(elementName, attributes)](/api/pablo/#pablo-04)

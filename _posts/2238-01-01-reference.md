@@ -1,20 +1,18 @@
 --- 
-category: api
+category: elements
 heading: Element reference
 ---
 
-SVG elements can be created with the shortcut methods listed below. See the [Creation](/api/#creation) section for information on how to use them.
-
-Each method is linked to the element's page on [MDN's element reference][mdn-svg-el]. For further informatio, see [MDN's attribute reference][mdn-svg-attr] and the [Pablo Resources][resources] section.
+Each method below is linked to the element's page on [MDN's element reference][mdn-svg-el]. For further information, see [MDN's attribute reference][mdn-svg-attr] and the [Pablo Resources][resources] section.
 
 <style class="multi-column">
-	style.multi-column + ul {
-		column-count: 2;
-		-moz-column-count: 2;
-		-webkit-column-count: 2;
-		-o-column-count: 2;
-		-ms-column-count: 2;
-	}
+    style.multi-column + ul {
+        column-count: 2;
+        -moz-column-count: 2;
+        -webkit-column-count: 2;
+        -o-column-count: 2;
+        -ms-column-count: 2;
+    }
 </style>
 
 * [a()][a]
