@@ -15,14 +15,14 @@
 
 {% assign sections = site.sections %}
 {% assign relative_path  = "." %}
-{% assign page_path  = "" %}
+{% assign page_path = "" %}
 {% if page.layout_type == 'subpage' %}
-    {% assign relative_path  = ".." %}
-    {% assign page_path  = "../" %}
+    {% assign relative_path = ".." %}
+    {% assign page_path = "../" %}
 {% endif %}
 {% if page.layout_type == 'absolute' %}
-    {% assign relative_path  = "" %}
-    {% assign page_path  = "" %}
+    {% assign relative_path = "" %}
+    {% assign page_path = "" %}
 {% endif %}
 
 <!--[if IE 9]><html class="ie" lang="en"><![endif]-->
@@ -33,7 +33,7 @@
     <title>
       {% for section in sections %}
         {% if page.url == section.path %} 
-          {% if page.url != '/index.html' %}  {{ section.name }} : {% endif %}
+          {% if page.url != '/index.html' %} {{ section.name }} : {% endif %}
           {{ site.project_name }}
         {% endif %}
       {% endfor %}
@@ -79,7 +79,6 @@
         {% endfor %}
       </ul>
     </nav>
-
 
     <section class="content">
     {{ content }}
@@ -139,7 +138,6 @@
         ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
       }());
-
     </script>
     {% endif %}    
   </body>
