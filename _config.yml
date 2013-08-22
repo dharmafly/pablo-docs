@@ -1,48 +1,48 @@
 --- 
 project_name: Pablo
-scripts: 
-- src: /downloads/pablo.min.js
-pygments: false
-version: 0.3.2
-ga_id: UA-34978047-1
-project_url: https://github.com/dharmafly/pablo
-lang: javascript
+lsi: false
 markdown: maruku
 exclude: 
 - README.md
 - assets
 - FiddlerRules.farx
-twitter_url: https://twitter.com/dharmafly
-lsi: false
-permalink: /:title
+version: 0.3.2
+jquery_no_conflict: true
+future: true
+project_url: https://github.com/dharmafly/pablo
 download_links: 
 - href: http://pablojs.com/downloads/pablo.js
-  title: Full source code, for use in development
   subtext: v{{ version }}
+  title: Full source code, for use in development
   text: pablo.js
 - href: http://pablojs.com/downloads/pablo.min.js
-  title: Minified, for use in production
   subtext: v{{ version }}
+  title: Minified, for use in production
   text: pablo.min.js
 - href: https://github.com/dharmafly/pablo/zipball/master
-  title: Latest codebase (zip); potentially unstable
   subtext: (master)
+  title: Latest codebase (zip); potentially unstable
   text: Edge
-future: true
+pygments: false
+permalink: /:title
 baseurl: /
-sections: 
-- name: Overview
-  path: /index.html
-- name: API
-  path: /api/index.html
-- name: Misc
-  path: /misc/index.html
-- name: Resources
-  path: /resources/index.html
-safe: false
-jquery_no_conflict: true
-twitter_name: Dharmafly
-theme: horus
+scripts: 
+- src: /downloads/pablo.min.js
 quote: 
 - quote: Painting is just another way of keeping a diary.
 - cite: Pablo Picasso
+ga_id: UA-34978047-1
+twitter_name: Dharmafly
+theme: horus
+lang: javascript
+sections: 
+- path: /index.html
+  name: Overview
+- path: /api/index.html
+  name: API
+- path: /misc/index.html
+  name: Misc
+- path: /resources/index.html
+  name: Resources
+twitter_url: https://twitter.com/dharmafly
+safe: false
