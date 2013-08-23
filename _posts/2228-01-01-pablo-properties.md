@@ -3,7 +3,7 @@ category: api
 heading: Pablo properties
 ---
 
-These are the properties available on the global `Pablo` object.
+These properties are available on the global `Pablo` object.
 
 ## [Pablo.v](/api/v/)
 _alias: .pablo_

@@ -3,7 +3,7 @@ category: api
 heading: Pablo methods
 ---
 
-These are the methods available on the global `Pablo` object.
+These methods are available on the global `Pablo` object.
 
 ## [Pablo.isArrayLike(obj)](/api/isArrayLike/)
 
