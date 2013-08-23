@@ -12,7 +12,7 @@ lang: javascript
 scripts:
   - src: /downloads/pablo.min.js
 stylesheets:
-  - src: /css/custom/custom.css
+  - url: /css/custom/custom.css
 quote:
   - quote: Painting is just another way of keeping a diary.
   - cite: Pablo Picasso
