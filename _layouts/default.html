@@ -33,6 +33,7 @@
 <!--[if !IE ]><!-->
 <html lang="en"> <!--<![endif]-->
   <head>
+    <meta charset="utf-8">
     <title>
       {% for section in sections %}
         {% if page.url == section.path %} 
@@ -41,8 +42,6 @@
         {% endif %}
       {% endfor %}
     </title>
-    <meta charset="utf-8">
-    <meta name="viewport" content=""> 
     <script>
       var satya = satya || {};
       satya.isIPad = navigator.userAgent.match(/iPad/i) != null;
@@ -51,11 +50,13 @@
           .setAttribute('content','width=device-width,initial-scale=0.75,user-scalable=no,maximum-scale=0.75');
       }
     </script>
-    <!--[if lt IE 9]>
-        <script src="/javascript/html5shiv.js"></script>
-    <![endif]-->
+    <!--[if lt IE 9]><script src="/javascript/html5shiv.js"></script><![endif]-->
     {% include fonts.liquid %}
-    <link href="/css/{{ site.theme }}.css?v1" rel="stylesheet">
+    <link href="/css/{{ site.theme }}.css?v2" rel="stylesheet">
+    {% for stylesheet in site.stylesheet %}
+    <link href="{{ stylesheet.url }}" rel="stylesheet">
+    {% endfor %}
+
     <link rel="shortcut icon" sizes="16x16" type="image/vnd.microsoft.icon" href="/img/{{ site.theme }}-favicon.ico"> 
     <link rel="apple-touch-icon" href="/img/{{ site.theme }}-apple-touch-icon.png">
   </head>
@@ -128,7 +129,7 @@
 
     {% for script in site.scripts %}
     <script src="{{ script.src }}"></script>
-    {% endfor %}      
+    {% endfor %}   
 
     {% if site.ga_id %}
     <script>
