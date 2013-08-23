@@ -1,6 +1,6 @@
 --- 
-category: api
 heading: Collections
+category: api
 ---
 
 When creating elements, or selecting SVG and HTML from the page, Pablo encloses these elements within an [array][array]-like "collection".
