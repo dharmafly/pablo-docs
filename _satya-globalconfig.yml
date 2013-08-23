@@ -10,6 +10,7 @@ twitter_url: https://twitter.com/dharmafly
 twitter_name: Dharmafly
 lang: javascript
 scripts:
+stylesheets:
 quote:
 ga_id:
 download_links:
