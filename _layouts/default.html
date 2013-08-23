@@ -54,7 +54,7 @@
     <!--[if lt IE 9]><script src="/javascript/html5shiv.js"></script><![endif]-->
     {% include fonts.liquid %}
     <link href="/css/{{ site.theme }}.css?v2" rel="stylesheet">
-    {% for stylesheet in site.stylesheet %}
+    {% for stylesheet in site.stylesheets %}
     <link href="{{ stylesheet.url }}" rel="stylesheet">
     {% endfor %}
 
