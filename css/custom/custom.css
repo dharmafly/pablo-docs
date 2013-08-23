@@ -1,0 +1,7 @@
+/* Prevent selection color on clicking on in output, e.g. SVG drawings */
+.run output::selection,
+.run output *::selection,
+.run output::-moz-selection,
+.run output *::-moz-selection {
+    background-color:transparent;
+}
