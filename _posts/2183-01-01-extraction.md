@@ -1,6 +1,6 @@
 --- 
-heading: Extract from collection
 category: api
+heading: Extraction
 ---
 
 These collection methods are used to extract specific elements from the collection. See also [Iteration](/api/#iteration).
