@@ -1,6 +1,6 @@
 --- 
-heading: insertBefore(elements, [attributes])
 category: insertbefore
+heading: insertBefore(elements, [attributes])
 ---
 
 Same as [.before()][before] but, with this method, each of the elements in the collection are inserted into the DOM _before_ the supplied `elements`.

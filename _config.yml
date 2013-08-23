@@ -1,50 +1,50 @@
 --- 
-lang: javascript
-safe: false
-markdown: maruku
-version: 0.3.2
-jquery_no_conflict: true
-twitter_name: Dharmafly
+quote: 
+- quote: Painting is just another way of keeping a diary.
+- cite: Pablo Picasso
+sections: 
+- name: Overview
+  path: /index.html
+- name: API
+  path: /api/index.html
+- name: Misc
+  path: /misc/index.html
+- name: Resources
+  path: /resources/index.html
+project_url: https://github.com/dharmafly/pablo
+scripts: 
+- src: /downloads/pablo.min.js
 ga_id: UA-34978047-1
-theme: horus
-twitter_url: https://twitter.com/dharmafly
+download_links: 
+- subtext: v{{ version }}
+  href: /downloads/pablo.js
+  title: Full source code, for use in development
+  text: pablo.js
+- subtext: v{{ version }}
+  href: /downloads/pablo.min.js
+  title: Minified, for use in production
+  text: pablo.min.js
+- subtext: (master)
+  href: https://github.com/dharmafly/pablo/zipball/master
+  title: Latest codebase (zip); potentially unstable
+  text: Edge
+lsi: false
 permalink: /:title
+twitter_url: https://twitter.com/dharmafly
+lang: javascript
+stylesheets: 
+- src: /css/custom/custom.css
+safe: false
+version: 0.3.2
+theme: horus
+pygments: false
 baseurl: /
+twitter_name: Dharmafly
+future: true
+project_name: Pablo
+jquery_no_conflict: true
+markdown: maruku
 exclude: 
 - README.md
 - assets
 - FiddlerRules.farx
-quote: 
-- quote: Painting is just another way of keeping a diary.
-- cite: Pablo Picasso
-download_links: 
-- href: /downloads/pablo.js
-  title: Full source code, for use in development
-  text: pablo.js
-  subtext: v{{ version }}
-- href: /downloads/pablo.min.js
-  title: Minified, for use in production
-  text: pablo.min.js
-  subtext: v{{ version }}
-- href: https://github.com/dharmafly/pablo/zipball/master
-  title: Latest codebase (zip); potentially unstable
-  text: Edge
-  subtext: (master)
-pygments: false
-stylesheets: 
-- src: /css/custom/custom.css
-project_name: Pablo
-lsi: false
-scripts: 
-- src: /downloads/pablo.min.js
-future: true
-project_url: https://github.com/dharmafly/pablo
-sections: 
-- path: /index.html
-  name: Overview
-- path: /api/index.html
-  name: API
-- path: /misc/index.html
-  name: Misc
-- path: /resources/index.html
-  name: Resources
