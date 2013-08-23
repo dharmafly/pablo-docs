@@ -10,15 +10,6 @@ Elements are usually manipulated and filtered via the methods on the collection 
 
 ## Method chaining
 
-<style>
-    .run output::selection,
-    .run output *::selection,
-    .run output::-moz-selection,
-    .run output *::-moz-selection {
-      background-color:transparent;
-    }
-</style>
-
 Collection methods are generally chainable:
 
     /* Append an <svg> element to an HTML element */
