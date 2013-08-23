@@ -1,6 +1,6 @@
 --- 
-category: size
 heading: size()
+category: size
 ---
 
 The `.size()` method and the `length` property give the number of elements in a collection.

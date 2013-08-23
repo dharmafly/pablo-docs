@@ -1,6 +1,6 @@
 --- 
-category: misc
 heading: Changelog
+category: misc
 ---
 
 ## v0.3.2
