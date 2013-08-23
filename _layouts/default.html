@@ -16,13 +16,16 @@
 {% assign sections = site.sections %}
 {% assign relative_path  = "." %}
 {% assign page_path = "" %}
+{% assign body_class = "home" %}
 {% if page.layout_type == 'subpage' %}
     {% assign relative_path = ".." %}
     {% assign page_path = "../" %}
+    {% assign body_class = page.layout_type %}
 {% endif %}
 {% if page.layout_type == 'absolute' %}
     {% assign relative_path = "" %}
     {% assign page_path = "" %}
+    {% assign body_class = page.layout_type %}
 {% endif %}
 
 <!--[if IE 9]><html class="ie" lang="en"><![endif]-->
@@ -57,7 +60,7 @@
     <link rel="apple-touch-icon" href="/img/{{ site.theme }}-apple-touch-icon.png">
   </head>
   
-  <body class="loading">
+  <body class="{{ body_class }} loading">
     <header>
       <h1 class="title">
         <a href="/">
