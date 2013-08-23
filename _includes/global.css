@@ -1169,8 +1169,10 @@ aside.icons li:hover:after  {
 }
 
 @media (max-width:52em) {
-  /* TODO: on subpages, on narrow screens, hide icons */
-  /* aside.icons: display:none; */
+  /* On subpages, on narrow screens, hide icons */
+  body.subpage aside.icons{
+    display:none;
+  }
 }
   
 @media (min-width:52em) {
