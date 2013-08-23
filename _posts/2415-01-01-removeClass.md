@@ -1,6 +1,6 @@
 --- 
-heading: removeClass(name)
 category: removeclass
+heading: removeClass(name)
 ---
 
 Removes the specified CSS class from all elements in the collection and returns the collection.
