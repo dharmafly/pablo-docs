@@ -1,11 +1,13 @@
 --- 
-heading: Duplication
 category: api
+heading: Duplication
 ---
+
 
 ## [clone(\[deepDom\], \[withData\], \[deepData\])](/api/clone/)
 
 Return a shallow or deep copy of the collection.
+
 
 ## [duplicate(\[amount\])](/api/duplicate/)
 
