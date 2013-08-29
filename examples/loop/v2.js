@@ -8,7 +8,7 @@ var svg = Pablo('#stage').svg({width:1920, height:1024}),
 /////
 
 
-animation = rect.animation([{
+animation = rect.tween([{
         attr: 'x',
         delta: 100,
         per: 1000,

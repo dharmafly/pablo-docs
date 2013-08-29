@@ -226,7 +226,7 @@
     Pablo.extend(Pablo.fn, {
         active: false,
 
-        animation: function(settings, autostart){
+        animation: function(callback, autostart){
             var elem = this,
                 animations = this.data(dataIndex),
                 animation;
@@ -240,37 +240,46 @@
                 this.data(dataIndex, animations);
             }
 
-            // If a settings object to tween an attributes
-            function updateAttr(deltaT, settings){
-                var currentAttr = Number(elem.attr(settings.attr)),
-                    deltaAttr = (deltaT / settings.per) * settings.delta,
-                    newAttr = currentAttr + deltaAttr;
-
-                elem.attr(settings.attr, newAttr);
-            }
-
-            // TODO: improve performance by caching element attribute values. Have an
-            // optional override as argument, which would be needed if the attributes
-            // were being modified from outside of this loop
-            animation = new Animation(function(deltaT){
-                if (Pablo.isArray(settings)){
-                    settings.forEach(function(settings){
-                        updateAttr(deltaT, settings);
-                    });
-                }
-                else {
-                    updateAttr(deltaT, settings);
-                }
-            });
-
+            animation = new Animation(callback);
             animations.push(animation);
 
-            // 
             if (autostart){
                 animation.start();
             }
             return animation;
         },
+
+        tween: (function(){
+            function updateAttr(elem, deltaT, settings){
+                var currentAttr = Number(elem.attr(settings.attr)),
+                    deltaAttr = (deltaT / settings.per) * settings.delta,
+                    newAttr = currentAttr + deltaAttr;
+                
+                elem.attr(settings.attr, newAttr);
+            }
+
+            return function(settings, autostart){
+                var collection = this;
+
+                return this.animation(function(deltaT){
+                    collection.each(function(el){
+                        // TODO: improve performance by caching element attribute values. Have an
+                        // optional override as argument, which would be needed if the attributes
+                        // were being modified from outside of this loop
+                        var elem = Pablo(el);
+
+                        if (Pablo.isArray(settings)){
+                            settings.forEach(function(settings){
+                                updateAttr(elem, deltaT, settings);
+                            });
+                        }
+                        else {
+                            updateAttr(elem, deltaT, settings);
+                        }                            
+                    });
+                }, autostart);
+            }
+        }()),
 
         removeAnimation: function(animation){
             var animations = this.data(dataIndex);
