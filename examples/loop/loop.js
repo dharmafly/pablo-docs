@@ -27,16 +27,106 @@
     /////
 
 
-    function Loop(animations){
-        // Cache an array of animations. (The animations can be modified at any time 
-        // by the calling scope).
-        this.animations = animations;
+    function Animation(callback, loop){
+        this.callback = callback;
+        this.loop = loop;
+    }
+
+    Pablo.extend(Animation.prototype, {
+        // The `active` parameter is changed by Loop.add and Loop.remove
+        active: false,
+
+        start: function(){
+            if (!this.active){
+                // Add to loop and start if not already started
+                this.loop.add(this);
+                this.loop.start();
+            }
+            return this;
+        },
+
+        stop: function(){
+            if (this.active){
+                // Remove from loop
+                this.loop.remove(this);
+            }
+            return this;
+        },
+
+        toggle: function(){
+            if (this.active){
+                this.stop();
+            }
+            else {
+                this.start();
+            }
+            return this;
+        }
+    });
+
+
+    /////
+
+
+    function Loop(animations, autostart){
+        // Cache an array of animation callbacks
+        this.animations = [];
+        this.events = Pablo({});
         this.onAnimationFrame = this.onAnimationFrame.bind(this);
+
+        if (animations){
+            this.add(animations);
+        }
+        if (autostart){
+            this.start();
+        }
     }
 
     Pablo.extend(Loop.prototype, {
         active: false,
-        events: Pablo({}),
+
+        createAnimation: function(animation){
+            if (animation instanceof Animation){
+                return animation;
+            }
+            else if (typeof animation === 'function'){
+                return new Animation(animation, this);
+            }
+        },
+
+        add: function(animation){
+            if (Pablo.isArray(animation)){
+                return animation.map(function(animation){
+                    return this.add(animation);
+                }, this);
+            }
+
+            animation = this.createAnimation(animation);
+            animation.active = true;
+            animation.lasttime = null;
+            animation.starttimeUnix = now();
+            this.animations.push(animation);
+            this.events.trigger('add', animation);
+            
+            return animation;
+        },
+
+        remove: function(animation, persist){
+            if (Pablo.isArray(animation)){
+                animation.forEach(function(animation){
+                    this.remove(animation, persist);
+                }, this);
+            }
+            else {
+                animation.active = false;
+                removeFromArray(this.animations, animation);
+                if (!persist && !this.animations.length){
+                    this.stop();
+                }
+                this.events.trigger('remove', animation);
+            }
+            return this;
+        },
 
         onAnimationFrame: function(timestamp){
             var loop = this,
@@ -56,21 +146,21 @@
             }
 
             // Process each animation callback
-            this.animations.forEach(function(callback){
+            this.animations.forEach(function(animation){
                 var deltaT;
 
                 // First iteration of the animation - use time since added
-                if (!callback.lasttime){
+                if (!animation.lasttime){
                     if (!currenttimeUnix){
                         currenttimeUnix = now();
                     }
-                    deltaT = currenttimeUnix - callback.starttimeUnix;
+                    deltaT = currenttimeUnix - animation.starttimeUnix;
                 }
                 else {
-                    deltaT = timestamp - callback.lasttime;
+                    deltaT = timestamp - animation.lasttime;
                 }
-                callback.lasttime = timestamp;
-                callback(deltaT, timestamp);
+                animation.lasttime = timestamp;
+                animation.callback(deltaT, timestamp);
             });
 
             this.events.trigger('loop', deltaT, timestamp);
@@ -83,9 +173,16 @@
         },
 
         start: function(){
+            var starttimeUnix;
+
             if (!this.active){
                 this.active = true;
-                this.starttimeUnix = now();
+                this.starttimeUnix = starttimeUnix = now();
+                this.lasttime = null;
+                this.animations.forEach(function(animation){
+                    animation.starttimeUnix = starttimeUnix;
+                    animation.lasttime = null;
+                });
                 this.events.trigger('start');
                 this.handle = requestAnimationFrame(this.onAnimationFrame);
             }
@@ -118,105 +215,55 @@
 
 
     // Pablo.animation
-    Pablo.animation = function(animations){
-        this.animation.add(animations);
-        this.animation.loop.start();
-        return this;
+    Pablo.animation = function(animation){
+        animation = Pablo.animation.add(animation);
+        Pablo.animation.start();
+        return animation;
     };
 
-    (function(){
-        var animations = [];
+    
+    Pablo.extend(Pablo.animation, {
+        Loop: Loop,
+        Animation: Animation,
+        now: now,
+        loop: new Loop(),
 
-        Pablo.extend(Pablo.animation, {
-            animations: animations,
-            events: Pablo({}),
-            loop: new Loop(animations),
+        add: function(animation){
+            return this.loop.add(animation);
+        },
 
-            start: function(){
-                this.loop.start();
-                return this;
-            },
-
-            stop: function(){
-                this.loop.stop();
-                return this;
-            },
-
-            add: function(callback){
-                callback.starttimeUnix = now();
-                callback.lasttime = null;
-                this.animations.push(callback);
-                this.loop.events.trigger('add', callback);
-                return this;
-            },
-
-            remove: function(callback, persist){
-                var animationApi;
-
-                if (Pablo.isArray(callback)){
-                    animationApi = this;
-                    callback.forEach(function(callback){
-                        animationApi.remove(callback);
-                    });
-                }
-
-                else {
-                    removeFromArray(this.animations, callback);
-                }
-
-                if (!persist && !this.animations.length){
-                    this.stop();
-                }
-                this.loop.events.trigger('remove', callback);
-
-                return this;
-            },
-
-            on: function(){
-                this.loop.events.on.apply(this.loop.events, arguments);
-                return this;
-            },
-
-            off: function(){
-                this.loop.events.off.apply(this.loop.events, arguments);
-                return this;
-            }
-        });
-    }());
-
-
-    /////
-
-    function Animation(callback, autostart){
-        this.callback = callback;
-    }
-
-    Pablo.extend(Animation.prototype, {
-        active: false,
+        remove: function(animation, persist){
+            this.loop.remove(animation, persist);
+            return this;
+        },
 
         start: function(){
-            this.active = true;
-            // Add to global loop
-            Pablo.animation.add(this.callback);
-            // Start global loop if not already started
-            Pablo.animation.start();
+            this.loop.start();
             return this;
         },
 
         stop: function(){
-            this.active = false;
-            // Remove from global loop
-            Pablo.animation.remove(this.callback);
+            this.loop.stop();
             return this;
         },
 
-        toggle: function(animations){
-            if (this.active){
-                this.stop();
-            }
-            else {
-                this.start();
-            }
+        toggle: function(){
+            this.loop.toggle();
+            return this;
+        },
+
+        on: function(){
+            this.loop.events.on.apply(this.loop.events, arguments);
+            return this;
+        },
+
+        off: function(){
+            this.loop.events.off.apply(this.loop.events, arguments);
+            return this;
+        },
+
+        trigger: function(){
+            this.loop.events.trigger.apply(this.loop.events, arguments);
             return this;
         }
     });
@@ -224,31 +271,6 @@
 
     // Collection API extension
     Pablo.extend(Pablo.fn, {
-        active: false,
-
-        animation: function(callback, autostart){
-            var elem = this,
-                animations = this.data(dataIndex),
-                animation;
-
-            // `autostart` is true by default; pass `false` to override
-            autostart = autostart !== false;
-
-            if (!animations){
-                animations = [];
-                animations.active = autostart;
-                this.data(dataIndex, animations);
-            }
-
-            animation = new Animation(callback);
-            animations.push(animation);
-
-            if (autostart){
-                animation.start();
-            }
-            return animation;
-        },
-
         tween: (function(){
             function updateAttr(elem, deltaT, settings){
                 var currentAttr = Number(elem.attr(settings.attr)),
@@ -258,10 +280,10 @@
                 elem.attr(settings.attr, newAttr);
             }
 
-            return function(settings, autostart){
+            return function(settings){
                 var collection = this;
 
-                return this.animation(function(deltaT){
+                return Pablo.animation(function(deltaT){
                     collection.each(function(el){
                         // TODO: improve performance by caching element attribute values. Have an
                         // optional override as argument, which would be needed if the attributes
@@ -277,66 +299,9 @@
                             updateAttr(elem, deltaT, settings);
                         }                            
                     });
-                }, autostart);
-            }
+                });
+            };
         }()),
-
-        removeAnimation: function(animation){
-            var animations = this.data(dataIndex);
-
-            // Remove from global animation loop
-            animation.stop();
-
-            if (animations){
-                removeFromArray(animations, animation);
-            }
-
-            if (animations.length){
-                this.removeData(dataIndex);
-            }
-            return this;
-        },
-
-        // TODO: pass `id` instead of `animations` callback function?
-        // TODO: need to create new loop or reset deltaT, so that pause/resume is possible - 
-        // currently, stopAnimation -> startAnimation jumps to current position, with the clock not paused
-        startAnimation: function(){
-            var animations = this.data(dataIndex);
-
-            if (animations){
-                animations.active = true;
-                animations.forEach(function(animation){
-                    animation.start();
-                });
-            }
-            return this;
-        },
-
-        stopAnimation: function(){
-            var animations = this.data(dataIndex);
-
-            if (animations){
-                animations.active = false;
-                animations.forEach(function(animation){
-                    animation.stop();
-                });
-            }
-            return this;
-        },
-
-        toggleAnimation: function(){
-            var animations = this.data(dataIndex);
-
-            if (animations){
-                if (animations.active){
-                    this.stopAnimation();
-                }
-                else {
-                    this.startAnimation();
-                }
-            }
-            return this;
-        }
     });
 
 }(window, window.Pablo));

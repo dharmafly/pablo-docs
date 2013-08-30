@@ -2,13 +2,7 @@
 
 var svg = Pablo('#stage').svg({width:1920, height:1024}),
     rect = svg.rect({width:100, height:100, x:0, y:0}),
-    animation;
-
-
-/////
-
-
-animation = rect.tween([{
+    tweenSettings = [{
         attr: 'x',
         delta: 100,
         per: 1000,
@@ -19,10 +13,19 @@ animation = rect.tween([{
         delta: 38,
         per: 1000,
         dur: 6000
-    }], false);
+    }],
+    animation;
 
-rect.on('click', function(){
-    rect.toggleAnimation(animation);
+
+/////
+
+
+rect.one('click', function(){
+    animation = rect.tween(tweenSettings);
+    
+    rect.on('click', function(){
+        animation.toggle();
+    });
 });
 
 // Add event listeners
