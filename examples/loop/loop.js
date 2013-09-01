@@ -30,14 +30,30 @@
     function Animation(callback, loop){
         this.callback = callback;
         this.loop = loop;
+        this.events = Pablo();
     }
 
     Pablo.extend(Animation.prototype, {
         // The `active` parameter is changed by Loop.add and Loop.remove
         active: false,
+        complete: false,
+        starttimeUnix: null,
+        lasttime: null,
+        runningtime: 0,
+        dur: -1,
+
+        reset: function(){
+            this.complete = false;
+            this.runningtime = 0;
+            return this;
+        },
 
         start: function(){
             if (!this.active){
+                if (this.complete){
+                    this.reset();
+                }
+
                 // Add to loop and start if not already started
                 this.loop.add(this);
                 this.loop.start();
@@ -61,6 +77,15 @@
                 this.start();
             }
             return this;
+        },   
+
+        end: function(){
+            if (!this.complete){
+                this.complete = true;
+                this.stop();
+                this.events.trigger('end');
+            }
+            return this;
         }
     });
 
@@ -71,7 +96,8 @@
     function Loop(animations, autostart){
         // Cache an array of animation callbacks
         this.animations = [];
-        this.events = Pablo({});
+        // Create an empty collection to act as an events proxy
+        this.events = Pablo();
         this.onAnimationFrame = this.onAnimationFrame.bind(this);
 
         if (animations){
@@ -160,7 +186,16 @@
                     deltaT = timestamp - animation.lasttime;
                 }
                 animation.lasttime = timestamp;
+                animation.runningtime = deltaT + animation.runningtime;
                 animation.callback(deltaT, timestamp);
+
+                // If duration reached, then end
+                if (animation.dur > -1){
+                    animation.runningtime = deltaT + animation.runningtime;
+                    if (animation.runningtime > animation.dur){
+                        animation.end();
+                    }
+                }
             });
 
             this.events.trigger('loop', deltaT, timestamp);
@@ -272,34 +307,51 @@
     // Collection API extension
     Pablo.extend(Pablo.fn, {
         tween: (function(){
+            // TODO: improve performance by caching element attribute values. Have an
+            // optional override as argument, which would be needed if the attributes
+            // were being modified from outside of this loop
             function updateAttr(elem, deltaT, settings){
                 var currentAttr = Number(elem.attr(settings.attr)),
-                    deltaAttr = (deltaT / settings.per) * settings.delta,
+                    deltaAttr = (deltaT / settings.per) * settings.by,
                     newAttr = currentAttr + deltaAttr;
-                
+
                 elem.attr(settings.attr, newAttr);
             }
 
-            return function(settings){
-                var collection = this;
+            function updateCollection(collection, deltaT, settings){
+                var length = collection.length;
 
-                return Pablo.animation(function(deltaT){
+                if (length > 1){
                     collection.each(function(el){
-                        // TODO: improve performance by caching element attribute values. Have an
-                        // optional override as argument, which would be needed if the attributes
-                        // were being modified from outside of this loop
-                        var elem = Pablo(el);
+                        updateAttr.call(this, Pablo(el), deltaT, settings);
+                    }, this);
+                }
+                else if (length) {
+                    updateAttr.call(this, collection, deltaT, settings);
+                }
+            }
 
-                        if (Pablo.isArray(settings)){
-                            settings.forEach(function(settings){
-                                updateAttr(elem, deltaT, settings);
-                            });
-                        }
-                        else {
-                            updateAttr(elem, deltaT, settings);
-                        }                            
+            function applySettings(collection, deltaT, settings){
+                if (Pablo.isArray(settings)){
+                    settings.forEach(function(settings){
+                        updateCollection.call(this, collection, deltaT, settings);
+                    }, this);
+                }
+                else {
+                    updateCollection.call(this, collection, deltaT, settings);
+                }
+            }
+
+            return function(settings){
+                var collection = this,
+                    animation = Pablo.animation(function(deltaT){
+                        applySettings.call(this, collection, deltaT, settings);
                     });
-                });
+
+                if ('dur' in settings){
+                    animation.dur = settings.dur;
+                }
+                return animation;
             };
         }()),
     });

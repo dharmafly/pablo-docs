@@ -2,29 +2,50 @@
 
 var svg = Pablo('#stage').svg({width:1920, height:1024}),
     rect = svg.rect({width:100, height:100, x:0, y:0}),
-    tweenSettings = [{
-        attr: 'x',
-        delta: 100,
-        per: 1000,
-        dur: 6000
-    },
-    {
-        attr: 'y',
-        delta: 38,
-        per: 1000,
-        dur: 6000
-    }],
-    animation;
+    animations;
 
 
 /////
 
 
 rect.one('click', function(){
-    animation = rect.tween(tweenSettings);
-    
+    animations = [
+        rect.tween({
+            attr: 'x',
+            by: 100,
+            per: 1000,
+            dur: 1000
+        }),
+
+        rect.tween({
+            attr: 'y',
+            by: 38,
+            per: 1000,
+            dur: 3000
+        })
+    ];
+    animations.active = true;
+
     rect.on('click', function(){
-        animation.toggle();
+        var allComplete = animations.every(function(animation){
+            return animation.complete;
+        });
+
+        animations.active = !animations.active;
+
+        animations.forEach(function(animation){
+            if (allComplete){
+                animation.start();
+                animations.active = true;
+            }
+            else if (!animations.active){
+                animation.stop();
+            }
+            else if (!animation.complete){
+                animation.start();
+            }
+        });
+        
     });
 });
 
