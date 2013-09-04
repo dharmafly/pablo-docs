@@ -254,6 +254,7 @@
                 this.active = true;
                 this.lasttime = null;
                 this.loopStartTimeUnix = nowUnix();
+                // this.loopStartTime = window.performance.now();
 
                 this.animations.forEach(function(animation){
                     animation.onStartLoop();
@@ -386,6 +387,11 @@
                 else {
                     deltaAttr = 1000 / deltaT;
                 }
+
+                if (!deltaAttr){
+                    this.end();
+                    return;
+                }
                 
                 newAttr = isPositive ?
                     currentAttr + deltaAttr : currentAttr - deltaAttr;
@@ -431,18 +437,6 @@
                 var collection = this,
                     animation;
 
-                if ('from' in tweenSettings){
-                    this.attr(tweenSettings.attr, tweenSettings.from);
-                }
-                else {
-                    // TODO: don't set `from`, as this affects restarting the loop
-                    tweenSettings.from = Number(this.attr(tweenSettings.attr));
-                    if (!tweenSettings.from){
-                        tweenSettings.from = 0;
-                        this.attr(tweenSettings.attr, 0);
-                    }
-                }
-
                 // Default 'per' is 1000 milliseconds
                 if ('by' in tweenSettings && !('per' in tweenSettings)){
                     tweenSettings.per = 1000;
@@ -453,9 +447,33 @@
                     animationSettings.dur = tweenSettings.dur;
                 }
                     
-                return Pablo.animation(function(deltaT){
+                animation = Pablo.animation(function(deltaT, timestamp){
                     applyTween.call(this, collection, deltaT, tweenSettings);
+
+                    if ('callback' in tweenSettings){
+                        tweenSettings.callback.call(this, deltaT, timestamp, collection, tweenSettings);
+                    }
                 }, animationSettings);
+
+                if ('from' in tweenSettings){
+                    this.attr(tweenSettings.attr, tweenSettings.from);
+                }
+                else {
+                    // TODO: handle multiple elements in the collection
+                    tweenSettings.from = Number(this.attr(tweenSettings.attr)) || 0;
+
+                    // Set `from` on unpause when no `from` had been specified
+                    animation.events.on('start', function(){
+                        tweenSettings.from = Number(collection.attr(tweenSettings.attr)) || 0;
+
+                        if (!tweenSettings.from){
+                            tweenSettings.from = 0;
+                            collection.attr(tweenSettings.attr, 0);
+                        }
+                    });   
+                }
+
+                return animation;
             };
         }()),
     });
