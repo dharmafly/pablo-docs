@@ -13,14 +13,18 @@ rect.one('click', function(){
         rect.tween({
             attr: 'x',
             by: 100,
-            per: 1000,
             dur: 1000
+        }),
+
+        rect.tween({
+            attr: 'x',
+            to: 200,
+            dur: 600
         }),
 
         rect.tween({
             attr: 'y',
             by: 38,
-            per: 1000,
             dur: 3000
         })
     ];

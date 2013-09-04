@@ -9,7 +9,7 @@
 
         cancelAnimationFrame = window.cancelAnimationFrame || window.webkitCancelAnimationFrame || window.mozCancelAnimationFrame || window.oCancelAnimationFrame || window.msCancelAnimationFrame || window.webkitCancelRequestAnimationFrame,
 
-        now = window.Date.now || function(){
+        nowUnix = window.Date.now || function(){
             return (new Date()).getTime();
         };
 
@@ -27,36 +27,84 @@
     /////
 
 
-    function Animation(callback, loop){
+    function Animation(callback, loop, settings){
         this.callback = callback;
         this.loop = loop;
         this.events = Pablo();
+
+        if (settings){
+            Pablo.extend(this, settings);
+        }
     }
 
     Pablo.extend(Animation.prototype, {
         // The `active` parameter is changed by Loop.add and Loop.remove
         active: false,
         complete: false,
-        starttimeUnix: null,
         lasttime: null,
+        addedToLoopTimeUnix: null,
         runningtime: 0,
         dur: -1,
 
-        reset: function(){
+        // Prepare the animation for a new cycle, which will last many frames
+        onStartCycle: function(){
             this.complete = false;
             this.runningtime = 0;
+            return this;
+        },
+
+        // Prepare the animation to be added back into the loop, after stopping
+        onAddToLoop: function(){
+            this.active = true;
+            this.lasttime = null;
+            this.addedToLoopTimeUnix = nowUnix();
+            return this;
+        },
+
+        onRemoveFromLoop: function(){
+            this.active = false;
+            return this;
+        },
+
+        onStartLoop: function(){
+            this.lasttime = null;
+            return this;
+        },
+
+        onAnimationFrame: function(deltaT, timestamp, frameStartTimeUnix){
+            // First iteration of the animation since last added to the loop
+            if (!this.lasttime){
+                deltaT = frameStartTimeUnix - this.addedToLoopTimeUnix;
+            }
+            // Successive iterations
+            else {
+                deltaT = timestamp - this.lasttime;
+            }
+
+            this.deltaT = deltaT;
+            this.lasttime = timestamp;
+            this.runningtime = deltaT + this.runningtime;
+            this.callback(deltaT, timestamp);
+
+            // If duration reached, then end
+            if (this.dur > -1){
+                if (this.runningtime > this.dur){
+                    this.end();
+                }
+            }
             return this;
         },
 
         start: function(){
             if (!this.active){
                 if (this.complete){
-                    this.reset();
+                    this.onStartCycle();
                 }
 
                 // Add to loop and start if not already started
                 this.loop.add(this);
                 this.loop.start();
+                this.events.trigger('start');
             }
             return this;
         },
@@ -66,6 +114,7 @@
                 // Remove from loop
                 this.loop.remove(this);
             }
+            this.events.trigger('stop');
             return this;
         },
 
@@ -96,6 +145,8 @@
     function Loop(animations, autostart){
         // Cache an array of animation callbacks
         this.animations = [];
+        this.autostart = autostart;
+
         // Create an empty collection to act as an events proxy
         this.events = Pablo();
         this.onAnimationFrame = this.onAnimationFrame.bind(this);
@@ -108,29 +159,33 @@
         }
     }
 
+    Loop.nowUnix = nowUnix;
+
     Pablo.extend(Loop.prototype, {
         active: false,
+        autostart: false,
 
-        createAnimation: function(animation){
-            if (animation instanceof Animation){
-                return animation;
-            }
-            else if (typeof animation === 'function'){
-                return new Animation(animation, this);
-            }
+        create: function(callback, settings){
+            return new Animation(callback, this, settings);
         },
 
-        add: function(animation){
-            if (Pablo.isArray(animation)){
-                return animation.map(function(animation){
-                    return this.add(animation);
+        add: function(callback, settings){
+            var animation;
+
+            if (Pablo.isArray(callback)){
+                return callback.map(function(callback){
+                    return this.add(callback);
                 }, this);
             }
 
-            animation = this.createAnimation(animation);
-            animation.active = true;
-            animation.lasttime = null;
-            animation.starttimeUnix = now();
+            if (callback instanceof Animation){
+                animation = callback;
+            }
+            else {
+                animation = this.create(callback, settings);
+            }
+
+            animation.onAddToLoop();
             this.animations.push(animation);
             this.events.trigger('add', animation);
             
@@ -144,91 +199,82 @@
                 }, this);
             }
             else {
-                animation.active = false;
+                animation.onRemoveFromLoop();
                 removeFromArray(this.animations, animation);
+                this.events.trigger('remove', animation);
+
                 if (!persist && !this.animations.length){
                     this.stop();
                 }
-                this.events.trigger('remove', animation);
             }
             return this;
         },
 
         onAnimationFrame: function(timestamp){
-            var loop = this,
-                deltaT, currenttimeUnix;
+            var frameStartTimeUnix;
 
             // In case cancelAnimationFrame is unavailable, break the loop here
             if (!this.active){
                 return;
             }
 
+            this.timestamp = timestamp;
+
+            // This is the first iteration of the loop since it was last started
             if (!this.lasttime){
-                currenttimeUnix = now();
-                deltaT = currenttimeUnix - this.starttimeUnix;
+                frameStartTimeUnix = nowUnix();
+                this.deltaT = frameStartTimeUnix - this.loopStartTimeUnix;
             }
+            // Successive iterations
             else {
-                deltaT = timestamp - this.lasttime;
+                this.deltaT = timestamp - this.lasttime;
             }
 
             // Process each animation callback
             this.animations.forEach(function(animation){
-                var deltaT;
-
-                // First iteration of the animation - use time since added
-                if (!animation.lasttime){
-                    if (!currenttimeUnix){
-                        currenttimeUnix = now();
-                    }
-                    deltaT = currenttimeUnix - animation.starttimeUnix;
+                if (!frameStartTimeUnix && !animation.lasttime){
+                    frameStartTimeUnix = nowUnix();
                 }
-                else {
-                    deltaT = timestamp - animation.lasttime;
-                }
-                animation.lasttime = timestamp;
-                animation.runningtime = deltaT + animation.runningtime;
-                animation.callback(deltaT, timestamp);
+                animation.onAnimationFrame(this.deltaT, timestamp, frameStartTimeUnix);
+            }, this);
 
-                // If duration reached, then end
-                if (animation.dur > -1){
-                    animation.runningtime = deltaT + animation.runningtime;
-                    if (animation.runningtime > animation.dur){
-                        animation.end();
-                    }
-                }
-            });
-
-            this.events.trigger('loop', deltaT, timestamp);
+            this.events.trigger('loop', this.deltaT, timestamp, frameStartTimeUnix);
 
             // Update lasttime for next loop
             this.lasttime = timestamp;
 
             // Send the loop function to the next animation frame
-            this.handle = requestAnimationFrame(this.onAnimationFrame);
+            this.frameRequestId = requestAnimationFrame(this.onAnimationFrame);
+
+            return this;
         },
 
         start: function(){
-            var starttimeUnix;
-
             if (!this.active){
                 this.active = true;
-                this.starttimeUnix = starttimeUnix = now();
                 this.lasttime = null;
+                this.loopStartTimeUnix = nowUnix();
+
                 this.animations.forEach(function(animation){
-                    animation.starttimeUnix = starttimeUnix;
-                    animation.lasttime = null;
+                    animation.onStartLoop();
                 });
+
                 this.events.trigger('start');
-                this.handle = requestAnimationFrame(this.onAnimationFrame);
+                this.frameRequestId = requestAnimationFrame(this.onAnimationFrame);
             }
             return this;
         },
 
         stop: function(){
+            var stoptimeUnix;
+
             if (this.active){
                 this.active = false;
-                this.stoptimeUnix = now();
-                cancelAnimationFrame(this.handle);
+                this.stoptimeUnix = stoptimeUnix = nowUnix();
+                this.animations.forEach(function(animation){
+                    animation.stoptimeUnix = stoptimeUnix;
+                });
+                cancelAnimationFrame(this.frameRequestId);
                 this.events.trigger('stop');
             }
             return this;
@@ -250,21 +296,24 @@
 
 
     // Pablo.animation
-    Pablo.animation = function(animation){
-        animation = Pablo.animation.add(animation);
+    Pablo.animation = function(animation, settings){
+        animation = Pablo.animation.add(animation, settings);
         Pablo.animation.start();
         return animation;
     };
-
     
     Pablo.extend(Pablo.animation, {
         Loop: Loop,
         Animation: Animation,
-        now: now,
+        nowUnix: nowUnix,
         loop: new Loop(),
 
-        add: function(animation){
-            return this.loop.add(animation);
+        create: function(animation, settings){
+            return this.loop.create(animation, settings);
+        },
+
+        add: function(animation, settings){
+            return this.loop.add(animation, settings);
         },
 
         remove: function(animation, persist){
@@ -310,48 +359,103 @@
             // TODO: improve performance by caching element attribute values. Have an
             // optional override as argument, which would be needed if the attributes
             // were being modified from outside of this loop
-            function updateAttr(elem, deltaT, settings){
-                var currentAttr = Number(elem.attr(settings.attr)),
-                    deltaAttr = (deltaT / settings.per) * settings.by,
-                    newAttr = currentAttr + deltaAttr;
+            function updateAttr(elem, deltaT, tweenSettings){
+                var currentAttr = Number(elem.attr(tweenSettings.attr)) || 0,
+                    isPositive = true,
+                    deltaAttr, newAttr;
 
-                elem.attr(settings.attr, newAttr);
+                if ('to' in tweenSettings){
+                    isPositive = tweenSettings.to > tweenSettings.from;
+                }
+                
+                if ('by' in tweenSettings){
+                    deltaAttr = (deltaT / tweenSettings.per) * tweenSettings.by;
+                }
+                else if ('dur' in tweenSettings){
+                    if ('to' in tweenSettings){
+                        deltaAttr = (deltaT / tweenSettings.dur) * (
+                            isPositive ?
+                                tweenSettings.to - tweenSettings.from :
+                                tweenSettings.from - tweenSettings.to
+                        );
+                    }
+                    else {
+                        deltaAttr = tweenSettings.dur / deltaT;
+                    }
+                }
+                else {
+                    deltaAttr = 1000 / deltaT;
+                }
+                
+                newAttr = isPositive ?
+                    currentAttr + deltaAttr : currentAttr - deltaAttr;
+
+                if ('to' in tweenSettings && (
+                    isPositive && newAttr >= tweenSettings.to ||
+                    !isPositive && newAttr <= tweenSettings.to
+                )){
+                    elem.attr(tweenSettings.attr, tweenSettings.to);
+                    this.end();
+                }
+
+                else {
+                    elem.attr(tweenSettings.attr, newAttr);
+                }
             }
 
-            function updateCollection(collection, deltaT, settings){
+            function updateCollection(collection, deltaT, tweenSettings){
                 var length = collection.length;
 
                 if (length > 1){
                     collection.each(function(el){
-                        updateAttr.call(this, Pablo(el), deltaT, settings);
+                        updateAttr.call(this, Pablo(el), deltaT, tweenSettings);
                     }, this);
                 }
                 else if (length) {
-                    updateAttr.call(this, collection, deltaT, settings);
+                    updateAttr.call(this, collection, deltaT, tweenSettings);
                 }
             }
 
-            function applySettings(collection, deltaT, settings){
-                if (Pablo.isArray(settings)){
-                    settings.forEach(function(settings){
-                        updateCollection.call(this, collection, deltaT, settings);
+            function applyTween(collection, deltaT, tweenSettings){
+                if (Pablo.isArray(tweenSettings)){
+                    tweenSettings.forEach(function(tweenSettings){
+                        updateCollection.call(this, collection, deltaT, tweenSettings);
                     }, this);
                 }
                 else {
-                    updateCollection.call(this, collection, deltaT, settings);
+                    updateCollection.call(this, collection, deltaT, tweenSettings);
                 }
             }
 
-            return function(settings){
+            return function(tweenSettings, animationSettings){
                 var collection = this,
-                    animation = Pablo.animation(function(deltaT){
-                        applySettings.call(this, collection, deltaT, settings);
-                    });
+                    animation;
 
-                if ('dur' in settings){
-                    animation.dur = settings.dur;
+                if ('from' in tweenSettings){
+                    this.attr(tweenSettings.attr, tweenSettings.from);
                 }
-                return animation;
+                else {
+                    // TODO: don't set `from`, as this affects restarting the loop
+                    tweenSettings.from = Number(this.attr(tweenSettings.attr));
+                    if (!tweenSettings.from){
+                        tweenSettings.from = 0;
+                        this.attr(tweenSettings.attr, 0);
+                    }
+                }
+
+                // Default 'per' is 1000 milliseconds
+                if ('by' in tweenSettings && !('per' in tweenSettings)){
+                    tweenSettings.per = 1000;
+                }
+
+                if ('dur' in tweenSettings && !('to' in tweenSettings)){
+                    animationSettings = (animationSettings || {});
+                    animationSettings.dur = tweenSettings.dur;
+                }
+                    
+                return Pablo.animation(function(deltaT){
+                    applyTween.call(this, collection, deltaT, tweenSettings);
+                }, animationSettings);
             };
         }()),
     });
