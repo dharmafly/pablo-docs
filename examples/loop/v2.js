@@ -5,75 +5,84 @@ var svg = Pablo('#stage').svg({width:1920, height:1024}),
     fpsElem = Pablo('#fps'),
     fpsFrames,
     lastFpsRounded,
-    animations;
+    tweens, fpsCounter;
 
 
 /////
 
 
 rect.one('click', function(){
-    animations = [
-        rect.tween({
+    tweens = rect.tween([
+        /*
+        {
             attr: 'x',
             to: 300,
             dur: 2000
-        }),
+        },
 
-        rect.tween({
+        {
             attr: 'y',
             by: 50,
-            dur: 5000,
-            callback: function(deltaT){
-                var fps = 1000 / deltaT,
-                    fpsSampleSize = 60,
-                    fpsAverage, fpsRounded;
+            dur: 5000
+        },
 
-                // Skip first frame
-                if (!fpsFrames){
-                    fpsFrames = [];
-                    return;
-                }
+        {
+            transform: 'rotate',
+            by: [10]
+        }
+        */
+        {
+            attr: 'x',
+            from: 0,
+            to: 500
+        }
+    ]);
 
-                if (fpsFrames.length === fpsSampleSize){
-                    fpsFrames.shift();
-                }
-                fpsFrames.push(fps);
+    fpsCounter = Pablo.animation(function(deltaT){
+        var fps, fpsSampleSize, fpsAverage, fpsRounded;
 
-                fpsAverage = fpsFrames.reduce(function(previousValue, currentValue){
-                    return currentValue + previousValue;
-                }) / fpsFrames.length;
+        fps = 1000 / deltaT;
+        fpsSampleSize = 60;
+        fpsAverage, fpsRounded;
 
-                fpsRounded = Math.round(fpsAverage);
-                if (lastFpsRounded !== fpsRounded){
-                    lastFpsRounded = fpsRounded;
-                    fpsElem.content(fpsRounded + ' fps');
-                }
-            }
-        })
-    ];
-    animations.active = true;
+        // Skip first frame
+        if (!fpsFrames){
+            fpsFrames = [];
+            return;
+        }
+
+        if (fpsFrames.length === fpsSampleSize){
+            fpsFrames.shift();
+        }
+        fpsFrames.push(fps);
+
+        fpsAverage = fpsFrames.reduce(function(previousValue, currentValue){
+            return currentValue + previousValue;
+        }) / fpsFrames.length;
+
+        fpsRounded = Math.round(fpsAverage);
+        if (lastFpsRounded !== fpsRounded){
+            lastFpsRounded = fpsRounded;
+            fpsElem.content(fpsRounded + ' fps');
+        }
+    });
+
+    tweens.events.on('start', function(){
+        fpsCounter.start();
+    });
+
+    tweens.events.on('stop', function(){
+        fpsCounter.stop();
+    });
 
     rect.on('click', function(){
-        var allComplete = animations.every(function(animation){
-            return animation.complete;
-        });
-
-        animations.active = !animations.active;
-
-        animations.forEach(function(animation){
-            if (allComplete){
-                animation.start();
-                animations.active = true;
-            }
-            else if (!animations.active){
-                animation.stop();
-            }
-            else if (!animation.complete){
-                animation.start();
-            }
-        });
+        tweens.toggle();
     });
 });
+
+
+/////
+
 
 // Add event listeners
 Pablo.animation.on('add', function(obj, callback){console.log('add');});

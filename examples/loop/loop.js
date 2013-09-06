@@ -14,27 +14,47 @@
         };
 
 
-    function removeFromArray(array, target){
-        var index = array.indexOf(target);
+    /////
 
-        // Remove animation from array
-        if (index >= 0){
-            array.splice(index, 1);
+
+    function Things(){}
+
+    Things.prototype = Pablo.extend([], {
+        add: function(thing){
+            // Flatten array of things
+            if (Pablo.isArray(thing)){
+                thing.forEach(this.add, this);
+            }
+            else {
+                this.push(thing);
+            }
+            return this;
+        },
+
+        remove: function(thing){
+            var index;
+
+            if (Pablo.isArray(thing)){
+                thing.forEach(this.remove, this);
+            }
+            else {
+                index = this.indexOf(thing);
+
+                // Remove animation from array
+                if (index >= 0){
+                    this.splice(index, 1);
+                }
+            }   
+            return this;
         }
-    }
+    });
 
 
     /////
 
 
     function Animation(callback, loop, settings){
-        this.callback = callback;
-        this.loop = loop;
-        this.events = Pablo();
-
-        if (settings){
-            Pablo.extend(this, settings);
-        }
+        this.init(callback, loop, settings);
     }
 
     Pablo.extend(Animation.prototype, {
@@ -45,6 +65,17 @@
         addedToLoopTimeUnix: null,
         runningtime: 0,
         dur: -1,
+
+        init: function(callback, loop, settings){
+            this.callback = callback;
+            this.loop = loop;
+            this.events = Pablo();
+
+            if (settings){
+                Pablo.extend(this, settings);
+            }
+            return this;
+        },
 
         // Prepare the animation for a new cycle, which will last many frames
         onStartCycle: function(){
@@ -144,7 +175,7 @@
 
     function Loop(animations, autostart){
         // Cache an array of animation callbacks
-        this.animations = [];
+        this.animations = new Things();
         this.autostart = autostart;
 
         // Create an empty collection to act as an events proxy
@@ -186,24 +217,22 @@
             }
 
             animation.onAddToLoop();
-            this.animations.push(animation);
+            this.animations.add(animation);
             this.events.trigger('add', animation);
             
             return animation;
         },
 
-        remove: function(animation, persist){
+        remove: function(animation, indefinite){
             if (Pablo.isArray(animation)){
-                animation.forEach(function(animation){
-                    this.remove(animation, persist);
-                }, this);
+                animation.forEach(this.remove, this);
             }
             else {
                 animation.onRemoveFromLoop();
-                removeFromArray(this.animations, animation);
+                this.animations.remove(animation);
                 this.events.trigger('remove', animation);
 
-                if (!persist && !this.animations.length){
+                if (!indefinite && !this.animations.length){
                     this.stop();
                 }
             }
@@ -317,8 +346,8 @@
             return this.loop.add(animation, settings);
         },
 
-        remove: function(animation, persist){
-            this.loop.remove(animation, persist);
+        remove: function(animation, indefinite){
+            this.loop.remove(animation, indefinite);
             return this;
         },
 
@@ -352,6 +381,125 @@
             return this;
         }
     });
+
+
+    /////
+
+    function Tween(loop, collection, tweenSettings){
+        this.init(loop, collection, tweenSettings);
+    }
+
+    Tween.prototype = Pablo.extend(new Animation(), {
+        init: function(loop, collection, tweenSettings){
+            this.collection = collection;
+            this.tween = tweenSettings;
+
+            Animation.prototype.init.call(this, this.onAnimationFrame, loop);
+            return this;
+        },
+
+        onAnimationFrame: function(deltaT, timestamp){
+            this.applyTween(deltaT);
+
+            if ('callback' in this.tween){
+                this.tween.callback(deltaT, timestamp);
+            }
+            return this;
+        },
+
+        applyTween: function(deltaT){
+            if ('transform' in this.tween){
+                this.applyTransform(deltaT);
+            }
+            else if ('attr' in this.tween) {
+                this.applyAttr(deltaT);
+            }
+            return this;
+        },
+
+        applyAttr: function(deltaT){
+            // TODO: apply isSingle
+            this.collection.each(function(el){
+                var node = Pablo(el),
+                    currentAttr = Number(node.attr(this.tween.attr)) || 0,
+                    newAttr;
+
+                if (currentAttr === this.tween.to){
+                    return;
+                }
+
+                // TODO: apply for each element in the collection
+                if (!this.tween.original){
+                    this.tween.original = currentAttr;
+                }
+
+                // TODO: determine isPositive
+                newAttr = this.linear(deltaT, currentAttr, this.tween.to, this.tween.original);
+
+                if (this.tween.to - newAttr < 1){
+                    newAttr = this.tween.to;
+                }
+                node.attr(this.tween.attr, newAttr);
+
+                // TODO: need to end each element in the collection, not the whole tween
+                // or instead add tween callback to each element? extra work; not ideal
+                if (newAttr === this.tween.to){
+                    this.end();
+                }
+            }, this);
+            return this;
+        },
+
+        applyTransform: function(deltaT){
+
+        },
+
+        linear: function(deltaT, from, to, original){
+            return (to - original) / 1000 * deltaT + from;
+        },
+
+        easeout: function(deltaT, from, to){
+            return (to - from) / 1000 * deltaT + from;
+        }
+    });
+
+    Pablo.fn.tween = (function(){
+        var tweens = new Things(),
+            master;
+
+        function onAnimationFrame(deltaT, timestamp){
+            if (!tweens.length){
+                this.end();
+            }
+            else {
+                tweens.forEach(function(tween){
+                    tween.onAnimationFrame(deltaT, timestamp);
+                });
+            }
+            return this;
+        }
+
+        return function(tweenSettings, animationSettings, indefinite){
+            var tween = new Tween(Pablo.animation.loop, this, tweenSettings);
+
+            if (!indefinite){
+                tween.events.on('end', function(){
+                    tweens.remove(tween);
+                });
+            }
+
+            tweens.add(tween);
+
+            if (!master){
+                master = Pablo.animation(onAnimationFrame, animationSettings);
+            }
+            return master;
+        };
+    }());
+
+    return;
+
+    /////
 
 
     // Collection API extension
@@ -409,16 +557,39 @@
                 }
             }
 
+            function updateTransform(elem, deltaT, tweenSettings){
+                var currentTransformStr = elem.attr('transform'),
+                    pattern, currentTransform;
+
+                pattern = currentTransformStr && new RegExp('^.*' + tweenSettings.transform + '\\(' + '(.*)\\).*$');
+                currentTransform = currentTransformStr && Number(currentTransformStr.replace(pattern, '$1')) || 0;
+
+                elem.transform(tweenSettings.transform, currentTransform + tweenSettings.by.join(' '));
+            }
+
             function updateCollection(collection, deltaT, tweenSettings){
                 var length = collection.length;
 
-                if (length > 1){
-                    collection.each(function(el){
-                        updateAttr.call(this, Pablo(el), deltaT, tweenSettings);
-                    }, this);
+                if ('transform' in tweenSettings){
+                    if (length > 1){
+                        collection.each(function(el){
+                            updateTransform.call(this, Pablo(el), deltaT, tweenSettings);
+                        }, this);
+                    }
+                    else if (length) {
+                        updateTransform.call(this, collection, deltaT, tweenSettings);
+                    }
                 }
-                else if (length) {
-                    updateAttr.call(this, collection, deltaT, tweenSettings);
+
+                else {
+                    if (length > 1){
+                        collection.each(function(el){
+                            updateAttr.call(this, Pablo(el), deltaT, tweenSettings);
+                        }, this);
+                    }
+                    else if (length) {
+                        updateAttr.call(this, collection, deltaT, tweenSettings);
+                    }
                 }
             }
 
