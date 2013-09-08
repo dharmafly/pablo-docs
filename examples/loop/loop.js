@@ -17,7 +17,10 @@
     /////
 
 
-    function Things(){}
+    function Things(unique){
+        // If `unique` is true, then the object cannot appear more than once
+        this.unique = unique === true;
+    }
 
     Things.prototype = Pablo.extend([], {
         add: function(thing){
@@ -26,7 +29,9 @@
                 thing.forEach(this.add, this);
             }
             else {
-                this.push(thing);
+                if (!this.unique || (this.unique && this.indexOf(thing) === -1)){
+                    this.push(thing);
+                }
             }
             return this;
         },
@@ -53,51 +58,35 @@
     /////
 
 
-    function Animation(callback, loop, settings){
-        this.init(callback, loop, settings);
+    function Animation(callback, settings){
+        this.init(callback, settings);
     }
 
     Pablo.extend(Animation.prototype, {
         // The `active` parameter is changed by Loop.add and Loop.remove
         active: false,
-        complete: false,
+        ended: false,
+        autostart: true,
         lasttime: null,
-        addedToLoopTimeUnix: null,
+        startTimeUnix: null,
         runningtime: 0,
         dur: -1,
 
-        init: function(callback, loop, settings){
+        init: function(callback, settings){
             this.callback = callback;
-            this.loop = loop;
             this.events = Pablo();
 
             if (settings){
                 Pablo.extend(this, settings);
             }
+            if (this.autostart){
+                this.start();
+            }
             return this;
         },
 
-        // Prepare the animation for a new cycle, which will last many frames
-        onStartCycle: function(){
-            this.complete = false;
-            this.runningtime = 0;
-            return this;
-        },
-
-        // Prepare the animation to be added back into the loop, after stopping
-        onAddToLoop: function(){
-            this.active = true;
-            this.lasttime = null;
-            this.addedToLoopTimeUnix = nowUnix();
-            return this;
-        },
-
-        onRemoveFromLoop: function(){
-            this.active = false;
-            return this;
-        },
-
-        onStartLoop: function(){
+        // Prepare the animation for a new frame
+        resetFrame: function(){
             this.lasttime = null;
             return this;
         },
@@ -105,7 +94,7 @@
         onAnimationFrame: function(deltaT, timestamp, frameStartTimeUnix){
             // First iteration of the animation since last added to the loop
             if (!this.lasttime){
-                deltaT = frameStartTimeUnix - this.addedToLoopTimeUnix;
+                deltaT = frameStartTimeUnix - this.startTimeUnix;
             }
             // Successive iterations
             else {
@@ -128,13 +117,18 @@
 
         start: function(){
             if (!this.active){
-                if (this.complete){
-                    this.onStartCycle();
+                // Reset values after having stopped
+                this.active = true;
+                this.lasttime = null;
+                this.startTimeUnix = nowUnix();
+
+                // Reset values after having previously ended
+                if (this.ended){
+                    this.ended = false;
+                    this.runningtime = 0;
                 }
 
-                // Add to loop and start if not already started
-                this.loop.add(this);
-                this.loop.start();
+                // Loop can listen for the 'start' event and add the animation to the loop
                 this.events.trigger('start');
             }
             return this;
@@ -142,10 +136,10 @@
 
         stop: function(){
             if (this.active){
-                // Remove from loop
-                this.loop.remove(this);
+                this.active = false;
+                // Loop can listen for the 'stop' event and remove the animation from the loop
+                this.events.trigger('stop');
             }
-            this.events.trigger('stop');
             return this;
         },
 
@@ -160,8 +154,8 @@
         },   
 
         end: function(){
-            if (!this.complete){
-                this.complete = true;
+            if (!this.ended){
+                this.ended = true;
                 this.stop();
                 this.events.trigger('end');
             }
@@ -173,10 +167,9 @@
     /////
 
 
-    function Loop(animations, autostart){
+    function Loop(animations){
         // Cache an array of animation callbacks
-        this.animations = new Things();
-        this.autostart = autostart;
+        this.animations = new Things(true);
 
         // Create an empty collection to act as an events proxy
         this.events = Pablo();
@@ -185,19 +178,27 @@
         if (animations){
             this.add(animations);
         }
-        if (autostart){
-            this.start();
-        }
     }
 
     Loop.nowUnix = nowUnix;
 
     Pablo.extend(Loop.prototype, {
         active: false,
-        autostart: false,
 
         create: function(callback, settings){
-            return new Animation(callback, this, settings);
+            var loop = this,
+                animation = new Animation(callback, settings);
+
+            // Add/remove from loop at animation start and stop
+            animation.events
+                .on('start', function(){
+                    loop.add(animation);
+                })
+                .on('stop', function(){
+                    loop.remove(animation);
+                });
+
+            return animation;
         },
 
         add: function(callback, settings){
@@ -216,23 +217,22 @@
                 animation = this.create(callback, settings);
             }
 
-            animation.onAddToLoop();
             this.animations.add(animation);
             this.events.trigger('add', animation);
-            
+
             return animation;
         },
 
-        remove: function(animation, indefinite){
+        remove: function(animation){
             if (Pablo.isArray(animation)){
                 animation.forEach(this.remove, this);
             }
             else {
-                animation.onRemoveFromLoop();
                 this.animations.remove(animation);
+                animation.stop();
                 this.events.trigger('remove', animation);
 
-                if (!indefinite && !this.animations.length){
+                if (!this.animations.length){
                     this.stop();
                 }
             }
@@ -286,7 +286,7 @@
                 // this.loopStartTime = window.performance.now();
 
                 this.animations.forEach(function(animation){
-                    animation.onStartLoop();
+                    animation.resetFrame();
                 });
 
                 this.events.trigger('start');
@@ -385,6 +385,13 @@
 
     /////
 
+    // var elements = new Things(true);
+
+    return;
+
+    /////
+
+
     function Tween(loop, collection, tweenSettings){
         this.init(loop, collection, tweenSettings);
     }
@@ -463,6 +470,8 @@
         }
     });
 
+    // TODO: use data('tweens')on each element to store AnimationController (stop/start) of tweens 
+    // TODO: store elements with active tweens; when empty, stop(); when new addition, start
     Pablo.fn.tween = (function(){
         var tweens = new Things(),
             master;
@@ -479,7 +488,7 @@
             return this;
         }
 
-        return function(tweenSettings, animationSettings, indefinite){
+        return function(tweenSettings, indefinite){
             var tween = new Tween(Pablo.animation.loop, this, tweenSettings);
 
             if (!indefinite){
@@ -491,7 +500,7 @@
             tweens.add(tween);
 
             if (!master){
-                master = Pablo.animation(onAnimationFrame, animationSettings);
+                master = Pablo.animation(onAnimationFrame);
             }
             return master;
         };
@@ -633,7 +642,7 @@
                     // TODO: handle multiple elements in the collection
                     tweenSettings.from = Number(this.attr(tweenSettings.attr)) || 0;
 
-                    // Set `from` on unpause when no `from` had been specified
+                    // Set `from` on resume when no `from` had been specified
                     animation.events.on('start', function(){
                         tweenSettings.from = Number(collection.attr(tweenSettings.attr)) || 0;
 
