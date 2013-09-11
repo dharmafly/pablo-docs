@@ -17,18 +17,23 @@
     /////
 
 
+    // An extended array for managing related objects
     function Things(unique){
         // If `unique` is true, then the object cannot appear more than once
         this.unique = unique === true;
     }
 
     Things.prototype = Pablo.extend([], {
+        constructor: Things,
+
         add: function(thing){
             // Flatten array of things
             if (Pablo.isArray(thing)){
                 thing.forEach(this.add, this);
             }
             else {
+                // TODO: a more performant way to check if `thing` is already present is
+                // to add an index to each object and check on a lookup object of indexes
                 if (!this.unique || (this.unique && this.indexOf(thing) === -1)){
                     this.push(thing);
                 }
@@ -169,7 +174,7 @@
 
     function Loop(animations){
         // Cache an array of animation callbacks
-        this.animations = new Things(true);
+        this.animations = new Things();
 
         // Create an empty collection to act as an events proxy
         this.events = Pablo();
@@ -383,13 +388,546 @@
     });
 
 
-    /////
 
-    // var elements = new Things(true);
+    ///////////////////////////////////////////
+
+
+    (function(){
+        var tweens = new Things(true);
+
+
+        /////
+
+
+        function Tween(settings){
+            Pablo.extend(this, settings);
+            this.events = Pablo();
+            this.elements = new Things(true);
+        }
+
+        Pablo.extend(Tween.prototype, {
+            from: 0,
+            to: 0,
+            dur: -1, // infinite
+            repeats: 1,
+            remaining: 1,
+            per: 1000,
+            ended: false,
+            active: true,
+
+            addElement: function(elem){
+                var doTrigger = !this.elements.length;
+
+                this.elements.add(elem);
+                if (doTrigger){
+                    this.events.trigger('firstelement', elem);
+                }
+                return this;
+            },
+
+            removeElement: function(elem){
+                var hadElement = this.elements.length === 1;
+
+                this.elements.remove(elem);
+                if (hadElement && !this.elements.length){
+                    this.events.trigger('lastelement', elem);
+                }
+                return this;
+            },
+
+            pause: function(){
+                this.active = false;
+                return this;
+            },
+
+            resume: function(){
+                this.active = true;
+                return this;
+            },
+
+            start: function(){
+                if (this.ended){
+                    this.ended = false;
+                }
+                this.events.trigger('start');
+                return this;
+            },
+
+            stop: function(){
+                this.events.trigger('stop');
+                return this;
+            },
+
+            end: function(){
+                if (!this.ended){
+                    this.ended = true;
+
+                    if (this.remaining > 0){
+                        this.remaining --;
+                    }
+                    this.events.trigger('end');
+                }
+                return this;
+            },
+
+            onAnimationFrame: function(deltaT, timestamp, elem){
+                // Change `elem` according to `deltaT`
+
+                return this;
+            }
+        });
+
+
+        /////
+
+
+        function TweenSet(tweens){
+            this.add(tweens);
+            this.events = Pablo();
+            this.elements = new Things(true);
+        }
+
+        TweenSet.prototype = Pablo.extend(new Things(), {
+            constructor: TweenSet,
+            active: true,
+            //ended: false,
+
+            addElement: function(elem){
+                var doTrigger = !this.elements.length;
+
+                this.elements.add(elem);
+                if (doTrigger){
+                    this.events.trigger('firstelement', elem);
+                }
+                return this;
+            },
+
+            removeElement: function(elem){
+                var hadElement = this.elements.length === 1;
+
+                this.elements.remove(elem);
+                if (hadElement && !this.elements.length){
+                    this.events.trigger('lastelement', elem);
+                }
+                return this;
+            },
+
+            add: function(tween){
+                Things.prototype.add.call(this, tween);
+
+                tween.on('start', function(){
+                    if (!this.active){
+                        this.start();
+                    }
+                }, this);
+
+                tween.on('stop', function(){
+                    this.remove(tween);
+                }, this);
+
+                return this;
+            },
+
+            remove: function(){
+                Things.prototype.remove.call(this, tween);
+
+                if (!this.length){
+                    this.stop();
+                }
+                return this;
+            },
+
+            start: function(){
+                if (!this.active){
+                    this.active = true;
+
+                    if (this.length){
+                        this.forEach(function(tween){
+                            tween.start();
+                        });
+                    }
+                    this.events.trigger('start');
+                }
+                return this;
+            },
+
+            stop: function(){
+                if (this.active){
+                    this.active = false;
+
+                    if (this.length){
+                        this.forEach(function(tween){
+                            tween.stop();
+                        });
+                    }
+                    this.events.trigger('stop');
+                }
+                return this;
+            }/*,
+
+            end: function(){
+                if (!this.ended && !this.length){
+                    this.ended = true;
+                    this.events.trigger('end');
+                }
+                return this;
+            },
+            */
+
+            onAnimationFrame: function(deltaT, timestamp, elem){
+                return this.forEach(function(tween){
+                    tween.onAnimationFrame(deltaT, timestamp, elem);
+                });
+            }
+        });
+
+
+        /////
+
+
+        Pablo.tween = function(settings){
+            var tween;
+
+            if (Pablo.isArray(tween)){
+                tween = new TweenSet(tween);
+            }
+            tween = new Tween(tween);
+
+            // TODO: do on tween.start() - i.e. make start on tween.addElement
+            tween.events
+                .on('firstelement', function(){
+                    tweens.add(tween);
+                })
+                .on('lastelement', function(){
+                    tweens.remove(tween);
+                });
+
+            return tween;
+        }
+        Pablo.tween.tweens = tweens;
+
+
+        /////
+
+
+        Pablo.fn.tween = function(tween){
+            if (!(tween instanceof Tween || tween instanceof TweenSet)){
+                tween = Pablo.tween(tweens);
+            }
+
+            // Add to `tweens`
+            // Check if the tween's `elements` set is empty, a performant way to check if the
+            // tween is already in `tweens`
+            if (!tween.elements.length){
+                tweens.add(tween);
+            }
+
+            // Add element to tween's set of elements
+            // If this is a single-element Pablo collection
+            if (this.length === 1){
+                tween.elements.add(this);
+            }
+
+            // If there are multiple elements in the collection
+            else {
+                this.each(function(el){
+                    tween.elements.add(Pablo(el));
+                });
+            }
+            return this;
+        };
+
+
+        /////
+        
+
+        Pablo.fn.removeTween = function(tween){
+            // Remove element from tween's set of elements
+            // If this is a single-element Pablo collection
+            if (this.length === 1){
+                tween.elements.remove(this);
+            }
+
+            // If there are multiple elements in the collection
+            else {
+                this.each(function(el){
+                    tween.elements.remove(Pablo(el));
+                });
+            }
+
+            // If tween has no more elements to serve, then remove from `tweens`
+            if (!tween.elements.length){
+                tweens.remove(tween);
+            }
+
+            return this;
+        };
+    }());
+
 
     return;
 
+
+
+    ///////////////////////////////////////////
+
+
     /////
+
+    Pablo.fn.removeTween = function(tween){
+        var tweens = this.data(tweenNamespace);
+        if (tweens){
+            tweens.remove(tween);
+        }
+    };
+
+    (function(){
+        var tweenNamespace = '__tweens__',
+            elements = new Things(true),
+            animation;
+
+        animation = Pablo.animation(function(deltaT, timestamp){
+            elements.forEach(function(elem){
+                var tweens = elem.data(tweenNamespace);
+                
+                // Double-check an element hasn't mistakenly avoided being
+                // removed from `elements`
+                if (tweens){
+                    tweens.onAnimationFrame(deltaT, timestamp, elem);
+                }
+                else {
+                    elements.remove(elem);
+                }
+            });
+
+            if (!elements.length){
+                this.stop();
+            }
+        });
+
+
+        /////
+
+
+        function Tween(settings){
+            Pablo.extend(this, settings);
+            this.events = Pablo();
+        }
+
+        Pablo.extend(Tween.prototype, {
+            from: 0,
+            to: 0,
+            dur: -1, // infinite
+            repeats: 1,
+            remaining: 1,
+            per: 1000,
+            ended: false,
+            active: true,
+
+            pause: function(){
+                this.active = false;
+                return this;
+            },
+
+            resume: function(){
+                this.active = true;
+                return this;
+            },
+
+            start: function(){
+                if (this.ended){
+                    this.ended = false;
+                }
+                this.events.trigger('start');
+                return this;
+            },
+
+            stop: function(){
+                this.events.trigger('stop');
+                return this;
+            },
+
+            end: function(){
+                if (!this.ended){
+                    this.ended = true;
+
+                    if (this.remaining > 0){
+                        this.remaining --;
+                    }
+                    this.events.trigger('end');
+                }
+                return this;
+            },
+
+            onAnimationFrame: function(deltaT, timestamp, elem){
+                // Change `elem` according to `deltaT`
+
+                return this;
+            }
+        });
+
+
+        /////
+
+
+        function TweenSet(tweens){
+            this.events = Pablo();
+            this.add(tweens);
+        }
+
+        TweenSet.prototype = Pablo.extend(new Things(), {
+            constructor: TweenSet,
+            active: true,
+            //ended: false,
+
+            add: function(tween){
+                Things.prototype.add.call(this, tween);
+
+                tween.on('start', function(){
+                    if (!this.active){
+                        this.start();
+                    }
+                }, this);
+
+                tween.on('stop', function(){
+                    this.remove(tween);
+                }, this);
+
+                return this;
+            },
+
+            remove: function(){
+                Things.prototype.remove.call(this, tween);
+
+                if (!this.length){
+                    this.stop();
+                }
+                return this;
+            },
+
+            start: function(){
+                if (!this.active){
+                    this.active = true;
+
+                    if (this.length){
+                        this.forEach(function(tween){
+                            tween.start();
+                        });
+                    }
+                    this.events.trigger('start');
+                }
+                return this;
+            },
+
+            stop: function(){
+                if (this.active){
+                    this.active = false;
+
+                    if (this.length){
+                        this.forEach(function(tween){
+                            tween.stop();
+                        });
+                    }
+                    this.events.trigger('stop');
+                }
+                return this;
+            }/*,
+
+            end: function(){
+                if (!this.ended && !this.length){
+                    this.ended = true;
+                    this.events.trigger('end');
+                }
+                return this;
+            },
+            */
+
+            onAnimationFrame: function(deltaT, timestamp, elem){
+                return this.forEach(function(tween){
+                    tween.onAnimationFrame(deltaT, timestamp, elem);
+                });
+            }
+        });
+
+
+        /////
+
+
+        // TODO: improve on having to search through each element to remove tween
+        Pablo.fn.removeTween = function(tween){
+            elements.forEach(function(elem){
+                var tweens = elem.data(tweenNamespace);
+                if (tweens){
+                    tweens.remove(tween);
+                }
+            });
+            return this;
+        };
+
+        Pablo.fn.tween = function(settings){
+            var tween;
+
+            if (settings instanceof Tween || settings instanceof TweenSet){
+                tween = settings;
+            }
+            else if (Pablo.isArray(settings)){
+                tween = new TweenSet(settings);
+            }
+            else {
+                tween = new Tween(settings);
+            }
+
+            this.each(function(el){
+                var elem = Pablo(el),
+                    tweens;
+
+                tween.events
+                    .on('start', function(){
+                        tweens = elem.data(tweenNamespace);
+
+                        if (!tweens){
+                            tweens = new TweenSet(settings);
+                            elem.data(tweenNamespace, tweens);
+                            animation.start();
+                        }
+                        tweens.add(tween);
+                        elements.add(elem);
+                    })
+                    .on('stop', function(){
+                        tweens.remove(tween);
+
+                        if (!tweens.length){
+                            elem.removeData(tweenNamespace);
+                            elements.remove(elem);
+                        }
+                    })
+                    .on('end', function(){
+                        if (!tween.remaining){
+                            tweens.remove(tween);
+
+                            if (!tweens.length){
+                                elem.removeData(tweenNamespace);
+                                elements.remove(elem);
+                            }
+                        }
+                    });
+            });
+
+            
+            tween.start();
+
+            return tween;
+        };
+    });
+
+
+    return;
+
+
+
+    ///////////////////////////////////////////
+
+
 
 
     function Tween(loop, collection, tweenSettings){
