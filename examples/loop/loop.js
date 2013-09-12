@@ -68,7 +68,6 @@
     }
 
     Pablo.extend(Animation.prototype, {
-        // The `active` parameter is changed by Loop.add and Loop.remove
         active: false,
         ended: false,
         autostart: true,
@@ -194,14 +193,16 @@
             var loop = this,
                 animation = new Animation(callback, settings);
 
-            // Add/remove from loop at animation start and stop
-            animation.events
-                .on('start', function(){
-                    loop.add(animation);
-                })
-                .on('stop', function(){
-                    loop.remove(animation);
-                });
+            if (animation.active){
+                loop.add(animation);
+                animation.events
+                    .on('start', function(){
+                        loop.add(animation);
+                    })
+                    .on('stop', function(){
+                        loop.remove(animation);
+                    });
+            }
 
             return animation;
         },
@@ -224,6 +225,10 @@
 
             this.animations.add(animation);
             this.events.trigger('add', animation);
+
+            if (animation.active && !this.active){
+                this.start();
+            }
 
             return animation;
         },
@@ -333,7 +338,6 @@
     // Pablo.animation
     Pablo.animation = function(animation, settings){
         animation = Pablo.animation.add(animation, settings);
-        Pablo.animation.start();
         return animation;
     };
     
@@ -344,11 +348,13 @@
         loop: new Loop(),
 
         create: function(animation, settings){
-            return this.loop.create(animation, settings);
+            this.loop.create(animation, settings);
+            return this;
         },
 
         add: function(animation, settings){
-            return this.loop.add(animation, settings);
+            this.loop.add(animation, settings);
+            return this;
         },
 
         remove: function(animation, indefinite){
@@ -393,7 +399,7 @@
 
 
     (function(){
-        var tweens = new Things(true);
+        var tweens, animation;
 
 
         /////
@@ -403,6 +409,10 @@
             Pablo.extend(this, settings);
             this.events = Pablo();
             this.elements = new Things(true);
+
+            if (this.autostart){
+                this.start();
+            }
         }
 
         Pablo.extend(Tween.prototype, {
@@ -413,50 +423,38 @@
             remaining: 1,
             per: 1000,
             ended: false,
-            active: true,
-
-            addElement: function(elem){
-                var doTrigger = !this.elements.length;
-
-                this.elements.add(elem);
-                if (doTrigger){
-                    this.events.trigger('firstelement', elem);
-                }
-                return this;
-            },
-
-            removeElement: function(elem){
-                var hadElement = this.elements.length === 1;
-
-                this.elements.remove(elem);
-                if (hadElement && !this.elements.length){
-                    this.events.trigger('lastelement', elem);
-                }
-                return this;
-            },
-
-            pause: function(){
-                this.active = false;
-                return this;
-            },
-
-            resume: function(){
-                this.active = true;
-                return this;
-            },
+            active: false,
+            autostart: true,
 
             start: function(){
-                if (this.ended){
-                    this.ended = false;
-                }
-                this.events.trigger('start');
+                if (!this.active){
+                    this.active = true;
+
+                    if (this.ended){
+                        this.ended = false;
+                    }
+                    this.events.trigger('start');
+                }   
                 return this;
             },
 
             stop: function(){
-                this.events.trigger('stop');
+                if (this.active){
+                    this.active = false;
+                    this.events.trigger('stop');
+                }
                 return this;
             },
+
+            toggle: function(){
+                if (this.active){
+                    this.stop();
+                }
+                else {
+                    this.start();
+                }
+                return this;
+            }, 
 
             end: function(){
                 if (!this.ended){
@@ -470,11 +468,67 @@
                 return this;
             },
 
-            onAnimationFrame: function(deltaT, timestamp, elem){
-                // Change `elem` according to `deltaT`
+            onAnimationFrame: function(deltaT, timestamp){
+                // Change elements according to `deltaT`
 
                 return this;
+            },
+
+            /*
+            applyTween: function(deltaT){
+                if ('transform' in this.tween){
+                    this.applyTransform(deltaT);
+                }
+                else if ('attr' in this.tween) {
+                    this.applyAttr(deltaT);
+                }
+                return this;
+            },
+
+            applyAttr: function(deltaT){
+                // TODO: apply isSingle
+                this.elements.forEach(function(elem){
+                    var currentAttr = Number(elem.attr(this.tween.attr)) || 0,
+                        newAttr;
+
+                    if (currentAttr === this.tween.to){
+                        return;
+                    }
+
+                    // TODO: apply for each element in the collection
+                    if (!this.tween.original){
+                        this.tween.original = currentAttr;
+                    }
+
+                    // TODO: determine isPositive
+                    newAttr = this.linear(deltaT, currentAttr, this.tween.to, this.tween.original);
+
+                    if (this.tween.to - newAttr < 1){
+                        newAttr = this.tween.to;
+                    }
+                    node.attr(this.tween.attr, newAttr);
+
+                    // TODO: need to end each element in the collection, not the whole tween
+                    // or instead add tween callback to each element? extra work; not ideal
+                    if (newAttr === this.tween.to){
+                        this.end();
+                    }
+                }, this);
+                return this;
+            },
+
+            applyTransform: function(deltaT){
+
+            },
+
+            linear: function(deltaT, from, to, original){
+                return (to - original) / 1000 * deltaT + from;
+            },
+
+            easeout: function(deltaT, from, to){
+                return (to - from) / 1000 * deltaT + from;
             }
+            */
         });
 
 
@@ -482,53 +536,69 @@
 
 
         function TweenSet(tweens){
-            this.add(tweens);
             this.events = Pablo();
             this.elements = new Things(true);
+
+            if (tweens){
+                this.add(tweens);
+            }
         }
 
-        TweenSet.prototype = Pablo.extend(new Things(), {
+        TweenSet.prototype = Pablo.extend(new Things(true), {
             constructor: TweenSet,
-            active: true,
-            //ended: false,
-
-            addElement: function(elem){
-                var doTrigger = !this.elements.length;
-
-                this.elements.add(elem);
-                if (doTrigger){
-                    this.events.trigger('firstelement', elem);
-                }
-                return this;
-            },
-
-            removeElement: function(elem){
-                var hadElement = this.elements.length === 1;
-
-                this.elements.remove(elem);
-                if (hadElement && !this.elements.length){
-                    this.events.trigger('lastelement', elem);
-                }
-                return this;
-            },
+            active: false,
+            ended: false,
 
             add: function(tween){
+                var tweenset = this;
+
+                // Add to tweenset
                 Things.prototype.add.call(this, tween);
 
-                tween.on('start', function(){
-                    if (!this.active){
-                        this.start();
+                function onStart(){
+                    if (!tweenset.active){
+                        tweenset.start();
                     }
-                }, this);
+                }
 
-                tween.on('stop', function(){
-                    this.remove(tween);
-                }, this);
+                function onStop(){
+                    if (tweenset.every(function(tween){
+                        return !tween.active;
+                    })){
+                        tweenset.stop();
+                    }
+                }
+
+                function onEnd(){
+                    if (tween.remaining > 0 || tween.remaining === -1){
+                        tweenset.remove(tween);
+
+                        // Remove listeners
+                        tween.events
+                            .off('start', onStart)
+                            .off('stop', onStop)
+                            .off('end', onEnd);
+                    }
+
+                    if (!tweenset.length){
+                        tweenset.end();
+                    }
+                }
+
+                // Add listeners
+                tween.events
+                    .on('start', onStart, this)
+                    .on('stop', onStop, this)
+                    .on('end', onEnd, this);
+
+                if (tween.active){
+                    onStart();
+                }
 
                 return this;
             },
 
-            remove: function(){
+            remove: function(tween){
                 Things.prototype.remove.call(this, tween);
 
                 if (!this.length){
@@ -540,6 +610,10 @@
             start: function(){
                 if (!this.active){
                     this.active = true;
+
+                    if (this.ended){
+                        this.ended = false;
+                    }
 
                     if (this.length){
                         this.forEach(function(tween){
@@ -563,20 +637,29 @@
                     this.events.trigger('stop');
                 }
                 return this;
-            }/*,
+            },
+
+            toggle: function(){
+                if (this.length){
+                    this.forEach(function(tween){
+                        tween.toggle();
+                    });
+                }
+                return this;
+            },
 
             end: function(){
-                if (!this.ended && !this.length){
+                if (!this.ended){
                     this.ended = true;
+                    this.stop();
                     this.events.trigger('end');
                 }
                 return this;
             },
-            */
 
-            onAnimationFrame: function(deltaT, timestamp, elem){
+            onAnimationFrame: function(deltaT, timestamp){
                 return this.forEach(function(tween){
-                    tween.onAnimationFrame(deltaT, timestamp, elem);
+                    tween.onAnimationFrame(deltaT, timestamp);
                 });
             }
         });
@@ -584,27 +667,50 @@
 
         /////
 
+        tweens = new TweenSet();
 
-        Pablo.tween = function(settings){
-            var tween;
+        Pablo.tween = (function(){
+            return function(settings){
+                var tween;
 
-            if (Pablo.isArray(tween)){
-                tween = new TweenSet(tween);
-            }
-            tween = new Tween(tween);
+                if (Pablo.isArray(tween)){
+                    tween = new TweenSet(tween);
+                }
+                tween = new Tween(tween);
 
-            // TODO: do on tween.start() - i.e. make start on tween.addElement
-            tween.events
-                .on('firstelement', function(){
-                    tweens.add(tween);
-                })
-                .on('lastelement', function(){
-                    tweens.remove(tween);
-                });
+                tween.events
+                    .on('start', function(){
+                        tweens.add(tween);
+                    })
+                    .on('stop', function(){
+                        tweens.remove(tween);
+                    });
 
-            return tween;
-        }
-        Pablo.tween.tweens = tweens;
+                return tween;
+            };
+        }());
+
+        Pablo.extend(Pablo.tween, {
+            tweens: tweens,
+            Tween: Tween,
+            TweenSet: TweenSet
+        });
+
+        animation = Pablo.animation(function(deltaT, timestamp){
+            tweens.onAnimationFrame(deltaT, timestamp);
+        }, {id:'tweenloop', autostart:false});
+
+        tweens.events
+            .on('start', function(){
+                if (!animation.active){
+                    animation.start();
+                }
+            })
+            .on('stop', function(){
+                if (animation.active){
+                    animation.stop();
+                }
+            });
 
 
         /////
@@ -634,7 +740,7 @@
                     tween.elements.add(Pablo(el));
                 });
             }
-            return this;
+            return tween.start();
         };
 
 
@@ -831,7 +937,7 @@
                     this.events.trigger('stop');
                 }
                 return this;
-            }/*,
+            }, /*
 
             end: function(){
                 if (!this.ended && !this.length){

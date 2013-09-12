@@ -11,6 +11,17 @@ var svg = Pablo('#stage').svg({width:1920, height:1024}),
 /////
 
 
+// Add event listeners
+Pablo.animation.on('add', function(obj, callback){console.log('add');});
+Pablo.animation.on('remove', function(obj, callback){console.log('remove');});
+Pablo.animation.on('start', function(){console.log('start');});
+Pablo.animation.on('loop', function(obj, deltaT, timestamp){console.log('loop', deltaT, timestamp);});
+Pablo.animation.on('stop', function(){console.log('stop');});
+
+
+////
+
+
 rect.one('click', function(){
     tweens = rect.tween([
         /*
@@ -65,7 +76,7 @@ rect.one('click', function(){
             lastFpsRounded = fpsRounded;
             fpsElem.content(fpsRounded + ' fps');
         }
-    });
+    }, {id:'fps'});
 
     tweens.events.on('start', function(){
         fpsCounter.start();
@@ -79,14 +90,3 @@ rect.one('click', function(){
         tweens.toggle();
     });
 });
-
-
-/////
-
-
-// Add event listeners
-Pablo.animation.on('add', function(obj, callback){console.log('add');});
-Pablo.animation.on('remove', function(obj, callback){console.log('remove');});
-Pablo.animation.on('start', function(){console.log('start');});
-Pablo.animation.on('loop', function(obj, deltaT, timestamp){console.log('loop', deltaT, timestamp);});
-Pablo.animation.on('stop', function(){console.log('stop');});
