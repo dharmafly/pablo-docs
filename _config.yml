@@ -1,50 +1,50 @@
 --- 
-theme: horus
-future: true
+download_links: 
+- text: pablo.js
+  title: Full source code, for use in development
+  href: /downloads/pablo.js
+  subtext: v{{ version }}
+- text: pablo.min.js
+  title: Minified, for use in production
+  href: /downloads/pablo.min.js
+  subtext: v{{ version }}
+- text: Edge
+  title: Latest codebase (zip); potentially unstable
+  href: https://github.com/dharmafly/pablo/zipball/master
+  subtext: (master)
 lsi: false
-ga_id: UA-34978047-1
-baseurl: /
-scripts: 
-- src: /downloads/pablo.min.js
+project_url: https://github.com/dharmafly/pablo
 version: 0.3.2
-lang: javascript
+twitter_url: https://twitter.com/dharmafly
 sections: 
-- name: Overview
-  path: /index.html
-- name: API
-  path: /api/index.html
-- name: Misc
-  path: /misc/index.html
-- name: Resources
-  path: /resources/index.html
+- path: /index.html
+  name: Overview
+- path: /api/index.html
+  name: API
+- path: /misc/index.html
+  name: Misc
+- path: /resources/index.html
+  name: Resources
+ga_id: UA-34978047-1
+safe: false
 permalink: /:title
-stylesheets: 
-- url: /css/custom/custom.css
+baseurl: /
+project_name: Pablo
 quote: 
 - quote: Painting is just another way of keeping a diary.
 - cite: Pablo Picasso
-download_links: 
-- title: Full source code, for use in development
-  href: /downloads/pablo.js
-  subtext: v{{ version }}
-  text: pablo.js
-- title: Minified, for use in production
-  href: /downloads/pablo.min.js
-  subtext: v{{ version }}
-  text: pablo.min.js
-- title: Latest codebase (zip); potentially unstable
-  href: https://github.com/dharmafly/pablo/zipball/master
-  subtext: (master)
-  text: Edge
-safe: false
+markdown: maruku
 exclude: 
 - README.md
 - assets
 - FiddlerRules.farx
-twitter_name: Dharmafly
-markdown: maruku
-project_url: https://github.com/dharmafly/pablo
 jquery_no_conflict: true
-twitter_url: https://twitter.com/dharmafly
-project_name: Pablo
+future: true
 pygments: false
+lang: javascript
+scripts: 
+- src: /downloads/pablo.min.js
+stylesheets: 
+- url: /css/custom/custom.css
+theme: horus
+twitter_name: Dharmafly

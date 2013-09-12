@@ -1,0 +1,20 @@
+{
+  "name": "pablo-docs",
+  "version": "0.1.0",
+  "description": "Docs site for pablojs.com",
+  "main": "\"\"",
+  "directories": {
+    "test": "tests"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-copy": "~0.4.1",
+    "grunt-git": "~0.1.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/dharmafly/pablo-docs.git"
+  },
+  "author": "Premasagar Rose",
+  "license": "MIT"
+}
