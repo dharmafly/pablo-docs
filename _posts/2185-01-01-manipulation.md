@@ -11,14 +11,29 @@ These collection methods manipulate DOM elements.
 Append the specified elements to each element in the collection.
 
 
-## [prepend(elements)](/api/prepend/)
-
-Prepend the specified elements to each element in the collection.
-
-
 ## [appendTo(elements)](/api/appendTo/)
 
 Append the elements in the collection to each element specified.
+
+
+## [attr()](/api/attr/)
+
+Get or set attributes on elements in the collection.
+
+
+## [removeAttr(attribute)](/api/removeAttr/)
+
+Remove an attribute from each the element in the collection.
+
+
+## [transform()](/api/transform/)
+
+Set a type of transform in the transform attribute for each element in the collection.
+
+
+## [prepend(elements)](/api/prepend/)
+
+Prepend the specified elements to each element in the collection.
 
 
 ## [prependTo(element)](/api/prependTo/)
@@ -64,13 +79,3 @@ Remove the child elements of each element in the collection and remove any assoc
 ## [content(string)](/api/content/)
 
 Get or set the text content of elements in the collection.
-
-
-## [attr()](/api/attr/)
-
-Get or set attributes on elements in the collection.
-
-
-## [removeAttr(attribute)](/api/removeAttr/)
-
-Remove an attribute from each the element in the collection.
