@@ -1,7 +1,7 @@
 'use strict';
 
-var width, height, centerX, centerY, radiusScale, distanceScale, durationScale,
-    solarsystem, sun, mercury, venus, earth, mars, jupiter, saturn, uranus, neptune, pluto;
+var width, height, centerX, centerY, radiusScale, planetRadiusScale, distanceScale, durationScale,
+    svg, solarsystem, sun, mercury, venus, earth, mars, jupiter, saturn, uranus, neptune, pluto;
 
 
 // SETTINGS
@@ -9,6 +9,7 @@ var width, height, centerX, centerY, radiusScale, distanceScale, durationScale,
 width = window.innerWidth;
 height = window.innerHeight;
 radiusScale = 0.2;
+planetRadiusScale = 1;
 distanceScale = 9;
 durationScale = 10;
     
@@ -37,7 +38,7 @@ function CelestialBody(properties){
     this.id = this.title.toLowerCase().replace('/\W/g', '-');
         
     // radius
-    this.radius = round(this.radius * radiusScale, 2);
+    this.radius = round(this.radius * (this.parent ? planetRadiusScale : radiusScale), 2);
         
     // distance
     if (this.distance){
@@ -55,9 +56,11 @@ function CelestialBody(properties){
     
 CelestialBody.prototype = {
     addOrbit: function(properties){
-        var orbitingBody = new CelestialBody(properties);
-            
-        orbitingBody.parent = this;
+        var orbitingBody;
+
+        properties.parent = this;
+        orbitingBody = new CelestialBody(properties);
+
         this.orbits.push(orbitingBody);
         return orbitingBody;
     },
@@ -92,7 +95,7 @@ CelestialBody.prototype = {
                 cy: centerY,
                 r: this.parent.radius + this.distance + this.radius,
                 stroke: '#fff',
-                'stroke-width': 0.125,
+                'stroke-width': 0.1,
                 fill: 'none'
             });
                 
@@ -207,11 +210,18 @@ if (Pablo.isSupported){
     });
     
     // SVG root node
-    solarsystem = Pablo('#paper').svg({
-        width: width,
-        height: height
+    svg = Pablo('#paper').svg({
+        width: width * 8,
+        height: height * 8,
+        viewBox: '0 0 ' + width + ' ' + height
     });
+
+    solarsystem = svg.g();//.transform('translate', -width*3.5, -height*3.5).transform('scale', 8);
     
     // Draw the sun, and the rest will follow
     sun.draw();
+
+    var body = window.document.body;
+    body.scrollTop = height * 3.5;
+    body.scrollLeft = width * 3.5;
 }
