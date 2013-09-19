@@ -193,16 +193,14 @@
             var loop = this,
                 animation = new Animation(callback, settings);
 
-            if (animation.active){
-                loop.add(animation);
-                animation.events
-                    .on('start', function(){
-                        loop.add(animation);
-                    })
-                    .on('stop', function(){
-                        loop.remove(animation);
-                    });
-            }
+            loop.add(animation);
+            animation.events
+                .on('start', function(){
+                    loop.add(animation);
+                })
+                .on('stop', function(){
+                    loop.remove(animation);
+                });
 
             return animation;
         },
@@ -353,8 +351,7 @@
         },
 
         add: function(animation, settings){
-            this.loop.add(animation, settings);
-            return this;
+            return this.loop.add(animation, settings);
         },
 
         remove: function(animation, indefinite){
@@ -408,11 +405,7 @@
         function Tween(settings){
             Pablo.extend(this, settings);
             this.events = Pablo();
-            this.elements = new Things(true);
-
-            if (this.autostart){
-                this.start();
-            }
+            this.elements = new Things();
         }
 
         Pablo.extend(Tween.prototype, {
@@ -424,7 +417,40 @@
             per: 1000,
             ended: false,
             active: false,
-            autostart: true,
+            attr: null,
+            transform: null,
+
+            addElement: function(elem){
+                var el = Pablo.isElement(elem) ? elem : elem[0],
+                    value, element;
+
+                if (this.elements.every(function(element){
+                    return element.elem[0] !== el;
+                })){
+                    elem = Pablo.isPablo(elem) ? elem : Pablo(elem);
+                    value = this.getDomValue(elem),
+                    element = {
+                        elem: elem,
+                        value: value,
+                        original: value
+                    };
+                    this.elements.add(element);
+                }
+                return this;
+            },
+
+            removeElement: function(elem){
+                var el = Pablo.isElement(elem) ? elem : elem[0];
+
+                this.some(function(element, index){
+                    if (element.elem[0] === el){
+                        this.elements.splice(index, 1);
+                        return true;
+                    }
+                }, this);
+
+                return this;
+            },
 
             start: function(){
                 if (!this.active){
@@ -434,7 +460,7 @@
                         this.ended = false;
                     }
                     this.events.trigger('start');
-                }   
+                }
                 return this;
             },
 
@@ -468,56 +494,65 @@
                 return this;
             },
 
+            getDomValue: function(elem){
+                if (!this.attr){
+                    return 0;
+                }
+                return Number(elem.attr(this.attr)) || 0;
+            },
+
             onAnimationFrame: function(deltaT, timestamp){
-                // Change elements according to `deltaT`
+                var method;
 
-                return this;
-            },
-
-            /*
-            applyTween: function(deltaT){
-                if ('transform' in this.tween){
-                    this.applyTransform(deltaT);
+                if (this.transform){
+                    method = this.applyTransform;
                 }
-                else if ('attr' in this.tween) {
-                    this.applyAttr(deltaT);
+                else if (this.attr) {
+                    method = this.applyAttr;
+                }
+
+                if (method && this.elements.length){
+                    this.elements.forEach(function(element){
+                        method.call(this, deltaT, element);
+                    }, this);
                 }
                 return this;
             },
 
-            applyAttr: function(deltaT){
-                // TODO: apply isSingle
-                this.elements.forEach(function(elem){
-                    var currentAttr = Number(elem.attr(this.tween.attr)) || 0,
-                        newAttr;
+            getNewValue: function(deltaT, element){
+                var newValue;
 
-                    if (currentAttr === this.tween.to){
-                        return;
-                    }
+                if (element.value === this.to){
+                    return element.value;
+                }
+                
+                // TODO: determine isPositive
+                newValue = this.linear(deltaT, element.value, this.to, element.original);
 
-                    // TODO: apply for each element in the collection
-                    if (!this.tween.original){
-                        this.tween.original = currentAttr;
-                    }
+                // If only a pixel remaining, then end
+                if (Math.abs(this.to - newValue) < 1){
+                    newValue = this.to;
+                }
 
-                    // TODO: determine isPositive
-                    newAttr = this.linear(deltaT, currentAttr, this.tween.to, this.tween.original);
-
-                    if (this.tween.to - newAttr < 1){
-                        newAttr = this.tween.to;
-                    }
-                    node.attr(this.tween.attr, newAttr);
-
-                    // TODO: need to end each element in the collection, not the whole tween
-                    // or instead add tween callback to each element? extra work; not ideal
-                    if (newAttr === this.tween.to){
-                        this.end();
-                    }
-                }, this);
-                return this;
+                return newValue;
             },
 
-            applyTransform: function(deltaT){
+            applyAttr: function(deltaT, element){
+                var elem = element.elem,
+                    newValue = this.getNewValue(deltaT, element);
+
+                if (newValue !== element.value){
+                    element.value = newValue;
+                    elem.attr(this.attr, newValue);
+                }
+
+                if (newValue === this.to){
+                    this.end();
+                }
+                return newValue;
+            },
+
+            applyTransform: function(deltaT, elem){
 
             },
 
@@ -528,7 +563,6 @@
             easeout: function(deltaT, from, to){
                 return (to - from) / 1000 * deltaT + from;
             }
-            */
         });
 
 
@@ -587,9 +621,9 @@
 
                 // Add listeners
                 tween.events
-                    .on('start', onStart, this)
-                    .on('stop', onStop, this)
-                    .on('end', onEnd, this);
+                    .on('start', onStart)
+                    .on('stop', onStop)
+                    .on('end', onEnd);
 
                 if (tween.active){
                     onStart();
@@ -603,6 +637,24 @@
 
                 if (!this.length){
                     this.stop();
+                }
+                return this;
+            },
+
+            addElement: function(elem){
+                if (this.length){
+                    this.forEach(function(tween){
+                        tween.addElement(elem);
+                    });
+                }
+                return this;
+            },
+
+            removeElement: function(elem){
+                if (this.length){
+                    this.forEach(function(tween){
+                        tween.removeElement(elem);
+                    });
                 }
                 return this;
             },
@@ -673,10 +725,15 @@
             return function(settings){
                 var tween;
 
-                if (Pablo.isArray(tween)){
-                    tween = new TweenSet(tween);
+                if (Pablo.isArray(settings)){
+                    tween = new TweenSet();
+                    settings.forEach(function(settings){
+                        tween.add(new Tween(settings));
+                    });
                 }
-                tween = new Tween(tween);
+                else {
+                    tween = new Tween(settings);
+                }
 
                 tween.events
                     .on('start', function(){
@@ -686,7 +743,7 @@
                         tweens.remove(tween);
                     });
 
-                return tween;
+                return tween.start();
             };
         }());
 
@@ -718,7 +775,7 @@
 
         Pablo.fn.tween = function(tween){
             if (!(tween instanceof Tween || tween instanceof TweenSet)){
-                tween = Pablo.tween(tweens);
+                tween = Pablo.tween(tween);
             }
 
             // Add to `tweens`
@@ -731,13 +788,13 @@
             // Add element to tween's set of elements
             // If this is a single-element Pablo collection
             if (this.length === 1){
-                tween.elements.add(this);
+                tween.addElement(this);
             }
 
             // If there are multiple elements in the collection
             else {
                 this.each(function(el){
-                    tween.elements.add(Pablo(el));
+                    tween.addElement(el);
                 });
             }
             return tween.start();
@@ -751,13 +808,13 @@
             // Remove element from tween's set of elements
             // If this is a single-element Pablo collection
             if (this.length === 1){
-                tween.elements.remove(this);
+                tween.removeElement(this);
             }
 
             // If there are multiple elements in the collection
             else {
                 this.each(function(el){
-                    tween.elements.remove(Pablo(el));
+                    tween.removeElement(el);
                 });
             }
 

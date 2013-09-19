@@ -21,6 +21,34 @@ Pablo.animation.on('stop', function(){console.log('stop');});
 
 ////
 
+fpsCounter = Pablo.animation(function(deltaT){
+    var fps, fpsSampleSize, fpsAverage, fpsRounded;
+
+    fps = 1000 / deltaT;
+    fpsSampleSize = 60;
+    fpsAverage, fpsRounded;
+
+    // Skip first frame
+    if (!fpsFrames){
+        fpsFrames = [];
+        return;
+    }
+
+    if (fpsFrames.length === fpsSampleSize){
+        fpsFrames.shift();
+    }
+    fpsFrames.push(fps);
+
+    fpsAverage = fpsFrames.reduce(function(previousValue, currentValue){
+        return currentValue + previousValue;
+    }) / fpsFrames.length;
+
+    fpsRounded = Math.round(fpsAverage);
+    if (lastFpsRounded !== fpsRounded){
+        lastFpsRounded = fpsRounded;
+        fpsElem.content(fpsRounded + ' fps');
+    }
+}, {id:'fps', autostart:false});
 
 rect.one('click', function(){
     tweens = rect.tween([
@@ -45,38 +73,9 @@ rect.one('click', function(){
         {
             attr: 'x',
             from: 0,
-            to: 500
+            to: 50
         }
     ]);
-
-    fpsCounter = Pablo.animation(function(deltaT){
-        var fps, fpsSampleSize, fpsAverage, fpsRounded;
-
-        fps = 1000 / deltaT;
-        fpsSampleSize = 60;
-        fpsAverage, fpsRounded;
-
-        // Skip first frame
-        if (!fpsFrames){
-            fpsFrames = [];
-            return;
-        }
-
-        if (fpsFrames.length === fpsSampleSize){
-            fpsFrames.shift();
-        }
-        fpsFrames.push(fps);
-
-        fpsAverage = fpsFrames.reduce(function(previousValue, currentValue){
-            return currentValue + previousValue;
-        }) / fpsFrames.length;
-
-        fpsRounded = Math.round(fpsAverage);
-        if (lastFpsRounded !== fpsRounded){
-            lastFpsRounded = fpsRounded;
-            fpsElem.content(fpsRounded + ' fps');
-        }
-    }, {id:'fps'});
 
     tweens.events.on('start', function(){
         fpsCounter.start();
@@ -85,6 +84,10 @@ rect.one('click', function(){
     tweens.events.on('stop', function(){
         fpsCounter.stop();
     });
+
+    window.setTimeout(function(){
+        Pablo.animation.loop.stop();
+    }, 1000);
 
     rect.on('click', function(){
         tweens.toggle();
