@@ -1,50 +1,50 @@
 --- 
+lsi: false
 twitter_url: https://twitter.com/dharmafly
 sections: 
-- name: Overview
-  path: /index.html
-- name: API
-  path: /api/index.html
-- name: Misc
-  path: /misc/index.html
-- name: Resources
-  path: /resources/index.html
-permalink: /:title
-lsi: false
-markdown: maruku
-lang: javascript
+- path: /index.html
+  name: Overview
+- path: /api/index.html
+  name: API
+- path: /misc/index.html
+  name: Misc
+- path: /resources/index.html
+  name: Resources
 pygments: false
 version: 0.3.2
-quote: 
-- quote: Painting is just another way of keeping a diary.
-- cite: Pablo Picasso
-safe: false
-baseurl: /
-ga_id: UA-34978047-1
 stylesheets: 
 - url: /css/custom/custom.css
-twitter_name: Dharmafly
-download_links: 
-- text: pablo.js
-  title: Full source code, for use in development
-  href: /downloads/pablo.js
-  subtext: v{{ version }}
-- text: pablo.min.js
-  title: Minified, for use in production
-  href: /downloads/pablo.min.js
-  subtext: v{{ version }}
-- text: Edge
-  title: Latest codebase (zip); potentially unstable
-  href: https://github.com/dharmafly/pablo/zipball/master
-  subtext: (master)
-future: true
-project_name: Pablo
-theme: horus
 exclude: 
 - README.md
 - assets
 - FiddlerRules.farx
+theme: horus
+download_links: 
+- subtext: v{{ version }}
+  title: Full source code, for use in development
+  href: /downloads/pablo.js
+  text: pablo.js
+- subtext: v{{ version }}
+  title: Minified, for use in production
+  href: /downloads/pablo.min.js
+  text: pablo.min.js
+- subtext: (master)
+  title: Latest codebase (zip); potentially unstable
+  href: https://github.com/dharmafly/pablo/zipball/master
+  text: Edge
 project_url: https://github.com/dharmafly/pablo
+ga_id: UA-34978047-1
+project_name: Pablo
+twitter_name: Dharmafly
+baseurl: /
+lang: javascript
+quote: 
+- quote: Painting is just another way of keeping a diary.
+- cite: Pablo Picasso
+permalink: /:title
+safe: false
 jquery_no_conflict: true
+future: true
+markdown: maruku
 scripts: 
 - src: /downloads/pablo.min.js

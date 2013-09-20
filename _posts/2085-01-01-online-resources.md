@@ -24,3 +24,4 @@ Other resources
 * [SVG Wow](http://svg-wow.org)
 * [My Spare Brain's short intro to SVG](http://www.mysparebrain.com/svgjs)
 * [An SVG primer for Today's Browsers](http://www.w3.org/Graphics/SVG/IG/resources/svgprimer.html)
+* [Easing functions for SVG & CSS animation](http://easings.net)
