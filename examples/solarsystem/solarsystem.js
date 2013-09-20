@@ -216,7 +216,7 @@ if (Pablo.isSupported){
         viewBox: '0 0 ' + width + ' ' + height
     });
 
-    solarsystem = svg.g();//.transform('translate', -width*3.5, -height*3.5).transform('scale', 8);
+    solarsystem = svg.g();
     
     // Draw the sun, and the rest will follow
     sun.draw();
@@ -224,4 +224,15 @@ if (Pablo.isSupported){
     var body = window.document.body;
     body.scrollTop = height * 3.5;
     body.scrollLeft = width * 3.5;
+
+    var paused = false;
+    svg.on('click', function(){
+        if (paused){
+            svg[0].unpauseAnimations();
+        }
+        else {
+            svg[0].pauseAnimations();
+        }
+        paused = !paused;
+    });
 }
