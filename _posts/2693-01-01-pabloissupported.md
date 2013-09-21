@@ -1,5 +1,5 @@
 --- 
-category: issupported
+category: pablo.issupported
 heading: Pablo.isSupported
 ---
 

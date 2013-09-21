@@ -6,13 +6,13 @@ heading: Pablo properties
 These properties are available on the global `Pablo` object.
 
 
-## [Pablo.v](/api/v/)
+## [Pablo.v](/api/Pablo.v/)
 _alias: `collection.pablo`_
 
 The current version of the Pablo library. E.g. `"1.2.23"`.
 
 
-## [Pablo.isSupported](/api/isSupported/)
+## [Pablo.isSupported](/api/Pablo.isSupported/)
 
 Returns `true` if Pablo is supported in the current browser.
 
