@@ -1,5 +1,5 @@
 --- 
-category: Pablo.isarraylike
+category: pablo.isarraylike
 heading: Pablo.isArrayLike(obj)
 ---
 

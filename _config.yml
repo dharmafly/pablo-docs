@@ -1,50 +1,50 @@
 --- 
-project_url: https://github.com/dharmafly/pablo
 version: 0.3.2
-pygments: false
-baseurl: /
-ga_id: UA-34978047-1
-safe: false
-permalink: /:title
-scripts: 
-- src: /downloads/pablo.min.js
-jquery_no_conflict: true
-stylesheets: 
-- url: /css/custom/custom.css
-lang: javascript
-future: true
 theme: horus
-twitter_url: https://twitter.com/dharmafly
-twitter_name: Dharmafly
 quote: 
 - quote: Painting is just another way of keeping a diary.
 - cite: Pablo Picasso
-sections: 
-- path: /index.html
-  name: Overview
-- path: /api/index.html
-  name: API
-- path: /misc/index.html
-  name: Misc
-- path: /resources/index.html
-  name: Resources
-download_links: 
-- subtext: v{{ version }}
-  title: Full source code, for use in development
-  href: /downloads/pablo.js
-  text: pablo.js
-- subtext: v{{ version }}
-  title: Minified, for use in production
-  href: /downloads/pablo.min.js
-  text: pablo.min.js
-- subtext: (master)
-  title: Latest codebase (zip); potentially unstable
-  href: https://github.com/dharmafly/pablo/zipball/master
-  text: Edge
+jquery_no_conflict: true
+lang: javascript
+twitter_url: https://twitter.com/dharmafly
+lsi: false
+baseurl: /
 exclude: 
 - README.md
 - assets
 - FiddlerRules.farx
 project_name: Pablo
-lsi: false
+project_url: https://github.com/dharmafly/pablo
+sections: 
+- name: Overview
+  path: /index.html
+- name: API
+  path: /api/index.html
+- name: Misc
+  path: /misc/index.html
+- name: Resources
+  path: /resources/index.html
 markdown: maruku
+twitter_name: Dharmafly
+scripts: 
+- src: /downloads/pablo.min.js
+download_links: 
+- text: pablo.js
+  href: /downloads/pablo.js
+  subtext: v{{ version }}
+  title: Full source code, for use in development
+- text: pablo.min.js
+  href: /downloads/pablo.min.js
+  subtext: v{{ version }}
+  title: Minified, for use in production
+- text: Edge
+  href: https://github.com/dharmafly/pablo/zipball/master
+  subtext: (master)
+  title: Latest codebase (zip); potentially unstable
+safe: false
+permalink: /:title
+ga_id: UA-34978047-1
+future: true
+pygments: false
+stylesheets: 
+- url: /css/custom/custom.css

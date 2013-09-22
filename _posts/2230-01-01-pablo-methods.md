@@ -11,7 +11,7 @@ These methods are available on the global `Pablo` object.
 Create a factory function to generate templates of SVG elements, allowing custom settings to be passed in when the template is used.
 
 
-## [Pablo.import()](/api/Pablo.import/)
+## [Pablo.load()](/api/Pablo.load/)
 
 Load an external SVG file via an Ajax request, wrap it in a collection and pass to a callback.
 
