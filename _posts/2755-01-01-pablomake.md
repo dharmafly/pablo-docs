@@ -1,6 +1,6 @@
 --- 
-category: pablo.make
 heading: Pablo.make(elementName)
+category: pablo.make
 ---
 
 Returns a native SVG element with the supplied name.

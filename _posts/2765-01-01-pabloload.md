@@ -1,12 +1,12 @@
 --- 
-category: pablo.load
 heading: Pablo.load(url, callback)
+category: pablo.load
 ---
 
 Loads an external SVG file via an Ajax request, wraps it in a new collection and passes it to the `callback` function.
 
 The callback is passed one argument: the XMLHttpRequest object used to load the file. Within the callback, the `this` object will be the new collection.
 
-    Pablo.load('rocket.svg', function(){
-        this.appendTo('svg');
+    Pablo.load('/images/villain.svg', function(){
+        this.appendTo(demoElement);
     });
