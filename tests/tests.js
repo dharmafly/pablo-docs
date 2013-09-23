@@ -5,7 +5,7 @@
       assert = chai.assert;
 
   describe('Pablo test suite', function () {
-    it('should load the the Pablo library into the browser', function () {
+    it('should load the Pablo library into the browser', function () {
       expect(Pablo).to.be.a('function');
     });
 
@@ -3035,8 +3035,8 @@
 
     describe('Pablo.load()', function () {
       it('Pablo.load() loads SVG document', function (done) {
-          Pablo.load('images/villain.svg', function(collection, xhr){
-            if (collection.length === 1){
+          Pablo.load('images/villain.svg', function(xhr){
+            if (this.length === 1){
               done();
             }
             else {
