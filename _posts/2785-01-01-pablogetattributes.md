@@ -1,6 +1,6 @@
 --- 
-heading: Pablo.getAttributes(element)
 category: pablo.getattributes
+heading: Pablo.getAttributes(element)
 ---
 
 Returns an object of attributes on the DOM element.

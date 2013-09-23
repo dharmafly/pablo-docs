@@ -1,6 +1,6 @@
 --- 
-heading: Pablo properties
 category: api
+heading: Pablo properties
 ---
 
 These properties are available on the global `Pablo` object.

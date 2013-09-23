@@ -1,8 +1,9 @@
 --- 
-heading: Pablo.make(elementName)
 category: pablo.make
+heading: Pablo.make(elementName)
 ---
 
 Returns a native SVG element with the supplied name.
 
-    Pablo.make('path');
+    var myelement = Pablo.make('path');
+    alert(Pablo.isElement(myelement)); // true
