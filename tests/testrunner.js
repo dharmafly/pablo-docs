@@ -23,14 +23,14 @@
   if (minjs){
     librarySrc = remote ?
       'http://pablojs.com/downloads/pablo.min.js' :
-      '../build/pablo.min.js';
+      '../downloads/pablo.min.js';
   }
 
   // Test pablo.js - either remote or local
   else {
     librarySrc = remote ?
       'http://pablojs.com/downloads/pablo.js' :
-      '../pablo.js';
+      '../downloads/pablo.js';
   }
 
   // Load the script to be tested
