@@ -1,6 +1,6 @@
 --- 
-category: pablo.ishtmldocument
 heading: Pablo.isHTMLDocument(obj)
+category: pablo.ishtmldocument
 ---
 
 Returns `true` if the passed argument is the html document object; otherwise `false`.
