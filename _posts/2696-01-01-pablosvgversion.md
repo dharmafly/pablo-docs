@@ -1,0 +1,8 @@
+--- 
+heading: Pablo.svgVersion
+category: pablo.svgversion
+---
+
+The version of SVG used internally on SVG root elements. Currently `1.1`.
+
+This is a read-only property and cannot be changed.
