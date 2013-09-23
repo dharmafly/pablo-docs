@@ -35,7 +35,7 @@
 
 {% for section in sections %}
   {% if page.url == section.path %}
-    {% if section.path == '/index.html' %}
+    {% if section.path == "/index.html" %}
       {% assign ishome = true %}
       {% assign title = site.project_name %}
     {% else %}
@@ -48,10 +48,13 @@
 {% if title == "" %}
   {% assign directories = page.url | split:"/" %}
   {% assign directory = directories | last %}
-  {% if directory == 'index.html' %}
+  {% if directory == "index.html" %}
     {% assign index = directories | size | minus:2 %}
     {% assign directory = directories[index] %}
+  {% elsif directory == "404.html" %}
+    {% assign directory = "404" %}
   {% endif %}
+
   {% assign title = directory | append:" : " | append:site.project_name %}
 {% endif %}
 
