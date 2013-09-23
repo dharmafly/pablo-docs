@@ -1,6 +1,6 @@
 --- 
-heading: Traversal
 category: api
+heading: Traversal
 ---
 
 These collection methods return elements that have DOM-related associations with the elements in the collection.

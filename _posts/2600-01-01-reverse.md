@@ -1,6 +1,6 @@
 --- 
-heading: reverse()
 category: reverse
+heading: reverse()
 ---
 
 Reverses the order of the collection and returns the collection.
