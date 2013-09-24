@@ -83,4 +83,4 @@ Get or set the text content of elements in the collection.
 
 ## [markup()](/api/markup/)
 
-Get a string of markup for the collection. Like innerHTML but also works for SVG.
+Get a string of markup for all the elements the collection. Like innerHTML for both HTML and SVG.
