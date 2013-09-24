@@ -7,11 +7,9 @@ Returns the last index of the element within the collection, or -1 if not found.
 
 Note: A collection will not contain any duplicate items. All items within a collection are unique.
 
-    var shapes = Pablo(),
-        shapeA = Pablo.circle(),
+    var shapeA = Pablo.circle(),
         shapeB = Pablo.rect(),
-        shapeC = Pagitblo.ellipse();
+        shapeC = Pablo.ellipse(),
+        shapes = Pablo([shapeA, shapeB, shapeC]);
 
-    shapes.push([shapeA, shapeB, shapeC]);
-
-    alert(shapes.lastIndexOf(shapeA));
+    alert(shapes.lastIndexOf(shapeB)); // 1
