@@ -3,29 +3,15 @@ module.exports = function(grunt) {
       copy: {
         main: {
           files: [
-            {expand: true, src: ['../pablo/build/*'], dest: 'downloads', flatten: true},
-            {expand: true, src: ['../pablo/pablo.js'], dest: 'downloads'},
-            {expand: true, src: ['../pablo/tests'], dest: './'}
+            {expand:true, cwd:'../pablo/', src: ['pablo.js'], dest: 'downloads/'},
+            {expand:true, cwd:'../pablo/build/', src: ['**'], dest: 'downloads/'},
+            {expand:true, cwd:'../pablo/tests/', src: ['**', '!index.html', '!testrunner.js'], dest: 'tests/'}
           ]
         }
-      },
-      gitcheckout: {
-        ghpages: {
-          options: {
-            branch: 'gh-pages'
-          }
-        }
-      },
-      gitstash: {
-        master: {
-          options: {
-            
-          }
-        }
-      },
+      }
   });
 
   grunt.loadNpmTasks('grunt-contrib-copy');
 
-  grunt.registerTask('default', ['gitstash', 'gitcheckout', 'copy']);
+  grunt.registerTask('default', ['copy']);
 };
