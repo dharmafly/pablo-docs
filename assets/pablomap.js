@@ -88,8 +88,8 @@
 		  }
 		];
 
-	var mindmapStyles = '/media/mindmap.css',
-		mindmapScript = '/media/mindmap.min.js';
+	var mindmapStyles = '/assets/mindmap.css',
+		mindmapScript = '/assets/mindmap.min.js';
 
 	/////
 
