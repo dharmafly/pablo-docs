@@ -1,6 +1,6 @@
 --- 
-heading: Pablo.hasSvgNamespace(obj)
 category: pablo.hassvgnamespace
+heading: Pablo.hasSvgNamespace(obj)
 ---
 
 Returns boolean `true` if the object is an element that has an SVG namespace; otherwise `false`.

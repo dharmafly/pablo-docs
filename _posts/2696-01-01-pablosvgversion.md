@@ -1,6 +1,6 @@
 --- 
-heading: Pablo.svgVersion
 category: pablo.svgversion
+heading: Pablo.svgVersion
 ---
 
 The version of SVG used internally on SVG root elements. Currently `1.1`.

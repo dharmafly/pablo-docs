@@ -1,6 +1,6 @@
 --- 
-heading: Pablo.canBeWrapped(obj)
 category: pablo.canbewrapped
+heading: Pablo.canBeWrapped(obj)
 ---
 
 Returns `true` if the node can be wrapped by Pablo into a collection - e.g. if the object is an HTML or SVG element, NodeList, Pablo collection, jQuery collection or array of elements.

@@ -1,0 +1,26 @@
+html, body, .demo-rocket, .demo-rocket > svg.space {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: white;
+}
+
+.demo-rocket > svg.space {
+    width: 100%;
+    /* encourage GPU: http://stackoverflow.com/a/10814821/165716; */
+    -webkit-transform: rotateZ(360deg) translateZ(0);
+}
+
+body > h1 {
+    font-family: Megrim, 'Helvetica Neue', sans-serif;
+    font-size: 72px;
+    color: #fdde03;
+    position: absolute;
+    left: 40%;
+    top: 40%;
+}

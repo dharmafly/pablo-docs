@@ -1,6 +1,6 @@
 --- 
-heading: Pablo.isSVGElement(obj)
 category: pablo.issvgelement
+heading: Pablo.isSVGElement(obj)
 ---
 
 Returns boolean `true` if the object is an SVG element; otherwise `false`.
