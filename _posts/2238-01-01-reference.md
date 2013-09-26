@@ -1,6 +1,6 @@
 --- 
-heading: Element reference
 category: elements
+heading: Element reference
 ---
 
 Each method below is linked to the element's page on [MDN's element reference][mdn-svg-el]. For further information, see [MDN's attribute reference][mdn-svg-attr] and the [Pablo Resources][resources] section.

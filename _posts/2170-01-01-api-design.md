@@ -1,6 +1,6 @@
 --- 
-heading: API design
 category: api
+heading: API design
 ---
 
 Pablo provides methods like `circle()` and `line()` to create each kind of SVG element. It has methods for manipulating SVG and HTML, to change the appearance, size, position or some other property. It also has methods for filtering and sorting the elements. It has a simple plugin system, allowing new functionality to be added.

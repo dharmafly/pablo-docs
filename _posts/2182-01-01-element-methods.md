@@ -1,6 +1,6 @@
 --- 
-heading: Element methods
 category: api
+heading: Element methods
 ---
 
 Any elements can be created with the [`Pablo()`](/api/pablo/) method. However, usually elements are created by calling a specific [element method](/api/elements/).
