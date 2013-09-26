@@ -1,6 +1,67 @@
 (function(window, Pablo){
     'use strict';
 
+    var baseUrl = '/assets/rocket/',
+        url = function(path){
+            return baseUrl + path;
+        },
+        width = 1920,
+        height = 1080,
+        containerWidth = 540,
+        scale = containerWidth / width,
+        containerHeight = scale * height,
+        //width = window.innerWidth,
+        //height = window.innerHeight,
+        svg = Pablo('.demo-rocket').svg()
+                .css('background', 'black'),
+        defs = svg.defs().append([
+            /*
+            Pablo.radialGradient({
+                id:'sun',
+                //gradientTransform:'rotate(0.04 ' + width/2 + ' ' + height/2 + ')'
+            }).append([
+                Pablo.stop({offset:'30%', 'stop-color':'gold', 'stop-opacity': 0.9}),
+                Pablo.stop({offset:'60%', 'stop-color':'orange', 'stop-opacity': 0.5}),
+                Pablo.stop({offset:'80%', 'stop-color':'darkred', 'stop-opacity': 0.2}),
+            ]),
+
+            Pablo.linearGradient({
+                id:'sky-day',
+                gradientTransform:'rotate(90)'
+            }).append([
+                Pablo.stop({offset:'10%', 'stop-color':'darkblue', 'stop-opacity': 0.9}),
+                //Pablo.stop({offset:'30%', 'stop-color':'darkblue', 'stop-opacity': 0.9}),
+                Pablo.stop({offset:'60%', 'stop-color':'#3ac', 'stop-opacity': 0.7}),
+            ])
+            */
+        ]),
+        space = svg.g().addClass('space')
+                    .css('opacity', 0)
+                    .transform('scale', scale),
+        sky = space.g().addClass('sky'),
+        /*
+        skyDay = space.rect({
+            width: '100%',
+            height: '100%',
+            fill: 'url(#sky-day)',
+        }).addClass('sky'),
+        sun = space.circle({
+            r: 100,
+            cx: width - 110,
+            cy: 110,
+            fill: 'url(#sun)',
+        }).addClass('sun'),
+        */
+        rocketSymbol = defs.symbol({id:'rocket'}),
+        fireSymbol = defs.symbol({id:'fire'}),
+        rocket = space.g().addClass('rocket'),
+        rocketBody, rocketLabels, rocketShapes, fireControl,
+        rocketShapeControl1, rocketShapeControl2;
+
+
+    /////
+
+
     // TODO:
     // Pablo.fn.cssTransform(type, arg1, ...)
 
@@ -89,53 +150,6 @@
     */
 
 
-
-    var width = window.innerWidth,
-        height = window.innerHeight,
-        svg = Pablo('.demo-rocket').svg().css('background', 'black'),
-        defs = svg.defs().append([
-            /*
-            Pablo.radialGradient({
-                id:'sun',
-                //gradientTransform:'rotate(0.04 ' + width/2 + ' ' + height/2 + ')'
-            }).append([
-                Pablo.stop({offset:'30%', 'stop-color':'gold', 'stop-opacity': 0.9}),
-                Pablo.stop({offset:'60%', 'stop-color':'orange', 'stop-opacity': 0.5}),
-                Pablo.stop({offset:'80%', 'stop-color':'darkred', 'stop-opacity': 0.2}),
-            ]),
-
-            Pablo.linearGradient({
-                id:'sky-day',
-                gradientTransform:'rotate(90)'
-            }).append([
-                Pablo.stop({offset:'10%', 'stop-color':'darkblue', 'stop-opacity': 0.9}),
-                //Pablo.stop({offset:'30%', 'stop-color':'darkblue', 'stop-opacity': 0.9}),
-                Pablo.stop({offset:'60%', 'stop-color':'#3ac', 'stop-opacity': 0.7}),
-            ])
-            */
-        ]),
-        space = svg.g().addClass('space').css('opacity', 0),
-        sky = space.g().addClass('sky'),
-        /*
-        skyDay = space.rect({
-            width: '100%',
-            height: '100%',
-            fill: 'url(#sky-day)',
-        }).addClass('sky'),
-        sun = space.circle({
-            r: 100,
-            cx: width - 110,
-            cy: 110,
-            fill: 'url(#sun)',
-        }).addClass('sun'),
-        */
-        rocketSymbol = defs.symbol({id:'rocket'}),
-        fireSymbol = defs.symbol({id:'fire'}),
-        rocket = space.g().addClass('rocket'),
-        rocketBody, rocketLabels, rocketShapes, fireControl,
-        rocketShapeControl1, rocketShapeControl2;
-
-
     /////
 
     var rocketControl = {
@@ -169,11 +183,11 @@
         space.cssPrefix('transition', 'opacity 2s');
     }, 4);
 
-    Pablo.load('fire-e.svg', function(){
+    Pablo.load(url('fire-e.svg'), function(){
         this.appendTo(fireSymbol);
     });
 
-    Pablo.load('rocket-japanese-e.svg', function(){
+    Pablo.load(url('rocket-japanese-e.svg'), function(){
         var text, paths;
 
         rocketBody = this.addClass('rocketbody')
@@ -306,7 +320,7 @@
 
     function buttonInit(){
         var b = space.image({
-            'xlink:href': 'button-launch.png',
+            'xlink:href': url('button-launch.png'),
             width: 112,
             height: 122,
             x: width - 112,
@@ -398,7 +412,7 @@
 
         // Create moon
         moon = foreground.image({
-            'xlink:href': 'moon-200.png',
+            'xlink:href': url('moon-200.png'),
             width: 200,
             height: 200,
             x: width - 250,
@@ -407,7 +421,7 @@
 
         // Create moon
         saturn = foreground.image({
-            'xlink:href': 'saturn-100.png',
+            'xlink:href': url('saturn-100.png'),
             width: 100,
             height: 109,
             x: width - 280,
@@ -415,7 +429,7 @@
         }).addClass('saturn');
 
         foreground.image({
-            'xlink:href': 'jupiter.svg',
+            'xlink:href': url('jupiter.svg'),
             width: 60,
             height: 60,
             x: width - 90,
@@ -423,7 +437,7 @@
         }).addClass('jupiter').transform('rotate', -20, width - 90 + 30, 340);
 
         foreground.image({
-            'xlink:href': 'star.svg',
+            'xlink:href': url('star.svg'),
             width: 30,
             height: 30,
             x: width - 80,
@@ -447,7 +461,7 @@
         /////
 
         foreground2.image({
-            'xlink:href': 'star.svg',
+            'xlink:href': url('star.svg'),
             width: 20,
             height: 20,
             x: 80,
@@ -455,7 +469,7 @@
         }).transform('rotate', 45, 90, 10);
 
         foreground2.image({
-            'xlink:href': 'star.svg',
+            'xlink:href': url('star.svg'),
             width: 20,
             height: 20,
             x: 0,
@@ -463,7 +477,7 @@
         }).transform('rotate', 22, 10, 110);
 
         foreground2.image({
-            'xlink:href': 'star.svg',
+            'xlink:href': url('star.svg'),
             width: 20,
             height: 20,
             x: 160,
@@ -471,7 +485,7 @@
         }).transform('rotate', 80, 170, 130);
 
         foreground2.image({
-            'xlink:href': 'pie.svg',
+            'xlink:href': url('pie.svg'),
             width: 60,
             height: 60,
             x: -80,
@@ -529,7 +543,7 @@
         }).addClass('import-hotspot');
 
         callouts.image({
-            'xlink:href': 'callout-circle.svg',
+            'xlink:href': url('callout-circle.svg'),
             width: 582.77,
             height: 234.94,
             x: width - 90 - 585,
@@ -537,7 +551,7 @@
         }).addClass('callout-circle');
 
         callouts.image({
-            'xlink:href': 'callout-template.svg',
+            'xlink:href': url('callout-template.svg'),
             width: 955.57,
             height: 183.81,
             x: width - 900,
@@ -545,7 +559,7 @@
         }).addClass('callout-template');
 
         callouts.image({
-            'xlink:href': 'callout-images.svg',
+            'xlink:href': url('callout-images.svg'),
             width: 393.74,
             height: 126.03,
             x: width - 666,
@@ -553,7 +567,7 @@
         }).addClass('callout-images');
 
         callouts.image({
-            'xlink:href': 'callout-plugins.svg',
+            'xlink:href': url('callout-plugins.svg'),
             width: 487.18,
             height: 126.18,
             x: 110,
@@ -561,7 +575,7 @@
         }).addClass('callout-plugins');
 
         callouts.image({
-            'xlink:href': 'callout-import.svg',
+            'xlink:href': url('callout-import.svg'),
             width: 473.25,
             height: 126.16,
             x: 10,
@@ -569,7 +583,7 @@
         }).addClass('callout-import');
 
         callouts.image({
-            'xlink:href': 'callout-animation.svg',
+            'xlink:href': url('callout-animation.svg'),
             width: 707.27,
             height: 234.22,
             x: width - 360 - 940,
