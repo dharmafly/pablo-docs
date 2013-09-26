@@ -1,6 +1,6 @@
 --- 
-heading: Keep drawing
 category: overview
+heading: Keep drawing
 ---
 
 Let's try something a bit more ambitious, using attribute functions and some more user interaction... 

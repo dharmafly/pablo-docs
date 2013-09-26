@@ -1,6 +1,6 @@
 --- 
-heading: Pablo.template(namespace, constructor)
 category: pablo.template
+heading: Pablo.template(namespace, constructor)
 ---
 
 Allows variable, repeatable SVG structures to be created, e.g. polygons, stars, or any other complex collection of elements. Each structures can be assigned a namespace, so that creating new instances is as simple as creating any of the basic SVG elements with Pablo.
