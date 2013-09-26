@@ -1,6 +1,6 @@
 --- 
-heading: attr(attributeName, value)
 category: attr
+heading: attr(attributeName, value)
 ---
 
 Sets the named attribute to the specified value, on all elements in the collection and returns the collection.

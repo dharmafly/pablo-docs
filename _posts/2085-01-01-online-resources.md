@@ -1,6 +1,6 @@
 --- 
-heading: Online Resources
 category: resources
+heading: Online Resources
 ---
 
 MDN (Mozilla Developer Network)
@@ -19,7 +19,7 @@ Other resources
 * [Browser support for SVG](http://caniuse.com/#cats=SVG)
 * [W3C spec for SVG 1.1](http://www.w3.org/TR/SVG11/)
 * [Phrogz's ObjJob reference](http://objjob.phrogz.net/svg/hierarchy)
-* [KevLinDev tutorials](http://kevlindev.com/tutorials/basics/index.htm)
+* [KevLinDev tutorials](http://www.kevlindev.com/tutorials/basics/index.htm)
 * [SVG Basics](http://www.svgbasics.com)
 * [SVG Wow](http://svg-wow.org)
 * [My Spare Brain's short intro to SVG](http://www.mysparebrain.com/svgjs)
