@@ -1,24 +1,19 @@
 --- 
-project_name: Pablo
 stylesheets: 
 - url: /css/custom/custom.css
-project_url: https://github.com/dharmafly/pablo
-twitter_url: https://twitter.com/dharmafly
-twitter_name: Dharmafly
-exclude: 
-- README.md
-- FiddlerRules.farx
-theme: horus
-baseurl: /
-lang: javascript
-permalink: /:title
-jquery_no_conflict: true
-safe: false
-scripts: 
-- src: /downloads/pablo.min.js
-quote: 
-- quote: Painting is just another way of keeping a diary.
-- cite: Pablo Picasso
+download_links: 
+- subtext: v{{ version }}
+  title: Full source code, for use in development
+  href: /downloads/pablo.js
+  text: pablo.js
+- subtext: v{{ version }}
+  title: Minified, for use in production
+  href: /downloads/pablo.min.js
+  text: pablo.min.js
+- subtext: (master)
+  title: Latest codebase (zip); potentially unstable
+  href: https://github.com/dharmafly/pablo/zipball/master
+  text: Edge
 sections: 
 - name: Overview
   path: /index.html
@@ -28,22 +23,27 @@ sections:
   path: /misc/index.html
 - name: Resources
   path: /resources/index.html
-future: true
-ga_id: UA-34978047-1
+exclude: 
+- README.md
+- FiddlerRules.farx
+theme: horus
+baseurl: /
+scripts: 
+- src: /downloads/pablo.min.js
 pygments: false
+twitter_url: https://twitter.com/dharmafly
+safe: false
+project_url: https://github.com/dharmafly/pablo
+jquery_no_conflict: true
+quote: 
+- quote: Painting is just another way of keeping a diary.
+- cite: Pablo Picasso
+lang: javascript
+ga_id: UA-34978047-1
 lsi: false
-markdown: maruku
 version: 0.3.2
-download_links: 
-- href: /downloads/pablo.js
-  title: Full source code, for use in development
-  subtext: v{{ version }}
-  text: pablo.js
-- href: /downloads/pablo.min.js
-  title: Minified, for use in production
-  subtext: v{{ version }}
-  text: pablo.min.js
-- href: https://github.com/dharmafly/pablo/zipball/master
-  title: Latest codebase (zip); potentially unstable
-  subtext: (master)
-  text: Edge
+permalink: /:title
+project_name: Pablo
+twitter_name: Dharmafly
+future: true
+markdown: maruku

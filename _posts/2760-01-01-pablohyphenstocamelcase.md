@@ -1,6 +1,6 @@
 --- 
-category: pablo.hyphenstocamelcase
 heading: Pablo.hyphensToCamelCase(string)
+category: pablo.hyphenstocamelcase
 ---
 
 Converts the hyphenated-string to a camelCase string.

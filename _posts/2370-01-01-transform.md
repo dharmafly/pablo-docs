@@ -1,6 +1,6 @@
 --- 
-category: transform
 heading: transform(type, value, [value1], [value2])
+category: transform
 ---
 
 Set a type of transform in the <a href="https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/transform" target="_blank">transform attribute</a> of each element in the collection and return the collection. Any number of values can be used, according to needs of the transformation.
