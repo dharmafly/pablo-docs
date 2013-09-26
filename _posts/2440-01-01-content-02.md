@@ -1,6 +1,6 @@
 --- 
-category: content
 heading: content(text)
+category: content
 ---
 
 Sets the text content of all the elements in the collection to the specified text, and returns the collection.
