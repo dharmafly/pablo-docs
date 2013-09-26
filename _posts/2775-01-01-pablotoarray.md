@@ -1,6 +1,6 @@
 --- 
-category: pablo.toarray
 heading: Pablo.toArray(obj)
+category: pablo.toarray
 ---
 
 Converts the array-like object into a true array.

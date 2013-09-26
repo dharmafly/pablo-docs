@@ -1,6 +1,6 @@
 --- 
-category: pablo.cssprefix
 heading: Pablo.cssPrefix(property, value)
+category: pablo.cssprefix
 ---
 
 Converts a CSS `property` and `value` to a semi-separated string of vendor-prefixed property-value pairs, as used in CSS style rules.

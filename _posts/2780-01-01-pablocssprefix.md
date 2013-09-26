@@ -1,6 +1,6 @@
 --- 
-category: pablo.cssprefix
 heading: Pablo.cssPrefix(property)
+category: pablo.cssprefix
 ---
 
 Converts a CSS `property` string to a comma-separated string of vendor-prefixed properties.
