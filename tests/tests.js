@@ -120,6 +120,14 @@
         expect(typeof matchesProp).to.eql('function');
       });
 
+      it('window.XMLSerializer', function(){
+        expect('XMLSerializer' in window).to.eql(true);
+      });
+
+      it('window.DOMParser', function(){
+        expect('DOMParser' in window).to.eql(true);
+      });
+
       describe('Non-essential browser features', function(){
         // Pablo currently provides a polyfill for this
         it.skip('svgElement.classList: ' + (typeof testElement.classList === 'object'), function(){
@@ -133,6 +141,28 @@
         // Bug report in WebKit: https://bugs.webkit.org/show_bug.cgi?id=112698
         it.skip('svgElement.children: ' + (typeof testElement.children === 'object'), function(){
           expect(testElement.children).to.be.an('object');
+        });
+      });
+
+      describe('Support for download() and image()', function(){
+        it.skip('window.btoa: ' + ('btoa' in window), function(){
+          expect('btoa' in window).to.eql(true);
+        });
+
+        it.skip('window.Blob: ' + ('Blob' in window), function(){
+          expect('Blob' in window).to.eql(true);
+        });
+
+        it.skip('window.URL: ' + ('URL' in window), function(){
+          expect('URL' in window).to.eql(true);
+        });
+
+        it.skip('document.createEvent: ' + ('createEvent' in document), function(){
+          expect('createEvent' in document).to.eql(true);
+        });
+
+        it.skip('download attribute on HTML <a>: ' + ('download' in document.createElement('a')), function(){
+          expect('download' in document.createElement('a')).to.eql(true);
         });
       });
   });
@@ -1631,8 +1661,8 @@
       
       describe('Collection iteration', function () {
         describe('.each()/.forEach()', function () {
-          it('.each(callback)/.forEach(callback) should iterate over every element in the collection passing to a callback the element and an iterator', function () {
-            var subject      = Pablo([Pablo.rect(), Pablo.circle(), Pablo.a()]),
+          it('should iterate over a collection with only one element', function () {
+            var subject = Pablo.rect(),
                 iterationIndices = [],
                 pabloItems       = [];
 
@@ -1641,6 +1671,22 @@
               pabloItems.push(item);
             });
 
+            expect(pabloItems.length).to.eql(1);
+            expect(pabloItems[0] instanceof SVGRectElement).to.eql(true);
+            expect(iterationIndices[0]).to.eql(0);
+          });
+
+          it('should iterate over a collection of multiple elements, passing each element to the callback', function () {
+            var subject = Pablo([Pablo.rect(), Pablo.circle(), Pablo.a()]),
+                iterationIndices = [],
+                pabloItems       = [];
+
+            subject.each(function (item, i) {
+              iterationIndices.push(i);
+              pabloItems.push(item);
+            });
+
+            expect(pabloItems.length).to.eql(3);
             expect(pabloItems[0] instanceof SVGRectElement).to.eql(true);
             expect(pabloItems[1] instanceof SVGCircleElement).to.eql(true);
             expect(pabloItems[2] instanceof SVGAElement).to.eql(true);
@@ -1648,7 +1694,37 @@
             expect(iterationIndices[1]).to.eql(1);
             expect(iterationIndices[2]).to.eql(2);
           });
-          it('.each(callback, context)/.forEach(callback, context) like above but the this property refers to the passed context', function () {
+
+          
+          it('should not call callback if collection contains no elements', function () {
+            var subject = Pablo(),
+                iterationIndices = [],
+                callbackCalled = false;
+
+            subject.each(function (item, i) {
+              iterationIndices.push(i);
+              callbackCalled = true;
+            });
+
+            expect(iterationIndices.length).to.eql(0);
+            expect(callbackCalled).to.eql(false);
+          });
+
+          it('should set the `this` context of the callback to the original if the collection contains one element', function () {
+            var collection = Pablo.rect();
+            collection.each(function () {
+              expect(this).to.eql(collection);
+            });
+          });
+
+          it('should set the `this` context of the callback to the original if the collection contains multiple elements', function () {
+            var collection = Pablo.rect();
+            collection.each(function () {
+              expect(this).to.eql(collection);
+            });
+          });
+
+          it('.each(callback, context)/.forEach(callback, context) should apply `this` within the callback to the passed context', function () {
             var subject      = Pablo([Pablo.rect(), Pablo.circle(), Pablo.a()]),
                 iterationIndices = [],
                 pabloItems       = [],
@@ -1670,13 +1746,6 @@
             expect(iterationIndices[1]).to.eql(1);
             expect(iterationIndices[2]).to.eql(2);
             expect(contextWasCorrect).to.eql(true);
-          });
-
-          it('should have the "this" context of the callback be the subject collection', function () {
-            var collection = Pablo.rect();
-            collection.each(function () {
-              expect(this).to.eql(collection);
-            });
           });
         });
 
@@ -3047,7 +3116,7 @@
     });
 
     describe('collection.load()', function () {
-      it('collection.load() loads SVG document into node', function (done) {
+      it('.load() loads SVG document into node', function (done) {
           var subject = Pablo.g();
 
           subject.load('images/villain.svg', function(collection, xhr){
@@ -3065,66 +3134,135 @@
       });
     });
 
-    describe('collection.markup() SVG', function () {
-      it('collection.markup() should return a markup string', function () {
+    describe('.markup() SVG', function () {
+      it('.markup() should return a markup string', function () {
           var subject = Pablo.g(),
               markup = subject.markup();
 
           // match <g></g> and <g/>
-          expect(markup).to.match(/^(<g><\/g>|<g\/>)$/);
+          expect(markup).to.match(/^(<g.*><\/g>|<g.*\/>)$/);
       });
 
-      it('collection.markup() should export markup for multiple elements in the collection', function () {
+      it('.markup() should export markup for multiple elements in the collection', function () {
           var subject = Pablo(['g', 'a']),
               markup = subject.markup();
 
-          expect(markup).to.match(/^(<g><\/g>|<g\/>)(<a><\/a>|<a\/>)$/);
+          expect(markup).to.match(/^(<g.*><\/g>|<g.*\/>)(<a.*><\/a>|<a.*\/>)$/);
       });
 
-      it('collection.markup() should be consistent on repeated use', function () {
+      it('.markup() should be consistent on repeated use', function () {
           var subject = Pablo.svg({viewBox:'0 0 1 1'}).append([
                 Pablo.g(),
                 Pablo.circle({r:5})
               ]),
               markup = subject.markup(),
-              carboncopy = Pablo(markup);
+              attributes = subject.attr(),
+              attrNames = Object.keys(attributes).sort(),
+              copy = Pablo(markup),
+              markupCopy = copy.markup(),
+              attributesCopy = copy.attr(),
+              attrNamesCopy = Object.keys(attributes).sort();
 
-          expect(carboncopy.length).to.eql(1);
-          expect(carboncopy.children().length).to.eql(2);
-          expect(carboncopy.markup()).to.eql(markup);
+          expect(copy.length).to.eql(1);
+          expect(copy.children().length).to.eql(2);
+
+          expect(markupCopy).to.be.a('string');
+          expect(markupCopy.length).to.be.at.least(1);
+
+          expect(attrNames.length).to.eql(attrNamesCopy.length);
+          attrNames.forEach(function(attr, i){
+            expect(attr).to.eql(attrNamesCopy[i]);
+          });
       });
 
-      it('collection.markup() should export markup for multiple elements on repeated use', function () {
+      // Currently passes in Chrome and FF but fails in grunt mocha with PhantomJS
+      it('.markup() should have consistent xlink ns on repeated use', function(){
+          var subject = Pablo.svg({viewBox:'0 0 1 1'}).append([
+                Pablo.g(),
+                Pablo.circle({r:5})
+              ]),
+              markup = subject.markup(),
+              copy = Pablo(markup),
+              markupCopy = copy.markup();
+
+          expect(markup.indexOf('xmlns:xlink')).to.not.eql(-1);
+          expect(markupCopy.indexOf('xmlns:xlink')).to.not.eql(-1);
+      });
+
+      it('.markup() should export markup for multiple elements on repeated use', function () {
           var subject = Pablo(['g', 'a']),
               markup = subject.markup(),
-              carboncopy = Pablo(markup);
+              copy = Pablo(markup),
+              markupCopy = copy.markup(),
+              doubleCopy = Pablo(markupCopy);
 
-          expect(carboncopy.length).to.eql(2);
-          expect(carboncopy.markup()).to.eql(markup);
+          expect(copy.length).to.eql(2);
+          expect(doubleCopy.length).to.eql(2);
+          expect(copy[0].nodeName).to.eql('g');
+          expect(copy[1].nodeName).to.eql('a');
+          expect(doubleCopy[0].nodeName).to.eql('g');
+          expect(doubleCopy[1].nodeName).to.eql('a');
+      });
+
+      it('.markup(true) should wrap elements in an <svg> element', function () {
+          var subject = Pablo(['g', 'a']),
+              markup = subject.markup(true),
+              copy = Pablo(markup);
+
+          expect(copy.length).to.eql(1);
+          expect(copy.children().length).to.eql(2);
+          expect(copy[0].nodeName).to.eql('svg');
+          expect(copy.children()[0].nodeName).to.eql('g');
+          expect(copy.children()[1].nodeName).to.eql('a');
+      });
+
+      it('.markup(true) should not create a new <svg> element when the collection is a single <svg> element', function () {
+          var subject = Pablo.svg().append(['g', 'a']),
+              markup = subject.markup(true),
+              copy = Pablo(markup);
+
+          expect(copy.length).to.eql(1);
+          expect(copy.children().length).to.eql(2);
+          expect(copy[0].nodeName).to.eql('svg');
+          expect(copy.children()[0].nodeName).to.eql('g');
+          expect(copy.children()[1].nodeName).to.eql('a');
+      });
+
+      it('.markup(true) should create a new <svg> element when the collection has multiple <svg> elements', function () {
+          var subject = Pablo.svg().append(['g', 'a']).duplicate(),
+              markup = subject.markup(true),
+              copy = Pablo(markup);
+
+          expect(copy.length).to.eql(1);
+          expect(copy.children().length).to.eql(2);
+          expect(copy.children().children().length).to.eql(4);
+          expect(copy[0].nodeName).to.eql('svg');
+          expect(copy.children()[0].nodeName).to.eql('svg');
+          expect(copy.children()[1].nodeName).to.eql('svg');
       });
     });
     
 
-    describe('collection.markup() HTML', function () {
-      it('collection.markup() should return a markup string', function () {
+    describe('.markup() HTML', function () {
+      it('.markup() should return a markup string', function () {
           var subject = Pablo(document.createElement('div')),
               markup = subject.markup();
 
-          // match <g></g> and <g/>
-          expect(markup).to.match(/^(<div><\/div>|<div\/>)$/);
+          // match <div></div> and <div/>
+          expect(markup).to.match(/^(<div.*><\/div>|<div.*\/>)$/);
       });
 
-      it('collection.markup() should export markup for multiple elements in the collection', function () {
+      it('.markup() should export markup for multiple elements in the collection', function () {
           var subject = Pablo([
                 document.createElement('div'),
                 document.createElement('a')
               ]),
               markup = subject.markup();
 
-          expect(markup).to.match(/^(<div><\/div>|<div\/>)(<a><\/a>|<a\/>)$/);
+          expect(markup).to.match(/^(<div.*><\/div>|<div.*\/>)(<a.*><\/a>|<a.*\/>)$/);
       });
 
-      it.skip('collection.markup() should be consistent on repeated use', function () {
+      it.skip('.markup() should be consistent on repeated use', function () {
           var subject = Pablo(document.createElement('div')).append([
                 Pablo(document.createElement('a'), {href:'#'}),
                 Pablo(document.createElement('span'))
@@ -3136,17 +3274,62 @@
           expect(carboncopy.children().length).to.eql(2);
           expect(carboncopy.markup()).to.eql(markup);
       });
+    });
 
-      it.skip('collection.markup() should export markup for multiple elements on repeated use', function () {
-          var subject = Pablo([
-                document.createElement('div'),
-                document.createElement('a')
-              ]),
-              markup = subject.markup(),
-              carboncopy = Pablo(markup);
 
-          expect(carboncopy.length).to.eql(2);
-          expect(carboncopy.markup()).to.eql(markup);
+    describe('.bbox', function(){
+      var svg = Pablo.svg({width: 500, height:190});
+      var circle = svg.circle({cx:100, cy:100, r:10});
+      var rect = svg.rect({x:200, y:100, width:50, height:90});
+      var circlebbox = circle.bbox();
+
+      it('.bbox() should objection containing x, y, width and height', function () {
+        expect('x' in circlebbox).to.eql(true);
+        expect('y' in circlebbox).to.eql(true);
+        expect('width' in circlebbox).to.eql(true);
+        expect('height' in circlebbox).to.eql(true);
+      });
+
+      it('.bbox() should give dimensions and position of the single element in the collection', function () {
+        expect(circlebbox.width).to.eql(20);
+        expect(svg.bbox().width).to.eql(160);
+        expect(rect.bbox().height).to.eql(90);
+      });
+
+      it('.bbox() should give dimensions and position of the multiple elements in the collection', function () {
+        expect(Pablo([circle, rect]).bbox().y).to.eql(90);
+      });
+    });
+
+
+    describe('.crop', function(){
+      var svg = Pablo.svg({width: 500, height:190});
+      var circle = svg.circle({cx:100, cy:100, r:10});
+      var rect = svg.rect({x:200, y:100, width:50, height:90});
+
+      it('.crop() should resize the svg element to its contents', function () {
+        expect(svg[0].width.baseVal.value).to.eql(500);
+        expect(svg[0].height.baseVal.value).to.eql(190);
+
+        svg = svg.crop();
+        expect(svg[0].width.baseVal.value).to.eql(160);
+        expect(svg[0].height.baseVal.value).to.eql(100);
+      });
+
+      it('.crop(collection) should resize the svg element to the single element in the collection', function () {
+        svg = svg.crop(rect);
+        expect(svg[0].width.baseVal.value).to.eql(50);
+        expect(svg[0].height.baseVal.value).to.eql(90);
+
+        svg = svg.crop(circle);
+        expect(svg[0].width.baseVal.value).to.eql(20);
+        expect(svg[0].height.baseVal.value).to.eql(20);
+      });
+
+      it('.crop(collection) should resize the svg element to the multiple elements in the collection', function () {
+        svg = svg.crop(Pablo([circle, rect]));
+        expect(svg[0].width.baseVal.value).to.eql(160);
+        expect(svg[0].height.baseVal.value).to.eql(100);
       });
     });
 
@@ -3156,6 +3339,14 @@
 
     describe('Pablo.ELEMENT_NAME([attributes]) shortcuts', function () {
       it('Pable.svg([attributes]) should return a Pablo collection of that element and with the attribute "version=1.1" on it', function () {
+        var subject = Pablo.svg();
+
+        expect(subject instanceof Pablo.Collection).to.eql(true);
+        expect(subject[0].tagName.toLowerCase()).to.eql('svg');
+        expect(subject[0].getAttribute('version')).to.eql('1.1');
+      });
+
+      it('Pable.svg([attributes]) should have namespaced attributes from Pablo.ns', function () {
         var subject = Pablo.svg();
 
         expect(subject instanceof Pablo.Collection).to.eql(true);
