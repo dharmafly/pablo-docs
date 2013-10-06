@@ -1,6 +1,6 @@
 --- 
-heading: removeAttr(attributes)
 category: removeattr
+heading: removeAttr(attributes)
 ---
 
 Removes an attribute from all elements in the collection, and returns the collection.
