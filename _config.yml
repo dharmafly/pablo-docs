@@ -1,49 +1,49 @@
 --- 
-lang: javascript
+twitter_name: Dharmafly
+download_links: 
+- href: /downloads/pablo.js
+  text: pablo.js
+  title: Full source code, for use in development
+  subtext: v{{ version }}
+- href: /downloads/pablo.min.js
+  text: pablo.min.js
+  title: Minified, for use in production
+  subtext: v{{ version }}
+- href: https://github.com/dharmafly/pablo/zipball/master
+  text: Edge
+  title: Latest codebase (zip); potentially unstable
+  subtext: (master)
+safe: false
+pygments: false
 baseurl: /
 project_url: https://github.com/dharmafly/pablo
+ga_id: UA-34978047-1
+sections: 
+- name: Overview
+  path: /index.html
+- name: API
+  path: /api/index.html
+- name: Misc
+  path: /misc/index.html
+- name: Resources
+  path: /resources/index.html
+theme: horus
+lsi: false
+permalink: /:title
+version: 0.3.4
+jquery_no_conflict: true
 twitter_url: https://twitter.com/dharmafly
+lang: javascript
+scripts: 
+- src: /downloads/pablo.min.js
+project_name: Pablo
 stylesheets: 
 - url: /css/custom/custom.css
-ga_id: UA-34978047-1
-lsi: false
-pygments: false
-sections: 
-- path: /index.html
-  name: Overview
-- path: /api/index.html
-  name: API
-- path: /misc/index.html
-  name: Misc
-- path: /resources/index.html
-  name: Resources
-jquery_no_conflict: true
-theme: horus
+future: true
 quote: 
 - quote: Painting is just another way of keeping a diary.
 - cite: Pablo Picasso
-twitter_name: Dharmafly
-scripts: 
-- src: /downloads/pablo.min.js
-future: true
-download_links: 
-- text: pablo.js
-  title: Full source code, for use in development
-  href: /downloads/pablo.js
-  subtext: v{{ version }}
-- text: pablo.min.js
-  title: Minified, for use in production
-  href: /downloads/pablo.min.js
-  subtext: v{{ version }}
-- text: Edge
-  title: Latest codebase (zip); potentially unstable
-  href: https://github.com/dharmafly/pablo/zipball/master
-  subtext: (master)
-safe: false
-project_name: Pablo
-version: 0.3.3
+markdown: maruku
 exclude: 
 - README.md
 - FiddlerRules.farx
-markdown: maruku
-permalink: /:title
