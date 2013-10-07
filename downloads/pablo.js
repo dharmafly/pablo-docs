@@ -14,7 +14,7 @@
     'use strict';
     
     var /* SETTINGS */
-        pabloVersion = '0.3.3',
+        pabloVersion = '0.3.4',
         svgVersion = 1.1,
         svgns = 'http://www.w3.org/2000/svg',
         xlinkns = 'http://www.w3.org/1999/xlink',
@@ -98,13 +98,20 @@
 
     /////
 
+    support = (function(){
+        var createCanvas = 'getContext' in document.createElement('canvas'),
+            dataURL = 'btoa' in window,
+            imageSvg = dataURL;
 
-    support = {
-        basic: true,
-        classList: 'classList' in testElement,
-        dataURL:   'btoa' in window,
-        download:  'btoa' in window && 'download' in document.createElement('a')
-    };
+        return {
+            basic: true,
+            classList: 'classList' in testElement,
+            dataURL: dataURL,
+            imageSvg: imageSvg,
+            canvas: imageSvg && createCanvas,
+            download: dataURL && 'createEvent' in document && 'download' in document.createElement('a')
+        };
+    }());
 
     cssPrefixes = vendorPrefixes.map(function(prefix){
         return prefix ? '-' + prefix + '-' : '';
@@ -981,6 +988,68 @@
             return Pablo.svg().append(this);
         },
 
+        // Get bounding box of all elements in collection
+        bbox: function(){
+            var allInDocument = this.isInDocument(),
+                total, svg, x1, y1, x2, y2;
+
+            if (!this.length){
+                return {x:0, y:0, width:0, height:0};
+            }
+
+            // All elements in the collection are in the DOM
+            if (allInDocument){
+                if (this.length === 1){
+                    total = this[0].getBBox();
+                }
+
+                else {
+                    x1 = Infinity,
+                    y1 = Infinity,
+                    x2 = 0,
+                    y2 = 0;
+
+                    this.each(function(el){
+                        var bbox = el.getBBox(),
+                            width, height;
+
+                        if (bbox.x < x1){
+                            x1 = bbox.x;
+                        }
+                        if (bbox.y < y1){
+                            y1 = bbox.y;
+                        }
+                        if (bbox.x + bbox.width > x2){
+                            x2 = bbox.x + bbox.width;
+                        }
+                        if (bbox.y + bbox.height > y2){
+                            y2 = bbox.y + bbox.height;
+                        }
+                    });
+
+                    total = {x:x1, y:y1, width:x2, height:y2};
+                }
+            }
+
+            // Not all in the DOM
+            else {
+                if (this.length === 1 && this[0].nodeName === 'svg'){
+                    this.appendTo(document.body);
+                    total = this.bbox();
+                    this.detach();
+                }
+                else {
+                    svg = Pablo.svg()
+                            .append(this.clone())
+                            .appendTo(document.body);
+
+                    total = svg.children().bbox();
+                    svg.detach();
+                }
+            }
+            return total;
+        },
+
         crop: function(to){
             return this.each(function(el){
                 var node, bbox;
@@ -994,7 +1063,9 @@
                         // e.g. crop(circles)
                         if (isPablo(to)){
                             // get bbox of the collection
-                            bbox = to.bbox();
+                            bbox = Pablo.svg()
+                                        .append(to.clone())
+                                        .bbox();
                         }
                         // e.g. crop({x:-10,y:50,width:100, height:100})
                         else {
@@ -1009,6 +1080,12 @@
                         bbox = node.bbox();
                     }
 
+                    // HACK for Safari 6.0.5
+                    // If <svg> element is already in the DOM, the width &
+                    // height change is not correctly rendered
+                    node.removeAttr('width').removeAttr('height');
+                    // end HACK for Safari 6.0.5
+
                     // Apply dimension attributes to the <svg> element
                     node.attr({
                         width:   bbox.width,
@@ -1017,17 +1094,6 @@
                     });
                 }
             });
-        },
-
-        // Get bounding box of all elements in collection
-        bbox: function(){
-            var svg = this.clone()
-                            .toSingleSvg()
-                            .appendTo(document.body),
-                bbox = svg[0].getBBox();
-
-            svg.detach();
-            return bbox;
         },
 
         markup: (function(){
@@ -1069,9 +1135,7 @@
                 };
             }
             // Can't generate dataURL (use a polyfill to enable the toDataURL method in an unsupported browser)
-            return function(){
-                return 'about:blank';
-            };
+            return function(){};
         }()),
 
         toCanvas: function(canvas){
@@ -1121,6 +1185,7 @@
             var el = document.createElement('img'),
                 img = Pablo(el);
 
+            // SVG image
             if (!type || type === 'svg'){
                 img.one('load', function(){
                     img.attr({
@@ -1130,6 +1195,8 @@
                 });
                 el.src = this.toDataURL();
             }
+
+            // PNG, JPEG or other format supported by the browser
             else {
                 this.toCanvas().one('img:load', function(){
                     try {
