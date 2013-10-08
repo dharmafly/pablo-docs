@@ -1,6 +1,6 @@
 --- 
-heading: Pablo.isArrayLike(obj)
 category: pablo.isarraylike
+heading: Pablo.isArrayLike(obj)
 ---
 
 Returns boolean `true` if the argument is an object and can be iterated like an Array; otherwise `false`.

@@ -1,6 +1,6 @@
 --- 
-heading: prependTo(elements, [attributes])
 category: prependto
+heading: prependTo(elements, [attributes])
 ---
 
 Same as [.appendTo()][appendTo] but, with this method, the elements in the collection are inserted as the _first child_ of the passed elements.

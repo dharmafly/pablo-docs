@@ -1,6 +1,6 @@
 --- 
-heading: Duplication
 category: api
+heading: Duplication
 ---
 
 

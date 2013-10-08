@@ -1,7 +1,11 @@
 --- 
-heading: Changelog
 category: misc
+heading: Changelog
 ---
+
+## v0.3.4
+- Add collection.dataUrl()
+- Improve bbox(), toImage() and related methods
 
 
 ## v0.3.3
