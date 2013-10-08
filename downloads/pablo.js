@@ -100,16 +100,16 @@
 
     support = (function(){
         var createCanvas = 'getContext' in document.createElement('canvas'),
-            dataURL = 'btoa' in window,
-            imageSvg = dataURL;
+            dataUrl = 'btoa' in window,
+            imageSvg = dataUrl;
 
         return {
             basic: true,
             classList: 'classList' in testElement,
-            dataURL: dataURL,
+            dataUrl: dataUrl,
             imageSvg: imageSvg,
             canvas: imageSvg && createCanvas,
-            download: dataURL && 'createEvent' in document && 'download' in document.createElement('a')
+            download: dataUrl && 'createEvent' in document && 'download' in document.createElement('a')
         };
     }());
 
@@ -1123,10 +1123,19 @@
             };
         }()),
 
-        toDataURL: (function(){
-            if (support.dataURL){
+        dataUrl: (function(){
+            if (support.dataUrl){
                 return function(){
-                    var markup = this.markup(true);
+                    var collection, markup;
+
+                    if (this.length === 1 && this[0].nodeName === 'svg'){
+                        collection = this;
+                    }
+                    else {
+                        collection = this.clone().toSingleSvg().crop();
+                    }
+                    markup = collection.markup();
+
                     return 'data:image/svg+xml;base64,' + window.btoa(markup);
 
                     // Alternative approach:
@@ -1134,7 +1143,7 @@
                     //return window.URL.createObjectURL(blob);
                 };
             }
-            // Can't generate dataURL (use a polyfill to enable the toDataURL method in an unsupported browser)
+            // Can't generate dataUrl (use a polyfill to enable the dataUrl method in an unsupported browser)
             return function(){};
         }()),
 
@@ -1193,7 +1202,8 @@
                         height: el.height
                     });
                 });
-                el.src = this.toDataURL();
+                // Set the image src, using the collection's dataUrl() method
+                el.src = this.dataUrl();
             }
 
             // PNG, JPEG or other format supported by the browser
@@ -1201,12 +1211,15 @@
                 this.toCanvas().one('img:load', function(){
                     try {
                         img.attr({
+                            // Access canvas element's native toDataURL() method
                             src: this.toDataURL('image/' + type),
                             width:  this.width,
                             height: this.height
                         });
                     }
-                    catch(e){}
+                    catch(e){
+                        img.trigger('pablo:error');
+                    }
                 });
             }
             return img;
@@ -1221,8 +1234,8 @@
         download: function(filename){
             var link = Pablo(document.createElement('a')),
                 markup = this.markup(this),
-                url = this.toDataURL(),
-                // An alternative approach to using toDataURL is to create a Blob
+                url = this.dataUrl(),
+                // An alternative approach to using dataUrl is to create a Blob
                 //blob = new window.Blob([markup], {type:'image/svg+xml'}),
                 //url = window.URL.createObjectURL(blob),
                 event;
