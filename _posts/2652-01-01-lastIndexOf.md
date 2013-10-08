@@ -1,6 +1,6 @@
 --- 
-category: lastindexof
 heading: lastIndexOf(filter, [context])
+category: lastindexof
 ---
 
 Returns the last index of the element within the collection, or -1 if not found.

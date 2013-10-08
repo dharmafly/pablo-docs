@@ -1,6 +1,6 @@
 --- 
-category: pablo.load
 heading: Pablo.load(url, callback)
+category: pablo.load
 ---
 
 Loads an external SVG file via an Ajax request, wraps it in a new collection and passes it to the `callback` function.

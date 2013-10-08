@@ -1,6 +1,6 @@
 --- 
-category: pablo.extend
 heading: Pablo.extend(target, source)
+category: pablo.extend
 ---
 
 Copies properties from the `source` object to the `target` object and returns the target.
