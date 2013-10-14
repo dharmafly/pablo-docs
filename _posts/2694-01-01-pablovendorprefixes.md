@@ -1,6 +1,0 @@
---- 
-heading: Pablo.vendorPrefixes
-category: pablo.vendorprefixes
----
-
-An array of vendor-prefixes used by [`cssPrefix()`](/api/cssPrefix/) and [`Pablo.cssPrefix()`](/api/Pablo.cssPrefix/).
