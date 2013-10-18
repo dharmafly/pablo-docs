@@ -30,3 +30,12 @@ Not all browsers support PNG and JPEG data URLs. To confirm, check `Pablo.suppor
         }
     });
 
+    Pablo.support.jpeg(function(support){
+        if (support){
+            // get data URL
+        }
+        else {
+            // fallback
+        }
+    });
+

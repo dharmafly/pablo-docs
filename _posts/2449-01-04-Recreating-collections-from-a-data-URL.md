@@ -11,4 +11,4 @@ You can pass an SVG data URL directly to the `Pablo()` method to recreate the co
         dataUrl = shape.dataUrl();
 
     // Later...
-    Pablo(dataUrl).appendTo('body');
+    Pablo(dataUrl).appendTo(demoElement);

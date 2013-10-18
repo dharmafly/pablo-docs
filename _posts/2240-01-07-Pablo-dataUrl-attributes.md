@@ -7,7 +7,7 @@ path: api/Pablo
 
 Converts a data URL for an SVG file into a collection of elements.
 
-    var dataUrl = 'data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3L…wvcmVjdD48Y2lyY2xlIGN4PSIxNTAiIGN5PSI0MCIgcj0iMzAiPjwvY2lyY2xlPjwvc3ZnPg==';
+    var dataUrl = 'data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiB2aWV3Qm94PSItNTAgLTUwIDEwMCAxMDAiPjxjaXJjbGUgcj0iNTAiPjwvY2lyY2xlPjwvc3ZnPg==';
 
     Pablo(dataUrl).appendTo(demoElement);
 

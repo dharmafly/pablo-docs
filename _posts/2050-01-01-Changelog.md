@@ -3,6 +3,11 @@ heading: Changelog
 category: misc
 path: misc
 ---
+
+## 0.3.6
+* Escape Unicode on data URL creation
+
+
 ## 0.3.5
 * Add withViewport()
 * Rename Pablo.isHTMLDocument() to Pablo.isDocument()
