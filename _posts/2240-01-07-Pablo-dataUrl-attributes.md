@@ -1,7 +1,7 @@
 ---
 category: pablo
 heading: "Pablo(dataUrl, [attributes])"
-path: api/pablo
+path: api/api/Pablo
 ---
 
 
