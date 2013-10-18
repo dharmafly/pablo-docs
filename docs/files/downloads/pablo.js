@@ -401,7 +401,9 @@
 
     dataUrlToSvgMarkup = support.dataUrl ?
         function(dataUrl){
-            return atob(dataUrl.slice(svgDataUrlPrefix.length));
+            var data = dataUrl.slice(svgDataUrlPrefix.length);
+            // See https://developer.mozilla.org/en-US/docs/Web/API/window.btoa#Unicode_Strings for use of decodeURIComponent and escape
+            return decodeURIComponent(escape(atob(data)));
         } :
 
         function(){
@@ -1414,7 +1416,12 @@
             dataUrl: support.dataUrl ?
                 function(type, callback){
                     var collection = this,
-                        target, markup, dataUrl;
+                        target, markup, data, dataUrl;
+
+                    if (!callback && typeof type === 'function'){
+                        callback = type;
+                        type = null;
+                    }
 
                     if (!type || type === 'svg'){
                         if (this.length === 1 && this[0].nodeName === 'svg'){
@@ -1425,7 +1432,9 @@
                         }
                         markup = target.markup();
 
-                        dataUrl = svgDataUrlPrefix + btoa(markup);
+                        // See https://developer.mozilla.org/en-US/docs/Web/API/window.btoa#Unicode_Strings for use of encodeURIComponent and unescape
+                        data = btoa(unescape(encodeURIComponent(markup)));
+                        dataUrl = svgDataUrlPrefix + data;
 
                         if (callback){
                             callback.call(collection, dataUrl);
@@ -1476,6 +1485,11 @@
                         img = Pablo(el),
                         bbox = this.bbox();
 
+                    if (!callback && typeof type === 'function'){
+                        callback = type;
+                        type = null;
+                    }
+
                     this.dataUrl(type, function(dataUrl){
                         if (dataUrl){
                             // If no dimensions, then give the image zero
@@ -1493,20 +1507,14 @@
                                     width: 0,
                                     height: 0
                                 });
+                            }
 
-                                if (callback){
+                            if (callback){
+                                img.one('load', function(){
                                     callback.call(collection, img);
-                                }
+                                });
                             }
-
-                            else {
-                                if (callback){
-                                    img.one('load', function(){
-                                        callback.call(collection, img);
-                                    });
-                                }
-                                el.src = dataUrl;
-                            }
+                            el.src = dataUrl;
                         }
 
                         // Error: couldn't create dataUrl
@@ -1531,6 +1539,11 @@
                 function(callback, canvas){
                     var collection = this,
                         svgImage, doCanvasResize;
+
+                    if (!canvas && typeof callback === 'object'){
+                        canvas = callback;
+                        callback = null;
+                    }
 
                     doCanvasResize = !canvas;
                     canvas = toPablo(canvas || document.createElement('canvas'));
@@ -1731,15 +1744,13 @@
                 });
             },
 
-            removeData: function(keys){
+            removeData: function(key){
                 return this.each(function(el){
-                    // Remove single or multiple, space-delimited keys
-                    if (keys){
-                        this.processList(keys, function(key){
-                            removeData(el, key);
-                        });
+                    // Remove a key from the element's data object
+                    if (key){
+                        removeData(el, key);
                     }
-                    // Remove everything
+                    // Remove all data on the element
                     else {
                         removeData(el);
                     }
