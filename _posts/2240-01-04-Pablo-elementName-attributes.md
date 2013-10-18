@@ -1,7 +1,7 @@
 ---
 category: pablo
 heading: "Pablo(elementName, attributes)"
-path: api/api/Pablo
+path: api/Pablo
 ---
 
 

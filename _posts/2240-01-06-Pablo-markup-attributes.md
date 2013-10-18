@@ -1,7 +1,7 @@
 ---
 category: pablo
 heading: "Pablo(markup, [attributes])"
-path: api/api/Pablo
+path: api/Pablo
 ---
 
 

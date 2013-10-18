@@ -1,7 +1,7 @@
 ---
 category: pablo
 heading: "Pablo(selectors, [context])"
-path: api/api/Pablo
+path: api/Pablo
 ---
 
 
