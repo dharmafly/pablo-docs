@@ -1,7 +1,7 @@
 ---
-category: toCanvas
+category: tocanvas
 heading: Browser support
-path: api/toCanvas
+path: api/tocanvas
 ---
 
 

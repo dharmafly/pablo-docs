@@ -1,7 +1,7 @@
 ---
-category: withViewport
+category: withviewport
 heading: withViewport()
-path: api/withViewport
+path: api/withviewport
 ---
 
 If the collection contains anything other than a single `<svg>` element, it will append the elements in the collection to a new `<svg>` container, crop the container to its contents and return the container.

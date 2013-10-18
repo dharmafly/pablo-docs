@@ -1,7 +1,7 @@
 ---
-category: toCanvas
+category: tocanvas
 heading: "toCanvas(callback, canvas)"
-path: api/toCanvas
+path: api/tocanvas
 ---
 
 

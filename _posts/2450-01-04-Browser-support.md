@@ -1,7 +1,7 @@
 ---
-category: toImage
+category: toimage
 heading: Browser support
-path: api/toImage
+path: api/toimage
 ---
 
 

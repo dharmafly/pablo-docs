@@ -1,7 +1,7 @@
 ---
-category: toImage
+category: toimage
 heading: "toImage(type, callback)"
-path: api/toImage
+path: api/toimage
 ---
 
 
