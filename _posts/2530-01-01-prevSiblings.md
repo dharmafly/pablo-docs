@@ -1,0 +1,18 @@
+---
+category: prevsiblings
+heading: "prevSiblings([filter])"
+path: api/prevsiblings
+---
+
+Returns a collection of elements that are present in the DOM before each element in the original collection.
+
+    var svg = Pablo(demoElement).svg({height: 60});
+
+    svg.append(Pablo.circle({r: 30, cx: 30, cy: 30}))
+        .append(Pablo.circle({r: 30, cx: 100, cy: 30}))
+        .append(Pablo.circle({r: 30, cx: 170, cy: 30, fill:'green'}))
+        .append(Pablo.circle({r: 30, cx: 240, cy: 30}));
+
+    svg.children('circle[fill=green]')
+        .prevSiblings()
+        .attr({'fill': 'purple'})
