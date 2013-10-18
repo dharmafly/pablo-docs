@@ -1,0 +1,11 @@
+---
+category: toggleclass
+heading: toggleClass(name)
+path: api/toggleclass
+---
+
+For each element in the collection, if the CSS class is present it will be removed, otherwise it will be added.
+
+    var rect = Pablo.rect({'class': 'john paul george ringo'});
+    rect.toggleClass('george');
+    alert(rect.hasClass('george')); // false

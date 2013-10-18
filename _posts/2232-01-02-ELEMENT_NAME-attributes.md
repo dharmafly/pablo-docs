@@ -1,0 +1,18 @@
+---
+category: elements
+heading: "ELEMENT_NAME([attributes])"
+path: api/elements
+---
+
+
+The same element methods can be called directly on collections, to create and append a new element to each element in the collection:
+
+    /* Create two groups */
+    var group1 = Pablo.g(),
+        group2 = Pablo.g(),
+        groups = Pablo([group1, group2]);
+
+    /* Create and append a circle and rectangle to each group */
+    var circle = group.circle(),
+        rectangle = group.rect({width: 50, height: 50});
+

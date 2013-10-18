@@ -1,0 +1,15 @@
+---
+category: firstchild
+heading: "firstChild([filter])"
+path: api/firstchild
+---
+
+Returns a collection of the collection’s first child element.
+
+    var svg = Pablo(demoElement).svg({height: 60});
+
+    svg.append(Pablo.circle({r: 30, cx: 30, cy: 30}))
+        .append(Pablo.circle({r: 30, cx: 100, cy: 30}))
+        .append(Pablo.circle({r: 30, cx: 170, cy: 30}));
+
+    svg.firstChild().attr({'fill':'green'})
