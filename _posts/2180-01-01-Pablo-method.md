@@ -4,7 +4,7 @@ category: api
 path: api
 ---
 
-The `Pablo()` method creates an array-like [collection][collections] of new or pre-existing HTML or SVG elements.
+The `Pablo()` method creates an array-like [collection](#Collections) of new or pre-existing HTML or SVG elements.
 
 
 ## [Pablo()](/api/Pablo/)
@@ -44,6 +44,3 @@ Converts SVG markup into a collection of elements. (experimental)
 ## [Pablo(dataUrl, \[attributes\])](/api/Pablo/#Pablo-dataUrl-attributes)
 
 Converts a data URL for an SVG file into a collection of elements.
-
-
-[collections]: #collections

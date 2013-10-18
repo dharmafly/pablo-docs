@@ -7,14 +7,13 @@ path: api/Pablo
 
 Converts SVG markup into a collection of elements.
 
-    var shapes = Pablo(
-        '<rect width="120" height="80"/>' + 
-        '<circle cx="150" cy="40" r="30"/>'
-    );
-    
+    var markup = '<circle cx="50" cy="50" r="50"/>',
+        shapes = Pablo(markup);
+
     Pablo(demoElement)
-        .svg({width:180, height:80})
-        .append(shapes);
+        .svg()
+        .append(shapes)
+        .crop();
 
 If `attributes` are specified, they are set on each element.
 

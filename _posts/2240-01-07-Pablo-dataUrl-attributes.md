@@ -17,7 +17,7 @@ See also the collection method, [`dataUrl()`](/api/dataUrl/).
 
 
 [push]: /api/push/
-[collection-manipulation]: /api/#collection-manipulation
+[collection-manipulation]: /api/#Collection-manipulation
 [nodelist]: https://developer.mozilla.org/docs/Web/API/NodeList
 [jquery-collection]: http://api.jquery.com/jQuery/
 [qsa]: https://developer.mozilla.org/docs/DOM/Element.querySelectorAll

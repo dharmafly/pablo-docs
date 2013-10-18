@@ -3,7 +3,7 @@ heading: Collection manipulation
 category: api
 path: api
 ---
-These collection methods are used to pluck, add, remove or re-order elements in the collection. See also [Iteration](/api/#iteration) and [Duplication](/api/#duplication)
+These collection methods are used to pluck, add, remove or re-order elements in the collection. See also [Iteration](/api/#Iteration) and [Duplication](/api/#Duplication)
 
 
 ## [length](/api/length/)
