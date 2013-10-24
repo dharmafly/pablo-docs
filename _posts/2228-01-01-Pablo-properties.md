@@ -17,11 +17,6 @@ The current version of the Pablo library. E.g. `"1.2.23"`.
 Returns `true` if Pablo is supported in the current browser.
 
 
-## [Pablo.vendorPrefixes](/api/Pablo.vendorPrefixes/)
-
-An array of vendor-prefixes used by [`cssPrefix()`](/api/cssPrefix/) and [`Pablo.cssPrefix()`](/api/Pablo.cssPrefix/).
-
-
 ## [Pablo.Collection](/api/Pablo.Collection/)
 
 The constructor function used internally for creating a new Pablo collection.

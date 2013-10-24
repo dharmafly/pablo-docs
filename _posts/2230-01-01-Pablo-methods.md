@@ -26,11 +26,6 @@ Load an external file via an Ajax request and pass to a callback.
 Convert the array-like object into a true array.
 
 
-## [Pablo.cssPrefix()](/api/Pablo.cssPrefix/)
-
-Convert CSS properties and values to a vendor-prefixed list.
-
-
 ## [Pablo.getAttributes()](/api/Pablo.getAttributes/)
 
 Get an object of attributes from a DOM element.
