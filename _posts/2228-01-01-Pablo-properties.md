@@ -6,7 +6,7 @@ path: api
 These properties are available on the global `Pablo` object.
 
 
-## [Pablo.v](/api/Pablo.v/)
+## [Pablo.version](/api/Pablo.version/)
 _alias: `collection.pablo`_
 
 The current version of the Pablo library. E.g. `"1.2.23"`.

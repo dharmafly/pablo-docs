@@ -1,0 +1,31 @@
+---
+category: overview
+heading: How it works
+path: overview
+---
+
+<div id="mindmap">
+    <script>
+        document.addEventListener('DOMContentLoaded', function(){
+            _site.mindmap('#mindmap');
+        }, false);
+    </script>
+</div>
+
+
+Both SVG or HTML can be used in Pablo, although the main focus is on SVG.
+
+Pablo acts as a thin wrapper around the contents of a web page, making it easier to work with dynamically-generated SVG and avoiding the verbose code required when using raw JavaScript.
+
+Pablo provides methods like `circle()` and `line()` to create each kind of SVG element. It has methods for manipulating SVG and HTML, to change the appearance, size, position and other properties. It also has methods for filtering and sorting the elements.
+
+It has a simple plugin system, allowing new functionality to be added.
+
+<!-- Random circles -->
+<div id="demo-randomcircles"></div>
+<script>
+    document.addEventListener('DOMContentLoaded', function(){
+        _site.circles('#demo-randomcircles');
+    }, false);
+</script>
+

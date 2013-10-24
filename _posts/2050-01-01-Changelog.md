@@ -3,6 +3,11 @@ heading: Changelog
 category: misc
 path: misc
 ---
+## 0.3.7
+* css() now autodetect's browser vendor-prefixes
+* Removed cssPrefix()
+* Added `Pablo.userAgent`
+* Renamed `Pablo.v` to `Pablo.version`
 
 ## 0.3.6
 * Escape Unicode on data URL creation
@@ -21,7 +26,7 @@ path: misc
 
 
 ## 0.3.3
-* Add bbox(), crop(), toImage(), toCanvas(), download()
+* Add bbox(), crop(), toImage(), toCanvas(), download(), stagger()
 * Add `Pablo.support` for fine-grained environment capabilities detection
 * Expose methods useful for advanced use or plugin writers
 * Use native `DOMParser` / `XMLSerializer` under the hood for creation from markup and outputting to markup

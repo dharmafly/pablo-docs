@@ -14,3 +14,4 @@ Sets multiple styles (specified as an object), for all elements in the collectio
         });
 
     rect.css({fill:'black', opacity:0.4});
+
