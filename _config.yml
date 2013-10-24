@@ -1,7 +1,7 @@
 ---
 project_name: Pablo
 project_url: "https://github.com/dharmafly/pablo"
-version: 0.3.7
+version: 0.3.8
 jquery_no_conflict: true
 theme: horus
 twitter_url: "https://twitter.com/premasagar"
