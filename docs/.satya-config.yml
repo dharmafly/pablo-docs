@@ -3,7 +3,7 @@
 
 project_name: Pablo
 project_url: https://github.com/dharmafly/pablo
-version: '0.3.6'
+version: '0.3.7'
 # options: forest, ocean, horus, seagrass, sundae, slate
 theme: horus
 twitter_url: https://twitter.com/premasagar
@@ -11,6 +11,7 @@ twitter_url: https://twitter.com/premasagar
 lang: javascript
 scripts:
   - src: /downloads/pablo.min.js
+  - src: /javascript/pablosite.js
 stylesheets:
   - url: /css/custom/custom.css
 quote:
