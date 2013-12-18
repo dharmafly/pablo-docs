@@ -4,7 +4,7 @@
     by Premasagar Rose <http://premasagar.com>,
        Dharmafly <http://dharmafly.com>
 
-    Repo: <https://github.com/dharmafly/pablo>
+    Repo: <https://github.com/premasagar/pablo>
     MIT license
 
 */
