@@ -1,32 +1,17 @@
 ---
-heading: transition
-category: api
-path: api
+path: api/transition
+heading: Multiple transitions
+category: api_transition
 ---
 
 
-    var svg = Pablo(demoElement).svg(),
-        circle = svg.circle({
-            r:  50,
-            cx: 80,
-            cy: 80,
-            stroke: 'red',
-            fill: 'blue'
-        });
-
-    circle.transition({
-        property: 'stroke-width',
-        from: 0,
-        to: 30,
-        dur: 3000,
-        timing: 'ease-out'
-    });
+One way to set mult
 
 
 /////
 
 
-    var svg = Pablo(demoElement).svg(),
+    var svg = Pablo(demoElement).svg({width:'100%', height:160}),
         circle = svg.circle({
             r:  50,
             cx: 80,
@@ -39,7 +24,7 @@ path: api
         property: ['opacity', 'stroke-width'],
         from: 0,
         to: [1, 30],
-        dur: [2000, 3000],
+        dur: [3000, 50],
         timing: ['ease-in', 'ease-out']
     });
 
@@ -47,7 +32,7 @@ path: api
 /////
 
 
-    var svg = Pablo(demoElement).svg(),
+    var svg = Pablo(demoElement).svg({width:'100%', height:160}),
         circle = svg.circle({
             r:  50,
             cx: 80,
@@ -58,15 +43,21 @@ path: api
 
     circle.transition({
         opacity: {
+            dur: 3000,
             from: 0,
             to: 1,
-            dur: 2000,
+            end: function(event){
+                alert(event.propertyName + ' done');
+            },
             timing: 'ease-in'
         },
         strokeWidth: { // or 'stroke-width'
+            dur: 500,
             from: 0,
-            to:50,
-            dur: 3000,
-            timing: 'ease-out'
+            to: 50,
+            end: function(event){
+                alert(event.propertyName + ' done');
+            },
+            timing: 'ease-in'
         }
     });

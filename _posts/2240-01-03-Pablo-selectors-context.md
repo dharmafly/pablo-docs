@@ -1,7 +1,7 @@
 ---
-category: pablo
-heading: "Pablo(selectors, [context])"
 path: api/Pablo
+heading: "Pablo(selectors, [context])"
+category: api_pablo
 ---
 
 

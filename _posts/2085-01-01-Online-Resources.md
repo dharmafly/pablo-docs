@@ -21,6 +21,7 @@ Other resources
 * [Internet Explorer's SVG reference](http://msdn.microsoft.com/en-us/library/ie/ff971903(v=vs.85).aspx)
 * [Learn SVG](http://learnsvg.com)
 * [Peter Collingridge's tutorial](http://www.petercollingridge.co.uk/svg-tutorial)
+* [Pike's SVG tutorial](http://apike.ca/prog_svg.html)
 * [Phrogz's ObjJob reference](http://objjob.phrogz.net/svg/hierarchy)
 * [KevLinDev tutorials](http://www.kevlindev.com/tutorials/basics/index.htm)
 * [SVG Basics](http://www.svgbasics.com)

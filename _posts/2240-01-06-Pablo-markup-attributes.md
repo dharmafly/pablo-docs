@@ -1,7 +1,7 @@
 ---
-category: pablo
-heading: "Pablo(markup, [attributes])"
 path: api/Pablo
+heading: "Pablo(markup, [attributes])"
+category: api_pablo
 ---
 
 

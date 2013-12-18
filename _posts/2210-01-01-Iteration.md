@@ -3,7 +3,7 @@ heading: Iteration
 category: api
 path: api
 ---
-These collection methods are used to filter or perform a function on each element in the collection.
+These collection methods are used to filter or perform a function on each element in the collection. Most of them are analagous to [native Array][array] methods.
 
 
 ## [each(fn, \[context\])](/api/each/)
@@ -38,7 +38,6 @@ Return `true` if **all** elements in the collection match the filter, which can 
 
 
 ## [some(filter, \[context\])](/api/some/)
-_alias: `is(filter, [context])`_
 
 Return `true` if **any** elements in the collection match the filter, which can be a function, CSS selector or elements. Otherwise `false`.
 
@@ -51,3 +50,14 @@ Return the collection index of the first element in the collection that matches 
 ## [lastIndexOf(filter, \[context\])](/api/lastIndexOf/)
 
 Return the collection index of the last element in the collection that matches the filter, which can be a function, CSS selector or elements. Otherwise `-1`.
+
+
+Pablo collections are extended Arrays, so all native Array methods should be supported. For example:
+
+
+## reduce(callback, \[initialValue\])
+
+Passes to the callback the arguments `previousValue`, `el`, `index` and `collection`. Performs a native array `reduce()` call on the collection, returning the result.
+
+
+[array]: https://developer.mozilla.org/docs/JavaScript/Reference/Global_Objects/Array

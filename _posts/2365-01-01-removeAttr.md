@@ -1,7 +1,7 @@
 ---
 category: removeattr
 heading: removeAttr(attributeName)
-path: api/removeattr
+path: api/removeAttr
 ---
 
 Removes an named attribute from each element in the collection, and returns the collection.
