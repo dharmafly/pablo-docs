@@ -4,7 +4,7 @@ window._site = {
     browsersupport: function(container){
         if (Pablo.isSupported){
             container = document.getElementById(container.slice(1));
-            container.textContent = '(✔ Your browser supports Pablo).';
+            container.textContent = '✔ Your browser supports Pablo.';
         }
     },
     mindmap: function(container){

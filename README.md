@@ -6,7 +6,7 @@ To update the website, fork this repo, edit the [Markdown][markdown-syntax] file
 
 
 [pablo-site]: http://pablojs.com
-[repo]: https://github.com/dharmafly/pablo
+[repo]: https://github.com/premasagar/pablo
 [docs-folder]: https://github.com/dharmafly/pablo-docs/tree/master/docs
 [docs-pullrequests]: https://github.com/dharmafly/pablo-docs/pulls
 [markdown-syntax]: http://daringfireball.net/projects/markdown/syntax

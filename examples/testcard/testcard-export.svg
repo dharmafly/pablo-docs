@@ -38,7 +38,7 @@
     <text>
         <textPath xlink:href="#squiggle" fill="#997099">★ In Xanadu, did Kublah Khan a stately pleasuredome decree…</textPath>
     </text>
-    <a xlink:href="https://github.com/dharmafly/pablo" target="_blank">
+    <a xlink:href="https://github.com/premasagar/pablo" target="_blank">
         <text x="300" y="170" fill="#777" transform="rotate(-45 300 170)">➵ ♥ pablo</text>
     </a>
     <defs>
