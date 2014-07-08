@@ -30,7 +30,7 @@ download_links:
     title: Minified, for use in production
   - text: Edge
     subtext: (master)
-    href: https://github.com/dharmafly/premasagar/zipball/master
+    href: https://github.com/premasagar/pablo/zipball/master
     title: Latest codebase (zip); potentially unstable
 sections:
   - path: /index.html
