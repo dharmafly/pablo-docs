@@ -394,7 +394,8 @@ var launchDemo = (function(window, Pablo){
                 }, 300);
 
                 window.setTimeout(function(){
-                    createHeader();
+                    createHeader(null, true).appendTo(space);
+
                     createCallouts();
                     fireControl.collection.css('opacity', 1);
                     fireControl.destroy();
@@ -557,7 +558,8 @@ var launchDemo = (function(window, Pablo){
                 'dominant-baseline': 'central',
                 x: '50%',
                 y: '50%'
-            }).content('Pablo')
+            })
+            .content('Pablo')
             .transition('opacity', {
                 from: 0,
                 to: 1,
@@ -582,6 +584,8 @@ var launchDemo = (function(window, Pablo){
                     });
                 }, 1200);
             }
+
+            return header;
         }
 
         function addFullscreenStyles(){
