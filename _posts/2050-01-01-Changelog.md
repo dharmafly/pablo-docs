@@ -3,6 +3,16 @@ heading: Changelog
 category: misc
 path: misc
 ---
+## 0.5.0
+* Added viewbox()
+* Revised stagger()
+* Allow function values in transition(), transformCss(), transform()
+* Update repo location
+
+## 0.4.0
+* Added Pablo.support
+* Revised transition(), transformCss(), transform()
+
 ## 0.3.8
 * Added transition() for CSS transitions
 * Pass previous element to stagger() callback
