@@ -164,6 +164,7 @@ var launchDemo = (function(window, Pablo){
             }, {t:200, repeat:-1, autostart:false});
         }());
 
+
         function buttonInit(){
             var b = space.image({
                 'xlink:href': path + 'button-launch.png',
@@ -546,29 +547,6 @@ var launchDemo = (function(window, Pablo){
             }
         }
 
-        // function start(){
-        //     fullscreen('body');
-
-        //     window.setTimeout(function(){
-        //         Pablo('h1').transition({
-        //             name: 'opacity',
-        //             from: 1,
-        //             to: 0,
-        //             dur: 1200,
-        //             timing: 'ease-in',
-        //             end: function(){
-        //                 // fullscreen
-        //                 rocketInit();
-        //                 rocketPrepareForLaunch();
-        //                 rocketEffects();
-        //                 buttonInit();
-
-        //                 //spaceSceneInit();
-        //             }
-        //         });
-        //     }, 1200);
-        // }
-
         function createHeader(callback, fadeOut){
             var header = Pablo.text({
                 'font-family': 'Megrim, "Helvetica Neue", sans-serif',
@@ -739,6 +717,13 @@ var launchDemo = (function(window, Pablo){
             });
 
         placeholder();
+
+        // Preload images; TODO init on all loaded
+        Pablo.load(path + 'rocket-japanese-e.svg', function(){
+            ['fire-e.svg', 'button-launch.png', 'moon-200.png', 'saturn-100.png', 'jupiter.svg', 'star.svg', 'pie.svg', 'callout-circle.svg', 'callout-template.svg', 'callout-images.svg', 'callout-plugins.svg', 'callout-import.svg', 'callout-animation.svg'].forEach(function(src){
+                Pablo.load(path + src, function(){});
+            });
+        })
     }
 
     /////
