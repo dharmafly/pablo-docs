@@ -732,7 +732,7 @@ var launchDemo = (function(window, Pablo){
 
     /////
 
-    if (Pablo.isSupported && Pablo.support.css.transform && Pablo.support.css.transition){
+    if (Pablo.isSupported && Pablo.support.css.transform && Pablo.support.css.transition && Pablo.findPrefixedProperty('cancelFullScreen', document)){
         init();
         return true;
     }

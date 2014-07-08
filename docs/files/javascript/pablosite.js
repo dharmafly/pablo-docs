@@ -71,7 +71,7 @@ window._site = {
         if (Pablo.isSupported){
             container = Pablo(container);
 
-            if (!Pablo.support.css.transform || !Pablo.support.css.transition){
+            if (!Pablo.support.css.transform || !Pablo.support.css.transition || !Pablo.findPrefixedProperty('cancelFullScreen', document)){
                 container.parents('section').first().remove();
             }
 
