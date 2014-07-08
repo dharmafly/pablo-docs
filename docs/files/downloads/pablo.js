@@ -14,7 +14,7 @@
     'use strict';
     
     var /* SETTINGS */
-        pabloVersion = '0.4.1',
+        pabloVersion = '0.5.0',
         svgVersion = 1.1,
         svgns = 'http://www.w3.org/2000/svg',
 
@@ -1369,7 +1369,7 @@
                                 delete options[prop];
                             }
                         }
-                        
+
                         for (prop in this){
                             if (this.hasOwnProperty(prop)){
                                 delete this[prop];
