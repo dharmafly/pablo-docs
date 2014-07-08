@@ -76,7 +76,7 @@ window._site = {
             }
 
             else {
-                container.css({margin:'20px 0 30px'});
+                container.css({margin:'20px 0 30px', height:'150px'});
 
                 Pablo(document.createElement('script'), {
                     src: '/assets/launch/index.js'
