@@ -1358,20 +1358,25 @@
                     var prop,
                         options = this.options;
 
-                    this.trigger('destroy');
-                    this.stop();
-                    this.off();
+                    // if not already destroyed
+                    if (this.event){
+                        this.trigger('destroy');
+                        this.stop();
+                        this.off();
 
-                    for (prop in options){
-                        if (options.hasOwnProperty(prop)){
-                            delete options[prop];
+                        for (prop in options){
+                            if (options.hasOwnProperty(prop)){
+                                delete options[prop];
+                            }
+                        }
+                        
+                        for (prop in this){
+                            if (this.hasOwnProperty(prop)){
+                                delete this[prop];
+                            }
                         }
                     }
-                    for (prop in this){
-                        if (this.hasOwnProperty(prop)){
-                            delete this[prop];
-                        }
-                    }
+
                     return this;
                 }
             });
@@ -1894,6 +1899,7 @@
 
                     function updateStyle(collection, name, value){
                         if (name === 'transform'){
+                            // Pass the string value or object or array of objects to `transformCss()`
                             collection.transformCss(value);
                         }
                         else {

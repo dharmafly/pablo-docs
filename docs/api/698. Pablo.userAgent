@@ -1,16 +1,12 @@
 ---
 category: pablo.userAgent
+heading: Pablo.userAgent
 ---
 
 An object giving information about the current browser.
 
     alert(Pablo.userAgent);
-alert: {
-  "name": "webkit",
-  "version": "537.36",
-  "prefix": "webkit",
-  "cssPrefix": "-webkit-"
-}
+    
 
 ## `name`
 
