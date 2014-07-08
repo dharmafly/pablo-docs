@@ -1,0 +1,27 @@
+html, body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: white;
+}
+
+body > h1 {
+    font-family: Megrim, 'Helvetica Neue', sans-serif;
+    font-size: 72px;
+    color: #fdde03;
+    position: absolute;
+    left: 40%;
+    top: 40%;
+}
+
+#demo-launch {
+    width: 100%;
+    height: 100%;
+    /*width: 500px;
+    height: 300px;*/
+}

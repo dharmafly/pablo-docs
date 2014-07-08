@@ -872,6 +872,7 @@ p.buttons {
 .run output {
 	font-family: Menlo, mono-space;
 	display: block;
+  white-space: pre;
 	background-color: {{ page.content_bg_colour }};
 	font-size: 1.4em; /* Fixes odd issue in FF */
     min-height:1em;

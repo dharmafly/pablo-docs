@@ -9,7 +9,7 @@ Download the <a href="http://pablojs.com/downloads/pablo.js" target="_blank">ful
     <script src="pablo.min.js"></script>
 
 
-## Optional: install with Bower
+## Or, install with Bower
 
 If you use the [Bower](http://bower.io) package manager, you can install the latest version of Pablo by typing in the terminal:
 
@@ -18,20 +18,39 @@ If you use the [Bower](http://bower.io) package manager, you can install the lat
 
 ## Start drawing
 
-_Tip: The code snippets with 'Run' buttons are editable._
+_Tip: In the docs, you can click and edit any code snippets that have 'Run' buttons._
 
-    /* Check browser support */
-    if (Pablo.isSupported){
-        /* Inside an HTML element, append an <svg> root */
-        Pablo(demoElement).svg({height:180})
-            /* Append a <circle> element with attributes */
-            .circle({cx:90, cy:90, r:90})
-            /* Add an event listener to the circle */
-            .on('click', function(event){
-                /* On click, set the `fill` attribute */
-                Pablo(this).attr('fill', 'red');
+    /* Inside an HTML element, append an <svg> root */
+    Pablo(demoElement).svg({height:180})
+        /* Append a <circle> element with attributes */
+        .circle({cx:90, cy:90, r:90, fill:'red'})
+        /* Add an event listener to the circle */
+        .on('click', function(event){
+            /* On click, set the `fill` attribute */
+            Pablo(this).attr('fill', 'green');
+        });
+
+External SVG files can be imported and interacted with.
+
+    /* Load an SVG file */
+    Pablo(demoElement).load('/rocket.svg', function(rocket){
+        /* Find some elements */
+        rocket.find('path, rect')
+            /* Change their attributes */
+            .attr('opacity', 0.2)
+            /* Set a stagger function */
+            .stagger(function(current, previous){
+                Pablo(previous).attr('opacity', 0.2);
+                Pablo(current).attr('opacity', 1);
+            }, {t:100});
+
+        /* Some time later... */
+        window.setTimeout(function(){
+            /* Create a transition */
+            rocket.transition({
+                name: 'transform',
+                dur: 1000,
+                to: {translateX:'700px'}
             });
-    }
-    else {
-        /* Fallback content */
-    }
+        }, 5000);
+    });

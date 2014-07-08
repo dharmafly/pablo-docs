@@ -127,7 +127,7 @@
         // NOTE: currently underneath the bubbles and not clickable
         svg.append(
             Pablo.a({
-                'xlink:href':'https://github.com/dharmafly/pablo',
+                'xlink:href':'https://github.com/premasagar/pablo',
                 target:'_blank'
             })
             .append('text', {

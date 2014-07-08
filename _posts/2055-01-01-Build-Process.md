@@ -16,7 +16,7 @@ Currently, the build process handles code linting and minification. In the futur
 
 ## Build the library
 
-    $ git clone git@github.com:dharmafly/pablo.git
+    $ git clone git@github.com:premasagar/pablo.git
     $ cd pablo/build
     $ npm install
     $ grunt

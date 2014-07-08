@@ -1,6 +1,6 @@
 ---
 category: overview
-heading: "What Pablo's like"
+heading: Inspiration
 path: overview
 ---
 
@@ -12,7 +12,6 @@ Pablo is quite different from [D3][d3]. D3 is a purpose-built data visualisation
 Pablo gives access to the browser's full support for SVG, HTML and CSS, so a growing knowledge of these technologies will help to get the most out of Pablo. (See the [Resources][resources] page for some useful links).
 
 
-[issupported]: /api/Pablo.isSupported/
 [jquery]: http://jquery.com
 [_]: http://underscorejs.org
 [backbone]: http://backbonejs.org

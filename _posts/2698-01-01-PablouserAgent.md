@@ -1,0 +1,29 @@
+---
+category: pablo_useragent
+heading: Pablo.userAgent
+path: api/pablo.userAgent
+---
+
+An object giving information about the current browser.
+
+    alert(Pablo.userAgent);
+    
+
+## `name`
+
+The browser's generic name.
+
+
+## `version`
+
+The version of the browser.
+
+
+## `prefix`
+
+The prefix to use for vendor-prefixed JavaScript properties.
+
+
+## `cssPrefix`
+
+The prefix to use for vendor-prefixed CSS properties.

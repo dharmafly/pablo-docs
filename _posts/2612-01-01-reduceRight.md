@@ -1,0 +1,9 @@
+---
+category: reduceright
+heading: "reduceRight(fn, [initialValue])"
+path: api/reduceright
+---
+
+As per [`reduce()`](/api/reduce/), but reduces the collection from right-to-left, instead of left-to-right.
+
+See also [Array.reduceRight](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array/reduceRight).

@@ -1,7 +1,7 @@
 ---
 project_name: Pablo
-project_url: "https://github.com/dharmafly/pablo"
-version: 0.4.0
+project_url: "https://github.com/premasagar/pablo"
+version: 0.5.0
 jquery_no_conflict: true
 theme: horus
 twitter_url: "https://twitter.com/premasagar"
@@ -27,7 +27,7 @@ download_links:
     title: "Minified, for use in production"
   - text: Edge
     subtext: (master)
-    href: "https://github.com/dharmafly/pablo/zipball/master"
+    href: "https://github.com/dharmafly/premasagar/zipball/master"
     title: Latest codebase (zip); potentially unstable
 sections: 
   - path: /index.html
@@ -41,8 +41,8 @@ sections:
 safe: false
 future: true
 lsi: false
-pygments: false
-markdown: maruku
+highlighter: pygments
+markdown: kramdown
 permalink: "/:title"
 baseurl: /
 exclude: 

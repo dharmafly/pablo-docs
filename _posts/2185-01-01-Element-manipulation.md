@@ -13,12 +13,12 @@ Get or set attributes on elements in the collection.
 
 ## [removeAttr(attributeName)](/api/removeAttr/)
 
-Remove an named attribute from each element in the collection.
+Remove a named attribute from each element in the collection.
 
 
 ## [transform()](/api/transform/)
 
-Set a type of transform in the transform attribute for each element in the collection.
+Visually transform the elements, such as rotate, scale or translate them, using CSS transformsm using SVG's `transform` attribute.
 
 
 ## [bbox()](/api/bbox/)
@@ -89,3 +89,7 @@ Get or set the text content of elements in the collection.
 ## [crop()](/api/crop/)
 
 Get the bounding box for the sum total of all elements in the collection.
+
+## [viewbox()](/api/viewbox/)
+
+Manipulate an `<svg>` element's `viewbox` attribute as an array of values.

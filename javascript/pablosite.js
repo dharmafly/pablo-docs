@@ -1,10 +1,12 @@
 'use strict';
 
+//Pablo('.buttons .github.badge').css('opacity', 0);
+
 window._site = {
     browsersupport: function(container){
         if (Pablo.isSupported){
             container = document.getElementById(container.slice(1));
-            container.textContent = '(✔ Your browser supports Pablo).';
+            container.textContent = '✔ Your browser supports Pablo.';
         }
     },
     mindmap: function(container){
@@ -21,10 +23,10 @@ window._site = {
     circles: function(container){
         if (Pablo.isSupported){
             container = Pablo(container);
-            container.css({margin:'40px 0 0'});
+            //container.css({margin:'20px 0 0'});
 
             /* Inside an HTML element, append an <svg> root */
-            var paper = Pablo(container).svg({height:220}),
+            var paper = Pablo(container).svg({height:220, width:'100%'}),
             /* Create <circle> element, with attributes */
             circle = paper.circle({
                 cy: '50%',
@@ -62,6 +64,24 @@ window._site = {
             var script = document.createElement('script');
             document.body.appendChild(script);
             script.src = '/assets/testcard.js';
+        }
+    },
+
+    launch: function(container){
+        if (Pablo.isSupported){
+            container = Pablo(container);
+
+            if (!Pablo.support.css.transform || !Pablo.support.css.transition){
+                container.parents('section').first().remove();
+            }
+
+            else {
+                container.css({margin:'20px 0 30px'});
+
+                Pablo(document.createElement('script'), {
+                    src: '/assets/launch/index.js'
+                }).appendTo(container);
+            }
         }
     }
 };

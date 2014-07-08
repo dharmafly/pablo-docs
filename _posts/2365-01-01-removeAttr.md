@@ -4,7 +4,7 @@ heading: removeAttr(attributeName)
 path: api/removeAttr
 ---
 
-Removes an named attribute from each element in the collection, and returns the collection.
+Removes a named attribute from each element in the collection, and returns the collection.
 
     var svg = Pablo(demoElement).svg({height:100}),
         rect  = svg.rect({

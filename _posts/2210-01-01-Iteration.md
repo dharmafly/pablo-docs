@@ -29,7 +29,7 @@ Return an array of values from each element in the collection - e.g. attribute, 
 
 ## [select(filter, \[context\])](/api/select/)
 
-Return a new collection of elements that match the filter, which can be a function, CSS selector or elements.
+Return a new collection of elements that match the filter, which can be a function, CSS selector or elements. Equivalent to Array.filter
 
 
 ## [every(filter, \[context\])](/api/every/)
@@ -55,9 +55,14 @@ Return the collection index of the last element in the collection that matches t
 Pablo collections are extended Arrays, so all native Array methods should be supported. For example:
 
 
-## reduce(callback, \[initialValue\])
+## [reduce(callback, \[initialValue\])](/api/reduce/)
 
-Passes to the callback the arguments `previousValue`, `el`, `index` and `collection`. Performs a native array `reduce()` call on the collection, returning the result.
+Performs a native array `reduce()` call on the collection, returning the result. The callback is passed `previousValue`, `el`, `index` and `collection`. 
+
+
+## [reduceRight(callback, \[initialValue\])](/api/reduceRight/)
+
+As [`reduce()`](/api/reduce/), but reduces the collection from right-to-left.
 
 
 [array]: https://developer.mozilla.org/docs/JavaScript/Reference/Global_Objects/Array
