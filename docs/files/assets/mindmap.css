@@ -63,7 +63,7 @@
 }
 
 #mindmap .node:first-child.selected > rect {
-	stroke: 'none';
+	stroke: none;
 }
 
 

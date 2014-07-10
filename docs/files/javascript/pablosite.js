@@ -68,19 +68,37 @@ window._site = {
     },
 
     launch: function(container){
+        var doDemo;
+
         if (Pablo.isSupported){
             container = Pablo(container);
 
-            if (!Pablo.support.css.transform || !Pablo.support.css.transition || !Pablo.findPrefixedProperty('cancelFullScreen', document)){
-                container.parents('section').first().remove();
+            if (
+                window.location.search.indexOf('?launch') === 0 ||
+                (
+                    Pablo.support.css.transform  &&
+                    Pablo.support.css.transition &&
+                    Pablo.findPrefixedProperty('cancelFullScreen', document) &&
+                    // TEMP: until MS testing complete
+                    (
+                        Pablo.userAgent.prefix === 'webkit' ||
+                        Pablo.userAgent.prefix === 'moz'
+                    )
+                )
+            ){
+                doDemo = true;
             }
 
-            else {
+            if (doDemo){
                 container.css({margin:'20px 0 30px', height:'150px'});
 
                 Pablo(document.createElement('script'), {
                     src: '/assets/launch/index.js'
                 }).appendTo(container);
+            }
+
+            else {
+                container.parents('section').first().remove();
             }
         }
     }
