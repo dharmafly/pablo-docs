@@ -242,7 +242,7 @@ Symbol.prototype = {
 
         // Fade out, using CSS3
         // TODO: create as part of <style> element?
-        this.dom.cssPrefix({
+        this.dom.css({
             'transition': '-webkit-transform ' + (settings.fadeoutTime / 1000) + 's',
             'transition-timing-function': 'ease-out',
             'transform': 'scale(0)',

@@ -26,7 +26,7 @@ module.exports = function(grunt) {
               cwd:'../pablo/',
               src: ['HISTORY.md'],
               rename: function(dest, src) {
-                return 'docs/misc/050. Changelog.md';
+                return 'docs/misc/100. Changelog.md';
               }
             }
           ]

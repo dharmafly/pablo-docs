@@ -150,7 +150,7 @@ var Symbol = (function(){
             // Fade out
             this.dom
                 .addClass('fade')
-                .cssPrefix({
+                .css({
                     'transform-origin': this.pos.x + 'px ' + this.pos.y + 'px'
                 });
 

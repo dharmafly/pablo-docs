@@ -32,7 +32,7 @@
 	   e.g. `-moz-user-select`. To alternatively use one line of JavaScript to apply 
 	   vendor-prefixed styles to a collection of elements, using Pablo:
 
-	       Pablo(element).cssPrefix('user-select', 'none');
+	       Pablo(element).css('user-select', 'none');
 	*/
 	user-select: none;
 	-webkit-user-select: none;

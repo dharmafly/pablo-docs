@@ -83,21 +83,13 @@ var Symbolset = (function(){
 
         // Add CSS styles
         addStyles: function(){
-            var fadeStylesToPrefix = {
-                    transition: 'all ' + (this.settings.fadeoutTime / 1000) + 's ' + 'ease-out',
-                    transform: 'scale(0)'
-                },
-                fadeStyles = Pablo.cssPrefix(fadeStylesToPrefix),
-                fadeStylesString = '',
-                prop;
-
-            for (prop in fadeStyles){
-                fadeStylesString += prop + ':' + fadeStyles[prop] + ';'
-            }
+            var transformVal = 'scale(0)',
+                transitionVal = 'all ' + (this.settings.fadeoutTime / 1000) + 's ' + 'ease-out',
+                prefix = Pablo.userAgent.cssPrefix;
 
             this.settings.root.style().content(
                 '.symbol:hover {stroke:green; cursor:crosshair;}' + 
-                '.symbol.fade {' + fadeStylesString + '}'
+                '.symbol.fade {transform:' + transformVal + '; transition:' + transitionVal + ';' + prefix + 'transform:' + transformVal + ';' + prefix + 'transition:' + transitionVal + ';}'
             );
             return this;
         },

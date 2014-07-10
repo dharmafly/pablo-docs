@@ -420,7 +420,7 @@
         if (scaleRange){
             scaleRange.addEventListener('change', function(){
                 // svg.el[0].currentScale = scaleRange.value;
-                svg.cssPrefix({
+                svg.css({
                     'transform':'scale(' + scaleRange.value + ')',
                     'transform-origin':'0 0'
                 });

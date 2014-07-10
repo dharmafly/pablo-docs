@@ -74,7 +74,7 @@ var Game = (function(){
         transformPoints: function(){
             var px = Floaters.randomIntRange(60, 120);
 
-            this.points.cssPrefix({
+            this.points.css({
                 transform: 'rotate3d(1, 1, 1, ' + px + 'deg) scale(0.5) skew(0deg, 90deg)'
             });
             return this;
@@ -82,23 +82,15 @@ var Game = (function(){
 
         // Add CSS styles
         addStyles: function(){
-            var fadeStylesToPrefix = {
-                    transition: 'all ' + (this.settings.pointsTransitionDuration / 1000) + 's ' + 'ease-in-out',
-                    'transform-origin': (this.settings.width / 2) + 'px ' + (this.settings.height / 2) + 'px'
-                },
-                fadeStyles = Pablo.cssPrefix(fadeStylesToPrefix),
-                fadeStylesString = '',
-                prop;
-
-            for (prop in fadeStyles){
-                fadeStylesString += prop + ':' + fadeStyles[prop] + ';'
-            }
+            var transitionVal = 'all ' + (this.settings.pointsTransitionDuration / 1000) + 's ' + 'ease-in-out',
+                transformOriginVal = (this.settings.width / 2) + 'px ' + (this.settings.height / 2) + 'px',
+                prefix = Pablo.userAgent.cssPrefix;
 
             this.dom.style().content(
                 // prevent mouse clicks on dashboard notifications & points
                 '.dashboard .notification, .dashboard .points { pointer-events: none; }' +
                 // transform points
-                '.dashboard .points {' + fadeStylesString + '}' +
+                '.dashboard .points {transition:' + transitionVal + '; transform-origin:' + transformOriginVal + ';' + prefix + 'transition:' + transitionVal + ';' + prefix + 'transform-origin:' + transformOriginVal + ';}' +
                 '.dashboard.paused { pointer-events: none; }'
             );
 
