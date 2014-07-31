@@ -1,6 +1,5 @@
 ---
 category: pablo.support
-heading: Pablo.support
 ---
 
 An object giving information about the browser's support for various features. A value of `true` means the feature is supported, or `false` if not.
