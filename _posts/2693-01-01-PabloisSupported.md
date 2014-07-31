@@ -16,3 +16,6 @@ Some discrepancies between browsers are supported, but Pablo’s code is kept le
     else {
         alert('Not supported!');
     }
+
+
+See [`Pablo.support`](/api/Pablo.support/) for more granular browser-support info.

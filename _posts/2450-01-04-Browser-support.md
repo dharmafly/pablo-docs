@@ -7,7 +7,7 @@ path: api/toimage
 
 ## SVG images
 
-All modern browsers support SVG data URLs. To confirm, check that `Pablo.support.svgImage === true`.
+All modern browsers support SVG data URLs. To confirm, check that `Pablo.support.svgImage` is `true`.
 
     if (Pablo.support.svgImage){
         // create image
@@ -38,3 +38,7 @@ Not all browsers support conversion to PNG and JPEG images. To confirm, check `P
             // create image
         }
     });
+
+
+See [`Pablo.support`](/api/Pablo.support/) for details.
+
