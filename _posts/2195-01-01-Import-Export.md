@@ -32,7 +32,7 @@ Convert the elements in the collection to an HTML canvas element.
 Convert the elements in the collection to a single HTML image element, using either SVG, PNG or JPEG formats.
 
 
-## [download(\[type\], \[filename\], \[callback\]])](/api/download/)
+## [download(\[type\], \[filename\], \[callback\])](/api/download/)
 
 Download the collection as a SVG, PNG or JPEG image file.
 
