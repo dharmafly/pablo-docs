@@ -7,6 +7,7 @@ version: '0.5.0'
 # options: forest, ocean, horus, seagrass, sundae, slate
 theme: horus
 twitter_url: https://twitter.com/premasagar
+twitter_name: Premasagar
 # options: javascript, css, html5
 lang: javascript
 scripts:
