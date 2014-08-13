@@ -5,7 +5,7 @@ version: 0.5.0
 jquery_no_conflict: true
 theme: horus
 twitter_url: "https://twitter.com/premasagar"
-twitter_name: Dharmafly
+twitter_name: Premasagar
 lang: javascript
 scripts: 
   - src: /downloads/pablo.min.js
