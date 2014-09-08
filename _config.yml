@@ -5,7 +5,7 @@ version: 0.5.0
 jquery_no_conflict: true
 theme: horus
 twitter_url: "https://twitter.com/premasagar"
-twitter_name: Premasagar
+twitter_name: "@premasagar"
 lang: javascript
 scripts: 
   - src: /downloads/pablo.min.js
@@ -13,8 +13,8 @@ scripts:
 stylesheets: 
   - url: /css/custom/custom.css
 quote: 
-  - quote: Painting is just another way of keeping a diary.
-  - cite: Pablo Picasso
+  quote: Painting is just another way of keeping a diary.
+  cite: Pablo Picasso
 ga_id: "UA-34978047-1"
 download_links: 
   - text: pablo.js
