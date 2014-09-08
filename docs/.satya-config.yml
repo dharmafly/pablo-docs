@@ -7,7 +7,7 @@ version: '0.5.0'
 # options: forest, ocean, horus, seagrass, sundae, slate
 theme: horus
 twitter_url: https://twitter.com/premasagar
-twitter_name: Premasagar
+twitter_name: "@premasagar"
 # options: javascript, css, html5
 lang: javascript
 scripts:
@@ -16,8 +16,8 @@ scripts:
 stylesheets:
   - url: /css/custom/custom.css
 quote:
-  - quote: Painting is just another way of keeping a diary.
-  - cite: Pablo Picasso
+  quote: Painting is just another way of keeping a diary.
+  cite: Pablo Picasso
 # analytics
 ga_id: UA-34978047-1
 download_links:
