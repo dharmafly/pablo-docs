@@ -8,7 +8,7 @@ path: overview
 Your feedback is welcome. For bug reports and requests, please use the GitHub ['Issues' page][issues] or contact [@premasagar][prem-twitter]. [Read more](/misc/#Contributing).
 
 
-<!-- Testcard -->
+<!-- Testcard
 <div id="testcard">
     <script>
         document.addEventListener('DOMContentLoaded', function(){
@@ -16,6 +16,7 @@ Your feedback is welcome. For bug reports and requests, please use the GitHub ['
         }, false);
     </script>
 </div>
+ -->
 
 
 [api]: /api/
