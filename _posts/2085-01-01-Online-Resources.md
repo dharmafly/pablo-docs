@@ -3,7 +3,7 @@ heading: Online Resources
 category: resources
 path: resources
 ---
-MDN (Mozilla Developer Network)
+MDN (Mozilla Developer Network) references
 -------------------------------
 
 * [SVG](https://developer.mozilla.org/en-US/SVG)
