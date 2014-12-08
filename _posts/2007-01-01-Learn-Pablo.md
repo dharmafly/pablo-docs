@@ -5,7 +5,7 @@ path: overview
 ---
 
 **See the [API Reference][api]** for full details.  
-**Watch [the slides][slides]** for an overview.
+**Watch [the slides][slides]** for an overview. _[Needs update]_
 
 More resources are available on the [Resources page][resources].
 

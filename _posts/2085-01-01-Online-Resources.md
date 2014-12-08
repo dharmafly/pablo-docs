@@ -20,6 +20,7 @@ Other resources
 * [W3C spec for SVG 1.1](http://www.w3.org/TR/SVG11/)
 * [Internet Explorer's SVG reference](http://msdn.microsoft.com/en-us/library/ie/ff971903(v=vs.85).aspx)
 * [Learn SVG](http://learnsvg.com)
+* [Using SVG media assets](http://css-tricks.com/using-svg/)
 * [Peter Collingridge's tutorial](http://www.petercollingridge.co.uk/svg-tutorial)
 * [Pike's SVG tutorial](http://apike.ca/prog_svg.html)
 * [Phrogz's ObjJob reference](http://objjob.phrogz.net/svg/hierarchy)
