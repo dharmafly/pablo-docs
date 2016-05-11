@@ -16,5 +16,5 @@ Pablo gives access to the browser's full support for SVG, HTML and CSS, so a gro
 [_]: http://underscorejs.org
 [backbone]: http://backbonejs.org
 [raphael]: http://raphaeljs.com
-[d3]: http://d3js.com
+[d3]: http://d3js.org
 [resources]: /resources/

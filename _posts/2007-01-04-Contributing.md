@@ -28,5 +28,5 @@ Your feedback is welcome. For bug reports and requests, please use the GitHub ['
 [_]: http://underscorejs.org
 [backbone]: http://backbonejs.org
 [raphael]: http://raphaeljs.com
-[d3]: http://d3js.com
+[d3]: http://d3js.org
 [resources]: /resources/
